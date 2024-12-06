@@ -1,0 +1,65 @@
+.badge-style {
+    padding: 0.4em 1em 0.4em 1em;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-weight: 400;
+    font-size: .75rem;
+}
+
+.order-pending,
+.order-confirmed,
+.order-down-payment-confirmed,
+.order-processed,
+.order-shipped,
+.order-Pending,
+.order-Confirmed,
+.order-Down-payment-confirmed,
+.order-Processed,
+.order-Shipped,
+.status-pending,
+.user-open,
+.user-pending {
+    background: yellow;
+    color: black;
+}
+
+.status-active,
+.order-delivered,
+.order-Delivered,
+.user-close,
+.user-active {
+    background: green;
+    color: white;
+}
+
+.status-deactivated,
+.user-blocked,
+.order-cancel,
+.order-Canceled,
+.user-deactivated {
+    background: red;
+    color: white;
+}
+
+#image_preview {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.deleteBtn {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 25%;
+    background-color: #8585857a;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer !important;
+    display: block;
+    z-index: 999;
+    transition: all ease-in 0.9s;
+}
