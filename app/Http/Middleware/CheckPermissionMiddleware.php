@@ -31,6 +31,8 @@ class CheckPermissionMiddleware
                     $actionSegement = 'edit';
                 } else if ($request->method() == 'GET') {
                     $actionSegement = 'show';
+                } else if ($request->method() == 'DELETE') {
+                    $actionSegement = 'delete';
                 } else {
                     $actionSegement = $request->segments()[3];
                 }

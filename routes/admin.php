@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
@@ -34,6 +35,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Countries Routes
         Route::resource('countries', CountryController::class);
+
+        // Cities Routes
+        Route::resource('cities', CityController::class);
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('destroy');

@@ -109,6 +109,31 @@ class RolePermissionSeeder extends Seeder
             'guard_name' => 'admin'
         ]);
 
+        Permission::updateOrCreate([
+            'name' => 'list-cities',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'create-cities',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'show-cities',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'edit-cities',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'delete-cities',
+            'guard_name' => 'admin'
+        ]);
+
         $permissions = Permission::get()->pluck('id')->toArray();
 
         $adminRole->syncPermissions($permissions);

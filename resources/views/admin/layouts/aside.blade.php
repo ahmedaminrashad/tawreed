@@ -51,6 +51,17 @@
         </li>
         @endcan
 
+        @can('list-cities')
+        <li class="nav-item">
+            <a href="{{ route('admin.cities.index') }}" class="nav-link {{ request()->routeIs('admin.cities*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>
+                    Cities
+                </p>
+            </a>
+        </li>
+        @endcan
+
         @can('list-settings')
         <li class="nav-item">
             <a href="#" class="nav-link {{ (request()->routeIs('admin.settings*') || request()->routeIs('admin.announcements*') || request()->routeIs('admin.announcements*')) ? 'active' : '' }}">

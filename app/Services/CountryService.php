@@ -15,6 +15,15 @@ readonly class CountryService
         return $countries;
     }
 
+    // list all Countries for Select List function
+    public function listForSelect()
+    {
+        $countries = Country::join('country_translations', 'countries.id', 'country_translations.country_id')
+            ->select('countries.id as country_id', 'country_translations.name as country_name')
+            ->pluck('country_name', 'country_id')->toArray();
+        return $countries;
+    }
+
     // get Country by ID function
     public function getById($id)
     {

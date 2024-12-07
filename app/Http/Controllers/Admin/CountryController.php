@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Admin\StoreAdminRequest;
-use App\Http\Requests\Admin\Admin\UpdateAdminRequest;
 use App\Http\Requests\Country\StoreCountryRequest;
 use App\Http\Requests\Country\UpdateCountryRequest;
 use App\Models\Country;
@@ -104,6 +101,8 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
+        return redirect()->route('admin.countries.index');
+        
         try {
             $result = $this->countryService->delete($country);
 
