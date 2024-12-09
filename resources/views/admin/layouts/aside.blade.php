@@ -84,6 +84,17 @@
         </li>
         @endcan
 
+        @can('list-units')
+        <li class="nav-item">
+            <a href="{{ route('admin.units.index') }}" class="nav-link {{ request()->routeIs('admin.units*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>
+                    Measurement Units
+                </p>
+            </a>
+        </li>
+        @endcan
+
         @can('list-settings')
         <li class="nav-item">
             <a href="#" class="nav-link {{ (request()->routeIs('admin.settings*') || request()->routeIs('admin.announcements*') || request()->routeIs('admin.announcements*')) ? 'active' : '' }}">

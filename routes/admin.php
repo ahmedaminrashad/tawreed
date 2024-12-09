@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\WorkCategoryClassificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Activity Classifications Routes
         Route::resource('activity-classifications', ActivityClassificationController::class);
+
+        // Measurement Units Routes
+        Route::resource('units', UnitController::class);
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('destroy');
