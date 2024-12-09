@@ -159,6 +159,31 @@ class RolePermissionSeeder extends Seeder
             'guard_name' => 'admin'
         ]);
 
+        Permission::updateOrCreate([
+            'name' => 'list-activity-classifications',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'create-activity-classifications',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'show-activity-classifications',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'edit-activity-classifications',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'delete-activity-classifications',
+            'guard_name' => 'admin'
+        ]);
+
         $permissions = Permission::get()->pluck('id')->toArray();
 
         $adminRole->syncPermissions($permissions);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityClassificationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CityController;
@@ -42,6 +43,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Work Category Classifications Routes
         Route::resource('classifications', WorkCategoryClassificationController::class);
+
+        // Activity Classifications Routes
+        Route::resource('activity-classifications', ActivityClassificationController::class);
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('destroy');

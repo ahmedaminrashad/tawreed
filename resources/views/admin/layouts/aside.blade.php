@@ -73,6 +73,17 @@
         </li>
         @endcan
 
+        @can('list-activity-classifications')
+        <li class="nav-item">
+            <a href="{{ route('admin.activity-classifications.index') }}" class="nav-link {{ request()->routeIs('admin.activity-classifications*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>
+                    Activity Classifications
+                </p>
+            </a>
+        </li>
+        @endcan
+
         @can('list-settings')
         <li class="nav-item">
             <a href="#" class="nav-link {{ (request()->routeIs('admin.settings*') || request()->routeIs('admin.announcements*') || request()->routeIs('admin.announcements*')) ? 'active' : '' }}">
