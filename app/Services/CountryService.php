@@ -57,7 +57,7 @@ readonly class CountryService
                 $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
                 return $btn;
             })
-            ->rawColumns(['action', 'en_name'])
+            ->rawColumns(['action', 'ar_name', 'vat'])
             ->make(true);
     }
 

@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Show Country - ' . $country->translate('ar')->name)
+@section('title', 'Show Work Category Classification - ' . $classification->translate('ar')->name)
 
 @section('head')
 @endsection
@@ -11,11 +11,11 @@
 </li>
 
 <li class="nav-item d-none d-sm-inline-block">
-    <a href="{{ route('admin.countries.index') }}" class="nav-link">Countries</a>
+    <a href="{{ route('admin.classifications.index') }}" class="nav-link">Work Category Classifications</a>
 </li>
 
 <li class="nav-item d-none d-sm-inline-block">
-    <a href="javascript::void(0);" class="nav-link">Show Country - {{ $country->translate('ar')->name }}</a>
+    <a href="javascript::void(0);" class="nav-link">Show Work Category Classification - {{ $classification->translate('ar')->name }}</a>
 </li>
 @endsection
 
@@ -26,13 +26,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Countries</h1>
+                <h1 class="m-0">Work Category Classifications</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.countries.index') }}">Countries</a></li>
-                    <li class="breadcrumb-item active">Show Country - {{ $country->translate('ar')->name }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.classifications.index') }}">Classifications</a></li>
+                    <li class="breadcrumb-item active">Show Work Category Classification - {{ $classification->translate('ar')->name }}</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -43,18 +43,18 @@
 <!-- Main content -->
 <section class="content">
     @include('admin.layouts.flash_msg')
-    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title" style="margin-top: 3px">Show Country - {{ $country->translate('ar')->name }}</h3>
+                        <h3 class="card-title" style="margin-top: 3px">Show Work Category Classification - {{ $classification->translate('ar')->name }}</h3>
 
                         <div class="card-tools">
-                            @can('edit-countries')
+                            @can('edit-classifications')
                             <div class="input-group input-group-sm">
-                                <a href="{{route('admin.countries.edit',['country' => $country->id])}}" class="btn btn-success float-right">
+                                <a href="{{route('admin.classifications.edit',['classification' => $classification->id])}}" class="btn btn-success float-right">
                                     <i class="fa fa-edit"></i>
                                     Edit
                                 </a>
@@ -70,24 +70,19 @@
 
                                 <tr>
                                     <th class="txt-content">#ID</th>
-                                    <td>{{ $country->id }}</td>
+                                    <td>{{ $classification->id }}</td>
                                 </tr>
 
                                 @foreach (config('langs') as $locale => $name)
                                 <tr>
                                     <th class="txt-content">{{ $name }} Name</th>
-                                    <td>{{ $country->translate($locale)->name }}</td>
+                                    <td>{{ $classification->translate($locale)->name }}</td>
                                 </tr>
                                 @endforeach
 
                                 <tr>
-                                    <th class="txt-content">VAT</th>
-                                    <td>{{ $country->vat }}%</td>
-                                </tr>
-
-                                <tr>
                                     <th class="txt-content">Created At</th>
-                                    <td>{{ $country->created_date }}</td>
+                                    <td>{{ $classification->created_date }}</td>
                                 </tr>
 
                             </tbody>

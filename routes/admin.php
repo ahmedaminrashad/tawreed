@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\WorkCategoryClassificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['as' => 'admin.'], function () {
@@ -38,6 +39,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Cities Routes
         Route::resource('cities', CityController::class);
+
+        // Work Category Classifications Routes
+        Route::resource('classifications', WorkCategoryClassificationController::class);
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('destroy');

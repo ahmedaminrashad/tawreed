@@ -48,7 +48,7 @@ readonly class CityService
                 $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
                 return $btn;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'ar_name', 'country_name'])
             ->make(true);
     }
 
