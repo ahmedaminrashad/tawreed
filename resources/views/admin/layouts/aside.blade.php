@@ -100,7 +100,18 @@
             <a href="{{ route('admin.cancellations.index') }}" class="nav-link {{ request()->routeIs('admin.cancellations*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user-shield"></i>
                 <p>
-                    Cancellations Reasons
+                    Cancellation Reasons
+                </p>
+            </a>
+        </li>
+        @endcan
+
+        @can('list-rejections')
+        <li class="nav-item">
+            <a href="{{ route('admin.rejections.index') }}" class="nav-link {{ request()->routeIs('admin.rejections*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>
+                    Rejection Reasons
                 </p>
             </a>
         </li>

@@ -11,11 +11,11 @@
 </li>
 
 <li class="nav-item d-none d-sm-inline-block">
-    <a href="{{ route('admin.cancellations.index') }}" class="nav-link">Cancellation Reasons</a>
+    <a href="{{ route('admin.rejections.index') }}" class="nav-link">Rejection Reasons</a>
 </li>
 
 <li class="nav-item d-none d-sm-inline-block">
-    <a href="javascript::void(0);" class="nav-link">Create Cancellation Reason</a>
+    <a href="javascript::void(0);" class="nav-link">Create Rejection Reason</a>
 </li>
 @endsection
 
@@ -26,12 +26,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Cancellation Reasons</h1>
+                <h1 class="m-0">Rejection Reasons</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.cancellations.index') }}">Cancellation Reasons</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.rejections.index') }}">Rejection Reasons</a></li>
                     <li class="breadcrumb-item active">{{ $pageAction }}</li>
                 </ol>
             </div><!-- /.col -->
@@ -43,7 +43,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form method="post" action="{{ route('admin.cancellations.store') }}">
+        <form method="post" action="{{ route('admin.rejections.store') }}">
             @csrf
             <div class="row">
                 <div class="col-12">

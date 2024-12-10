@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CancellationReasonController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RejectionReasonController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UnitController;
@@ -54,6 +55,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Cancellation Reasons Routes
         Route::resource('cancellations', CancellationReasonController::class);
+
+        // Rejection Reasons Routes
+        Route::resource('rejections', RejectionReasonController::class);
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('destroy');
