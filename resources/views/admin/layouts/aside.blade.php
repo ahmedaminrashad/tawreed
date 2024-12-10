@@ -95,6 +95,17 @@
         </li>
         @endcan
 
+        @can('list-cancellations')
+        <li class="nav-item">
+            <a href="{{ route('admin.cancellations.index') }}" class="nav-link {{ request()->routeIs('admin.cancellations*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>
+                    Cancellations Reasons
+                </p>
+            </a>
+        </li>
+        @endcan
+
         @can('list-settings')
         <li class="nav-item">
             <a href="#" class="nav-link {{ (request()->routeIs('admin.settings*') || request()->routeIs('admin.announcements*') || request()->routeIs('admin.announcements*')) ? 'active' : '' }}">

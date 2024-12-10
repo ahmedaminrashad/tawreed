@@ -11,17 +11,17 @@ readonly class UnitService
     // list all Measurement Units function
     public function list()
     {
-        $countries = MeasurementUnit::all();
-        return $countries;
+        $units = MeasurementUnit::all();
+        return $units;
     }
 
     // list all Measurement Units for Select List function
     public function listForSelect()
     {
-        $countries = MeasurementUnit::join('unit_translations', 'countries.id', 'unit_translations.unit_id')
+        $units = MeasurementUnit::join('unit_translations', 'countries.id', 'unit_translations.unit_id')
             ->select('countries.id as unit_id', 'unit_translations.name as unit_name')
             ->pluck('unit_name', 'unit_id')->toArray();
-        return $countries;
+        return $units;
     }
 
     // get Measurement Unit by ID function

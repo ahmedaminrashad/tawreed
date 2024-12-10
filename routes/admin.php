@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ActivityClassificationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CancellationReasonController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -50,6 +51,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Measurement Units Routes
         Route::resource('units', UnitController::class);
+
+        // Cancellation Reasons Routes
+        Route::resource('cancellations', CancellationReasonController::class);
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('destroy');
