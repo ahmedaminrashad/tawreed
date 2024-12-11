@@ -10,7 +10,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ route('admin.home') }}"><b>Zawaya Dashboard</a>
+        <a href="{{ route('admin.home') }}"><b>QuoTech Dashboard</a>
     </div>
     <!-- /.login-logo -->
     <div class="card-body login-card-body">

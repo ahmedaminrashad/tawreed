@@ -23,6 +23,7 @@ class StoreAdminRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:admins,name', 'string', 'max:256'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:10240'],
             'email' => ['required', 'unique:admins,email', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'role_id' => ['required', 'integer', 'exists:roles,id'],

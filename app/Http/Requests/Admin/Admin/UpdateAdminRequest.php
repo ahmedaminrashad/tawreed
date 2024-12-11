@@ -23,6 +23,7 @@ class UpdateAdminRequest extends FormRequest
     {
         return [
             'name' => ['required', "unique:admins,name,{$this->admin->id}", 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:10240'],
             'email' => ['required', "unique:admins,email,{$this->admin->id}", 'email', 'max:255'],
             'password' => ['nullable', 'string', 'min:6', 'confirmed'],
             'role_id' => ['required', 'integer', 'exists:roles,id'],

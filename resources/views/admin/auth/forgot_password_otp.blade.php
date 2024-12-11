@@ -15,9 +15,10 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+            <p class="login-box-msg">Check your email</p>
+            <p>We have sent OTP to email@gmail.com</p>
 
-            <form action="{{ route('admin.forget.password') }}" method="post">
+            <form action="{{ route('admin.forget.password.otp') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" placeholder="Email" id="email" name="email">

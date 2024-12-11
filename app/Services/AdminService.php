@@ -59,6 +59,10 @@ readonly class AdminService
 
         $admin->save();
 
+        if (isset($data['image'])) {
+            $admin->uploadFile('image', $data['image']);
+        }
+
         $role = Role::find($data['role_id']);
 
         $admin->assignRole($role);
@@ -77,11 +81,15 @@ readonly class AdminService
             'name' => $data['name'],
             'email' => $data['email'],
         ]);
-        
-        if ($data['password']) {
+
+        if (isset($data['password'])) {
             $admin->update([
                 'password' => bcrypt($data['password']),
             ]);
+        }
+
+        if (isset($data['image'])) {
+            $admin->uploadFile('image', $data['image']);
         }
 
         $admin->roles()->detach();

@@ -29,10 +29,10 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form method="post" action="{{ route('admin.admins.store') }}">
+        <form method="post" action="{{ route('admin.admins.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-6">
+                <div class="col-8">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">{{ $formTitle }}</h3>
@@ -43,8 +43,18 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name in English</label>
+                                <label for="name">Name</label>
                                 <input type="text" class="form-control" value="{{ old('name') }}" name="name" id="name" placeholder="Enter Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <div class="custom-file">
+                                    <input type="file" name="image" id="image" class="custom-file-input" onchange="readURL(this);" accept="image/*">
+                                    <label class="custom-file-label" for="image" id="image_label">
+                                        Choose Admin Image
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -71,6 +81,21 @@
                     </div>
                     <!-- /.card -->
                 </div>
+
+                <div class="col-4">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Admin Image Preview</h3>
+                        </div>
+                        <div class="card-body" style="height: 365px">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img id="image_preview" src="{{ asset('/assets/images/image_preview.png') }}" alt="Admin Image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="card-footer">
@@ -88,6 +113,22 @@
 <!-- Page specific script -->
 <script>
     $(function() {});
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image_preview').attr('src', e.target.result)
+                    .attr('width', '100%')
+                    .attr('height', '100%');
+            };
+            reader.readAsDataURL(input.files[0]);
+            $("#image_label").text(input.files[0].name);
+        } else {
+            $('#image_preview').attr('src', "{{ asset('/assets/images/image_preview.png') }}");
+            $("#image_label").text('Choose Admin Image');
+        }
+    }
 
 </script>
 @endsection

@@ -20,22 +20,30 @@
 
     <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ asset('/assets/adminlte/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
-            <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
+            @if(auth('admin')->user()->image)
+            <img src="{{ asset('assets/uploads/admins/' . auth('admin')->id() . '/images/' . auth('admin')->user()->image) }}" class="user-image img-circle elevation-2" alt="Admin Image">
+            @else
+            <img src="{{ asset('/assets/adminlte/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="Admin Image">
+            @endif
+            <span class="d-none d-md-inline">{{ auth('admin')->user()->name }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <!-- User image -->
             <li class="user-header bg-primary">
-                <img src="{{ asset('/assets/adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                @if(auth('admin')->user()->image)
+                <img src="{{ asset('assets/uploads/admins/' . auth('admin')->id() . '/images/' . auth('admin')->user()->image) }}" class="img-circle elevation-2" alt="Admin Image">
+                @else
+                <img src="{{ asset('/assets/adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="Admin Image">
+                @endif
 
                 <p>
-                    {{ auth()->user()->name }}
+                    {{ auth('admin')->user()->name }}
                 </p>
             </li>
             <li class="user-footer">
-                {{-- <a href="{{ route('admin.users.show', ['admin' => auth()->user()->id]) }}" class="btn btn-default btn-flat">Profile</a> --}}
-                <a href="javascript:;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
-                class="btn btn-default btn-flat float-right">Sign Out</a>
+                <a href="{{ route('admin.admins.show', ['admin' => auth('admin')->user()->id]) }}" class="btn btn-default btn-flat">Profile</a>
+
+                <a href="javascript:;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat float-right">Sign Out</a>
                 <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>

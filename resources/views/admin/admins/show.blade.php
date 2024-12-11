@@ -28,6 +28,8 @@
 
 <!-- Main content -->
 <section class="content">
+    @include('admin.layouts.flash_msg')
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-8">
@@ -36,6 +38,15 @@
                         <h3 class="card-title" style="margin-top: 3px">{{ $admin->name }}</h3>
 
                         <div class="card-tools">
+                            {{-- @can('edit-admins')
+                            <div class="input-group input-group-sm">
+                                <a href="{{route('admin.admins.reset.password',['admin' => $admin->id])}}" class="btn btn-success float-right">
+                                    <i class="fa fa-edit"></i>
+                                    Reset Password
+                                </a>
+                            </div>
+                            @endcan --}}
+
                             @can('edit-admins')
                             <div class="input-group input-group-sm">
                                 <a href="{{route('admin.admins.edit',['admin' => $admin->id])}}" class="btn btn-success float-right">
@@ -81,9 +92,26 @@
                         </table>
                     </div>
                 </div>
-                <!-- /.card -->
             </div>
-            
+
+            <div class="col-4">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Admin Image Preview</h3>
+                    </div>
+                    <div class="card-body" style="height: 365px">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if ($admin->image)
+                                <img id="image_preview" src="{{ asset('assets/uploads/admins/' . $admin->id . '/images/' . $admin->image) }}" alt="Admin Image">
+                                @else
+                                <img id="image_preview" src="{{ asset('/assets/images/image_preview.png') }}" alt="Admin Image">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>

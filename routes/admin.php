@@ -20,6 +20,18 @@ Route::group(['as' => 'admin.'], function () {
         // Route Login
         Route::get('login', [AuthController::class, 'loginForm'])->name('login.form');
         Route::post('login', [AuthController::class, 'login'])->name('login');
+
+        // Forget Password Route
+        Route::get('forgot-password', [AuthController::class, 'forgotPasswordForm'])->name('forget.password.form');
+        Route::post('forgotPassword', [AuthController::class, 'forgotPassword'])->name('forget.password');
+
+        // Forget Password OTP Route
+        Route::get('forgot-password/otp', [AuthController::class, 'forgotPasswordOTPForm'])->name('forget.password.otp.form');
+        Route::post('forgotPassword/otp', [AuthController::class, 'forgotPasswordOTP'])->name('forget.password.otp');
+
+        // Reset Password Route
+        Route::get('reset-password/{token}', [AuthController::class, 'resetPasswordForm'])->name('reset.password.form');
+        Route::post('resetPassword', [AuthController::class, 'resetPassword'])->name('reset.password');
     });
 
     // After Login Admin Routes
