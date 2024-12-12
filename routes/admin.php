@@ -49,6 +49,7 @@ Route::group(['as' => 'admin.'], function () {
 
         // Admins Routes
         Route::resource('admins', AdminController::class);
+        Route::put('admins/{admin}/reset/password', [AdminController::class, 'resetPassword'])->name('admins.reset.password');
 
         // Countries Routes
         Route::resource('countries', CountryController::class);

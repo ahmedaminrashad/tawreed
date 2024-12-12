@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Admin\StoreAdminRequest;
+use App\Http\Requests\Admin\Admin\UpdateAdminPasswordRequest;
 use App\Http\Requests\Admin\Admin\UpdateAdminRequest;
 use App\Services\AdminService;
 use App\Services\RoleService;
@@ -99,9 +100,26 @@ class AdminController extends Controller
     {
         $data = $request->validated();
 
-        $admin = $this->adminService->update($admin, $data);
+        $result = $this->adminService->update($admin, $data);
+
+        if (!$result) {
+            return redirect()->back()->with('error', 'Error in update Admin User');
+        }
 
         return redirect()->route('admin.admins.show', ['admin' => $admin])->with('success', 'Admin User updated successfully');
+    }
+
+    public function resetPassword(UpdateAdminPasswordRequest $request, Admin $admin)
+    {
+        $data = $request->validated();
+
+        $result = $this->adminService->resetPassword($admin, $data);
+        
+        if (!$result) {
+            return redirect()->back()->with('error', 'Admin User Old Password isn\'t matched');
+        }
+
+        return redirect()->route('admin.admins.show', ['admin' => $admin])->with('success', 'Admin User Password updated successfully');
     }
 
     /**

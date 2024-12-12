@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use File;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ class Admin extends Authenticatable
 
     protected $guarded = ['id'];
 
-    protected $appends = ['adminRole', 'adminRoleId'];
+    protected $appends = ['created_date', 'adminRole', 'adminRoleId'];
 
     protected $hidden = [
         'password',
@@ -29,6 +30,12 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getCreatedDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d');
+    }
+
 
     public function getAdminRoleAttribute()
     {

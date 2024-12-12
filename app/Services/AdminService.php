@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Admin;
+use Hash;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
@@ -100,6 +101,24 @@ readonly class AdminService
 
         DB::commit();
 
-        return $admin;
+        return true;
+    }
+
+    // Reset Admin Password
+    public function resetPassword(Admin $admin, $data)
+    {
+        if (!Hash::check($data['old_password'], $admin->password)) {
+            return false;
+        }
+
+        DB::beginTransaction();
+
+        $admin->update([
+            'password' => bcrypt($data['password']),
+        ]);
+
+        DB::commit();
+
+        return true;
     }
 }
