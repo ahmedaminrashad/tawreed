@@ -85,6 +85,21 @@ class RolePermissionSeeder extends Seeder
         ]);
 
         Permission::updateOrCreate([
+            'name' => 'list-documentations',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'show-documentations',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'edit-documentations',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
             'name' => 'list-countries',
             'guard_name' => 'admin'
         ]);

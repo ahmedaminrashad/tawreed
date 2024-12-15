@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CancellationReasonController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DocumentationController;
 use App\Http\Controllers\Admin\RejectionReasonController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
@@ -74,5 +75,8 @@ Route::group(['as' => 'admin.'], function () {
 
         // Settings Routes
         Route::resource('settings', SettingController::class)->except('create', 'store', 'destroy');
+
+        // Documentation Routes
+        Route::resource('documentations', DocumentationController::class)->except('create', 'store', 'destroy');
     });
 });
