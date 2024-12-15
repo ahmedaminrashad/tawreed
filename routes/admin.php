@@ -73,6 +73,6 @@ Route::group(['as' => 'admin.'], function () {
         Route::resource('rejections', RejectionReasonController::class);
 
         // Settings Routes
-        Route::resource('settings', SettingController::class)->except('destroy');
+        Route::resource('settings', SettingController::class)->except('create', 'store', 'destroy');
     });
 });

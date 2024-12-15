@@ -67,12 +67,4 @@ class SettingController extends Controller
 
         return redirect()->route('admin.settings.show', ['setting' => $setting])->with('success', 'Setting updated successfully');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
-    {
-        //
-    }
 }

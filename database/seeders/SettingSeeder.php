@@ -13,13 +13,93 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        $emailSetting = Setting::updateOrCreate(
+        Setting::updateOrCreate(
             [
                 'key' => 'email',
                 'group' => 'general',
             ],
             [
-                'value' => 'ispark@mail.com'
+                'value' => 'info@quotech.com'
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'phone',
+                'group' => 'general',
+            ],
+            [
+                'value' => '19888'
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'facebook_link',
+                'group' => 'general',
+            ],
+            [
+                'value' => 'https://www.facebook.com/'
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'instagram_link',
+                'group' => 'general',
+            ],
+            [
+                'value' => 'https://www.instagram.com/'
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'twitter_link',
+                'group' => 'general',
+            ],
+            [
+                'value' => 'https://x.com/'
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'linkedin_link',
+                'group' => 'general',
+            ],
+            [
+                'value' => 'https://www.linkedin.com/'
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'review',
+                'group' => 'general',
+            ],
+            [
+                'value' => 1
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'vat',
+                'group' => 'general',
+            ],
+            [
+                'value' => 14
+            ]
+        );
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'commission',
+                'group' => 'general',
+            ],
+            [
+                'value' => 10
             ]
         );
     }

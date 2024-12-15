@@ -96,6 +96,7 @@
 <!-- Page specific script -->
 <script>
     $(function() {
+
         var showURL = '{{ route('admin.settings.show', ['setting'=>'#id']) }}';
         var editURL = '{{ route('admin.settings.edit', ['setting'=>'#id']) }}';
 
@@ -117,6 +118,8 @@
                 , {
                     data: 'value'
                     , name: 'value'
+                    , orderable: false
+                    , searchable: false
                 }
                 , {
                     "data": "action"

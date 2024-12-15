@@ -20,13 +20,11 @@
                     <li class="breadcrumb-item"><a href="{{ route('admin.settings.index') }}">Settings</a></li>
                     <li class="breadcrumb-item active">Show Setting - {{ $setting->key }}</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -49,7 +47,6 @@
 
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
-
                             <tbody>
 
                                 <tr>
@@ -57,42 +54,50 @@
                                     <td>{{ $setting->id }}</td>
                                 </tr>
 
-                                {{-- <tr>
-                                    <th class="txt-content">Key</th>
-                                    <td>{{ $setting->key }}</td>
-                                </tr> --}}
-
                                 <tr>
-                                    <th class="txt-content">{{ $setting->key }}</th>
-                                    <td>{{ $setting->value }}</td>
+                                    <th class="txt-content">{{ ucfirst($setting->key) }}</th>
+                                    <td>
+                                        @if($setting->key == 'commission' || $setting->key == 'vat')
+                                        {{ $setting->value }} %
+                                        @elseif($setting->key == 'email')
+                                        <a href="mailto::{{ $setting->value }}">{{ $setting->value }}</a>
+                                        @elseif($setting->key == 'phone')
+                                        <a href="tel::{{ $setting->value }}">{{ $setting->value }}</a>
+                                        @elseif($setting->key == 'review')
+                                        @if($setting->value)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" disabled checked>
+                                            <label class="form-check-label">Yes</label>
+                                        </div>
+                                        @else
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" disabled>
+                                            <label class="form-check-label">No</label>
+                                        </div>
+                                        @endif
+                                        @elseif(str_contains($setting->key, 'link'))
+                                        <a href="tel::{{ $setting->value }}" target="blanked">{{ $setting->value }}</a>
+                                        @endif
+                                    </td>
                                 </tr>
-
-                                {{-- <tr>
-                                    <th class="txt-content">Group</th>
-                                    <td>{{ $setting->group }}</td>
-                                </tr> --}}
 
                                 <tr>
                                     <th class="txt-content">Created At</th>
-                                    <td>{{ $setting->created_at }}</td>
+                                    <td>{{ $setting->created_date }}</td>
                                 </tr>
 
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <!-- /.card -->
             </div>
-            
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
-<!-- /.content -->
 @endsection
 
 @section('pagejs')
 
-<!-- Page specific script -->
 <script>
     $(function() {});
 

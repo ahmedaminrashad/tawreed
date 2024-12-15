@@ -35,7 +35,7 @@
             @method('put')
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">{{ $formTitle }}</h3>
@@ -45,36 +45,63 @@
                         @include('admin.layouts.flash_msg')
 
                         <div class="card-body">
-                            {{-- <div class="form-group">
-                                <label for="group">Group</label>
-                                <span class="form-control" id="group">{{ $setting->group }}</span>
-                            </div>
 
                             <div class="form-group">
-                                <label for="key">Key</label>
-                                <span class="form-control" id="key">{{ $setting->key }}</span>
-                            </div> --}}
-
-                            <div class="form-group">
-                                <label for="value">{{ $setting->key }}</label>
-                                <input type="{{ $setting->key ? 'email' : 'text' }}" class="form-control" value="{{ $setting->value ?? old('value') }}" name="value" id="value" placeholder="Enter Value">
+                                @if($setting->key == 'commission')
+                                <label for="value">{{ ucfirst($setting->key) }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" value="{{ $setting->value ?? old('value') }}" name="value" id="value" min="0" max="100">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                                @elseif($setting->key == 'vat')
+                                <label for="value">VAT</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" value="{{ $setting->value ?? old('value') }}" name="value" id="value" min="0" max="100">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                                @elseif($setting->key == 'email')
+                                <label for="value">Email</label>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" value="{{ $setting->value ?? old('value') }}" name="value" id="value">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                </div>
+                                @elseif($setting->key == 'phone')
+                                <label for="value">Phone</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" value="{{ $setting->value ?? old('value') }}" name="value" id="value">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                </div>
+                                @elseif($setting->key == 'review')
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="value" id="value" value="1" {{ $setting->value ? 'checked' : '' }}>
+                                    <label class="form-check-label">{{ ucfirst($setting->key) }}</label>
+                                </div>
+                                @elseif(str_contains($setting->key, 'link'))
+                                <label for="value">{{ ucfirst(str_replace("_link", "", $setting->key)) }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" value="{{ $setting->value ?? old('value') }}" name="value" id="value">
+                                </div>
+                                @endif
                             </div>
-
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary float-right">Submit</button>
             </div>
-            <!-- /.card-footer -->
         </form>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
-<!-- /.content -->
 @endsection
 
 @section('pagejs')
