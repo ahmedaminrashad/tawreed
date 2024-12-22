@@ -27,9 +27,14 @@ class Documentation extends Model
         return Carbon::parse($this->created_at)->format('Y-m-d');
     }
 
+    public function translations(): HasMany
+    {
+        return $this->hasMany(DocumentationTranslation::class, 'documentation_id', 'id');
+    }
+
     public function translation(): HasMany
     {
-        return $this->hasMany(DocumentationTranslation::class);
+        return $this->hasMany(DocumentationTranslation::class, 'documentation_id');
     }
 
     public function getKeyAttribute()

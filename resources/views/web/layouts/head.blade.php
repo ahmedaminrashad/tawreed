@@ -1,0 +1,14 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@yield('title')</title>
+<link href="{{ asset('/assets/front/css/bootstrap.css') }}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+<link href="{{ asset('/assets/front/css/style.css') }}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="{{ asset('/assets/front/img/fix-icon.png') }}">
+
+{{-- Custom CSS --}}
+<link href="{{ asset('/assets/front/css/custom.css') }}" rel="stylesheet">
+
+@yield('head')

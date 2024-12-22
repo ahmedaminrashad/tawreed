@@ -93,4 +93,12 @@ readonly class SettingService
 
         return $setting;
     }
+
+    // get Setting by key function
+    public function getByKey($key)
+    {
+        $setting = Setting::where('key', $key)->first();
+
+        return $setting;
+    }
 }

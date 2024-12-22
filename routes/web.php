@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\HomePageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomePageController::class, 'index'])->name('home');
+// Before Login Routes
+Route::group(['middleware' => ['guest:web']], function () {
+    // Route Login
+    // Route::get('login', [AuthController::class, 'loginForm'])->name('login.form');
+    // Route::post('login', [AuthController::class, 'login'])->name('login');
+
+    Route::post('register', [AuthController::class, 'register'])->name('register');
+
+    Route::post('verify-otp', [AuthController::class, 'verifyOTP'])->name('verify.otp');
+    Route::post('resend-otp', [AuthController::class, 'resendOTP'])->name('resend.otp');
+    Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 });

@@ -1,6 +1,6 @@
 <!-- Brand Logo -->
 <a href="{{ route('admin.home') }}" class="brand-link">
-    <img src="{{ asset('/assets/adminlte/dist/img/logo.jpg') }}" alt="FastForward Logo" class="brand-image elevation-3" style="opacity: .8">
+    <img src="{{ asset('/assets/adminlte/dist/img/logo2.png') }}" alt="FastForward Logo" class="brand-image elevation-3" style="opacity: .8">
     {{-- <span class="brand-text font-weight-light">QuoTech</span> --}}
 </a>
 
