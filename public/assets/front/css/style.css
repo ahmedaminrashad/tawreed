@@ -234,6 +234,31 @@ header.member-head .main-menu a {
     font-size: 14px;
 }
 
+.stie-map {
+    margin-top: 30px;
+}
+.stie-map ul li {
+    display: inline-block;
+}
+.stie-map a {
+    color: var(--gray5);
+    text-decoration: none;
+}
+.stie-map a:hover {
+    color: var(--green);
+}
+.stie-map span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.stie-map p {}
+
+
+.margin-section {
+    margin-bottom: 124px;
+}
+
+
 .member-side {
     text-align: right;
     margin-top: 6px;
@@ -1146,7 +1171,7 @@ margin-right: 7.5px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
-    margin-bottom: 30;
+    margin-bottom: 30px;
 }
 
 .Tender-item h4 {
@@ -1432,6 +1457,7 @@ margin-top: 20px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
     text-decoration: none;
+    float: left;
 }
 .users-tenders-item img {
     position:absolute ;
@@ -1442,6 +1468,176 @@ margin-top: 20px;
 
 .users-tenders-item a:hover {
     background-color: var(--green);
+}
+
+.balance-main {
+    background-color: transparent;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border: 1px solid var(--green);
+    padding:7px 15px;
+    float: right;
+}
+
+.balance-main h6 {
+    float: left;
+    font-size: 12px;
+    color: var(--gray6);
+    font-weight: 500;
+    
+}
+.balance-main h6 span {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--dark);
+    margin-top:5px;
+}
+
+.balance-main h6 i {
+    font-size: 16px;
+    color: var(--dark);
+}
+
+
+.balance-main a {
+    float: right;
+    margin: auto;
+    height: 26px;
+    line-height: 0px;
+    font-size: 12px;
+    margin-left: 5px;
+    position: relative;
+    right: -5px;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green);
+    top: 3.5px;
+}
+
+.balance-main a:hover {
+    color: var(--white);
+}
+
+.all-categories, .all-Finish-tender {
+    margin-top: 35px;
+}
+
+
+/* filter  */
+
+.filter-item {
+    border: 1px solid var(--gray8);
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 0;
+
+}
+
+.filter-item p {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(39, 36, 36, 1);
+}
+
+
+.checkbox-item {
+    display: block;
+    position: relative;
+    padding-right: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: rgba(39, 36, 36, 1);
+    margin-bottom: 20px;
+  }
+
+/* Hide the browser's default checkbox */
+.checkbox-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .filter-item .checkmark {
+    right: 0;
+    left: auto;
+    border: 2px solid var(--gray6);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-item input:checked ~ .checkmark {
+    background-color: var(--green);
+    border: 2px solid var(--green);
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-item input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox-item .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .filter-item p.collapse-btn-main {
+border-bottom: 1px solid var(--gray7);
+padding-bottom: 15px;
+margin-bottom: 15px;
+cursor: pointer;
+position: relative;
+}
+.filter-item p.collapse-btn-main::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 1px;
+    background-image: url(../img/arrow.svg);
+    width: 20px;
+    height: 20px;
+    background-size: 13px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.filter-item p.collapse-btn-main.collapsed {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.filter-item p.collapse-btn-main.collapsed::after {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
+.filter-item h5 {
+margin-bottom: 15px;
+font-weight: 700;
+color: var(--gray5);
+font-size: 16px;
+margin-top: 10px;
 }
 
 
@@ -1511,6 +1707,15 @@ header.member-head img {
     height: 27px;
     margin-top: 11px;
 }
+
+.users-tenders-item img {
+    height: 70%;
+}
+
+.users-tenders-item {
+    padding-right: 25%;
+}
+
 
 
 }
@@ -1995,6 +2200,20 @@ header .search-main form .select2-container {
 
 .users-tenders-item {
     margin-bottom: 15px;
+}
+
+.users-tenders-item img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.1;
+}
+
+.users-tenders-item {
+    padding: 15px;
+}
+.margin-section {
+    margin-bottom: 30px;
 }
 
 }
