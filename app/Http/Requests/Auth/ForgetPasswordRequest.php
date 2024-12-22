@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\FormRequest\ApiFormRequest;
 
-class ResendOTPRequest extends ApiFormRequest
+class ForgetPasswordRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -19,12 +19,17 @@ Route::get('/', [HomePageController::class, 'index'])->name('home');
 // Before Login Routes
 Route::group(['middleware' => ['guest:web']], function () {
     // Route Login
-    // Route::get('login', [AuthController::class, 'loginForm'])->name('login.form');
     // Route::post('login', [AuthController::class, 'login'])->name('login');
 
+    // Route Register
     Route::post('register', [AuthController::class, 'register'])->name('register');
 
+    // Route Verify User OTP
     Route::post('verify-otp', [AuthController::class, 'verifyOTP'])->name('verify.otp');
-    Route::post('resend-otp', [AuthController::class, 'resendOTP'])->name('resend.otp');
+
+    // Route User Forget Password
+    Route::post('forget-password', [AuthController::class, 'forgetPassword'])->name('forget.password');
+
+    // Route User Reset Password
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
 });

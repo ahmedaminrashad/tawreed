@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OTPRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Http\Requests\Auth\ResendOTPRequest;
+use App\Http\Requests\Auth\ForgetPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Resources\UserResource;
 use App\Services\Web\AuthService;
@@ -47,12 +47,12 @@ class AuthController extends Controller
         return $this->success([], 'User verified successfully');
     }
 
-    public function resendOTP(ResendOTPRequest $request)
+    public function forgetPassword(ForgetPasswordRequest $request)
     {
         $data = $request->validated();
         // return $this->success($data, 'Resennnnnd');
 
-        $response = $this->authService->resendOTP($data);
+        $response = $this->authService->forgetPassword($data);
 
         if (is_array($response)) {
             return $this->failure(['error' => $response['error']], 'Error in resend User OTP');

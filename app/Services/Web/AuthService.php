@@ -136,8 +136,8 @@ readonly class AuthService
         }
     }
 
-    // Resend User OTP
-    public function resendOTP(array $data)
+    // Forget User Password
+    public function forgetPassword(array $data)
     {
         try {
             DB::beginTransaction();

@@ -250,7 +250,7 @@
             <img src="{{ asset('/assets/front/img/logo.png') }}">
             <h1>Forget password</h1>
             <h4>Enter you Email or Commercial Register Number to reset password</h4>
-            <form id="forget_password_form" action="{{ route('resend.otp') }}" method="POST">
+            <form id="forget_password_form" action="{{ route('forget.password') }}" method="POST">
                 @csrf
 
                 <input type="text" name="forget_password_search" id="forget_password_search" placeholder="Write your Email or Commercial Registration Number (Company Only)">
