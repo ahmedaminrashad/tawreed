@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OTPRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ForgetPasswordRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Services\Web\AuthService;
 use App\Traits\CustomResponse;
 use Illuminate\Http\Request;
@@ -20,27 +22,43 @@ class AuthController extends Controller
         private readonly AuthService $authService,
     ) {}
 
+    public function login(LoginRequest $request)
+    {
+        $data = $request->validated();
+        $userIP = $request->ip();
+        // return $this->success($data, 'Logiiiiiiiiiiiiiiiiiin');
+
+        $response = $this->authService->login($data, $userIP);
+
+        if (is_array($response) && array_key_exists('error', $response)) {
+            return $this->failure(['error' => $response['error']], 'Error in Login User');
+        }
+
+        return $this->success($response, 'User Logged in successfully');
+    }
+
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
-        // return $this->success($data, 'DDDDDDDDDDDDDDDD');
 
-        $user = $this->authService->register($data);
+        $result = $this->authService->register($data);
 
-        $response['user'] = new UserResource($user);
+        if (is_object($result) || $result instanceof User) {
+            $response['user'] = new UserResource($result);
 
-        return $this->success($response, 'User created successfully');
+            return $this->success($response, 'User created successfully');
+        }
+
+        return $this->failure(['error' => $result['error']], 'Error in create User');
     }
 
     public function verifyOTP(OTPRequest $request)
     {
         $data = $request->validated();
-        // return $this->success($data, 'VVVVVVVVVVVVV');
 
         $response = $this->authService->verifyOTP($data);
-        // dd($response);
 
-        if (is_array($response)) {
+        if (is_array($response) && array_key_exists('error', $response)) {
             return $this->failure(['error' => $response['error']], 'Error in verify User OTP');
         }
 
@@ -50,11 +68,10 @@ class AuthController extends Controller
     public function forgetPassword(ForgetPasswordRequest $request)
     {
         $data = $request->validated();
-        // return $this->success($data, 'Resennnnnd');
 
         $response = $this->authService->forgetPassword($data);
 
-        if (is_array($response)) {
+        if (is_array($response) && array_key_exists('error', $response)) {
             return $this->failure(['error' => $response['error']], 'Error in resend User OTP');
         }
 
@@ -64,14 +81,28 @@ class AuthController extends Controller
     public function resetPassword(ResetPasswordRequest $request)
     {
         $data = $request->validated();
-        // return $this->success($data, 'Reset');
 
         $response = $this->authService->resetPassword($data);
 
-        if ($response != 1) {
+        if (is_array($response) && array_key_exists('error', $response)) {
             return $this->failure(['error' => $response['error']], 'Error in resend User OTP');
         }
 
         return $this->success([], 'User Password reset successfully');
+    }
+
+    public function logout(LoginRequest $request)
+    {
+        $data = $request->validated();
+        $userIP = $request->ip();
+        // return $this->success($data, 'Logiiiiiiiiiiiiiiiiiin');
+
+        $response = $this->authService->logout($userIP);
+
+        if (is_array($response) && array_key_exists('error', $response)) {
+            return $this->failure(['error' => $response['error']], 'Error in Logout User');
+        }
+
+        return $this->success([], 'User Logged out successfully');
     }
 }

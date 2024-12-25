@@ -14,6 +14,7 @@ class HomePageController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(auth('api')->user());
         return view('web.index');
     }
 }

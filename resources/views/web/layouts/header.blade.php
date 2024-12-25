@@ -29,12 +29,19 @@
             </div>
             <div class="col-md-3">
                 <ul class="side-menu">
+                    @if(!auth('api')->check())
                     <li>
                         <a class="link-style" data-toggle="modal" data-target="#logIn">Log in</a>
                     </li>
                     <li class="sign-btn">
                         <a class="link-style" data-toggle="modal" data-target="#signUp">Sign up</a>
                     </li>
+                    @else
+                    <form id="logout_form" method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        
+                        <button type="submit" class="link-style">Logout</button>
+                    @endif
                     <li class="dropdown">
                         <button type="button" data-toggle="dropdown">
                             <i class="ri-global-line"></i>

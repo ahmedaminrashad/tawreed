@@ -6,18 +6,20 @@
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
             <h1>Welcome back </h1>
-            <form>
+            <form id="login_form" action="{{ route('login') }}" method="POST">
                 @csrf
 
-                <input type="text" name="login_search" id="login_search" placeholder="Write your Email or Commercial Registration Number (Company Only)">
-                <div class="col-xs-12 remove-padding">
-                    <input type="password" id="pass_log_id" name="pass1" placeholder="password">
+                <div id="login_text_div" class="col-xs-12 remove-padding">
+                    <input type="text" name="login_text" id="login_text" placeholder="Write your Email or Commercial Registration Number (Company Only)">
+                </div>
+                <div id="login_password_div" class="col-xs-12 remove-padding">
+                    <input type="password" id="login_password" name="login_password" placeholder="Password">
                     <span toggle="#password-field" class="ri-eye-fill ri-eye-off-fill toggle-password1"></span>
                 </div>
 
-                <button>Login</button>
-                <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#forgot-passord-div">Forgot password ?</a>
+                <button type="submit">Login</button>
             </form>
+            <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#forgot-passord-div">Forgot password ?</a>
             <div class="clearfix"></div>
             <p>Don't have an account? <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#signUp">Create account</a></p>
         </div>
@@ -155,13 +157,13 @@
 
                 <div id="company_password_div" class="col-xs-12 remove-padding">
                     <input type="password" id="company_password" name="company_password" placeholder="Password">
-                    <span toggle="#password-field2" class="ri-eye-fill ri-eye-off-fill toggle-password2"></span>
+                    <span toggle="#password-field2" class="ri-eye-fill ri-eye-off-fill toggle-password4"></span>
                     <h6>Must contain 8 character</h6>
                 </div>
 
                 <div id="company_password_confirmation_div" class="col-xs-12 remove-padding">
                     <input type="password" id="company_password_confirmation" name="company_password_confirmation" placeholder="Confirm Password">
-                    <span toggle="#password-field3" class="ri-eye-fill ri-eye-off-fill toggle-password3"></span>
+                    <span toggle="#password-field3" class="ri-eye-fill ri-eye-off-fill toggle-password5"></span>
                     <h6>Must contain 8 character</h6>
                 </div>
 

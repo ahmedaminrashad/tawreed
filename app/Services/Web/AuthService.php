@@ -3,12 +3,15 @@
 namespace App\Services\Web;
 
 use App\Enums\UserType;
+use App\Http\Resources\UserResource;
 use App\Mail\Admin\SendCompanyVerifyOTPMail;
 use App\Mail\Admin\SendVerifyOTPMail;
 use App\Models\User;
 use App\Services\SettingService;
+use Auth;
 use Carbon\Carbon;
 use Hash;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
 use Mail;
 
@@ -20,82 +23,167 @@ readonly class AuthService
         private readonly UserService $userService,
     ) {}
 
+    // Login User
+    public function login(array $data, $userIP)
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = $this->userService->getUser($data['login_text']);
+
+            if (!$user) {
+                DB::rollBack();
+                return ['error' => 'Invalid - User not exists'];
+            }
+
+            if (!$user->email_verified_at) {
+                DB::rollBack();
+                return ['error' => 'Invalid - User not exists'];
+            }
+
+            $credentials = $this->credentials($data['login_text'], $data['login_password']);
+
+            if (!Auth::guard('api')->attempt($credentials)) {
+                return ['error' => 'Invalid Credentials'];
+            }
+
+            $user = Auth::guard('api')->user();
+
+            $token = $this->generateToken($user);
+
+            $response['user'] = new UserResource($user);
+
+            $response['token'] = $token;
+            
+            $user->userDevices()->updateOrCreate(['uuid' => $userIP]);
+
+            DB::commit();
+
+            return $response;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+    }
+
     // Register New User
     public function register(array $data)
     {
         if ($data['account_type'] == UserType::INDIVIDUAL->value) {
-            $user = $this->registerIndividual($data);
+            $result = $this->registerIndividual($data);
         } else if ($data['account_type'] == UserType::COMPANY->value) {
-            $user = $this->registerCompany($data);
+            $result = $this->registerCompany($data);
         }
 
-        return $user;
+        if (is_object($result) || $result instanceof User) {
+            return $result;
+        }
+
+        return ['error' => $result['error']];
     }
 
     // Register New Individual User
     public function registerIndividual(array $data)
     {
-        $otp = $this->oTPService->generateUserOTP();
+        try {
+            $otp = $this->oTPService->generateUserOTP();
 
-        DB::beginTransaction();
+            DB::beginTransaction();
 
-        $user = new User();
+            $user = User::updateOrCreate(
+                [
+                    'email' => $data['email_individual'],
+                ],
+                [
+                    'full_name' => $data['full_name'],
+                    'type' => $data['account_type'],
+                    'country_id' => $data['country_id_individual'],
+                    'password' => Hash::make($data['individual_password']),
+                    'otp' => $otp,
+                    'otp_expires_at' => Carbon::now()->addMinutes(3),
+                ]
+            );
 
-        $user->full_name = $data['full_name'];
-        $user->email = $data['email_individual'];
-        $user->country_id = $data['country_id_individual'];
-        $user->type = $data['account_type'];
-        $user->password = Hash::make($data['individual_password']);
-        $user->otp = $otp;
-        $user->otp_expires_at = Carbon::now()->addMinutes(3);
+            $otpData = [
+                'date' => Carbon::today()->format('d M, Y'),
+                'name' => $user->full_name,
+                'otp' => $user->otp,
+                'administratorEmail' => $this->settingService->getByKey('email')->value,
+            ];
 
-        $user->save();
+            Mail::to($user->email)->send(new SendVerifyOTPMail($otpData, $user->email));
 
-        $otpData = [
-            'date' => Carbon::today()->format('d M, Y'),
-            'name' => $user->full_name,
-            'otp' => $user->otp,
-            'administratorEmail' => $this->settingService->getByKey('email')->value,
-        ];
+            DB::commit();
 
-        Mail::to($user->email)->send(new SendVerifyOTPMail($otpData, $user->email));
-
-        DB::commit();
-
-        return $user;
+            return $user;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
     }
 
     // Register New Company User
     public function registerCompany(array $data)
     {
-        $otp = $this->oTPService->generateUserOTP();
+        try {
+            $otp = $this->oTPService->generateUserOTP();
 
-        DB::beginTransaction();
+            DB::beginTransaction();
 
-        $user = new User();
+            $user = User::updateOrCreate(
+                [
+                    'email' => $data['email_company'],
+                    'commercial_registration_number' => $data['crn'],
+                ],
+                [
+                    'company_name' => $data['company_name'],
+                    'type' => $data['account_type'],
+                    'country_id' => $data['country_id_company'],
+                    'password' => Hash::make($data['company_password']),
+                    'otp' => $otp,
+                    'otp_expires_at' => Carbon::now()->addMinutes(3),
+                ]
+            );
 
-        $user->company_name = $data['company_name'];
-        $user->email = $data['email_company'];
-        $user->country_id = $data['country_id_company'];
-        $user->type = $data['account_type'];
-        $user->password = Hash::make($data['company_password']);
-        $user->otp = $otp;
-        $user->otp_expires_at = Carbon::now()->addMinutes(3);
+            $user->save();
 
-        $user->save();
+            $otpData = [
+                'date' => Carbon::today()->format('d M, Y'),
+                'name' => $user->company_name,
+                'otp' => $user->otp,
+                'administratorEmail' => $this->settingService->getByKey('email')->value,
+            ];
 
-        $otpData = [
-            'date' => Carbon::today()->format('d M, Y'),
-            'name' => $user->company_name,
-            'otp' => $user->otp,
-            'administratorEmail' => $this->settingService->getByKey('email')->value,
-        ];
+            Mail::to($user->email)->send(new SendCompanyVerifyOTPMail($otpData, $user->email));
 
-        Mail::to($user->email)->send(new SendCompanyVerifyOTPMail($otpData, $user->email));
+            DB::commit();
 
-        DB::commit();
+            return $user;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+    }
 
-        return $user;
+    // Logout User
+    public function logout($userIP)
+    {
+        try {
+            DB::beginTransaction();
+
+            Auth::guard('api')->user()->userDevices()->where('uuid', $userIP)->delete();
+
+            Auth::guard('api')->user()->tokens()->delete();
+
+            Auth::guard('api')->logout();
+
+            DB::commit();
+
+            return 1;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
     }
 
     // Verify User OTP
@@ -214,5 +302,19 @@ readonly class AuthService
             DB::rollBack();
             return ['error' => $e->getMessage()];
         }
+    }
+
+    private function credentials($username, $password): array
+    {
+        if (is_numeric($username)) {
+            return ['commercial_registration_number' => $username, 'password' => $password];
+        }
+
+        return ['email' => $username, 'password' => $password];
+    }
+
+    private function generateToken(User|Authenticatable $user): string
+    {
+        return $user->createToken('quotech')->plainTextToken;
     }
 }

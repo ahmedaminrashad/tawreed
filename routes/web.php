@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
+
 // Before Login Routes
-Route::group(['middleware' => ['guest:web']], function () {
+Route::group(['middleware' => ['guest:api']], function () {
     // Route Login
-    // Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
 
     // Route Register
     Route::post('register', [AuthController::class, 'register'])->name('register');
@@ -32,4 +33,10 @@ Route::group(['middleware' => ['guest:web']], function () {
 
     // Route User Reset Password
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
+});
+
+// After Login Routes
+Route::group(['middleware' => ['auth:api']], function () {
+    // Route logout
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
