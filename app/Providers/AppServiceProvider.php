@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Country;
 use App\Models\Documentation;
 use Illuminate\Support\ServiceProvider;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Schema::defaultStringLength(191);
+        
         /*
         // share all Countries with all views
         view()->share('countries', Country::join('country_translations', 'countries.id', 'country_translations.country_id')
