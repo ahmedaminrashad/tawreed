@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomePageController;
+use App\Http\Controllers\Web\WorkCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 
+Route::get('/categories', [WorkCategoryController::class, 'index'])->name('categories.index');
+
 // Before Login Routes
 Route::group(['middleware' => ['guest:api']], function () {
+    /*********************************Auth Routes***********************/
+
     // Route Login
     Route::post('login', [AuthController::class, 'login'])->name('login');
 
@@ -33,6 +38,8 @@ Route::group(['middleware' => ['guest:api']], function () {
 
     // Route User Reset Password
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
+
+    /*********************************Auth Routes***********************/
 });
 
 // After Login Routes

@@ -91,9 +91,8 @@ class AuthController extends Controller
         return $this->success([], 'User Password reset successfully');
     }
 
-    public function logout(LoginRequest $request)
+    public function logout(Request $request)
     {
-        $data = $request->validated();
         $userIP = $request->ip();
         // return $this->success($data, 'Logiiiiiiiiiiiiiiiiiin');
 

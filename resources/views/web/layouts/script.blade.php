@@ -376,6 +376,10 @@
         , });
     });
 
+    $("#logout_btn").click(function() {
+        $('#logout_form').submit();
+    });
+
     $('#logout_form').on("submit", function(e) {
         e.preventDefault();
 
@@ -406,6 +410,59 @@
             , });
         }
     });
+
+
+    // otp
+    const inputs = document.querySelectorAll('.otp-input input');
+    const timerDisplay = document.getElementById('timer');
+    const resendLink = document.querySelector('.resend-link');
+    const emailSpan = document.getElementById('email');
+    let timeLeft = 10; // 2 minutes in seconds
+    let timerId;
+    let canResend = true;
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerId);
+                timerDisplay.textContent = "00";
+                inputs.forEach(input => input.disabled = true);
+                canResend = false;
+            } else {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `(${minutes}:${seconds.toString().padStart(2, '0')})`;
+                timeLeft--;
+            }
+        }, 1000);
+    }
+
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            if (e.target.value.length > 1) {
+                e.target.value = e.target.value.slice(0, 1);
+            }
+            if (e.target.value.length === 1) {
+                if (index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !e.target.value) {
+                if (index > 0) {
+                    inputs[index - 1].focus();
+                }
+            }
+            if (e.key === 'e') {
+                e.preventDefault();
+            }
+        });
+    });
+
+    startTimer();
+    // end otp
 
 </script>
 

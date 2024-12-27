@@ -201,13 +201,13 @@
 
                 <div class="row">
                     <div id="otp_div">
-                        <div class="col-xs-12 remove-padding otp-main">
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style otp_digit" name="digit_1" id="digit_1" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style otp_digit" name="digit_2" id="digit_2" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style otp_digit" name="digit_3" id="digit_3" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style otp_digit" name="digit_4" id="digit_4" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style otp_digit" name="digit_5" id="digit_5" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style otp_digit" name="digit_6" id="digit_6" min="0" max="9"></div>
+                        <div class="col-xs-12 remove-padding otp-main otp-input">
+                            <div class="col-xs-2"><input type="number" class="input_style otp_digit" name="digit_1" id="digit_1"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style otp_digit" name="digit_2" id="digit_2"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style otp_digit" name="digit_3" id="digit_3"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style otp_digit" name="digit_4" id="digit_4"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style otp_digit" name="digit_5" id="digit_5"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style otp_digit" name="digit_6" id="digit_6"></div>
                         </div>
                     </div>
                 </div>
@@ -276,13 +276,13 @@
 
                 <div class="row">
                     <div id="reset_otp_div">
-                        <div class="col-xs-12 remove-padding otp-main">
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style reset_otp_digit" name="reset_digit_1" id="reset_digit_1" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style reset_otp_digit" name="reset_digit_2" id="reset_digit_2" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style reset_otp_digit" name="reset_digit_3" id="reset_digit_3" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style reset_otp_digit" name="reset_digit_4" id="reset_digit_4" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style reset_otp_digit" name="reset_digit_5" id="reset_digit_5" min="0" max="9"></div>
-                            <div class="col-xs-2"><input type="number" maxlength="1" class="input_style reset_otp_digit" name="reset_digit_6" id="reset_digit_6" min="0" max="9"></div>
+                        <div class="col-xs-12 remove-padding otp-main otp-input">
+                            <div class="col-xs-2"><input type="number" class="input_style reset_otp_digit" name="reset_digit_1" id="reset_digit_1"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style reset_otp_digit" name="reset_digit_2" id="reset_digit_2"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style reset_otp_digit" name="reset_digit_3" id="reset_digit_3"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style reset_otp_digit" name="reset_digit_4" id="reset_digit_4"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style reset_otp_digit" name="reset_digit_5" id="reset_digit_5"></div>
+                            <div class="col-xs-2"><input type="number" class="input_style reset_otp_digit" name="reset_digit_6" id="reset_digit_6"></div>
                         </div>
                     </div>
                 </div>

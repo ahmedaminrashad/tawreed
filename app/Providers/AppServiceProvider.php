@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        /*
         // share all Countries with all views
         view()->share('countries', Country::join('country_translations', 'countries.id', 'country_translations.country_id')
             ->select('countries.id as country_id', 'country_translations.name as country_name')
@@ -32,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
 
         // share Privacy Policy with all views
         view()->share('privacy_policy', Documentation::where('key', 'privacy_policy')->first()->translate('ar')->page);
+        */
     }
 }

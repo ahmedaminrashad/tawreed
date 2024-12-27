@@ -16,12 +16,18 @@ readonly class WorkCategoryClassificationService
     }
 
     // list all Work Category Classifications for Select List function
-    public function listForSelect()
+    public function listForSelect($limit = null)
     {
-        $workCategoryClassifications = WorkCategoryClassification::join('workCategoryClassification_translations', 'workCategoryClassifications.id', 'workCategoryClassification_translations.workCategoryClassification_id')
-            ->select('workCategoryClassifications.id as workCategoryClassification_id', 'workCategoryClassification_translations.name as workCategoryClassification_name')
-            ->pluck('workCategoryClassification_name', 'workCategoryClassification_id')->toArray();
-        return $workCategoryClassifications;
+        $workCategoryClassifications = WorkCategoryClassification::join(
+            'classification_translations',
+            'classifications.id',
+            'classification_translations.classification_id'
+        )
+            ->select('classifications.id as classification_id', 'classification_translations.name as classification_name');
+        if ($limit) {
+            $workCategoryClassifications = $workCategoryClassifications->limit($limit);
+        }
+        return $workCategoryClassifications->pluck('classification_name', 'classification_id')->toArray();
     }
 
     // get Work Category Classification by ID function

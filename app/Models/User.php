@@ -49,6 +49,16 @@ class User extends Authenticatable
 
     public function userDevices(): HasMany
     {
-        return $this->hasMany(UserDevice::class);
+        return $this->hasMany(UserDevice::class, 'user_id', 'id');
+    }
+
+    public function isCompany(): bool
+    {
+        return $this->type->value == UserType::COMPANY->value;
+    }
+
+    public function isIndividual(): bool
+    {
+        return $this->type->value == UserType::INDIVIDUAL->value;
     }
 }

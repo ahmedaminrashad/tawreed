@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\WorkCategoryClassificationService;
 use Illuminate\Http\Request;
 
-class HomePageController extends Controller
+class WorkCategoryController extends Controller
 {
     public function __construct(
         protected WorkCategoryClassificationService $workCategoryClassificationService
@@ -17,9 +17,7 @@ class HomePageController extends Controller
      */
     public function index(Request $request)
     {
-        $workCategories = $this->workCategoryClassificationService->listForSelect(3);
-        // dd($workCategories);
-        // dd(auth('api')->user());
-        return view('web.index', compact('workCategories'));
+        $workCategories = $this->workCategoryClassificationService->listForSelect();
+        return view('web.workCategories.index', compact('workCategories'));
     }
 }
