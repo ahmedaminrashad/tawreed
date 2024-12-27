@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
             ->pluck('country_name', 'country_id')->toArray());
 
         // share Terms & Conditions with all views
-        view()->share('terms_conditions', Documentation::where('key', 'terms_conditions')->first()->translate('ar')->page);
+        view()->share('terms_conditions', Documentation::where('key', 'terms_conditions')->first()->translate('ar')?->page);
 
         // share Privacy Policy with all views
-        view()->share('privacy_policy', Documentation::where('key', 'privacy_policy')->first()->translate('ar')->page);
+        view()->share('privacy_policy', Documentation::where('key', 'privacy_policy')->first()->translate('ar')?->page);
     }
 }
