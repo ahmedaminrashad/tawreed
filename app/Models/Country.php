@@ -31,4 +31,20 @@ class Country extends Model
     {
         return $this->hasMany(CountryTranslation::class);
     }
+
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
+    }
+
+    public function cities_list(): array
+    {
+        return $this->cities()->join(
+            'city_translations',
+            'cities.id',
+            'city_translations.city_id'
+        )
+            ->select('city_translations.city_id as city_id', 'city_translations.name as city_name')
+            ->pluck('city_name', 'city_id')->toArray();
+    }
 }

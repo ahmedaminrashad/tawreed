@@ -1921,6 +1921,13 @@ width: 100% !important;
     left: 20px;
 }
 
+.input-item.error_textarea p {
+    position: absolute;
+    font-size: 12px;
+    color: red;
+    left: 20px;
+}
+
 
 .datepicker-input {
     position: relative;

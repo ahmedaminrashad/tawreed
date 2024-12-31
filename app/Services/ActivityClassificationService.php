@@ -16,12 +16,18 @@ readonly class ActivityClassificationService
     }
 
     // list all Activity Classifications for Select List function
-    public function listForSelect()
+    public function listForSelect($limit = null)
     {
-        $workCategoryClassifications = ActivityClassification::join('workCategoryClassification_translations', 'workCategoryClassifications.id', 'workCategoryClassification_translations.workCategoryClassification_id')
-            ->select('workCategoryClassifications.id as workCategoryClassification_id', 'workCategoryClassification_translations.name as workCategoryClassification_name')
-            ->pluck('workCategoryClassification_name', 'workCategoryClassification_id')->toArray();
-        return $workCategoryClassifications;
+        $activityClassifications = ActivityClassification::join(
+            'activity_classification_translations',
+            'activity_classifications.id',
+            'activity_classification_translations.activity_id'
+        )
+            ->select('activity_classifications.id as activity_classification_id', 'activity_classification_translations.name as activity_classification_name');
+        if ($limit) {
+            $activityClassifications = $activityClassifications->limit($limit);
+        }
+        return $activityClassifications->pluck('activity_classification_name', 'activity_classification_id')->toArray();
     }
 
     // get Activity Classification by ID function

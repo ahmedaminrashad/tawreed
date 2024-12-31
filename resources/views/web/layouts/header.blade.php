@@ -55,7 +55,7 @@
             @else
             <div class="col-md-4 member-side">
                 <ul>
-                    <li><a href="#" class="Create-Tender-btn"><i class="ri-add-circle-line"></i> Create Tenders</a></li>
+                    <li><a href="{{ route('tenders.create') }}" class="Create-Tender-btn"><i class="ri-add-circle-line"></i> Create Tender</a></li>
                     <li class="dropdown">
                         <button type="button" data-toggle="dropdown">
                             <i class="ri-global-line"></i>
@@ -94,22 +94,22 @@
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding">
                                         <div class="col-xs-12 remove-padding notification-item">
-                                            <img src="img/1.png" />
+                                            <img src="{{ asset('/assets/front/img/1.png') }}">
                                             <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item unread-notification">
-                                            <img src="img/1.png" />
+                                            <img src="{{ asset('/assets/front/img/1.png') }}">
                                             <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item">
-                                            <img src="img/1.png" />
+                                            <img src="{{ asset('/assets/front/img/1.png') }}">
                                             <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item">
-                                            <img src="img/1.png" />
+                                            <img src="{{ asset('/assets/front/img/1.png') }}">
                                             <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
@@ -118,27 +118,27 @@
 
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
@@ -146,17 +146,17 @@
 
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="img/1.png" />
+                                        <img src="{{ asset('/assets/front/img/1.png') }}">
                                         <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>

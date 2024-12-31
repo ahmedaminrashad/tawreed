@@ -6,6 +6,8 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
 <link href="{{ asset('/assets/front/css/style.css') }}" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="{{ asset('/assets/front/css/jquery.uploader.css') }}">
 <link rel="icon" type="image/x-icon" href="{{ asset('/assets/front/img/fix-icon.png') }}">
 
 {{-- Custom CSS --}}
