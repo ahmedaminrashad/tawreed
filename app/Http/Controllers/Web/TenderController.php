@@ -57,7 +57,7 @@ class TenderController extends Controller
         return view('web.tenders.items', compact('tender', 'units'));
     }
 
-    // public function storeItems(Request $request)
+    // public function storeItems(Tender $tender, Request $request)
     public function storeItems(Tender $tender, StoreTenderItemRequest $request)
     {
         // dd($request->all());
@@ -76,5 +76,15 @@ class TenderController extends Controller
     {
         // dd($tender->items);
         return view('web.tenders.review', compact('tender'));
+    }
+
+    public function publishTender(Tender $tender, Request $request)
+    {
+        $result = $this->tenderService->publish($tender);
+        if (is_array($result)) {
+            return redirect()->back()->with('error', $result['error']);
+        }
+        
+        return redirect()->route('tenders.create')->with('success', 'Tender Published Successfully');
     }
 }

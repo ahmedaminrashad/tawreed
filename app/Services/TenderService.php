@@ -104,6 +104,22 @@ readonly class TenderService
         }
     }
 
+    // Publish Tender
+    public function publish(Tender $tender)
+    {
+        try {
+            $result = $this->updateStatus($tender, TenderStatus::PUBLISHED->value);
+            if (is_array($result)) {
+                return ['error' => 'Error in publish Tender Status'];
+            }
+
+            return 1;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+    }
+
     // Update Tender
     public function update(Tender $tender, $data)
     {

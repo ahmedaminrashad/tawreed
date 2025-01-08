@@ -16,7 +16,7 @@ class Tender extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'remaining_days', 'contract_start_date_text', 'contract_end_date_text', 'closing_date_text'];
 
     public function getContractStartDateAttribute()
     {
@@ -38,6 +38,29 @@ class Tender extends Model
         return Carbon::parse($this->created_at)->format('Y-m-d');
     }
 
+    public function getContractStartDateTextAttribute()
+    {
+        return Carbon::parse($this->contract_start_date)->format('d M, Y');
+    }
+
+    public function getContractEndDateTextAttribute()
+    {
+        return Carbon::parse($this->contract_end_date)->format('d M, Y');
+    }
+
+    public function getClosingDateTextAttribute()
+    {
+        return Carbon::parse($this->closing_date)->format('d M, Y');
+    }
+
+    public function getRemainingDaysAttribute()
+    {
+        $closeDate = Carbon::parse($this->closing_date);
+        $now = Carbon::today();
+
+        return $closeDate->diffInDays($now);
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(TenderItem::class);
@@ -55,7 +78,7 @@ class Tender extends Model
 
     public function city(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(City::class);
     }
 
     public function workCategoryClassification(): BelongsTo

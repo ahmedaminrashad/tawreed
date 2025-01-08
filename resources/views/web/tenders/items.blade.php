@@ -27,6 +27,7 @@
         <div class="col-xs-12">
             <h1>Create New Tender Bid - Add Item(s)</h1>
         </div>
+
         <div class="col-xs-12 tender-steps-head">
             <div class="col-md-4 done">
                 <span><i class="ri-check-line"></i></span>
@@ -58,10 +59,53 @@
         </div>
         @endif
 
+        @if ($errors->any())
+        <div class="col-xs-12 error" style="margin-top: 15px">
+            <p style="color: red;">Error in Adding Tender Item(s)</p>
+        </div>
+        @endif
+
         <form id="add-item-form" action="{{ route('tenders.items.store', ['tender' => $tender]) }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div id="items_div">
+                @forelse($tender->items as $key => $item)
+                @php
+                $count = $key + 1;
+                @endphp
+                <div class="col-xs-12 inputs-group">
+                    <h2>Item {{ $count }}</h2>
+                    <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                        <input type="text" name="item[{{ $count }}][name]" id="item[{{ $count }}][name]" placeholder="Item name" value="{{ $item->name }}">
+                    </div>
+
+                    <div class="col-md-6 col-xs-12 col-sm-12 input-item unit_div  @if($errors->has('unit_id')) error @endif">
+                        <select class=" Choose-country" name="item[{{ $count }}][unit_id]" id="item[{{ $count }}][unit_id]">
+                            <option value="">Choose Measurement Unit</option>
+                            @foreach($units as $unitID => $unit)
+                            <option value="{{ $unitID }}" @selected($item->unit_id == $unitID)>{{ $unit }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('unit_id'))
+                        <p>{{ $errors->first('unit_id') }}</p>
+                        @endif
+                    </div>
+
+                    <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                        <input type="number" min="1" name="item[{{ $count }}][quantity]" id="item[{{ $count }}][quantity]" placeholder="Item Quantity" value="{{ $item->quantity }}">
+                    </div>
+
+                    <div class="col-xs-12 input-item">
+                        <textarea name="item[{{ $count }}][specs]" id="item[{{ $count }}][specs]" placeholder="Technical Specifications (Optional)">{{ $item->specs }}</textarea>
+                    </div>
+
+                    <div class="col-xs-12 upload-main">
+                        <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
+                        <input type="text" name="item[{{ $count }}][media][]" id="item[{{ $count }}][media]" class="demo1">
+                    </div>
+
+                </div>
+                @empty
                 <div class="col-xs-12 inputs-group">
                     <h2>Item 1</h2>
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
@@ -94,10 +138,11 @@
                     </div>
 
                 </div>
+                @endforelse
             </div>
 
             <div class="col-xs-12 remove-padding">
-                <a class="add-item-btn"><i class="ri-add-circle-line"></i> Add New Item</a>
+                <a class="add-item-btn link-style"><i class="ri-add-circle-line"></i> Add New Item</a>
             </div>
 
             <div class="col-xs-12 remove-padding">
@@ -139,7 +184,7 @@
                 }, 300)
             }
         }
-        
+
         $(".demo1").uploader({
             multiple: true
             , ajaxConfig: ajaxConfig
@@ -203,7 +248,7 @@
                 }, 300)
             }
         }
-        
+
         $(".demo1").uploader({
             multiple: true
             , ajaxConfig: ajaxConfig

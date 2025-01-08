@@ -52,12 +52,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     // Create Tender Route
-    Route::get('tenders/create', [TenderController::class, 'create'])->name('tenders.create');
-    // Create Tender Phase 2 Route
-    Route::get('tenders/create', [TenderController::class, 'create'])->name('tenders.create');
-    // Create Tender Phase 3 Route
     Route::get('tenders/create/{tender?}', [TenderController::class, 'create'])->name('tenders.create');
-
     // Store Tender Route
     Route::post('tenders/store/{tender?}', [TenderController::class, 'store'])->name('tenders.store');
     // Tender Items Route
@@ -66,6 +61,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('tenders/{tender}/items', [TenderController::class, 'storeItems'])->name('tenders.items.store');
     // Tender Review Route
     Route::get('tenders/{tender}/review', [TenderController::class, 'reviewTender'])->name('tenders.review');
-    // Store Tender Items Route
-    Route::post('tenders/{tender}/review', [TenderController::class, 'finalizeTender'])->name('tenders.review.finalize');
+    // Publish Tender Route
+    Route::post('tenders/{tender}/publish', [TenderController::class, 'publishTender'])->name('tenders.publish');
 });
