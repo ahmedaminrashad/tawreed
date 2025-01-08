@@ -18,8 +18,8 @@ readonly class UnitService
     // list all Measurement Units for Select List function
     public function listForSelect()
     {
-        $units = MeasurementUnit::join('unit_translations', 'countries.id', 'unit_translations.unit_id')
-            ->select('countries.id as unit_id', 'unit_translations.name as unit_name')
+        $units = MeasurementUnit::join('unit_translations', 'units.id', 'unit_translations.unit_id')
+            ->select('units.id as unit_id', 'unit_translations.name as unit_name')
             ->pluck('unit_name', 'unit_id')->toArray();
         return $units;
     }

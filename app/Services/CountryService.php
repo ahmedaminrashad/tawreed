@@ -24,14 +24,6 @@ readonly class CountryService
         return $countries;
     }
 
-    // get Country by ID function
-    public function getById($id)
-    {
-        $country = Country::find($id);
-
-        return $country;
-    }
-
     // list all Countries function AJAX
     public function listAjax($ajaxData)
     {
@@ -59,6 +51,14 @@ readonly class CountryService
             })
             ->rawColumns(['action', 'ar_name', 'vat'])
             ->make(true);
+    }
+    
+    // get Country by ID function
+    public function getById($id)
+    {
+        $country = Country::find($id);
+
+        return $country;
     }
 
     // Store new Country
@@ -125,5 +125,19 @@ readonly class CountryService
         }
 
         return $country->delete();
+    }
+
+    // List Country Cities
+    public function cities($country_id)
+    {
+        $country = $this->getById($country_id);
+
+        if (!$country) {
+            return false;
+        }
+
+        $cities = $country->cities_list();
+
+        return $cities;
     }
 }

@@ -1,0 +1,325 @@
+@extends('web.layouts.master')
+
+@section('title', 'Create Tender')
+
+@section('head')
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+</style>
+@endsection
+
+@section('content')
+
+<div class="container-fluid body remove-padding">
+    <div class="container stie-map">
+        <ul>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><span>/</span></li>
+            <li>
+                <p>Create Tender</p>
+            </li>
+        </ul>
+    </div>
+    <div class="container remove-padding add-tender-main">
+        <div class="col-xs-12">
+            <h1>Create New Tender Bid</h1>
+        </div>
+        <div class="col-xs-12 tender-steps-head">
+            <div class="col-md-4 active">
+                <span>1</span>
+                <h4>General info</h4>
+                <p>Add info about your Tender</p>
+                <i class="ri-arrow-right-s-line"></i>
+            </div>
+            <div class="col-md-4">
+                <span>2</span>
+                <h4>Add Item(s)</h4>
+                <p>Add one Item or more with details</p>
+                <i class="ri-arrow-right-s-line"></i>
+            </div>
+            <div class="col-md-4">
+                <span>3</span>
+                <h4>Preview</h4>
+                <p>Review your Tender info before publish</p>
+                <i class="ri-arrow-right-s-line"></i>
+            </div>
+        </div>
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            {{ session('error') }}
+        </div>
+        @endif
+
+        <form id="store_tender_info" action="{{ route('tenders.store', ['tender' => $tender?->id]) }}" method="POST">
+            @csrf
+
+            <div class="col-xs-12 inputs-group">
+                <h2>Main info</h2>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item subject_div @if($errors->has('subject')) error @endif">
+                    <input name="subject" id="subject" placeholder="Tender Subject name" value="{{ old('subject') ?? $tender?->subject }}">
+                    @if($errors->has('subject'))
+                    <p>{{ $errors->first('subject') }}</p>
+                    @endif
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item project_div @if($errors->has('project')) error @endif">
+                    <input name="project" id="project" placeholder="Tender Project name (Optional)" value="{{ old('project') ?? $tender?->project }}">
+                    @if($errors->has('project'))
+                    <p>{{ $errors->first('project') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item country_id_div @if($errors->has('country_id')) error @endif">
+                    <select class="list-select2-choose" name="country_id" id="country_id">
+                        <option value="">Choose Country</option>
+                        @foreach($countries as $countryID => $country)
+                        <option value="{{ $countryID }}" @selected((old('country_id') ?? $tender?->country_id)==$countryID)>{{ $country }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('country_id'))
+                    <p>{{ $errors->first('country_id') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item city_id_div @if($errors->has('city_id')) error @endif">
+                    <select class="list-select2-choose" name="city_id" id="city_id">
+                        <option value="">Choose City</option>
+                    </select>
+                    @if($errors->has('city_id'))
+                    <p>{{ $errors->first('city_id') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item category_id_div @if($errors->has('category_id')) error @endif">
+                    <select class="list-select2-choose" name="category_id" id="category_id">
+                        <option value="">Choose Work Category</option>
+                        @foreach($workCategories as $categoryID => $category)
+                        <option value="{{ $categoryID }}" @selected((old('category_id') ?? $tender?->category_id)==$categoryID)>{{ $category }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('category_id'))
+                    <p>{{ $errors->first('category_id') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item activity_id_div @if($errors->has('activity_id')) error @endif">
+                    <select class="list-select2-choose" name="activity_id" id="activity_id">
+                        <option value="">Choose Activity Classification</option>
+                        @foreach($activityClassifications as $activityID => $activity)
+                        <option value="{{ $activityID }}" @selected((old('activity_id') ?? $tender?->activity_id)==$activityID)>{{ $activity }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('activity_id'))
+                    <p>{{ $errors->first('activity_id') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-xs-12 input-item desc_div @if($errors->has('desc')) error_textarea @endif">
+                    <textarea name="desc" id="desc" placeholder="Tender Description (Optional)">{{ old('desc') ?? $tender?->desc }}</textarea>
+                    @if($errors->has('desc'))
+                    <p>{{ $errors->first('desc') }}</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="col-xs-12 inputs-group">
+                <h2>Dates</h2>
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item contract_duration_div @if($errors->has('contract_duration')) error @endif">
+                    <input type="number" min="1" name="contract_duration" id="contract_duration" value="{{ old('contract_duration') ?? $tender?->contract_duration }}" placeholder="Tender Contract Duration ( in Days )" autocomplete="off">
+                    @if($errors->has('contract_duration'))
+                    <p>{{ $errors->first('contract_duration') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input contract_start_date_div @if($errors->has('contract_start_date')) error @endif">
+                    <input type="text" name="contract_start_date" id="contract_start_date" value="{{ old('contract_start_date') ?? $tender?->contract_start_date }}" class="date-picker" placeholder="Tender Contract Start Date" autocomplete="off">
+                    <i class="ri-calendar-line"></i>
+                    @if($errors->has('contract_start_date'))
+                    <p>{{ $errors->first('contract_start_date') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input contract_end_date_div @if($errors->has('contract_end_date')) error @endif">
+                    <input type="text" name="contract_end_date" id="contract_end_date" value="{{ old('contract_end_date') ?? $tender?->contract_end_date }}" class="date-picker" placeholder="Tender Contract End Date" autocomplete="off">
+                    <i class="ri-calendar-line"></i>
+                    @if($errors->has('contract_end_date'))
+                    <p>{{ $errors->first('contract_end_date') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input closing_date_div @if($errors->has('closing_date')) error @endif">
+                    <input type="text" name="closing_date" id="closing_date" class="date-picker" value="{{ old('closing_date') ?? $tender?->closing_date }}" placeholder="Tender Closing Date (Bid Submission Deadline)" autocomplete="off">
+                    <i class="ri-calendar-line"></i>
+                    @if($errors->has('closing_date'))
+                    <p>{{ $errors->first('closing_date') }}</p>
+                    @endif
+                </div>
+
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item proposal_evaluation_duration_div @if($errors->has('proposal_evaluation_duration')) error @endif">
+                    <input type="number" min="1" name="proposal_evaluation_duration" id="proposal_evaluation_duration" value="{{ old('proposal_evaluation_duration') ?? $tender?->proposal_evaluation_duration }}" placeholder="Tender Proposals Evaluation Duration ( in Days )" autocomplete="off">
+                    @if($errors->has('proposal_evaluation_duration'))
+                    <p>{{ $errors->first('proposal_evaluation_duration') }}</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="col-xs-12 inputs-group" style="padding-bottom: 50px;">
+                <h2>Address</h2>
+                <div class="col-xs-12 col-md-6 input-item remove-margin address_div @if($errors->has('address')) error_textarea @endif">
+                    <textarea name="address" id="address" placeholder="Write Address">{{ old('address') ?? $tender?->address }}</textarea>
+                    @if($errors->has('address'))
+                    <p>{{ $errors->first('address') }}</p>
+                    @endif
+                </div>
+                <!-- will change this with you  -->
+                <div class="col-xs-12 col-md-6 input-item remove-margin location_div @if($errors->has('latitude') || $errors->has('longitude')) error_textarea @endif">
+                    <input type="hidden" id="latitude" name="latitude">
+                    <input type="hidden" id="longitude" name="longitude">
+                    <div id="map"></div>
+                    @if($errors->has('latitude') || $errors->has('longitude'))
+                    <p style="padding-top: 10px;">{{ $errors->first('latitude') ?? $errors->has('longitude') }}</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="col-xs-12 remove-padding">
+                <input type="hidden" name="step" value="1">
+                <button type="submit">Next / Add Item(s) to Tender</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+@endsection
+
+@section('script')
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsM_sgUSkhGcL4YWv1kKhxTSnF2oTnGhM&callback=initMap&libraries=marker" async defer></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.country-select').select2();
+
+        $('.country-select').select2({
+            dropdownCssClass: "country-select"
+        });
+
+        $('.list-select2-choose').select2({
+            dropdownCssClass: "country-select"
+        });
+
+        $(".date-picker").datepicker({
+            changeMonth: true
+            , changeYear: true
+        , });
+
+        getCityList($("#country_id").val());
+
+        $("#country_id").on("change", function() {
+            getCityList($(this).val());
+        });
+    });
+
+    function getCityList($country_id) {
+        var listCitiesURL = '{{ route('country.list.cities', ['country_id' => '#id']) }}';
+
+        var country_id = $("#country_id").val();
+        var city_id = "{{ old('city_id') }}" ? "{{ old('city_id') }}" : "{{ $tender?->city_id }}";
+
+        $("#city_id").find('option').not(':first').remove();
+
+        if (country_id != '') {
+            $.ajax({
+                url: listCitiesURL.replace('#id', country_id)
+                , dataType: 'json'
+                , success: function(data) {
+                    $.each(data, function(key, val) {
+                        if (key == city_id) {
+                            $("#city_id").append(`<option value="${key}" selected>${val}</option>`);
+                        } else {
+                            $("#city_id").append(`<option value="${key}">${val}</option>`);
+                        }
+                    });
+
+                    $('#city_id').select2({
+                        dropdownCssClass: "country-select"
+                    });
+                }
+            });
+        }
+    }
+
+    let map;
+    let marker;
+
+    function initMap() {
+        const defaultLocation = {
+            lat: 24.71
+            , lng: 46.67
+        }; // Default location
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: defaultLocation
+            , zoom: 13
+            , mapId: 'DEMO_MAP_ID'
+        });
+
+        // Add click listener to place a marker
+        map.addListener('click', (event) => {
+            const final_lat = event.latLng.lat();
+            const final_lng = event.latLng.lng();
+
+            // Update form inputs
+            document.getElementById('latitude').value = final_lat;
+            document.getElementById('longitude').value = final_lng;
+
+            // Place or move the marker
+            if (marker) {
+                marker.setPosition(event.latLng);
+            } else {
+                marker = new google.maps.Marker({
+                    position: event.latLng
+                    , map: map
+                });
+            }
+        });
+
+        if ("{{ $tender }}" || "{{ old('latitude') }}" || "{{ old('longitude') }}") {
+            const lat = "{{ old('latitude') }}" ? "{{ old('latitude') }}" : "{{ $tender?->latitude }}";
+            const lng = "{{ old('longitude') }}" ? "{{ old('longitude') }}" : "{{ $tender?->longitude }}";
+
+            // Update form inputs
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+
+            new google.maps.marker.AdvancedMarkerElement({
+                position: {
+                    lat: parseFloat(lat)
+                    , lng: parseFloat(lng)
+                }
+                , map: map
+            });
+        }
+    }
+
+</script>
+
+@endsection
