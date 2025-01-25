@@ -12,8 +12,8 @@
             <div class="col-md-3 main-menu">
                 <ul>
                     <li><a href="javascript:void(0);">Tenders</a></li>
-                    <li><a href="javascript:void(0);">Contact us</a></li>
-                    <li><a href="javascript:void(0);">About us </a></li>
+                    <li><a href="{{ route('contact') }}">Contact us</a></li>
+                    <li><a href="{{ route('about') }}">About us</a></li>
                 </ul>
             </div>
             <div class="col-md-4 search-main">
@@ -27,7 +27,7 @@
                     </select>
                 </form>
             </div>
-            @if(!auth('api')->check())
+            @if(!auth('web')->check())
             <div class="col-md-3">
                 <ul class="side-menu">
                     <li>
@@ -65,8 +65,8 @@
                             <h3 class="visible-xs visible-sm">Languge</h3>
                             <span class="visible-xs visible-sm close-btn">Close</span>
 
-                            <li class="active"><a href="#">English</a></li>
-                            <li><a href="#">Arabic</a></li>
+                            <li class="active"><a href="javascript:void(0);">English</a></li>
+                            <li><a href="javascript:void(0);">Arabic</a></li>
                         </ul>
                     </li>
 
@@ -95,22 +95,22 @@
                                     <div class="col-xs-12 remove-padding">
                                         <div class="col-xs-12 remove-padding notification-item">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item unread-notification">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                             <h5>Last Wednesday at 9:42 AM</h5>
                                         </div>
                                     </div>
@@ -119,27 +119,27 @@
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                 </div>
@@ -147,27 +147,24 @@
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="#">Your Verification Request is Rejected you can View Reason of Rejection.</a>
+                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
                                         <h5>Last Wednesday at 9:42 AM</h5>
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </ul>
                     </li>
-                    <li><a href="#"><i class="ri-message-3-line"></i>
+                    <li><a href="javascript:void(0);"><i class="ri-message-3-line"></i>
                             <h6>2</h6>
                         </a></li>
                     <li class="dropdown">
@@ -179,11 +176,11 @@
                             <h3 class="visible-xs visible-sm">Profile</h3>
                             <span class="visible-xs visible-sm close-btn">Close</span>
 
-                            <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
-                            <li><a href="#"><i class="ri-key-fill"></i> My tenders </a></li>
-                            <li><a href="#"><i class="ri-article-line"></i> My tenders </a></li>
-                            <li><a href="#"><i class="ri-wallet-line"></i> Wallet</a></li>
-                            <li><a href="#"><i class="ri-settings-2-line"></i> Setting</a></li>
+                            <li><a href="{{ route('profile.index') }}"><i class="ri-user-line"></i> Profile</a></li>
+                            <li><a href="javascript:void(0);"><i class="ri-key-fill"></i> My Tenders</a></li>
+                            <li><a href="javascript:void(0);"><i class="ri-article-line"></i> My Proposals</a></li>
+                            <li><a href="javascript:void(0);"><i class="ri-wallet-line"></i> Wallet</a></li>
+                            <li><a href="{{ route('profile.settings.index') }}"><i class="ri-settings-2-line"></i> Settings</a></li>
                             <li>
                                 <a class="link-style">
                                     <i class="ri-shut-down-line"></i>

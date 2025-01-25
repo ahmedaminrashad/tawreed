@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\FormRequest\ApiFormRequest;
 
-class ResetPasswordRequest extends ApiFormRequest
+class ResendOTPRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class ResetPasswordRequest extends ApiFormRequest
     public function rules(): array
     {
         $validations = [
-            'otp_user' => ['required', 'numeric', 'exists:users,id'],
-            'otp' => ['required', 'numeric', 'digits:6'],
-            'new_password' => ['required', 'min:8', 'confirmed'],
+            'resend_otp_user' => ['required', 'numeric', 'exists:users,id'],
         ];
 
         return $validations;
@@ -33,9 +31,7 @@ class ResetPasswordRequest extends ApiFormRequest
     public function attributes(): array
     {
         return [
-            'otp_user' => 'User',
-            'otp' => 'OTP',
-            'new_password' => 'Password',
+            'resend_otp_user' => 'User',
         ];
     }
 }

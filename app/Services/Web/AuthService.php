@@ -4,23 +4,19 @@ namespace App\Services\Web;
 
 use App\Enums\UserType;
 use App\Http\Resources\UserResource;
-use App\Mail\Admin\SendCompanyVerifyOTPMail;
-use App\Mail\Admin\SendVerifyOTPMail;
 use App\Models\User;
-use App\Services\SettingService;
 use Auth;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
-use Mail;
 
 readonly class AuthService
 {
     public function __construct(
         private readonly OTPService $oTPService,
-        private readonly SettingService $settingService,
         private readonly UserService $userService,
+        private readonly EmailService $emailService,
     ) {}
 
     // Login User
@@ -33,28 +29,24 @@ readonly class AuthService
 
             if (!$user) {
                 DB::rollBack();
-                return ['error' => 'Invalid - User not exists'];
+                return ['error' => 'Invalid Credentials'];
             }
 
             if (!$user->email_verified_at) {
                 DB::rollBack();
-                return ['error' => 'Invalid - User not exists'];
+                return ['error' => 'Invalid Credentials'];
             }
 
             $credentials = $this->credentials($data['login_text'], $data['login_password']);
 
-            if (!Auth::guard('api')->attempt($credentials)) {
+            if (!Auth::guard('web')->attempt($credentials)) {
                 return ['error' => 'Invalid Credentials'];
             }
 
-            $user = Auth::guard('api')->user();
-
-            $token = $this->generateToken($user);
+            $user = Auth::guard('web')->user();
 
             $response['user'] = new UserResource($user);
 
-            $response['token'] = $token;
-            
             $user->userDevices()->updateOrCreate(['uuid' => $userIP]);
 
             DB::commit();
@@ -104,14 +96,7 @@ readonly class AuthService
                 ]
             );
 
-            $otpData = [
-                'date' => Carbon::today()->format('d M, Y'),
-                'name' => $user->full_name,
-                'otp' => $user->otp,
-                'administratorEmail' => $this->settingService->getByKey('email')->value,
-            ];
-
-            Mail::to($user->email)->send(new SendVerifyOTPMail($otpData, $user->email));
+            $this->emailService->sendUserOTPEmail($user);
 
             DB::commit();
 
@@ -145,16 +130,7 @@ readonly class AuthService
                 ]
             );
 
-            $user->save();
-
-            $otpData = [
-                'date' => Carbon::today()->format('d M, Y'),
-                'name' => $user->company_name,
-                'otp' => $user->otp,
-                'administratorEmail' => $this->settingService->getByKey('email')->value,
-            ];
-
-            Mail::to($user->email)->send(new SendCompanyVerifyOTPMail($otpData, $user->email));
+            $this->emailService->sendUserOTPEmail($user);
 
             DB::commit();
 
@@ -171,11 +147,11 @@ readonly class AuthService
         try {
             DB::beginTransaction();
 
-            Auth::guard('api')->user()->userDevices()->where('uuid', $userIP)->delete();
+            Auth::guard('web')->user()->userDevices()->where('uuid', $userIP)->delete();
 
-            Auth::guard('api')->user()->tokens()->delete();
+            Auth::guard('web')->user()->tokens()->delete();
 
-            Auth::guard('api')->logout();
+            Auth::guard('web')->logout();
 
             DB::commit();
 
@@ -224,6 +200,37 @@ readonly class AuthService
         }
     }
 
+    // Resend User OTP
+    public function resendOTP(array $data)
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = $this->userService->getUserByID($data['resend_otp_user']);
+
+            if (!$user) {
+                DB::rollBack();
+                return ['error' => 'Invalid - User not exists'];
+            }
+
+            $otp = $this->oTPService->generateUserOTP();
+
+            $user->update([
+                'otp' => $otp,
+                'otp_expires_at' => Carbon::now()->addMinutes(3),
+            ]);
+
+            $this->emailService->sendUserOTPEmail($user);
+
+            DB::commit();
+
+            return 1;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+    }
+
     // Forget User Password
     public function forgetPassword(array $data)
     {
@@ -244,18 +251,7 @@ readonly class AuthService
                 'otp_expires_at' => Carbon::now()->addMinutes(3)
             ]);
 
-            $otpData = [
-                'date' => Carbon::today()->format('d M, Y'),
-                'name' => $user->company_name ?? $user->full_name,
-                'otp' => $user->otp,
-                'administratorEmail' => $this->settingService->getByKey('email')->value,
-            ];
-
-            if ($user->type->value == UserType::INDIVIDUAL->value) {
-                Mail::to($user->email)->send(new SendVerifyOTPMail($otpData, $user->email));
-            } else if ($user->type->value == UserType::COMPANY->value) {
-                Mail::to($user->email)->send(new SendCompanyVerifyOTPMail($otpData, $user->email));
-            }
+            $this->emailService->sendUserOTPEmail($user);
 
             DB::commit();
 

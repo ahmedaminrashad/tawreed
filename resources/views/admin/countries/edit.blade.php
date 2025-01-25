@@ -70,7 +70,12 @@
                             @endforeach
 
                             <div class="form-group">
-                                <label for="name">VAT</label>
+                                <label for="country_code">Country Code</label>
+                                <input type="text" class="form-control" value="{{ old('country_code') ?? $country->country_code }}" name="country_code" id="country_code" placeholder="Enter Country Code">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vat">VAT</label>
                                 <input type="text" class="form-control" value="{{ old('vat') ?? $country->vat }}" name="vat" id="vat" placeholder="Enter VAT">
                             </div>
                         </div>

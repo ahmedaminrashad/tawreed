@@ -2669,7 +2669,7 @@ table {
     background-color: var(--green);
 }
 
-#chenged-pass a, #change-email-model a {
+#change-password-modal a, #change-email-model a {
     float: right;
     background-color: var(--dark);
     color: var(--white);
@@ -2686,36 +2686,36 @@ table {
     text-decoration: none;
 }
 
-#chenged-pass a:hover, #change-email-model a:hover {
+#change-password-modal a:hover, #change-email-model a:hover {
     background-color: var(--green);
 }
 
-#chenged-pass h1, #change-email-model h1 {
+#change-password-modal h1, #change-email-model h1 {
     font-size: 20px;
 }
 
-#chenged-pass img, #change-email-model img {
+#change-password-modal img, #change-email-model img {
     height: 70px;
 }
-#Change-Email .otp-main {
+#change-email-tab .otp-main {
     margin-top: 25px;
 }
-#Change-Email .otp-main .col-xs-2{
+#change-email-tab .otp-main .col-xs-2{
     padding-left: 2.5px;
     padding-right: 2.5px;
   
 }
-#Change-Email .otp-main .col-xs-2 input {
+#change-email-tab .otp-main .col-xs-2 input {
     text-align: center;
 }
 
-#Change-Email a {
+#change-email-tab a {
     color: var(--dark);
     text-decoration: none;
     font-weight: bold;
 }
 
-#Change-Email a:hover {
+#change-email-tab a:hover {
     color: var(--green); 
 }
 
@@ -4602,6 +4602,780 @@ top: 20px;
     color: var(--white);
 }
 
+.proposal-tabs {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.proposal-tabs li {
+    display: inline-block;
+    margin-right: 5px;
+}
+.proposal-tabs li a {
+    color: var(--dark);
+    padding: 5px;
+    background-color: var(--gray8);
+    border: 1px solid var(--gray6);
+    text-decoration: none;
+}
+
+.proposal-tabs li.active a {
+    border: 1px solid var(--green);
+}
+
+
+.propoal-item {
+    margin-bottom: 30px;
+    width: 100%;
+    border: 1px solid var(--gray7);
+    padding: 15px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.propoal-item .dropdown-menu {
+    right: 0;
+    left: auto;
+    top: 15px;
+}
+
+.propoal-item .dropdown-toggle {
+    background: transparent;
+    border: none;
+    float: right;
+    position: relative;
+    top: -3px;
+}
+.propoal-item p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.propoal-item p span {
+    font-size: 14px;
+    border: 1px solid var(--gray4);
+    padding: 3px 5px;
+    font-weight: normal;
+    background: var(--gray8);
+    margin-left: 10px;
+    position: relative;
+    top: -2px;
+}
+.propoal-item h4 {
+    font-size: 14px;
+    color: var(--gray5);
+    margin-bottom: 10px;
+}
+
+.propoal-item h3  {
+    font-size: 14px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+.propoal-item h3 span.tag  {
+    font-size: 14px;
+    border: 1px solid var(--gray4);
+    padding: 3px 10px;
+    font-weight: normal;
+    background: transparent;
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+    border-radius: 2[x];
+    -webkit-border-radius: 2[x];
+    -moz-border-radius: 2[x];
+    -ms-border-radius: 2[x];
+    -o-border-radius: 2[x];
+}
+ span.tag.Initial-acceptance-tag {
+    border: 1px solid rgba(47, 84, 235, 1) !important;
+    color: rgba(47, 84, 235, 1);
+    background-color: rgba(173, 198, 255, 0.3);
+}
+
+ span.tag.Under-review-tag {
+    border: 1px solid rgba(250, 173, 20, 1) !important;
+    color: rgba(250, 173, 20, 1);
+    background-color:rgba(255, 229, 143, 0.3);
+}
+span.tag.Rejected-tag{
+    border: 1px solid rgba(245, 34, 45, 1) !important;
+    color: rgba(245, 34, 45, 1);
+    background-color:rgba(245, 34, 45, 0.1);
+}
+span.tag.Final-acceptance-tag{
+    border: 1px solid rgba(82, 196, 26, 1) !important;
+    color: rgba(82, 196, 26, 1);
+    background-color:rgba(82, 196, 26, 0.1);
+}
+span.tag.Withdraw-tag{
+    border: 1px solid rgba(250, 84, 28, 1) !important;
+    color: rgba(250, 84, 28, 1);
+    background-color:rgba(250, 84, 28, 0.1);
+}
+
+.propoal-item .propoal-img {
+    position: relative;
+    padding-left: 50px;
+    min-height: 40px;
+    margin-bottom: 15px;
+}
+.propoal-item .propoal-img img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    object-fit: cover;
+}
+.propoal-item .propoal-img h6 {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.propoal-item .propoal-img h6 span {
+    font-size: 12px;
+    color: var(--gray5);
+    font-weight: 300;
+}
+.propoal-item h5 {
+    font-size: 12px;
+    color: var(--gray5);
+    font-weight: 300;
+    float: left;
+}
+.propoal-item h5 b {
+    font-size: 16px;
+    position: relative;
+    top: 5px;
+    color: var(--dark);
+}
+.propoal-item a.details {
+    float: right;
+    border: 1px solid var(--dark);
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+}
+.propoal-item a.details:hover  {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+a.more {
+    border: 1px solid var(--dark);
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+a.more:hover  {
+    background-color: var(--dark);
+    color: var(--white);
+}
+ 
+.proposal-model .modal-content{
+    padding: 30px;
+    padding-bottom: 62px;
+  
+}
+.proposal-model span.close {
+    margin-top: -40px;
+}
+.proposal-model h3{
+    border-bottom: 1px solid var(--gray7);
+    font-size: 18px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.proposal-model h2{
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 25px;
+}
+.proposal-model p{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: var(--dark);
+}
+.proposal-model ul{
+    float: right;
+}
+.proposal-model ul li{
+    display: inline-block;
+}
+.proposal-model a {
+    background: var(--dark);
+    border-radius: 2px;
+    color: var(--white);
+    padding: 7px 16px;
+    height: auto;
+    text-decoration: none;
+}
+.proposal-model a:hover {
+    background-color: var(--green);
+}
+.proposal-model button {
+    background: transparent;
+    border-radius: 2px;
+    color: var(--dark);
+    border: 1px solid var(--dark);
+    padding: 7px 16px;
+    height: auto;
+}
+
+.proposal-model button:hover {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.proposal-model img{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.Proposal-Overview .col-xs-12 {
+    margin-top: 30px;
+}
+
+.review-item-title {
+    margin-top: 0 !important;
+}
+.proposal-d-main {
+    margin-top: 30px;
+}
+
+.proposal-d-main h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.proposal-d-main .proposal-img-main {
+    padding-left: 55px;
+    position: relative;
+    min-height: 50px;
+}
+
+.proposal-d-main .proposal-img-main img {
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.proposal-d-main .proposal-img-main h4 {
+    font-size: 16px;
+    color: var(--gray1);
+    margin-top: 13px;
+}
+
+.proposal-d-main .proposal-img-main h4 b {
+    font-size: 18px;
+    color: var(--dark);
+}
+
+.proposal-d-main .proposal-img-main h4 span {
+    padding: 5px 10px;
+    margin-left: 5px;
+    border: 1px solid var(--gray7);
+    cursor: pointer;
+}
+
+.proposal-d-main .proposal-img-main a {
+    float: right;
+    font-size: 24px;
+    padding: 7px 12px;
+    color: var(--green);
+    background-color: var(--gray8);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    text-decoration: none;
+    position: relative;
+    margin-top: -32px;
+}
+.proposal-d-main .proposal-img-main a:hover {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.proposal-side-item {
+    border: 1px solid var(--green);
+    background-color: rgb(152 202 82 / 15%);
+}
+.proposal-side-item h4{
+float: none;
+}
+.proposal-side-item h2 {
+    width: 100%;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.proposal-side-item a {
+    float: none;
+    border: 1px solid var(--green);
+    padding: 5px 10px;
+    background-color: transparent;
+    color: var(--green);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.proposal-side-item a:hover {
+    background-color: #8cc340;
+    color: var(--white);
+}
+
+.proposal-side-item span {
+    float: right;
+    font-size: 28px;
+}
+.Inquiry-history h4 {
+    width: 100%;
+    text-align: left;
+}
+.Inquiry-history h4 a {
+    color: var(--dark);
+    display: block;
+    float: none;
+}
+.Inquiry-history h4 a span {
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    color: var(--white);
+    font-size: 10px;
+    display: block;
+    float: right;
+    text-align: center;
+    line-height: 20px;
+}
+
+
+.proposal-container{
+    margin-bottom: 30px;
+}
+
+.proposal-tabs-first {
+    margin-top: 30px;
+    border-bottom: 1px solid var(--gray8);
+    
+    margin-bottom: 15px;
+}
+.proposal-tabs-first li {
+    display: inline-block;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+}
+
+.proposal-tabs-first li a {
+    color: var(--gray5);
+    text-decoration: none;
+    font-size: 16px;
+ 
+}
+
+.proposal-tabs-first li a:hover {
+    color: var(--green);
+}
+
+.proposal-tabs-first li i {
+    font-size: 22px;
+}
+
+.proposal-tabs-first li p {
+font-size: 16px;
+}
+
+.proposal-tabs-first li.active {
+    border-bottom: 1px solid var(--green);
+}
+
+.proposal-tabs-first li.active i {
+    color:var(--green)
+}
+
+.proposal-empty {
+    margin-top: 50px;
+}
+
+.proposal-empty p {
+    margin-top: 15px;
+}
+
+.Tenders-pro-main .Tender-item a.tender-link {
+    background-color: transparent;
+    color: var(--dark);
+    border: 1px solid var(--dark);
+    font-weight: bold;
+}
+.Tenders-pro-main .Tender-item a.tender-link:hover {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.Tenders-pro-main .Tender-item h2 {
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    position: relative;
+    top: -7px;
+}
+
+.Tenders-pro-main .Tender-item h2 span {
+    font-size: 13px;
+    color: var(--gray5);
+    font-weight: 300;
+    display: block;
+    top: 7px;
+    position: relative;
+}
+
+.Tenders-pro-main .Tender-item .dropdown-menu {
+    right: 0;
+    left: auto;
+    top: 15px;
+}
+
+.Tenders-pro-main .Tender-item .dropdown-toggle {
+    background: transparent;
+    border: none;
+    float: right;
+    position: relative;
+    top: -30px;
+}
+.Tenders-pro-main .Tender-item ul.dropdown-menu {
+    margin-top: 0;
+    top: 0;
+}
+.Tenders-pro-main .Tender-item ul.dropdown-menu li {
+display: block;
+display: block;
+    margin: 0;
+}
+
+.Tenders-pro-main .tender-img h4 {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.Tenders-pro-main .tender-img h4 i {
+    color: rgba(255, 193, 82, 1);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.Tenders-pro-main .tender-img h4 span {
+    color: var(--gray6);
+}
+
+.Tenders-pro-main a.rev-sel-link {
+ float: right;
+ color: var(--dark);
+ text-decoration: underline;
+ font-size: 16px;
+ margin-top: 5px;
+ margin-right: 10px;
+}
+.Tenders-pro-main a.rev-sel-link:hover {
+    color: var(--green);
+}
+
+
+.Tender-progress {
+    width: 100%;
+    background: var(--gray7);
+    height: 8px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    position: relative;
+    display: table;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+
+.Tender-progress div {
+    background: var(--green);
+    height: 8px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    position: absolute;
+    left: 0;
+}
+
+.tender-d-main h6 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tender-d-main h6 span {
+    float: right;
+}
+
+.tender-d-main {
+    margin-bottom: 30px;
+}
+
+
+.proposal-d-main .proposal-img-main a.cansel-btn {
+    color: red;
+}
+
+.tender-head .proposal-img-main a {
+    margin-left: 10px;
+}
+
+.proposal-model .container-radio  {
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.cancel-model-tender ul li a {
+    margin-top: 0;
+    float: none;
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    background-color: var(--white);
+}
+
+.cancel-model-tender ul li a:hover {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.cancel-model-tender ul li button {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 9px 16px;
+}
+
+.cancel-model-tender ul li button:hover {
+    background-color: var(--green);
+    border: 1px solid var(--green);
+}
+.add-note-main {
+    display: none;
+}
+
+.cancel-model-tender textarea {
+    width: 100%;
+    height: 120px;
+    border: 1px solid var(--gray8);
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.Tender-proposal-item h6 {
+    display: table;
+}
+
+.Tender-proposal-item h6 span {
+    position: relative;
+    top: 0px;
+    left: 5px;
+}
+
+.Tender-proposal-item h6 i {
+    font-size: 18px;
+    color: var(--green);
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+    border: none;
+}
+
+.propoal-item.Tender-proposal-item .dropdown-toggle {
+    top: -25px;
+}
+
+.propoal-item.Tender-proposal-item h4 {
+margin-top: 15px;
+margin-bottom: 15px;
+}
+
+.propoal-item.Tender-proposal-item .propoal-img {
+    margin-bottom: 10px;
+}
+
+.propoal-item.Tender-proposal-item .dropdown-menu {
+    right: 0;
+    left: auto;
+    top: -5px;
+}
+
+.print-main a {
+    float: right;
+    position: relative;
+    padding: 5px 10px;
+    color: var(--dark);
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border: 1px solid var(--dark);
+    text-decoration: none;
+    margin-top: -60px;
+}
+
+.print-main a:hover {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.print-main p {
+    float: right;
+    margin-top: -60px;
+    margin-right: 80px;
+}
+.print-main p i {
+    font-size: 22px;
+    position: relative;
+    color: var(--green);
+    top: 2px;
+}
+
+.container-tender-check {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: right;
+    padding-left: 30px;
+    top: -27px;
+    right: -10px;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container-tender-check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .container-tender-check .checkmark-tender-check{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #eee;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+  
+ 
+  
+  /* When the checkbox is checked, add a blue background */
+  .container-tender-check input:checked ~ .checkmark-tender-check {
+    background-color: var(--green);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .container-tender-check .checkmark-tender-check:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container-tender-check input:checked ~ .checkmark-tender-check:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container-tender-check .checkmark-tender-check:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+.Tender-proposal-item.active {
+    border: 1px solid var(--green);
+}
+.my-trends-side div {
+    margin-top: 20px;
+}
+
+.my-trends-side div img {
+height: 22px;
+}
+.Proposal-inquires-btn {
+    width: 100%;
+}
+.Proposal-inquires-btn a{
+    color: var(--dark);
+    display: block;
+    float: none;
+}
+.Proposal-inquires-btn a span {
+    float: right;
+    font-size: 22px;
+    position: relative;
+    top: -2px;
+}
+
+
 
 /*
 
@@ -5536,6 +6310,97 @@ aside.filter-main.open {
 
 .plan-confirm h2 {
     font-size: 20px;
+}
+
+.propoal-item p span {
+    margin-top: 10px;
+}
+
+.propoal-item h3 span.tag, .propoal-item p span {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 0;
+}
+
+.propoal-item a.details {
+    float: none;
+    margin-top: 10px;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.propoal-item h5 {
+    float: none;
+}
+
+.proposal-tabs li {
+    margin-bottom: 10px;
+}
+
+.proposal-d-main .proposal-img-main h4 {
+    margin-top: 0;
+}
+
+
+.proposal-d-main .proposal-img-main h4 span {
+    margin-left: 0;
+    width: calc(100% - 45px);
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.proposal-d-main .proposal-img-main a {
+    font-size: 18px;
+    padding: 5px 8px;
+    margin-top: -32px;
+}
+
+.propoal-item h3 span.tag {
+    font-size: 12px;
+}
+
+.Tenders-pro-main a.rev-sel-link {
+    float: none;
+    margin-top: 15px;
+}
+
+.Tender-proposal-item.propoal-item h3 span.tag {
+    font-size: 12px;
+    display: block;
+    clear: both;
+}
+
+.tender-head .proposal-img-main a {
+    float: left;
+    margin-top: 15px;
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.print-main a {
+    width: 100%;
+    margin-top: -15px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.proposal-tabs-first li a {
+    font-size: 14px;
+}
+
+.proposal-tabs-first li p {
+    font-size: 14px;
+}
+
+.print-main p {
+    float: none;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 15px;
 }
 
 

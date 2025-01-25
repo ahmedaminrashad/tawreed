@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\OTPRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ForgetPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\ResendOTPRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -26,7 +27,6 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         $userIP = $request->ip();
-        // return $this->success($data, 'Logiiiiiiiiiiiiiiiiiin');
 
         $response = $this->authService->login($data, $userIP);
 
@@ -63,6 +63,19 @@ class AuthController extends Controller
         }
 
         return $this->success([], 'User verified successfully');
+    }
+
+    public function resendOTP(ResendOTPRequest $request)
+    {
+        $data = $request->validated();
+
+        $response = $this->authService->resendOTP($data);
+
+        if (is_array($response) && array_key_exists('error', $response)) {
+            return $this->failure(['error' => $response['error']], 'Error in resend User OTP');
+        }
+
+        return $this->success([], 'User OTP resend successfully');
     }
 
     public function forgetPassword(ForgetPasswordRequest $request)

@@ -36,7 +36,7 @@ class TenderController extends Controller
     {
         $data = $request->validated();
 
-        $data['user_id'] = auth('api')->id();
+        $data['user_id'] = auth('web')->id();
         $data['contract_start_date'] = Carbon::parse($data['contract_start_date'])->format('Y-m-d');
         $data['contract_end_date'] = Carbon::parse($data['contract_end_date'])->format('Y-m-d');
         $data['closing_date'] = Carbon::parse($data['closing_date'])->format('Y-m-d');

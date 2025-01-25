@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Profile;
 
 use App\Http\Requests\FormRequest\ApiFormRequest;
 
-class ResetPasswordRequest extends ApiFormRequest
+class UpdateProfileEmailRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,21 +21,15 @@ class ResetPasswordRequest extends ApiFormRequest
      */
     public function rules(): array
     {
-        $validations = [
-            'otp_user' => ['required', 'numeric', 'exists:users,id'],
-            'otp' => ['required', 'numeric', 'digits:6'],
-            'new_password' => ['required', 'min:8', 'confirmed'],
+        return [
+            'new_email' => ['required', 'email', 'unique:users,email'],
         ];
-
-        return $validations;
     }
 
     public function attributes(): array
     {
         return [
-            'otp_user' => 'User',
-            'otp' => 'OTP',
-            'new_password' => 'Password',
+            "new_email" => "New Email",
         ];
     }
 }

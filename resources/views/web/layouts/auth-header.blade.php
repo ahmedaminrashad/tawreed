@@ -1,5 +1,5 @@
 <!-- login  -->
-<div id="logIn" class="modal fade" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="logIn" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -27,7 +27,7 @@
 </div>
 
 <!-- sign up -->
-<div id="signUp" class="modal fade" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="signUp" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -64,7 +64,7 @@
 </div>
 
 <!-- Sign Up Individual Form -->
-<div id="signUp-individual-form" class="modal fade" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="signUp-individual-form" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -124,7 +124,7 @@
 </div>
 
 <!-- Sign Up Company Form -->
-<div id="signUp-company-form" class="modal fade" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="signUp-company-form" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -188,7 +188,7 @@
 </div>
 
 <!-- otp -->
-<div id="verify-otp-form" class="modal fade reset-model" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="verify-otp-form" class="modal fade reset-model" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -217,13 +217,19 @@
                 <input type="hidden" name="otp_user" id="otp_user">
                 <button type="submit">Verify</button>
             </form>
-            <p>Didn’t receive the code ? <a href="javascript:void(0);">Resend</a><br><span id="timer"></span> </p>
+            <p>Didn’t receive the code ? <a href="javascript:void(0);" class="verify-resend-link disabled">Resend</a><br><span id="verify-timer"></span></p>
+            
+            <form id="verify_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
+                @csrf
+                
+                <input type="hidden" name="resend_otp_user">
+            </form>
         </div>
     </div>
 </div>
 
 <!-- Terms & Conditons -->
-<div id="terms_conditions" class="modal fade terms" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="terms_conditions" class="modal fade terms" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -234,7 +240,7 @@
 </div>
 
 <!-- Privacy Policy  -->
-<div id="privacy_policy" class="modal fade terms" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="privacy_policy" class="modal fade terms" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -245,7 +251,7 @@
 </div>
 
 <!-- forgot password  -->
-<div id="forgot-passord-div" class="modal fade reset-model" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="forgot-passord-div" class="modal fade reset-model" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -263,7 +269,7 @@
 </div>
 
 <!-- reset password  -->
-<div id="reset-password-otp" class="modal fade reset-model" role="dialog">
+<div data-backdrop="static" data-keyboard="false" id="reset-password-otp" class="modal fade reset-model" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -303,6 +309,14 @@
 
                 <input type="hidden" name="reset_otp_user" id="reset_otp_user">
                 <button type="submit">Reset Password</button>
+            </form>
+
+            <p>Didn’t receive the code ? <a href="javascript:void(0);" class="reset-resend-link disabled">Resend</a><br><span id="reset-timer"></span></p>
+            
+            <form id="reset_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
+                @csrf
+
+                <input type="hidden" name="resend_otp_user">
             </form>
         </div>
     </div>

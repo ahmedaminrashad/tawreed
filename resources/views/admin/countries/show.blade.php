@@ -81,6 +81,11 @@
                                 @endforeach
 
                                 <tr>
+                                    <th class="txt-content">Country Code</th>
+                                    <td>{{ $country->country_code }}</td>
+                                </tr>
+
+                                <tr>
                                     <th class="txt-content">VAT</th>
                                     <td>{{ $country->vat }}%</td>
                                 </tr>

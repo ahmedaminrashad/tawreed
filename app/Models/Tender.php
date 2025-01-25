@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TenderStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,10 @@ class Tender extends Model
     public $table = 'tenders';
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'status' => TenderStatus::class,
+    ];
 
     protected $appends = ['created_date', 'remaining_days', 'contract_start_date_text', 'contract_end_date_text', 'closing_date_text'];
 
@@ -51,6 +56,11 @@ class Tender extends Model
     public function getClosingDateTextAttribute()
     {
         return Carbon::parse($this->closing_date)->format('d M, Y');
+    }
+
+    public function isPublished()
+    {
+        return $this->status->value == TenderStatus::PUBLISHED->value;
     }
 
     public function getRemainingDaysAttribute()

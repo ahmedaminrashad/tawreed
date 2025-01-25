@@ -63,6 +63,11 @@
                             @endforeach
 
                             <div class="form-group">
+                                <label for="country_code">Country Code</label>
+                                <input type="text" class="form-control" value="{{ old('country_code') }}" name="country_code" id="country_code" placeholder="Enter Country Code">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="name">VAT</label>
                                 <input type="text" class="form-control" value="{{ old('vat') }}" name="vat" id="vat" placeholder="Enter VAT">
                             </div>

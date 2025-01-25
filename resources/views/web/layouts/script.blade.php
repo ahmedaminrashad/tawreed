@@ -46,33 +46,17 @@
             $(this).closest('.col-xs-12').addClass("checked");
         });
 
-        let time_limit = 30;
-        let time_out = setInterval(() => {
-
-            if (time_limit == 0) {
-                $('#timer').html('Time Over');
-            } else {
-                if (time_limit < 10) {
-                    time_limit = 0 + '' + time_limit;
-                }
-                $('#timer').html('00:' + time_limit);
-                time_limit -= 1;
-            }
-        }, 1000);
-
         $('.js-example-basic-single').select2();
         // $('.country-select').select2();
-        // $('.country-select').select2({
-        //     dropdownCssClass: "country-select"
-        // });
+        $('.country-select').select2({
+            dropdownCssClass: "country-select"
+        });
     });
 
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.country-select').select2();
-    });
+    $(document).ready(function() {});
 
     $('input[type=radio][name=type]').change(function() {
         if (this.value == 'company') {
@@ -98,11 +82,6 @@
             , url: $('#login_form').attr('action')
             , data: $('#login_form').serialize()
             , success: function(data) {
-                // console.log(data);
-                // return false;
-
-                localStorage.setItem('auth_token', data.data.token);
-
                 location.reload();
             }
             , error: function(error) {
@@ -152,9 +131,14 @@
 
                 $("#verify-otp-form #otp_user").val(userIDVal);
                 $("#verify-otp-form #set_sent_email").text(userEmailVal);
+                $('#verify_resend_link_form input[name="resend_otp_user"]').val(userIDVal);
 
                 $('#signUp-individual-form').modal('hide');
                 $('#verify-otp-form').modal('show');
+
+                let timerId;
+
+                startTimer('verify-timer', 10, timerId, 'verify-resend-link');
             }
             , error: function(error) {
                 var errors = error.responseJSON.messages;
@@ -199,9 +183,14 @@
 
                 $("#verify-otp-form #otp_user").val(userIDVal);
                 $("#verify-otp-form #set_sent_email").text(userEmailVal);
+                $('#verify_resend_link_form input[name="resend_otp_user"]').val(userIDVal);
 
                 $('#signUp-company-form').modal('hide');
                 $('#verify-otp-form').modal('show');
+
+                let timerId;
+
+                startTimer('verify-timer', 10, timerId, 'verify-resend-link');
             }
             , error: function(error) {
                 var errors = error.responseJSON.messages;
@@ -286,9 +275,6 @@
             , url: $('#forget_password_form').attr('action')
             , data: $('#forget_password_form').serialize()
             , success: function(data) {
-                // console.log(data);
-                // return false;
-
                 var userIDVal = data.data.user.id;
                 var userEmailVal = data.data.user.email;
 
@@ -300,9 +286,14 @@
 
                 $("#reset-password-otp #reset_otp_user").val(userIDVal);
                 $("#reset-password-otp #reset_sent_email").text(userEmailVal);
+                $('#reset_resend_link_form input[name="resend_otp_user"]').val(userIDVal);
 
                 $('#forgot-passord-div').modal('hide');
                 $('#reset-password-otp').modal('show');
+
+                let timerId;
+
+                startTimer('reset-timer', 10, timerId, 'reset-resend-link');
             }
             , error: function(error) {
                 if (error.responseJSON.messages) {
@@ -391,8 +382,6 @@
                 , url: $('#logout_form').attr('action')
                 , data: $('#logout_form').serialize()
                 , success: function(data) {
-                    localStorage.removeItem('auth_token');
-
                     location.reload();
                 }
                 , error: function(error) {
@@ -409,62 +398,119 @@
                     }
                     return false;
                 }
-            , });
+            });
         }
     });
 
+    function startTimer(className, timeLeft, timerId, linkClass) {
+        const inputs = document.querySelectorAll('.otp-input input');
 
-    // otp
-    const inputs = document.querySelectorAll('.otp-input input');
-    const timerDisplay = document.getElementById('timer');
-    const resendLink = document.querySelector('.resend-link');
-    const emailSpan = document.getElementById('email');
-    let timeLeft = 10; // 2 minutes in seconds
-    let timerId;
-    let canResend = true;
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length > 1) {
+                    e.target.value = e.target.value.slice(0, 1);
+                }
+                if (e.target.value.length === 1) {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }
+            });
 
-    function startTimer() {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value) {
+                    if (index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                }
+                if (e.key === 'e') {
+                    e.preventDefault();
+                }
+            });
+        });
+
         timerId = setInterval(() => {
             if (timeLeft <= 0) {
                 clearInterval(timerId);
-                timerDisplay.textContent = "00";
-                inputs.forEach(input => input.disabled = true);
-                canResend = false;
+                $("#" + className).text("00:00");
+                // inputs.forEach(input => input.disabled = true);
+                $("." + linkClass).removeClass('disabled');
             } else {
+                $("." + linkClass).addClass('disabled');
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
-                timerDisplay.textContent = `(${minutes}:${seconds.toString().padStart(2, '0')})`;
+                $("#" + className).text(`(${minutes}:${seconds.toString().padStart(2, '0')})`);
                 timeLeft--;
             }
         }, 1000);
     }
 
-    inputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => {
-            if (e.target.value.length > 1) {
-                e.target.value = e.target.value.slice(0, 1);
-            }
-            if (e.target.value.length === 1) {
-                if (index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            }
-        });
+    $(".reset-resend-link").click(function() {
+        $("#reset_resend_link_form").submit();
+    });
 
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !e.target.value) {
-                if (index > 0) {
-                    inputs[index - 1].focus();
-                }
+    $('#reset_resend_link_form').on("submit", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $('#reset_resend_link_form').attr('method')
+            , url: $('#reset_resend_link_form').attr('action')
+            , data: $('#reset_resend_link_form').serialize()
+            , success: function(data) {
+                let timerId;
+
+                startTimer('reset-timer', 10, timerId, 'reset-resend-link');
+                alert('Resend Reset OTP Mail');
             }
-            if (e.key === 'e') {
-                e.preventDefault();
+            , error: function(error) {
+                if (error.responseJSON.messages) {
+                    var errors = error.responseJSON.messages;
+                    $.each(errors, function(index, messageArr) {
+                        $("#" + index + "_div").addClass('error');
+                        $.each(messageArr, function(key, message) {
+                            $("#" + index + "_div").append(`<h6 class='error_text'>${message}</h6>`);
+                        });
+                    });
+                } else {
+                    alert(error.responseJSON.data.error);
+                }
+                return false;
             }
         });
     });
 
-    startTimer();
-    // end otp
+    $(".verify-resend-link").click(function() {
+        $("#verify_resend_link_form").submit();
+    });
+
+    $('#verify_resend_link_form').on("submit", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $('#verify_resend_link_form').attr('method')
+            , url: $('#verify_resend_link_form').attr('action')
+            , data: $('#verify_resend_link_form').serialize()
+            , success: function(data) {
+                let timerId;
+                startTimer('verify-timer', 10, timerId, 'verify-resend-link');
+                alert('Resend Reset OTP Mail');
+            }
+            , error: function(error) {
+                if (error.responseJSON.messages) {
+                    var errors = error.responseJSON.messages;
+                    $.each(errors, function(index, messageArr) {
+                        $("#" + index + "_div").addClass('error');
+                        $.each(messageArr, function(key, message) {
+                            $("#" + index + "_div").append(`<h6 class='error_text'>${message}</h6>`);
+                        });
+                    });
+                } else {
+                    alert(error.responseJSON.data.error);
+                }
+                return false;
+            }
+        });
+    });
 
 </script>
 

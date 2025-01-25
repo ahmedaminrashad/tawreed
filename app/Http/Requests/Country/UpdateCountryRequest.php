@@ -22,6 +22,7 @@ class UpdateCountryRequest extends FormRequest
     public function rules(): array
     {
         $validationRules = [
+            "country_code" => ['required', 'string', 'max:255'],
             "vat" => ['required', 'numeric', 'min:0'],
         ];
 

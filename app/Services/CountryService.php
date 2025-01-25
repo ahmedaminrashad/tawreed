@@ -24,6 +24,15 @@ readonly class CountryService
         return $countries;
     }
 
+    // list all Countries Codes for Select List function
+    public function listCountryCodeForSelect()
+    {
+        $countries = Country::join('country_translations', 'countries.id', 'country_translations.country_id')
+            ->select('countries.id as country_id', DB::raw("CONCAT(countries.country_code, ' - ' , country_translations.name) AS country"))
+            ->pluck('country', 'country_id')->toArray();
+        return $countries;
+    }
+
     // list all Countries function AJAX
     public function listAjax($ajaxData)
     {
@@ -68,6 +77,7 @@ readonly class CountryService
 
         $country = new Country();
 
+        $country->country_code = $data['country_code'];
         $country->vat = $data['vat'];
 
         $country->save();
@@ -94,6 +104,7 @@ readonly class CountryService
         DB::beginTransaction();
 
         $country->update([
+            'country_code' => $data['country_code'],
             'vat' => $data['vat'],
         ]);
 
