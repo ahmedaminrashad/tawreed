@@ -10,7 +10,7 @@
             your business</h1>
         <p>Forget the old rules. You can have the best<br> people. Right now. Right here.</p>
         <ul class="intor-links">
-            @if(!auth('api')->check())
+            @if(!auth('web')->check())
             <li><a class="link-style" data-toggle="modal" data-target="#signUp">Sign up</a></li>
             @endif
             <li><a class="link-style">QuoTech Premium</a></li>

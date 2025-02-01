@@ -101,7 +101,7 @@
 
                     <div class="col-xs-12 upload-main">
                         <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
-                        <input type="text" name="item[{{ $count }}][media][]" id="item[{{ $count }}][media]" class="demo1">
+                        <input type="file" name="item[{{ $count }}][media][]" id="item[{{ $count }}][media]" class="demo1">
                     </div>
 
                 </div>
@@ -134,7 +134,7 @@
 
                     <div class="col-xs-12 upload-main">
                         <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
-                        <input type="text" name="item[1][media][]" id="item[1][media]" class="demo1">
+                        <input type="file" name="item[1][media][]" id="item[1][media]" class="demo1">
                     </div>
 
                 </div>
@@ -220,7 +220,7 @@
 
                 <div class="col-xs-12 upload-main">
                     <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
-                    <input type="text" name="item[${itemNumber}][media][]" id="item[${itemNumber}][media]" class="demo1">
+                    <input type="file" name="item[${itemNumber}][media][]" id="item[${itemNumber}][media]" class="demo1">
                 </div>
             </div>
         `;

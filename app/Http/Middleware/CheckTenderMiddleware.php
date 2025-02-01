@@ -18,10 +18,12 @@ class CheckTenderMiddleware
         $tender = $request->route('tender');
 
         if ($tender) {
-            if (auth()->id() != $tender->user_id)
-                abort(403);
-            if ($tender->isPublished())
-                abort(403);
+            if ($request->route()->getName() != 'tenders.show') {
+                if (auth()->id() != $tender->user_id)
+                    abort(403);
+                if ($tender->isPublished())
+                    abort(403);
+            }
         }
 
         return $next($request);

@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         // Edit Profile Route
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         // Profile Store
-        Route::post('/', [ProfileController::class, 'settings'])->name('store');
+        Route::post('/', [ProfileController::class, 'store'])->name('store');
 
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             // Settings Route
@@ -86,18 +86,24 @@ Route::group(['middleware' => ['auth:web']], function () {
         });
     });
 
-    Route::group(['middleware' => ['check-tender']], function () {
+    Route::group(['middleware' => ['check-tender'], 'prefix' => 'tenders', 'as' => 'tenders.'], function () {
+        // Tenders List Route
+        Route::get('/', [TenderController::class, 'index'])->name('index');
+        // Filter Tenders Route
+        Route::post('/filter', [TenderController::class, 'indexAjax'])->name('filter');
+        // Show Tender Route
+        Route::get('/{tender}/show', [TenderController::class, 'show'])->name('show');
         // Create Tender Route
-        Route::get('tenders/create/{tender?}', [TenderController::class, 'create'])->name('tenders.create');
+        Route::get('create/{tender?}', [TenderController::class, 'create'])->name('create');
         // Store Tender Route
-        Route::post('tenders/store/{tender?}', [TenderController::class, 'store'])->name('tenders.store');
+        Route::post('store/{tender?}', [TenderController::class, 'store'])->name('store');
         // Tender Items Route
-        Route::get('tenders/{tender}/items', [TenderController::class, 'storeItemsForm'])->name('tenders.items.form');
+        Route::get('{tender}/items', [TenderController::class, 'storeItemsForm'])->name('items.form');
         // Store Tender Items Route
-        Route::post('tenders/{tender}/items', [TenderController::class, 'storeItems'])->name('tenders.items.store');
+        Route::post('{tender}/items', [TenderController::class, 'storeItems'])->name('items.store');
         // Tender Review Route
-        Route::get('tenders/{tender}/review', [TenderController::class, 'reviewTender'])->name('tenders.review');
+        Route::get('{tender}/review', [TenderController::class, 'reviewTender'])->name('review');
         // Publish Tender Route
-        Route::post('tenders/{tender}/publish', [TenderController::class, 'publishTender'])->name('tenders.publish');
+        Route::post('{tender}/publish', [TenderController::class, 'publishTender'])->name('publish');
     });
 });

@@ -1831,6 +1831,21 @@ border: 1px solid var(--dark);
     content: "\ec24";
 }
 
+.jquery-uploader-select a {
+    color: var(--dark) !important;
+    text-decoration: none;
+
+}
+.jquery-uploader-select-card {
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.jquery-uploader-select-card:hover {
+    border-color: var(--green);
+    cursor: pointer;
+}
+
 .add-tender-main .inputs-group {
     border: 1px solid var(--gray7);
     padding:15px 0;
@@ -6416,3 +6431,20 @@ aside.filter-main.open {
                                                     end media
 ====================================================================================================================
 */
+.loader {
+    height: 6px;
+    width: 100%;
+    --c:no-repeat linear-gradient(var(--green) 0 0);
+    background: var(--c),var(--c),#cdf892;
+    background-size: 60% 100%;
+    animation: l16 3s infinite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+  }
+  @keyframes l16 {
+    0%   {background-position:-150% 0,-150% 0}
+    66%  {background-position: 250% 0,-150% 0}
+    100% {background-position: 250% 0, 250% 0}
+  }

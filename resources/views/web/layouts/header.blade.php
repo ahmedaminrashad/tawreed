@@ -11,7 +11,7 @@
         <div class="mobile-menu-container">
             <div class="col-md-3 main-menu">
                 <ul>
-                    <li><a href="javascript:void(0);">Tenders</a></li>
+                    <li><a href="{{ route('tenders.index') }}">Tenders</a></li>
                     <li><a href="{{ route('contact') }}">Contact us</a></li>
                     <li><a href="{{ route('about') }}">About us</a></li>
                 </ul>

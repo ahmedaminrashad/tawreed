@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Enums\TenderStatus;
-use App\Models\Country;
 use App\Models\Tender;
 use App\Models\TenderItem;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
@@ -14,34 +14,79 @@ readonly class TenderService
     // list all Tenders function
     public function list() {}
 
-    // list all Tenders function AJAX
-    public function listAjax($ajaxData)
+    // list all Published Tenders function
+    public function listPublished()
     {
-        $data = Country::select('*');
+        $today = Carbon::today()->format('Y-m-d');
 
-        return DataTables::of($data)
-            ->filter(function ($query) use ($ajaxData) {
-                if ($ajaxData['search']['value']) {
-                    $query->whereHas('translations', function ($query) use ($ajaxData) {
-                        $search = $ajaxData['search']['value'];
-                        $query->where('name', 'like', '%' . $search . '%');
-                    });
-                }
-            }, true)
-            ->addIndexColumn()
-            ->addColumn('ar_name', function (Country $country) {
-                return html_entity_decode($country->translate('ar')->name);
-            })
-            ->addColumn('vat', function (Country $country) {
-                return html_entity_decode($country->vat . '%');
-            })
-            ->addColumn('action', function ($row) {
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
-                return $btn;
-            })
-            ->rawColumns(['action', 'ar_name', 'vat'])
-            ->make(true);
+        return Tender::where('status', TenderStatus::PUBLISHED->value)
+            ->where('closing_date', '>', $today)
+            ->orderBy('created_at', 'DESC')
+            ->get();
     }
+
+    // list all Published Tenders With filters function
+    public function listFilterPublished($filters)
+    {
+        $today = Carbon::today()->format('Y-m-d');
+
+        $filterCount = 0;
+
+        $query = Tender::with('user', 'country', 'city', 'workCategoryClassification', 'activityClassification')
+            ->where('status', TenderStatus::PUBLISHED->value)
+            ->where('closing_date', '>', $today);
+
+        if (isset($filters['range_from'])) {
+            $query = $query->where('contract_duration', '>=', $filters['range_from']);
+            $filterCount++;
+        }
+
+        if (isset($filters['range_to'])) {
+            $query = $query->where('contract_duration', '<=', $filters['range_to']);
+            $filterCount++;
+        }
+
+        if (isset($filters['category_filter']) && !in_array('all', $filters['category_filter'])) {
+            $query = $query->whereIn('category_id', $filters['category_filter']);
+            $filterCount++;
+        }
+
+        if (isset($filters['country_filter']) && !in_array('all', $filters['country_filter'])) {
+            $query = $query->whereIn('country_id', $filters['country_filter']);
+            $filterCount++;
+        }
+
+        if (isset($filters['classification_filter']) && !in_array('all', $filters['classification_filter'])) {
+            $query = $query->whereIn('activity_id', $filters['classification_filter']);
+            $filterCount++;
+        }
+
+        if (isset($filters['user_type_filter']) && !in_array('all', $filters['user_type_filter'])) {
+            $userType = $filters['user_type_filter'];
+            $query = $query->whereHas('user', function ($qry) use ($userType) {
+                $qry->where('users.type', $userType);
+            });
+            $filterCount++;
+        }
+
+        if (isset($filters['recent_filter']) && $filters['recent_filter'] == 1) {
+            $query = $query->orderBy('created_at', 'DESC');
+            $filterCount++;
+        }
+
+        if (isset($filters['closing_filter']) && $filters['closing_filter'] == 1) {
+            $query = $query->orderBy('closing_date', 'ASC');
+            $filterCount++;
+        }
+
+        $data['tenders'] = $query->get();
+        $data['filterCount'] = $filterCount;
+
+        return $data;
+    }
+
+    // list all Tenders function AJAX
+    public function listAjax($ajaxData) {}
 
     // get Tender by ID function
     public function getById($id)
@@ -57,7 +102,7 @@ readonly class TenderService
         try {
             DB::beginTransaction();
 
-            if ($tender) {
+            if ($tender->id) {
                 $tender->update($data);
             } else {
                 $tender = Tender::create($data);

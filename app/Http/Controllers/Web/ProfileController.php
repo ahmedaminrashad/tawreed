@@ -33,14 +33,17 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = auth()->user();
+        $userCategories = $user->userCategories()->pluck('id')->toArray();
         $countries = $this->countryService->listForSelect();
         $countries_codes = $this->countryService->listCountryCodeForSelect();
         $categories = $this->workCategoryClassificationService->listForSelect();
-        return view('web.profile.edit', compact('user', 'countries', 'countries_codes', 'categories'));
+        return view('web.profile.edit', compact('user', 'userCategories', 'countries', 'countries_codes', 'categories'));
     }
 
+    // public function store(Request $request)
     public function store(StoreProfileRequest $request)
     {
+        // dd($request->all());
         $data = $request->validated();
 
         if ($data['country_code']) {

@@ -5,7 +5,7 @@
 @section('head')
 <style>
     #map {
-        height: 400px;
+        height: 300px;
         width: 100%;
         margin-top: 10px;
     }
@@ -68,15 +68,26 @@
                     <h5>Country</h5>
                     <p>{{ $user->country?->translate('ar')->name ?? 'No Country Added' }}</p>
                 </div>
+                @if($user->isCompany())
                 <div class="col-xs-12 remove-padding user-main-info-item">
                     <h5>Commerical Registration Number</h5>
                     <p>{{ $user->commercial_registration_number ?? 'No Commerical Registration Number Added' }}</p>
                 </div>
+                @endif
                 <div class="col-xs-12 remove-padding user-main-info-item">
                     <h5>Work Category</h5>
-                    <p>{{ $user->userCategories()->count() > 0 ? $user->userCategoriesNameForShow() : 'No Work Category Added' }}</p>
+                    @if($user->userCategories()->count() > 0)
+                    <ul>
+                        @foreach($user->userCategoriesName() as $category)
+                        <li><span>{{ $category }}</span></li>
+                        @endforeach
+                    </ul>
+                    @else
+                    <p>No Work Category Added</p>
+                    @endif
                 </div>
 
+                @if($user->address)
                 <div class="col-xs-12 remove-padding user-main-info-item">
                     <h5>Address</h5>
                     <p><i class="ri-map-pin-fill"></i> {{ $user->address ?? 'No Address Added' }}</p>
@@ -84,9 +95,23 @@
                     <div id="map"></div>
                     @endif
                 </div>
+                @endif
             </div>
 
             <div class="row">
+                @if($user->address)
+                <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 user-main-info">
+                        <h3>Address</h3>
+                        <div class="no-address">
+                            <img src="{{ asset('/assets/front/img/33.svg') }}">
+                            <h5>You haven't added any addresses yet.
+                                Start by adding your first address .</h5>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 <div class="col-xs-12 col-md-6 qr-option-main">
                     <div class="col-xs-12 user-main-info">
                         <h3>QR Code</h3>

@@ -37,7 +37,7 @@
 
                         <div class="col-xs-12 input-item upload-main">
                             <h3>Image (Optional)</h3>
-                            <input type="text" id="image" name="image">
+                            <input type="file" id="image" name="image" class="demo1">
                         </div>
 
                         <div class="col-xs-12 input-item">
@@ -58,12 +58,12 @@
                                     <select class="js-example-phone" name="country_code" id="country_code">
                                         <option value="">Select Country Code</option>
                                         @foreach($countries_codes as $id => $code)
-                                        <option value="{{ $id }}" @selected($code == $user->country_code)>{{ $code }}</option>
+                                        <option value="{{ $id }}" @selected(str_contains($code, $user->country_code))>{{ $code }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-8 col-xs-8">
-                                    <input type="text" name="phone" id="phone" value="{{ old('phone') }}" autocomplete="off">
+                                    <input type="text" name="phone" id="phone" value="{{ old('phone') ?? $user->phone }}" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -82,20 +82,20 @@
                             <p>Work Category (Optional)</p>
                             <select class="js-example-basic-multiple" id="category_id" name="category_id[]" multiple="multiple">
                                 @foreach($categories as $id => $name)
-                                <option value="{{ $id }}">{{ $name }}</option>
+                                <option value="{{ $id }}" @selected(in_array($id, $userCategories))>{{ $name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="col-xs-12 input-item">
                             <p>Address (Optional)</p>
-                            <textarea name="address" id="address"></textarea>
+                            <textarea name="address" id="address">{{ old('address') ?? $user->address }}</textarea>
                         </div>
 
                         <div class="col-xs-12 input-item">
                             <p>Pin your location on Map (Optional)</p>
-                            <input type="hidden" id="latitude" name="latitude">
-                            <input type="hidden" id="longitude" name="longitude">
+                            <input type="hidden" id="latitude" name="latitude" value="{{ $user->latitude }}">
+                            <input type="hidden" id="longitude" name="longitude" value="{{ $user->longitude }}">
                             <div id="map"></div>
                         </div>
                         <ul class="col-xs-12">
@@ -184,7 +184,18 @@
             }
         });
 
+        if ("{{ $user->latitude }}" && "{{ $user->longitude }}") {
+            const lat = "{{ $user->latitude }}";
+            const lng = "{{ $user->longitude }}";
 
+            new google.maps.marker.AdvancedMarkerElement({
+                position: {
+                    lat: parseFloat(lat)
+                    , lng: parseFloat(lng)
+                }
+                , map: map
+            });
+        }
     }
 
 </script>

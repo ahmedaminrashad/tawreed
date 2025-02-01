@@ -45,7 +45,12 @@ class User extends Authenticatable
         'type' => UserType::class,
     ];
 
-    protected $appends = ['phone_number', 'created_date', 'user_type'];
+    protected $appends = ['phone_number', 'created_date', 'user_type', 'displayed_name'];
+
+    public function getDisplayedNameAttribute()
+    {
+        return $this->isCompany() ? $this->company_name : $this->full_name;
+    }
 
     public function getUserTypeAttribute()
     {

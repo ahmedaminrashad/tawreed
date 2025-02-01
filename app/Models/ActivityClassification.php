@@ -20,11 +20,16 @@ class ActivityClassification extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'arabic_name'];
 
     public function getCreatedDateAttribute()
     {
         return Carbon::parse($this->created_at)->format('Y-m-d');
+    }
+
+    public function getArabicNameAttribute()
+    {
+        return $this->translate('ar')->name;
     }
 
     public function translations(): HasMany

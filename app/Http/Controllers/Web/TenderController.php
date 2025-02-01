@@ -11,11 +11,14 @@ use App\Services\CountryService;
 use App\Services\TenderService;
 use App\Services\UnitService;
 use App\Services\WorkCategoryClassificationService;
+use App\Traits\CustomResponse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TenderController extends Controller
 {
+    use CustomResponse;
+
     public function __construct(
         protected TenderService $tenderService,
         protected CountryService $countryService,
@@ -23,6 +26,29 @@ class TenderController extends Controller
         protected WorkCategoryClassificationService $workCategoryClassificationService,
         protected ActivityClassificationService $activityClassificationService,
     ) {}
+
+    public function index(Request $request)
+    {
+        $tenders = $this->tenderService->listPublished();
+        $categories = $this->workCategoryClassificationService->listForSelect();
+        $classifications = $this->activityClassificationService->listForSelect();
+        $filterCount = 0;
+        return view('web.tenders.index', compact('tenders', 'categories', 'classifications', 'filterCount'));
+    }
+
+    public function indexAjax(Request $request)
+    {
+        $data = $request->all();
+
+        $tenders = $this->tenderService->listFilterPublished($data);
+
+        return $this->success($tenders, 'Tenders filtered successfully');
+    }
+
+    public function show(Tender $tender)
+    {
+        return view('web.tenders.show', compact('tender'));
+    }
 
     public function create(Tender $tender = null)
     {
@@ -42,7 +68,7 @@ class TenderController extends Controller
         $data['closing_date'] = Carbon::parse($data['closing_date'])->format('Y-m-d');
         $data['latitude'] = round($data['latitude'], 2);
         $data['longitude'] = round($data['longitude'], 2);
-        
+
         $tender = $this->tenderService->create($data, $tender);
 
         if (is_array($tender) && !$tender instanceof Tender) {
@@ -68,13 +94,12 @@ class TenderController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('tenders.review', ['tender' => $tender]);
     }
-    
+
     public function reviewTender(Tender $tender)
     {
-        // dd($tender->items);
         return view('web.tenders.review', compact('tender'));
     }
 
@@ -84,7 +109,7 @@ class TenderController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('tenders.create')->with('success', 'Tender Published Successfully');
     }
 }

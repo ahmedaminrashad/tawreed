@@ -22,7 +22,6 @@
             <ul>
                 <li><a href="javascript:void(0);" data-dismiss="modal">Cancel</a></li>
                 <li>
-                    {{-- <button type="submit" id="logout-btn" class="link-style">Logout</button> --}}
                     <a class="link-style" id="logout-btn">Log out</a>
                 </li>
                 <form id="profile_logout_form" method="POST" action="{{ route('logout') }}">
