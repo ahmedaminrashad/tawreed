@@ -46,7 +46,7 @@
                         <ul id="sort-div" class="collapse in">
                             <li>
                                 <label class="checkbox-item">Recent Tenders
-                                    <input type="checkbox" name="recent_filter" value="1">
+                                    <input type="checkbox" name="recent_filter" value="1" checked>
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
@@ -222,9 +222,9 @@
         <div class="col-md-8 col-xs-12 filter-cont" id="tenders_div">
             @foreach($tenders as $tender)
             <div class="col-xs-12 Tender-item">
-                <h4>{{ $tender->subject }}</h4>
+                <h4><a href="{{ route('tenders.show', ['tender' => $tender]) }}">{{ $tender->subject }}</a></h4>
                 <span>{{ $tender->workCategoryClassification->translate('ar')->name }}</span>
-                <h3> Contract duration :<span>{{ $tender->contract_duration }} days</span></h3>
+                <h3> Contract duration :<span>{{ $tender->contract_duration }} day(s)</span></h3>
                 <div class="clearfix"></div>
                 <ul class="col-xs-12 remove-padding">
                     <li>

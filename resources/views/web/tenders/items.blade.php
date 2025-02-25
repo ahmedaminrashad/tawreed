@@ -73,8 +73,17 @@
                 @php
                 $count = $key + 1;
                 @endphp
-                <div class="col-xs-12 inputs-group">
-                    <h2>Item {{ $count }}</h2>
+                <div id="item_div_{{ $count }}" class="col-xs-12 inputs-group">
+                    @if($count == 1)
+                    <h2>
+                        Item {{ $count }}
+                    </h2>
+                    @else
+                    <h2>
+                        Item {{ $count }}
+                        <a href="javascript:void(0);" onclick="deleteDiv({{ $count }});"><i class="ri-delete-bin-line"></i></a>
+                    </h2>
+                    @endif
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
                         <input type="text" name="item[{{ $count }}][name]" id="item[{{ $count }}][name]" placeholder="Item name" value="{{ $item->name }}">
                     </div>
@@ -101,12 +110,12 @@
 
                     <div class="col-xs-12 upload-main">
                         <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
-                        <input type="file" name="item[{{ $count }}][media][]" id="item[{{ $count }}][media]" class="demo1">
+                        <input type="file" multiple name="item[{{ $count }}][media][]" id="item[{{ $count }}][media]" class="demo1">
                     </div>
 
                 </div>
                 @empty
-                <div class="col-xs-12 inputs-group">
+                <div id="item_div_1" class="col-xs-12 inputs-group">
                     <h2>Item 1</h2>
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
                         <input type="text" name="item[1][name]" id="item[1][name]" placeholder="Item name">
@@ -134,7 +143,7 @@
 
                     <div class="col-xs-12 upload-main">
                         <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
-                        <input type="file" name="item[1][media][]" id="item[1][media]" class="demo1">
+                        <input type="file" multiple name="item[1][media][]" id="item[1][media]" class="demo1">
                     </div>
 
                 </div>
@@ -157,6 +166,8 @@
 @section('script')
 
 <script type="text/javascript">
+    var count = parseInt("{{ $tender->items()->count() }}") != 0 ? parseInt("{{ $tender->items()->count() }}") : 1;
+
     $(document).ready(function() {
 
         $(".close-btn").click(function() {
@@ -193,10 +204,13 @@
     });
 
     $(".add-item-btn").click(function() {
-        let itemNumber = $(".inputs-group").length + 1;
+        let itemNumber = count + 1;
         let item = `
-            <div class="col-xs-12 inputs-group">
-                <h2>Item ${itemNumber}</h2>
+            <div id="item_div_${itemNumber}" class="col-xs-12 inputs-group">
+                <h2>
+                    Item ${itemNumber}
+                    <a href="javascript:void(0);" onclick="deleteDiv(${itemNumber});"><i class="ri-delete-bin-line"></i></a>
+                </h2>
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item">
                     <input type="text" name="item[${itemNumber}][name]" id="item[${itemNumber}][name]" placeholder="Item name">
                 </div>
@@ -220,12 +234,13 @@
 
                 <div class="col-xs-12 upload-main">
                     <p>Illustrative Images and files Max 50 MB for all files( optional) </p>
-                    <input type="file" name="item[${itemNumber}][media][]" id="item[${itemNumber}][media]" class="demo1">
+                    <input type="file" multiple name="item[${itemNumber}][media][]" id="item[${itemNumber}][media]" class="demo1">
                 </div>
             </div>
         `;
 
-        // $(".remove-padding").before(item);
+        count = itemNumber;
+
         $("#items_div").append(item);
 
         $('.Choose-country').select2({
@@ -255,6 +270,11 @@
             , autoUpload: false
         })
     });
+
+    function deleteDiv(count)
+    {
+        $("#item_div_" + count).remove();
+    }
 
 </script>
 

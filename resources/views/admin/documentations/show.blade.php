@@ -28,7 +28,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title" style="margin-top: 3px">Show Documentation - {{ $documentation->key }}</h3>

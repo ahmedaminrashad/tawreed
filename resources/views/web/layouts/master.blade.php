@@ -10,7 +10,7 @@
     @include('web.layouts.header')
 
     <!-- Content -->
-    <div class="container-fluid body">
+    <div class="container-fluid body remove-padding">
         @yield('content')
     </div>
 

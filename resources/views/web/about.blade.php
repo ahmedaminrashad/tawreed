@@ -19,7 +19,7 @@
 
             <h1>About us</h1>
             
-            {!! $about !!}
+            {!! html_entity_decode($about) !!}
         </div>
     </div>
 </div>

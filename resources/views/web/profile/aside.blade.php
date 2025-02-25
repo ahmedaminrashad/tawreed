@@ -1,7 +1,7 @@
 <aside class="col-md-4 col-xs-12 hidden-xs hidden-sm">
     <ul>
         <li @if($active == 'profile') class="active" @endif><a href="{{ route('profile.index') }}"><img src="{{ asset('/assets/front/img/17.svg') }}"> My Profile</a></li>
-        <li @if($active == 'tenders') class="active" @endif><a href="javascript:void(0);"><img src="{{ asset('/assets/front/img/18.svg') }}"> My Tenders</a></li>
+        <li @if($active == 'tenders') class="active" @endif><a href="{{ route('profile.tenders') }}"><img src="{{ asset('/assets/front/img/18.svg') }}"> My Tenders</a></li>
         <li @if($active == 'proposals') class="active" @endif><a href="javascript:void(0);"><img src="{{ asset('/assets/front/img/19.svg') }}"> My Proposals</a></li>
         <li @if($active == 'messages') class="active" @endif><a href="javascript:void(0);"><img src="{{ asset('/assets/front/img/20.svg') }}"> Messages</a></li>
         <li @if($active == 'wallet') class="active" @endif><a href="javascript:void(0);"><img src="{{ asset('/assets/front/img/21.svg') }}"> Wallet</a></li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Enums\TenderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Notification\StoreProfileNotificationsRequest;
 use App\Http\Requests\Profile\StoreProfileRequest;
@@ -9,6 +10,7 @@ use App\Http\Requests\Profile\UpdateProfileEmailRequest;
 use App\Http\Requests\Profile\UpdateProfilePasswordRequest;
 use App\Http\Requests\Profile\VerifyProfileEmailRequest;
 use App\Services\CountryService;
+use App\Services\TenderService;
 use App\Services\Web\UserService;
 use App\Services\WorkCategoryClassificationService;
 use App\Traits\CustomResponse;
@@ -19,6 +21,7 @@ class ProfileController extends Controller
     use CustomResponse;
 
     public function __construct(
+        protected TenderService $tenderService,
         protected CountryService $countryService,
         protected UserService $userService,
         protected WorkCategoryClassificationService $workCategoryClassificationService
@@ -59,6 +62,15 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profile.index')->with(['success' => 'Profile updated successfully']);
+    }
+
+    public function tenders()
+    {
+        $user = auth()->user();
+        $data['userId'] = auth()->id();
+        $data['status'] = TenderStatus::IN_PROGRESS->value;
+        $tenders = $this->tenderService->list($data);
+        return view('web.profile.tenders', compact('user', 'tenders'));
     }
 
     public function settings()

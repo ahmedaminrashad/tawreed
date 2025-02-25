@@ -5,7 +5,7 @@
                 <img src="{{ asset('/assets/front/img/logo2.png') }}">
             </a>
             <ul>
-                <li><a href="javascript:void(0);">Tenders</a></li>
+                <li><a href="{{ route('tenders.index') }}">Tenders</a></li>
                 <li><a href="{{ route('about') }}">About us</a></li>
                 <li><a href="{{ route('contact') }}">Contact us</a></li>
                 <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>

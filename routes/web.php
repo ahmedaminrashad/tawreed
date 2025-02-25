@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\HomePageController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\ProposalController;
 use App\Http\Controllers\Web\TenderController;
 use App\Http\Controllers\Web\WorkCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,15 @@ Route::get('/terms-conditions', [HomePageController::class, 'terms'])->name('ter
 Route::get('/categories', [WorkCategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/country/{country_id}/cities', [CountryController::class, 'cities'])->name('country.list.cities');
+
+Route::group(['middleware' => ['check-tender'], 'prefix' => 'tenders', 'as' => 'tenders.'], function () {
+    // Tenders List Route
+    Route::get('/', [TenderController::class, 'index'])->name('index');
+    // Filter Tenders Route
+    Route::post('/filter', [TenderController::class, 'indexAjax'])->name('filter');
+    // Show Tender Route
+    Route::get('/{tender}/show', [TenderController::class, 'show'])->name('show');
+});
 
 // Route User Resend OTP Password
 Route::post('resend-otp', [AuthController::class, 'resendOTP'])->name('resend.otp');
@@ -71,6 +81,8 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         // Profile Store
         Route::post('/', [ProfileController::class, 'store'])->name('store');
+        // Profile Tenders
+        Route::get('/tenders', [ProfileController::class, 'tenders'])->name('tenders');
 
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             // Settings Route
@@ -87,12 +99,6 @@ Route::group(['middleware' => ['auth:web']], function () {
     });
 
     Route::group(['middleware' => ['check-tender'], 'prefix' => 'tenders', 'as' => 'tenders.'], function () {
-        // Tenders List Route
-        Route::get('/', [TenderController::class, 'index'])->name('index');
-        // Filter Tenders Route
-        Route::post('/filter', [TenderController::class, 'indexAjax'])->name('filter');
-        // Show Tender Route
-        Route::get('/{tender}/show', [TenderController::class, 'show'])->name('show');
         // Create Tender Route
         Route::get('create/{tender?}', [TenderController::class, 'create'])->name('create');
         // Store Tender Route
@@ -105,5 +111,22 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('{tender}/review', [TenderController::class, 'reviewTender'])->name('review');
         // Publish Tender Route
         Route::post('{tender}/publish', [TenderController::class, 'publishTender'])->name('publish');
+    });
+
+    Route::group(['prefix' => 'tenders', 'as' => 'tenders.'], function () {
+        Route::group(['as' => 'proposals.'], function () {
+            // Create Tender Proposal Route
+            Route::get('{tender}/proposals/items/{proposal?}', [ProposalController::class, 'items'])->name('items');
+            // Store Tender Proposal Items Route
+            Route::post('{tender}/proposals/items/{proposal?}', [ProposalController::class, 'storeItems'])->name('items.store');
+            // Proposal Info Route
+            Route::get('{tender}/proposals/{proposal}/info', [ProposalController::class, 'info'])->name('info');
+            // Store Proposal Info Route
+            Route::post('{tender}/proposals/{proposal}/info', [ProposalController::class, 'storeInfo'])->name('info.store');
+            // Proposal Review Route
+            Route::get('{tender}/proposals/{proposal}/review', [ProposalController::class, 'reviewProposal'])->name('review');
+            // Publish Proposal Route
+            Route::post('{tender}/proposals/{proposal}/publish', [ProposalController::class, 'publishTender'])->name('publish');
+        });
     });
 });

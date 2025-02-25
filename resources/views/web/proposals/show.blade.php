@@ -18,9 +18,8 @@
         <div class="col-xs-12 proposal-d-main tender-head">
             <h1>{{ $tender->subject . ' . ' . $tender->tender_uuid }}</h1>
             <div class="proposal-img-main col-xs-12 remove-padding">
-                <img src="{{ asset('/assets/front/img/1.png') }}">
+                <img src="{{ asset('/assets/front/img/1.png') }}" />
                 <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
-                <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Send Proposal</a>
                 <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-tender"><i class="ri-pencil-line"></i></a>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#del-tender" class="cansel-btn"><i class="ri-close-fill"></i></a>

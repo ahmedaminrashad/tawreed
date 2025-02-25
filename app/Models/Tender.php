@@ -60,7 +60,7 @@ class Tender extends Model
 
     public function isPublished()
     {
-        return $this->status->value == TenderStatus::PUBLISHED->value;
+        return $this->status->value == TenderStatus::IN_PROGRESS->value;
     }
 
     public function getRemainingDaysAttribute()

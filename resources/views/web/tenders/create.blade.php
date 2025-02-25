@@ -54,7 +54,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-    
+
             {{ session('success') }}
         </div>
         @endif
@@ -159,7 +159,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input contract_end_date_div @if($errors->has('contract_end_date')) error @endif">
-                    <input type="text" name="contract_end_date" id="contract_end_date" value="{{ old('contract_end_date') ?? $tender?->contract_end_date }}" class="date-picker" placeholder="Tender Contract End Date" autocomplete="off">
+                    <input type="text" name="contract_end_date" id="contract_end_date" value="{{ old('contract_end_date') ?? $tender?->contract_end_date }}" placeholder="Tender Contract End Date" readonly>
                     <i class="ri-calendar-line"></i>
                     @if($errors->has('contract_end_date'))
                     <p>{{ $errors->first('contract_end_date') }}</p>
@@ -271,9 +271,12 @@
     let marker;
 
     function initMap() {
+        const lat = "{{ old('latitude') }}" ? "{{ old('latitude') }}" : "{{ $tender?->latitude }}";
+        const lng = "{{ old('longitude') }}" ? "{{ old('longitude') }}" : "{{ $tender?->longitude }}";
+
         const defaultLocation = {
-            lat: 24.71
-            , lng: 46.67
+            lat: parseFloat(lat) ?? 24.71
+            , lng: parseFloat(lng) ?? 46.67
         }; // Default location
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -303,8 +306,6 @@
         });
 
         if ("{{ $tender }}" || "{{ old('latitude') }}" || "{{ old('longitude') }}") {
-            const lat = "{{ old('latitude') }}" ? "{{ old('latitude') }}" : "{{ $tender?->latitude }}";
-            const lng = "{{ old('longitude') }}" ? "{{ old('longitude') }}" : "{{ $tender?->longitude }}";
 
             // Update form inputs
             document.getElementById('latitude').value = lat;
@@ -317,6 +318,37 @@
                 }
                 , map: map
             });
+        }
+    }
+
+    $("#contract_start_date").on("change", function() {
+        calculateClosingDate();
+    });
+
+    $("#contract_duration").on("change", function() {
+        if($("#contract_duration").val() <= 0) {
+            $("#contract_duration").val(1);
+        }
+        calculateClosingDate();
+    });
+
+    function calculateClosingDate() {
+        var startDate = $("#contract_start_date").val();
+        var daysToAdd = parseInt($("#contract_duration").val(), 10);
+
+        if (startDate && !isNaN(daysToAdd)) {
+            var date = new Date(startDate);
+            date.setDate(date.getDate() + daysToAdd);
+
+            var formattedDate = (date.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                date.getDate().toString().padStart(2, '0') + '/' +
+                date.getFullYear();
+
+            var closingDate = formattedDate;
+
+            $("#contract_end_date").val(closingDate);
+        } else {
+            $("#contract_end_date").val(""); // Clear the closing date if inputs are invalid
         }
     }
 

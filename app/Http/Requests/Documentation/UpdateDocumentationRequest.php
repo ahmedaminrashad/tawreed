@@ -24,7 +24,7 @@ class UpdateDocumentationRequest extends FormRequest
         $validationRules = [];
 
         foreach (config('langs') as $locale => $name) {
-            $validationRules[$locale . "_page"] = ['required', 'string', 'max:5000'];
+            $validationRules[$locale . "_page"] = ['required', 'string', 'max:500000'];
         }
 
         return $validationRules;

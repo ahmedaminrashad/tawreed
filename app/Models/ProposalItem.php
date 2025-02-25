@@ -7,17 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class TenderItem extends Model
+class ProposalItem extends Model
 {
     use HasFactory;
 
-    public $table = 'tender_items';
+    public $table = 'proposal_items';
 
     protected $guarded = ['id'];
 
-    public function media(): HasMany
+    public function proposal(): BelongsTo
     {
-        return $this->hasMany(TenderItemMedia::class);
+        return $this->belongsTo(Proposal::class, 'proposal_id', 'id');
+    }
+
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(TenderItem::class, 'item_id', 'id');
     }
 
     public function unit(): BelongsTo

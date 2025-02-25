@@ -32,7 +32,7 @@ class TenderController extends Controller
         $tenders = $this->tenderService->listPublished();
         $categories = $this->workCategoryClassificationService->listForSelect();
         $classifications = $this->activityClassificationService->listForSelect();
-        $filterCount = 0;
+        $filterCount = 1;
         return view('web.tenders.index', compact('tenders', 'categories', 'classifications', 'filterCount'));
     }
 

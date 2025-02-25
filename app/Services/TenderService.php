@@ -7,19 +7,33 @@ use App\Models\Tender;
 use App\Models\TenderItem;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
 
 readonly class TenderService
 {
     // list all Tenders function
-    public function list() {}
+    public function list($data)
+    {
+        $today = Carbon::today()->format('Y-m-d');
+
+        $tenders = Tender::where('closing_date', '>', $today);
+        
+        if ($data['userId']) {
+            $tenders = $tenders->where('user_id', $data['userId']);
+        }
+
+        if($data['status']){
+            $tenders = $tenders->where('status', $data['status']);
+        }
+
+        return $tenders->orderBy('created_at', 'DESC')->get();
+    }
 
     // list all Published Tenders function
     public function listPublished()
     {
         $today = Carbon::today()->format('Y-m-d');
 
-        return Tender::where('status', TenderStatus::PUBLISHED->value)
+        return Tender::where('status', TenderStatus::IN_PROGRESS->value)
             ->where('closing_date', '>', $today)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -33,7 +47,7 @@ readonly class TenderService
         $filterCount = 0;
 
         $query = Tender::with('user', 'country', 'city', 'workCategoryClassification', 'activityClassification')
-            ->where('status', TenderStatus::PUBLISHED->value)
+            ->where('status', TenderStatus::IN_PROGRESS->value)
             ->where('closing_date', '>', $today);
 
         if (isset($filters['range_from'])) {
@@ -96,6 +110,14 @@ readonly class TenderService
         return $tender;
     }
 
+    // get Tender Item by ID function
+    public function getItemById($id)
+    {
+        $tenderItem = TenderItem::find($id);
+
+        return $tenderItem;
+    }
+
     // Store new Tender
     public function create($data, Tender $tender = null)
     {
@@ -104,8 +126,17 @@ readonly class TenderService
 
             if ($tender->id) {
                 $tender->update($data);
+
+                $tender->update([
+                    'tender_uuid' => Carbon::now()->format('Y') . Carbon::now()->format('m') . $tender->user_id . $tender->id
+                ]);
+
             } else {
                 $tender = Tender::create($data);
+
+                $tender->update([
+                    'tender_uuid' => Carbon::now()->format('Y') . Carbon::now()->format('m') . $tender->user_id . $tender->id
+                ]);
             }
 
             DB::commit();
@@ -153,7 +184,7 @@ readonly class TenderService
     public function publish(Tender $tender)
     {
         try {
-            $result = $this->updateStatus($tender, TenderStatus::PUBLISHED->value);
+            $result = $this->updateStatus($tender, TenderStatus::IN_PROGRESS->value);
             if (is_array($result)) {
                 return ['error' => 'Error in publish Tender Status'];
             }

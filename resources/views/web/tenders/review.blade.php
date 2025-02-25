@@ -175,6 +175,7 @@
 
 
                 </div>
+                
                 <div class="review-item map-section col-xs-12 remove-padding">
                     <div class="review-item-title col-xs-12">
                         <h4>Address</h4>
@@ -208,9 +209,12 @@
     let marker;
 
     function initMap() {
+        const lat = "{{ $tender->latitude }}";
+        const lng = "{{ $tender->longitude }}";
+
         const defaultLocation = {
-            lat: 24.71
-            , lng: 46.67
+            lat: parseFloat(lat) ?? 24.71
+            , lng: parseFloat(lng) ?? 46.67
         }; // Default location
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -218,9 +222,6 @@
             , zoom: 13
             , mapId: 'DEMO_MAP_ID'
         });
-
-        const lat = "{{ $tender->latitude }}";
-        const lng = "{{ $tender->longitude }}";
 
         new google.maps.marker.AdvancedMarkerElement({
             position: {
