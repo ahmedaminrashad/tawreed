@@ -8,6 +8,7 @@ use App\Http\Requests\Tender\StoreTenderItemRequest;
 use App\Models\Tender;
 use App\Services\ActivityClassificationService;
 use App\Services\CountryService;
+use App\Services\ProposalService;
 use App\Services\TenderService;
 use App\Services\UnitService;
 use App\Services\WorkCategoryClassificationService;
@@ -21,6 +22,7 @@ class TenderController extends Controller
 
     public function __construct(
         protected TenderService $tenderService,
+        protected ProposalService $proposalService,
         protected CountryService $countryService,
         protected UnitService $unitService,
         protected WorkCategoryClassificationService $workCategoryClassificationService,
@@ -47,7 +49,19 @@ class TenderController extends Controller
 
     public function show(Tender $tender)
     {
-        return view('web.tenders.show', compact('tender'));
+        $proposalsCount = $tender->proposals()->count();
+        
+        return view('web.tenders.show', compact('tender', 'proposalsCount'));
+    }
+
+    public function showProposals(Tender $tender)
+    {
+        $data['tenderId'] = $tender->id;
+        $proposalsCount = $tender->proposals()->count();
+        $proposals = $this->proposalService->statusList($data);
+        $statuses = $this->proposalService->listProposalStatus();
+        
+        return view('web.tenders.show-proposals', compact('tender', 'proposalsCount', 'proposals', 'statuses'));
     }
 
     public function create(Tender $tender = null)

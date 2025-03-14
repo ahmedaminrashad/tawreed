@@ -76,7 +76,6 @@
                     </div>
 
                     @foreach($tender->items as $key => $item)
-                    {{-- @dd($proposal->items()->where('item_id', $item->id)->first()); --}}
                     <div class="col-xs-12 table-item">
 
                         <table>
@@ -104,7 +103,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <input class="item_price" data-quantity="{{ $item->quantity }}" data-itemid="{{ $item->id }}" placeholder="Unit Price for each Item (USD)" type="number" min="1" 
                                 id="items[{{ $item->id }}][unit_price]" name="items[{{ $item->id }}][unit_price]" 
-                                value="{{ old('items.'.$item->id.'.unit_price') ?? $proposal->items()->where('item_id', $item->id)->first()->price }}" 
+                                value="{{ old('items.'.$item->id.'.unit_price') ?? $proposal?->items()->where('item_id', $item->id)->first()->price }}" 
                                 onchange="return calculateTotal(this, '{{ $item->quantity }}', '{{ $item->id }}');">
                             </div>
 

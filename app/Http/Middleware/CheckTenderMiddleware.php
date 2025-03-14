@@ -18,7 +18,7 @@ class CheckTenderMiddleware
         $tender = $request->route('tender');
 
         if ($tender) {
-            if ($request->route()->getName() != 'tenders.show') {
+            if ($request->route()->getName() != 'tenders.show' && $request->route()->getName() != 'tenders.proposals.show') {
                 if (auth()->id() != $tender->user_id)
                     abort(403);
                 if ($tender->isPublished())

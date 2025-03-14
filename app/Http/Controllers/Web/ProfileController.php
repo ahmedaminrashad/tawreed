@@ -10,6 +10,7 @@ use App\Http\Requests\Profile\UpdateProfileEmailRequest;
 use App\Http\Requests\Profile\UpdateProfilePasswordRequest;
 use App\Http\Requests\Profile\VerifyProfileEmailRequest;
 use App\Services\CountryService;
+use App\Services\ProposalService;
 use App\Services\TenderService;
 use App\Services\Web\UserService;
 use App\Services\WorkCategoryClassificationService;
@@ -22,6 +23,7 @@ class ProfileController extends Controller
 
     public function __construct(
         protected TenderService $tenderService,
+        protected ProposalService $proposalService,
         protected CountryService $countryService,
         protected UserService $userService,
         protected WorkCategoryClassificationService $workCategoryClassificationService
@@ -73,10 +75,25 @@ class ProfileController extends Controller
         return view('web.profile.tenders', compact('user', 'tenders'));
     }
 
+    public function proposals()
+    {
+        $user = auth()->user();
+        $data['userId'] = auth()->id();
+        $proposals = $this->proposalService->statusList($data);
+        $statuses = $this->proposalService->listProposalStatus();
+        return view('web.profile.proposals', compact('user', 'proposals', 'statuses'));
+    }
+
     public function settings()
     {
         $user = auth()->user();
         return view('web.profile.settings', compact('user'));
+    }
+
+    public function wallet()
+    {
+        $user = auth()->user();
+        return view('web.profile.wallet', compact('user'));
     }
 
     public function storeNotifications(StoreProfileNotificationsRequest $request)

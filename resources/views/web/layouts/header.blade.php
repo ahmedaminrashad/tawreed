@@ -178,8 +178,8 @@
 
                             <li><a href="{{ route('profile.index') }}"><i class="ri-user-line"></i> Profile</a></li>
                             <li><a href="{{ route('profile.tenders') }}"><i class="ri-key-fill"></i> My Tenders</a></li>
-                            <li><a href="javascript:void(0);"><i class="ri-article-line"></i> My Proposals</a></li>
-                            <li><a href="javascript:void(0);"><i class="ri-wallet-line"></i> Wallet</a></li>
+                            <li><a href="{{ route('profile.proposals') }}"><i class="ri-article-line"></i> My Proposals</a></li>
+                            <li><a href="{{ route('profile.wallet') }}"><i class="ri-wallet-line"></i> Wallet</a></li>
                             <li><a href="{{ route('profile.settings.index') }}"><i class="ri-settings-2-line"></i> Settings</a></li>
                             <li>
                                 <a class="link-style">

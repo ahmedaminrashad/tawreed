@@ -73,4 +73,9 @@ class ProposalController extends Controller
 
         return redirect()->route('tenders.show', ['tender' => $tender])->with('success', 'Proposal submitted successfully');
     }
+
+    public function show(Proposal $proposal)
+    {
+        return view('web.proposals.show', compact('proposal'));
+    }
 }

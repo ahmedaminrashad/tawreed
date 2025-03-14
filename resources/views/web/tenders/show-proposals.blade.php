@@ -1,0 +1,124 @@
+@extends('web.layouts.master')
+
+@section('title', 'Show Tender Proposals - ' . $tender->subject)
+
+@section('head')
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+</style>
+@endsection
+
+@section('content')
+<div class="container-fluid body remove-padding">
+    <div class="container profile-main tender-d-main remove-padding">
+        <div class="col-xs-12 proposal-d-main tender-head">
+            <h1>{{ $tender->subject . ' . ' . $tender->tender_uuid }}</h1>
+            <div class="proposal-img-main col-xs-12 remove-padding">
+                <img src="{{ asset('/assets/front/img/1.png') }}">
+                <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
+                <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Send Proposal</a>
+                <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-tender"><i class="ri-pencil-line"></i></a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#del-tender" class="cansel-btn"><i class="ri-close-fill"></i></a>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <ul class="proposal-tabs-first">
+                <li>
+                    <a href="{{ route('tenders.show', ['tender' => $tender->id]) }}"><i class="ri-lightbulb-flash-line"></i> General Details</a>
+                </li>
+                <li class="active">
+                    <a href="{{ route('tenders.proposals.show', ['tender' => $tender->id]) }}"><i class="ri-article-line"></i> Proposal(s) Sent ( {{ $proposalsCount }} )</a>
+                </li>
+
+                <div class="dropdown sort-dropdown">
+                    <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                        <b> Sort by:</b> Date ( Newest to Oldest )<span><i class="ri-arrow-down-s-fill"></i></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Date (Newest to Oldest)</a></li>
+                        <li><a href="#">Date (Oldest to Newest)</a></li>
+                        <li><a href="#">Total Price (High to Low)</a></li>
+                        <li><a href="#">Total Price (Low to High)</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+        <div class="col-xs-12 proposal-main-cont Tenders-pro-main">
+            <ul class="proposal-tabs" role="tablist">
+                <li class="active"><a id="tabAll" href="javascript:void(0);">All</a></li>
+                @foreach($statuses as $key => $status)
+                <li>
+                    <a href="#{{ $key }}" role="tab" data-toggle="tab">
+                        {{ $status }}
+                    </a>
+                </li>
+                @endforeach
+            </ul>
+
+            <div class="row">
+                <div class="tab-content">
+                    @foreach($statuses as $key => $status)
+                    @if(count($proposals[$key]) > 0)
+                    @foreach($proposals[$key] as $proposal)
+                    <div class="tab-pane fade active in" id="{{ $key }}">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="col-xs-12 remove-padding propoal-item">
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                                        <i class="ri-more-line"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:void(0);">Edit</a></li>
+                                        <li><a href="javascript:void(0);">Withdraw</a></li>
+                                        <li><a href="javascript:void(0);">Sample sent</a></li>
+                                        <li><a href="javascript:void(0);">Print</a></li>
+                                    </ul>
+                                </div>
+                                <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>In Progress</span></p>
+                                <h4>Proposal Validity Period : <b>{{ $proposal->proposal_end_date }}</b></h4>
+                                <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>Contract Duration by Seller : <b> {{ $proposal->contract_duration }} Day(s)</b></h3>
+                                <div class="col-xs-12 remove-padding propoal-img">
+                                    <img src="{{ asset('/assets/front/img/1.png') }}">
+                                    <h6>{{ $proposal->tender->user->displayed_name }} . <span>{{ $proposal->tender->user->user_type }}</span></h6>
+                                </div>
+                                <h5>
+                                    <span>Total Price </span><br>
+                                    <b>{{ $proposal->total }} SAR</b>
+                                </h5>
+                                <a href="{{ route('proposals.show', ['proposal' => $proposal]) }}" class="details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                    <div class="tab-pane fade active in" id="{{ $key }}">
+                    </div>
+                    @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabAll').on('click', function() {
+            $('#tabAll').parent().addClass('active');
+            $('.tab-pane').addClass('active in');
+            $('[data-toggle="tab"]').parent().removeClass('active');
+        });
+    });
+
+</script>
+
+@endsection

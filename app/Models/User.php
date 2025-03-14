@@ -67,6 +67,11 @@ class User extends Authenticatable
         return Carbon::parse($this->created_at)->format('Y-m-d');
     }
 
+    public function proposals(): HasMany
+    {
+        return $this->hasMany(Proposal::class);
+    }
+
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);

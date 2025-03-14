@@ -100,4 +100,9 @@ class Tender extends Model
     {
         return $this->belongsTo(ActivityClassification::class, 'activity_id', 'id');
     }
+
+    public function proposals(): HasMany
+    {
+        return $this->hasMany(Proposal::class);
+    }
 }

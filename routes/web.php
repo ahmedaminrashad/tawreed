@@ -41,6 +41,8 @@ Route::group(['middleware' => ['check-tender'], 'prefix' => 'tenders', 'as' => '
     Route::post('/filter', [TenderController::class, 'indexAjax'])->name('filter');
     // Show Tender Route
     Route::get('/{tender}/show', [TenderController::class, 'show'])->name('show');
+    // Show Tender Proposals Route
+    Route::get('/{tender}/show/proposals', [TenderController::class, 'showProposals'])->name('proposals.show');
 });
 
 // Route User Resend OTP Password
@@ -83,6 +85,10 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('/', [ProfileController::class, 'store'])->name('store');
         // Profile Tenders
         Route::get('/tenders', [ProfileController::class, 'tenders'])->name('tenders');
+        // Profile Proposals
+        Route::get('/proposals', [ProfileController::class, 'proposals'])->name('proposals');
+        // Profile Wallet
+        Route::get('/wallet', [ProfileController::class, 'wallet'])->name('wallet');
 
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             // Settings Route
@@ -111,6 +117,11 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('{tender}/review', [TenderController::class, 'reviewTender'])->name('review');
         // Publish Tender Route
         Route::post('{tender}/publish', [TenderController::class, 'publishTender'])->name('publish');
+    });
+
+    Route::group(['prefix' => 'proposals', 'as' => 'proposals.'], function () {
+        // Show Proposal Route
+        Route::get('/{proposal}/show', [ProposalController::class, 'show'])->name('show');
     });
 
     Route::group(['prefix' => 'tenders', 'as' => 'tenders.'], function () {

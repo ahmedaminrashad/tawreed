@@ -29,9 +29,11 @@
         <div class="col-xs-12">
             <ul class="proposal-tabs-first">
                 <li class="active">
-                    <p><i class="ri-lightbulb-flash-line"></i> General details</p>
+                    <a href="{{ route('tenders.show', ['tender' => $tender->id]) }}"><i class="ri-lightbulb-flash-line"></i> General Details</a>
                 </li>
-                <li><a href="javascript:void(0);"><i class="ri-article-line"></i> Proposal sent ( 12 )</a></li>
+                <li>
+                    <a href="{{ route('tenders.proposals.show', ['tender' => $tender->id]) }}"><i class="ri-article-line"></i> Proposal(s) Sent ( {{ $proposalsCount }} )</a>
+                </li>
             </ul>
         </div>
 
