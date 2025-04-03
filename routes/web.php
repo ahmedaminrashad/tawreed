@@ -122,6 +122,20 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::group(['prefix' => 'proposals', 'as' => 'proposals.'], function () {
         // Show Proposal Route
         Route::get('/{proposal}/show', [ProposalController::class, 'show'])->name('show');
+        // Update Proposal Status Route
+        Route::post('/{proposal}/status/update', [ProposalController::class, 'updateStatus'])->name('update.status');
+        // Proposal Initial Accept Route
+        Route::post('/{proposal}/inital/accept', [ProposalController::class, 'initialAccept'])->name('initial.accept');
+        // Submit Proposal Request Sample Route
+        Route::post('/{proposal}/request/sample', [ProposalController::class, 'requestSample'])->name('request.sample');
+        // Submit Proposal Sample Sent Route
+        Route::post('/{proposal}/sample/sent', [ProposalController::class, 'sampleSent'])->name('sample.sent');
+        // Submit Proposal Reject Route
+        Route::post('/{proposal}/reject', [ProposalController::class, 'reject'])->name('reject');
+        // Submit Proposal Withdraw Route
+        Route::post('/{proposal}/withdraw', [ProposalController::class, 'withdraw'])->name('withdraw');
+        // Submit Proposal Final Acceptance Route
+        Route::post('/{proposal}/final/accept', [ProposalController::class, 'finalAccept'])->name('final.accept');
     });
 
     Route::group(['prefix' => 'tenders', 'as' => 'tenders.'], function () {
@@ -137,7 +151,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             // Proposal Review Route
             Route::get('{tender}/proposals/{proposal}/review', [ProposalController::class, 'reviewProposal'])->name('review');
             // Publish Proposal Route
-            Route::post('{tender}/proposals/{proposal}/publish', [ProposalController::class, 'publishTender'])->name('publish');
+            Route::post('{tender}/proposals/{proposal}/publish', [ProposalController::class, 'publishProposal'])->name('publish');
         });
     });
 });

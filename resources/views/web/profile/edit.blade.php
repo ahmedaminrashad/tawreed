@@ -4,6 +4,11 @@
 
 @section('head')
 <style>
+    .file-preview img {
+        width: 100px;
+        height: 100px;
+    }
+
     #map {
         height: 400px;
         width: 100%;
@@ -49,6 +54,18 @@
                             @endif
                         </div>
 
+                        @if($user->isCompany())
+                        <div class="col-xs-12 input-item">
+                            <p>Commercial Registration Number</p>
+                            <input type="text" name="commercial_registration_number" id="commercial_registration_number" value="{{ old('commercial_registration_number') ?? $user->commercial_registration_number }}" autocomplete="off">
+                        </div>
+
+                        <div class="col-xs-12 input-item">
+                            <p>Tax Card Number / Zakat Certificate</p>
+                            <input type="text" name="tax_card_number" id="tax_card_number" value="{{ old('tax_card_number') ?? $user->tax_card_number }}" autocomplete="off">
+                        </div>
+                        @endif
+
                         <div class="col-xs-12 input-item">
                             <div class="row">
                                 <div class="col-xs-12">
@@ -73,7 +90,7 @@
                             <select id="country_id" name="country_id">
                                 <option value="">Select Country</option>
                                 @foreach($countries as $id => $name)
-                                <option value="{{ $id }}" @selected($id == $user->country_id)>{{ $name }}</option>
+                                <option value="{{ $id }}" @selected($id==$user->country_id)>{{ $name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -145,6 +162,7 @@
             }, 300)
         }
     }
+
     $("#image").uploader({
         ajaxConfig: ajaxConfig
     });

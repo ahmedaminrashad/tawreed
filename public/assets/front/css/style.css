@@ -6015,7 +6015,11 @@ margin-top: 12px;
     padding-right:0 ;
 }
 
-#Initial-tender img {
+#final-accept img {
+    height: 100px;
+}
+
+#initial-accept img {
     height: 100px;
 }
 .my-tender-head-final a.chat-tender-icon {
@@ -6038,11 +6042,11 @@ margin-top: 12px;
 .my-tender-head-final a.chat-tender-icon:hover {
     background-color: var(--dark);
 }
-#Request-tender h2 {
+#request-sample h2 {
     text-align: left;
 }
 
-#Request-tender textarea {
+#request-sample textarea {
     height: 120px;
     width: 100%;
     border: 1px solid var(--gray7);

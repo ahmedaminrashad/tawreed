@@ -275,8 +275,8 @@
         const lng = "{{ old('longitude') }}" ? "{{ old('longitude') }}" : "{{ $tender?->longitude }}";
 
         const defaultLocation = {
-            lat: parseFloat(lat) ?? 24.71
-            , lng: parseFloat(lng) ?? 46.67
+            lat: lat ? parseFloat(lat) : 24.71
+            , lng: lng ? parseFloat(lng) : 46.67
         }; // Default location
 
         map = new google.maps.Map(document.getElementById('map'), {

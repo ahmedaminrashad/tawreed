@@ -185,6 +185,7 @@ readonly class TenderService
     {
         try {
             $result = $this->updateStatus($tender, TenderStatus::IN_PROGRESS->value);
+
             if (is_array($result)) {
                 return ['error' => 'Error in publish Tender Status'];
             }
@@ -220,6 +221,25 @@ readonly class TenderService
             DB::beginTransaction();
 
             $tender->update([
+                'status' => $status
+            ]);
+
+            DB::commit();
+
+            return 1;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    // Update Tender Proposals Status
+    public function updateTenderProposalsStatus(Tender $tender, $status)
+    {
+        try {
+            DB::beginTransaction();
+
+            $tender->proposals()->update([
                 'status' => $status
             ]);
 

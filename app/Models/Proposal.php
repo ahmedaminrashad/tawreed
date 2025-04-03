@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ProposalStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,5 +41,64 @@ class Proposal extends Model
     public function getProposalEndDateTextAttribute()
     {
         return Carbon::parse($this->proposal_end_date)->format('d M, Y');
+    }
+
+    public function checkStatus()
+    {
+        return Carbon::now() > $this->proposal_end_date ? 'Closed' : 'In Progress';
+    }
+
+    public function getStatusText()
+    {
+        $final = str_replace(' ', '_', $this->status);
+        $final = str_replace('(', '', $final);
+        $final = str_replace(')', '', $final);
+        
+        return $final;
+    }
+
+    public function isCreator()
+    {
+        return $this->user_id == auth()->id();
+    }
+
+    public function isTenderCreator()
+    {
+        return $this->tender->user_id == auth()->id();
+    }
+
+    public function isUnderReview()
+    {
+        return $this->status == ProposalStatus::UNDER_REVIEW->value;
+    }
+
+    public function isInitialAccept()
+    {
+        return $this->status == ProposalStatus::INITIAL_ACCEPTANCE->value;
+    }
+
+    public function isSampleRequested()
+    {
+        return $this->status == ProposalStatus::INITIAL_ACCEPTANCE_SAMPLE_REQUESTED->value;
+    }
+
+    public function isSampleRequestSent()
+    {
+        return $this->status == ProposalStatus::INITIAL_ACCEPTANCE_SAMPLE_SENT->value;
+    }
+
+    public function isWithdrawn()
+    {
+        return $this->status == ProposalStatus::WITHDRAWN->value;
+    }
+
+    public function isRejected()
+    {
+        return $this->status == ProposalStatus::REJECTED->value;
+    }
+
+    public function isFinallyAccepted()
+    {
+        return $this->status == ProposalStatus::FINAL_ACCEPTANCE->value;
     }
 }

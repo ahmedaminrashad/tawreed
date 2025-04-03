@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Enums\ProposalStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tender\StoreTenderInfoRequest;
 use App\Http\Requests\Tender\StoreTenderItemRequest;
@@ -120,8 +121,17 @@ class TenderController extends Controller
     public function publishTender(Tender $tender, Request $request)
     {
         $result = $this->tenderService->publish($tender);
+
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
+        }
+
+        $proposalStatus = ProposalStatus::UNDER_REVIEW->value;
+
+        $response = $this->tenderService->updateTenderProposalsStatus($tender, $proposalStatus);
+
+        if (is_array($response)) {
+            return redirect()->back()->with('error', $response['error']);
         }
 
         return redirect()->route('tenders.create')->with('success', 'Tender Published Successfully');

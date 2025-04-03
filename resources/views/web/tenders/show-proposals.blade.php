@@ -20,10 +20,14 @@
             <div class="proposal-img-main col-xs-12 remove-padding">
                 <img src="{{ asset('/assets/front/img/1.png') }}">
                 <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
-                <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Send Proposal</a>
+                @if($tender->user_id != auth()->id() && !in_array(auth()->id(), $tender->proposals()->pluck('user_id')->toArray()))
+                <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Submit Proposal</a>
+                @endif
+                @if($tender->user_id == auth()->id())
                 <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-tender"><i class="ri-pencil-line"></i></a>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#del-tender" class="cansel-btn"><i class="ri-close-fill"></i></a>
+                @endif
             </div>
         </div>
 
@@ -81,12 +85,12 @@
                                         <li><a href="javascript:void(0);">Print</a></li>
                                     </ul>
                                 </div>
-                                <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>In Progress</span></p>
+                                <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>{{ $proposal->checkStatus() }}</span></p>
                                 <h4>Proposal Validity Period : <b>{{ $proposal->proposal_end_date }}</b></h4>
                                 <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>Contract Duration by Seller : <b> {{ $proposal->contract_duration }} Day(s)</b></h3>
                                 <div class="col-xs-12 remove-padding propoal-img">
                                     <img src="{{ asset('/assets/front/img/1.png') }}">
-                                    <h6>{{ $proposal->tender->user->displayed_name }} . <span>{{ $proposal->tender->user->user_type }}</span></h6>
+                                    <h6>{{ $proposal->tender->user->displayed_name }}<span>{{ $proposal->tender->user->user_type }}</span></h6>
                                 </div>
                                 <h5>
                                     <span>Total Price </span><br>

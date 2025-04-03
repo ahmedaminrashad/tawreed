@@ -35,6 +35,8 @@ class StoreProfileRequest extends FormRequest
 
         if (auth()->user()->isCompany()) {
             $validationRules["company_name"] = ["required", "string", "max:255"];
+            $validationRules["commercial_registration_number"] = ["required", "integer", "digits:10"];
+            $validationRules["tax_card_number"] = ["required", "integer", "digits:15"];
         } else {
             $validationRules["full_name"] = ["required", "string", "max:255"];
         }
@@ -47,6 +49,8 @@ class StoreProfileRequest extends FormRequest
         return [
             "country_code" => "Country Code",
             "country_id" => "Country",
+            "commercial_registration_number" => "Commercial Registration Number",
+            "tax_card_number" => "Tax Card Number / Zakat Certificate",
             "category_id" => "Category Work Classification",
             "latitude" => "Location",
             "longitude" => "Location",

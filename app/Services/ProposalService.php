@@ -225,6 +225,26 @@ readonly class ProposalService
         }
     }
 
+    // Request Sample Proposal Status
+    public function requestSample(Proposal $proposal, $data)
+    {
+        try {
+            DB::beginTransaction();
+
+            $proposal->update([
+                'sample_request' => $data['sample_request'],
+                'status' => ProposalStatus::INITIAL_ACCEPTANCE_SAMPLE_REQUESTED->value,
+            ]);
+
+            DB::commit();
+
+            return 1;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+    }
+
     // Delete Proposal
     public function delete(Proposal $proposal)
     {

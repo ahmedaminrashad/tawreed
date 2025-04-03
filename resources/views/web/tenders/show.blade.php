@@ -20,10 +20,14 @@
             <div class="proposal-img-main col-xs-12 remove-padding">
                 <img src="{{ asset('/assets/front/img/1.png') }}">
                 <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
-                <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Send Proposal</a>
+                @if($tender->user_id != auth()->id() && !in_array(auth()->id(), $tender->proposals()->pluck('user_id')->toArray()))
+                <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Submit Proposal</a>
+                @endif
+                @if($tender->user_id == auth()->id())
                 <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-tender"><i class="ri-pencil-line"></i></a>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#del-tender" class="cansel-btn"><i class="ri-close-fill"></i></a>
+                @endif
             </div>
         </div>
         <div class="col-xs-12">

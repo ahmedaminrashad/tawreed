@@ -71,9 +71,9 @@
                     </div>
                     <div class="col-xs-12 remove-padding">
                         <h2>
-                            <span>Number of submitted proposal</span>
+                            <span>Number of submitted Proposal(s)</span>
                             <br>
-                            12 proposal
+                            {{ $tender->proposals()->count() }} Proposal(s)
                         </h2>
                         <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">View details </a>
                     </div>
