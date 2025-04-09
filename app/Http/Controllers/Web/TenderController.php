@@ -134,6 +134,6 @@ class TenderController extends Controller
             return redirect()->back()->with('error', $response['error']);
         }
 
-        return redirect()->route('tenders.create')->with('success', 'Tender Published Successfully');
+        return redirect()->route('tenders.show', ['tender' => $tender])->with('success', 'Tender Published Successfully');
     }
 }

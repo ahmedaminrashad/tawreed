@@ -161,11 +161,12 @@ readonly class ProposalService
             DB::commit();
 
             $result = $this->updateStatus($proposal, ProposalStatus::CREATED->value);
+
             if (is_array($result)) {
                 return ['error' => 'Error in update Proposal Status'];
             }
 
-            return 1;
+            return $proposal;
         } catch (\Exception $e) {
             DB::rollBack();
             return ['error' => $e->getMessage()];

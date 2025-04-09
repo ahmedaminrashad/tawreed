@@ -24,7 +24,7 @@ class StoreTenderItemRequest extends FormRequest
         return [
             "item" => ["required", "array"],
             "item.*.name" => ["required", "string", "max:255"],
-            "item.*.quantity" => ["required", "numeric", 'min:1'],
+            "item.*.quantity" => ["required", "numeric", 'min:1', 'regex:/^[0-9]+$/'],
             "item.*.unit_id" => ["required", "numeric", 'exists:units,id'],
             "item.*.specs" => ["nullable", "string", 'max:3000'],
         ];

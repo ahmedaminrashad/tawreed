@@ -47,10 +47,10 @@
 
     <div class="container remove-padding proposal-container">
         <div class="col-xs-12 proposal-d-main tender-head my-tender-head-final">
-            <h1>Proposal Details</h1>
+            <h1>{{ $proposal->tender->subject }} - Proposal Details</h1>
             <div class="proposal-img-main col-xs-12 remove-padding">
                 <img src="{{ asset('/assets/front/img/1.png') }}">
-                <h4><b>{{ $proposal->tender->subject }}</b>. {{ $proposal->status }} <a class="chat-tender-icon" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}"><i class="ri-wechat-2-line"></i></a> <span data-toggle="modal" data-target="#Reason" class="tag {{ $proposal->getStatusText() }}-tag">{{ $proposal->checkStatus() }}</span></h4>
+                <h4><b>{{ $proposal->user->displayed_name }}</b>. {{ $proposal->status }} <a class="chat-tender-icon" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}"><i class="ri-wechat-2-line"></i></a> <span data-toggle="modal" data-target="#Reason" class="tag {{ $proposal->getStatusText() }}-tag">{{ $proposal->checkStatus() }}</span></h4>
                 <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
                 @if($proposal->isCreator())
                 @if($proposal->isSampleRequested())
@@ -105,6 +105,7 @@
                                 <th>#</th>
                                 <th>Item Name</th>
                                 <th>Unit</th>
+                                <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total Price</th>
                                 <th>-</th>
@@ -115,6 +116,7 @@
                                 <td data-label="#">{{ $key + 1 }}</td>
                                 <td data-label="item name">{{ $item->name }}</td>
                                 <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
+                                <td data-label="Quantities">{{ $item->price }}</td>
                                 <td data-label="Quantities">{{ $item->quantity }}</td>
                                 <td data-label="total_price">{{ $item->quantity * $item->price }}</td>
                                 <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs-{{ $item->id }}"></td>

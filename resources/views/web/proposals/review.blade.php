@@ -73,6 +73,7 @@
                                 <th>#</th>
                                 <th>Item Name</th>
                                 <th>Unit</th>
+                                <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total Price</th>
                                 <th>-</th>
@@ -83,6 +84,7 @@
                                 <td data-label="#">{{ $key + 1 }}</td>
                                 <td data-label="item name">{{ $item->name }}</td>
                                 <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
+                                <td data-label="Quantities">{{ $item->price }}</td>
                                 <td data-label="Quantities">{{ $item->quantity }}</td>
                                 <td data-label="total_price">{{ $item->quantity * $item->price }}</td>
                                 <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs-{{ $item->id }}"></td>

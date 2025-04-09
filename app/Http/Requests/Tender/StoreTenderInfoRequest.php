@@ -29,7 +29,7 @@ class StoreTenderInfoRequest extends FormRequest
             "category_id" =>  ["required", "numeric", "exists:classifications,id"],
             "activity_id" => ["required", "numeric", "exists:activity_classifications,id"],
             "desc" => ["nullable", "string", "max:3000"],
-            "contract_duration" => ["required", "numeric", "min:1"],
+            "contract_duration" => ["required", "numeric", "min:1", 'regex:/^[0-9]+$/'],
             "contract_start_date" => ["required", "date", 'after:today', "date_format:m/d/Y"],
             "contract_end_date" => ["required", "date", 'after:contract_start_date', "date_format:m/d/Y"],
             "closing_date" => ["required", "date", 'after:today', "date_format:m/d/Y"],

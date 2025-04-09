@@ -149,7 +149,7 @@
     });
 
     function calculateTotal(unitPrice, quantity, item) {
-        var price = parseInt(unitPrice.val(), 10);
+        var price = parseInt(unitPrice.value, 10);
         var total = price * quantity;
         $('#unit_total_price_' + item).val(total);
     }

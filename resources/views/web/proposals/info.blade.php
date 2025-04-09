@@ -65,11 +65,11 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                    <input type="number" name="contract_duration" id="contract_duration" placeholder="Contract Duration By Buyer" value="{{ old('contract_duration') ?? $proposal->contract_duration }}" min="1">
+                    <input type="number" name="tender_contract_duration" id="tender_contract_duration" placeholder="Contract Duration By Buyer" value="{{ $tender->contract_duration }}" min="1" readonly >
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                    <input type="number" name="tender_contract_duration" id="tender_contract_duration" placeholder="Contract Duration By Buyer" value="{{ $tender->contract_duration }}" min="1" readonly >
+                    <input type="number" name="contract_duration" id="contract_duration" placeholder="Contract Duration By Seller" value="{{ old('contract_duration') ?? $proposal->contract_duration }}" min="1">
                 </div>
 
                 <div class="col-xs-12 input-item">
