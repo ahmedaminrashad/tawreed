@@ -70,7 +70,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $data['userId'] = auth()->id();
-        $data['status'] = TenderStatus::IN_PROGRESS->value;
+        // $data['status'] = TenderStatus::IN_PROGRESS->value;
         $tenders = $this->tenderService->list($data);
         return view('web.profile.tenders', compact('user', 'tenders'));
     }

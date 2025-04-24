@@ -11,17 +11,18 @@ use Illuminate\Support\Facades\DB;
 readonly class TenderService
 {
     // list all Tenders function
-    public function list($data)
+    public function list($data = [])
     {
         $today = Carbon::today()->format('Y-m-d');
 
-        $tenders = Tender::where('closing_date', '>', $today);
-        
+        $tenders = Tender::where('closing_date', '>', $today)
+            ->whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value]);
+
         if ($data['userId']) {
             $tenders = $tenders->where('user_id', $data['userId']);
         }
 
-        if($data['status']){
+        if ($data['status']) {
             $tenders = $tenders->where('status', $data['status']);
         }
 
@@ -33,7 +34,9 @@ readonly class TenderService
     {
         $today = Carbon::today()->format('Y-m-d');
 
-        return Tender::where('status', TenderStatus::IN_PROGRESS->value)
+        return Tender::
+            // where('status', TenderStatus::IN_PROGRESS->value)
+            whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
             ->where('closing_date', '>', $today)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -47,7 +50,7 @@ readonly class TenderService
         $filterCount = 0;
 
         $query = Tender::with('user', 'country', 'city', 'workCategoryClassification', 'activityClassification')
-            ->where('status', TenderStatus::IN_PROGRESS->value)
+            ->whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
             ->where('closing_date', '>', $today);
 
         if (isset($filters['range_from'])) {
@@ -130,7 +133,6 @@ readonly class TenderService
                 $tender->update([
                     'tender_uuid' => Carbon::now()->format('Y') . Carbon::now()->format('m') . $tender->user_id . $tender->id
                 ]);
-
             } else {
                 $tender = Tender::create($data);
 

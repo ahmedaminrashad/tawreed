@@ -44,6 +44,10 @@ readonly class ProposalService
         $statuses = ProposalStatus::values();
 
         foreach ($statuses as $status) {
+            if ($status == ProposalStatus::CREATED->value) {
+                continue;
+            }
+
             $qry = $this->getQuery($data);
 
             $final = str_replace(' ', '_', $status);
@@ -62,6 +66,10 @@ readonly class ProposalService
         $statuses = ProposalStatus::values();
 
         foreach ($statuses as $status) {
+            if ($status == ProposalStatus::CREATED->value) {
+                continue;
+            }
+
             $final = str_replace(' ', '_', $status);
             $final = str_replace('(', '', $final);
             $final = str_replace(')', '', $final);
