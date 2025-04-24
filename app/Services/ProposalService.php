@@ -44,7 +44,7 @@ readonly class ProposalService
         $statuses = ProposalStatus::values();
 
         foreach ($statuses as $status) {
-            if ($status == ProposalStatus::CREATED->value) {
+            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
                 continue;
             }
 
@@ -66,7 +66,7 @@ readonly class ProposalService
         $statuses = ProposalStatus::values();
 
         foreach ($statuses as $status) {
-            if ($status == ProposalStatus::CREATED->value) {
+            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
                 continue;
             }
 
