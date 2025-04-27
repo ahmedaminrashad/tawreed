@@ -22,7 +22,7 @@ readonly class TenderService
             $tenders = $tenders->where('user_id', $data['userId']);
         }
 
-        if ($data['status']) {
+        if (isset($data['status'])) {
             $tenders = $tenders->where('status', $data['status']);
         }
 
