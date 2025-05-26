@@ -41,4 +41,9 @@ class ActivityClassification extends Model
     {
         return $this->hasMany(ActivityClassificationTranslation::class, 'activity_id', 'id');
     }
+
+    public function work_category()
+    {
+        return $this->belongsTo(WorkCategoryClassification::class, 'classification_id', 'id')->withDefault(['arabic_name' => '']);
+    }
 }

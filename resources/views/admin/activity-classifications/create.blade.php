@@ -61,7 +61,20 @@
                                 <input type="text" class="form-control" value="{{ old($locale . '_name') }}" name="{{ $locale }}_name" id="{{ $locale }}_name" placeholder="Enter Name in {{ $name }}">
                             </div>
                             @endforeach
+
+                                <div class="form-group">
+                                    <label for="{{ $locale }}_name">Work Category</label>
+                                    <select class="form-control" name="classification_id" id="classification_id">
+                                        <option value="">Select Work Category</option>
+                                        @foreach($workCategories as $categoryID => $category)
+                                            <option value="{{ $categoryID }}" @selected(old('classification_id') ==$categoryID)>{{ $category }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
                         </div>
+
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary float-right">Submit</button>

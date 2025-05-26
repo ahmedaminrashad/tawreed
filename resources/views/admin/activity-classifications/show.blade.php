@@ -79,7 +79,10 @@
                                     <td>{{ $activity_classification->translate($locale)->name }}</td>
                                 </tr>
                                 @endforeach
-
+                                <tr>
+                                    <th class="txt-content">Work Category</th>
+                                    <td>{{ $activity_classification->work_category->arabic_name }}</td>
+                                </tr>
                                 <tr>
                                     <th class="txt-content">Created At</th>
                                     <td>{{ $activity_classification->created_date }}</td>
@@ -91,7 +94,7 @@
                 </div>
                 <!-- /.card -->
             </div>
-            
+
         </div>
     </div><!-- /.container-fluid -->
 </section>

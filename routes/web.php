@@ -155,3 +155,5 @@ Route::group(['middleware' => ['auth:web']], function () {
         });
     });
 });
+
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);;

@@ -41,7 +41,7 @@ readonly class ActivityClassificationService
     // list all Activity Classifications function AJAX
     public function listAjax($ajaxData)
     {
-        $data = ActivityClassification::select('*');
+        $data = ActivityClassification::query()->with('work_category')->select('*');
 
         return DataTables::of($data)
             ->filter(function ($query) use ($ajaxData) {
@@ -70,7 +70,7 @@ readonly class ActivityClassificationService
         DB::beginTransaction();
 
         $activityClassification = new ActivityClassification();
-
+        $activityClassification->classification_id=$data['classification_id'];
         $activityClassification->save();
 
         $activityClassificationTranslations = [];

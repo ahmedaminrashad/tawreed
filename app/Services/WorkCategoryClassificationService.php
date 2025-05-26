@@ -65,6 +65,10 @@ readonly class WorkCategoryClassificationService
     }
 
     // Store new Work Category Classification
+
+    /**
+     * @throws \Throwable
+     */
     public function create($data)
     {
         DB::beginTransaction();

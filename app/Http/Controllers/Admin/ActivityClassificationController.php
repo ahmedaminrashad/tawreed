@@ -7,6 +7,7 @@ use App\Http\Requests\ActivityClassification\StoreActivityClassificationRequest;
 use App\Http\Requests\ActivityClassification\UpdateActivityClassificationRequest;
 use App\Models\ActivityClassification;
 use App\Services\ActivityClassificationService;
+use App\Services\WorkCategoryClassificationService;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -14,6 +15,7 @@ class ActivityClassificationController extends Controller
 {
     public function __construct(
         private readonly ActivityClassificationService $activityClassificationService,
+        private readonly WorkCategoryClassificationService $workCategoryClassificationService,
     ) {}
 
     /**
@@ -46,8 +48,9 @@ class ActivityClassificationController extends Controller
         $pageAction = 'Create';
 
         $formTitle = 'Create Activity Classification';
+        $workCategories = $this->workCategoryClassificationService->listForSelect();
 
-        return view('admin.activity-classifications.create', compact('pageTitle', 'pageAction', 'formTitle'));
+        return view('admin.activity-classifications.create', compact('pageTitle', 'pageAction', 'formTitle','workCategories'));
     }
 
     /**
@@ -67,6 +70,7 @@ class ActivityClassificationController extends Controller
      */
     public function show(ActivityClassification $activity_classification)
     {
+        $activity_classification->load('work_category');
         return view('admin.activity-classifications.show', compact('activity_classification'));
     }
 
@@ -80,8 +84,9 @@ class ActivityClassificationController extends Controller
         $pageAction = 'Edit';
 
         $formTitle = 'Edit Activity Classification';
+        $workCategories = $this->workCategoryClassificationService->listForSelect();
 
-        return view('admin.activity-classifications.edit', compact('activity_classification', 'pageTitle', 'pageAction', 'formTitle'));
+        return view('admin.activity-classifications.edit', compact('activity_classification', 'pageTitle', 'pageAction', 'formTitle','workCategories'));
     }
 
     /**
@@ -102,7 +107,7 @@ class ActivityClassificationController extends Controller
     public function destroy(ActivityClassification $activity_classification)
     {
         return redirect()->route('admin.activity-classifications.index');
-        
+
         try {
             $result = $this->activityClassificationService->delete($activity_classification);
 

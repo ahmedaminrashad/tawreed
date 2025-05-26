@@ -21,7 +21,7 @@ class StoreActivityClassificationRequest extends FormRequest
      */
     public function rules(): array
     {
-        $validationRules = [];
+        $validationRules = ['classification_id'=>'required|numeric|exists:classifications,id'];
 
         foreach (config('langs') as $locale => $name) {
             $validationRules[$locale . "_name"] = ['required', 'string', 'max:255'];

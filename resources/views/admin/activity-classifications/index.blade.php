@@ -84,12 +84,14 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Work Category</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Work Category</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -131,6 +133,9 @@
             , columns: [{
                     data: 'ar_name'
                     , name: 'ar_name'
+                }
+                ,{
+                    data: 'work_category.arabic_name'
                 }
                 , {
                     "data": "action"
