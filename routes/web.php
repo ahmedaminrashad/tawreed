@@ -33,6 +33,7 @@ Route::get('/terms-conditions', [HomePageController::class, 'terms'])->name('ter
 Route::get('/categories', [WorkCategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/country/{country_id}/cities', [CountryController::class, 'cities'])->name('country.list.cities');
+Route::get('/category/{category_id}/activities', [WorkCategoryController::class, 'activities'])->name('category.list.activities');
 
 Route::group(['middleware' => ['check-tender'], 'prefix' => 'tenders', 'as' => 'tenders.'], function () {
     // Tenders List Route

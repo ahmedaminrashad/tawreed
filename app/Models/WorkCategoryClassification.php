@@ -41,4 +41,9 @@ class WorkCategoryClassification extends Model
     {
         return $this->hasMany(WorkCategoryClassificationTranslation::class, 'classification_id', 'id');
     }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(ActivityClassification::class, 'classification_id', 'id');
+    }
 }

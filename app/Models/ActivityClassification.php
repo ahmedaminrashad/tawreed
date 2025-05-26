@@ -29,7 +29,7 @@ class ActivityClassification extends Model
 
     public function getArabicNameAttribute()
     {
-        return $this->translate('ar')->name;
+        return @$this->translate('ar')->name;
     }
 
     public function translations(): HasMany

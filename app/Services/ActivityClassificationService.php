@@ -11,8 +11,7 @@ readonly class ActivityClassificationService
     // list all Activity Classifications function
     public function list()
     {
-        $workCategoryClassifications = ActivityClassification::all();
-        return $workCategoryClassifications;
+        return ActivityClassification::all();
     }
 
     // list all Activity Classifications for Select List function
@@ -104,6 +103,10 @@ readonly class ActivityClassificationService
                 'name' => $data[$locale . '_name'],
             ];
         }
+
+        $activityClassification->classification_id=$data['classification_id'];
+
+        $activityClassification->save();
 
         $activityClassification->translation()->createMany($activityClassificationTranslations);
 

@@ -38,6 +38,11 @@ readonly class WorkCategoryClassificationService
         return $workCategoryClassification;
     }
 
+    public function activities(WorkCategoryClassification $category)
+    {
+        return $category->activities()->with('translations')->get();
+    }
+
     // list all Work Category Classifications function AJAX
     public function listAjax($ajaxData)
     {

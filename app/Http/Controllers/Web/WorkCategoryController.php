@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\WorkCategoryClassification;
 use App\Services\WorkCategoryClassificationService;
 use Illuminate\Http\Request;
 
@@ -19,5 +20,10 @@ class WorkCategoryController extends Controller
     {
         $workCategories = $this->workCategoryClassificationService->listForSelect();
         return view('web.workCategories.index', compact('workCategories'));
+    }
+    public function activities(WorkCategoryClassification $category_id)
+    {
+        return $this->workCategoryClassificationService->activities($category_id);
+
     }
 }

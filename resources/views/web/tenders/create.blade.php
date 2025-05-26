@@ -124,9 +124,7 @@
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item activity_id_div @if($errors->has('activity_id')) error @endif">
                     <select class="list-select2-choose" name="activity_id" id="activity_id">
                         <option value="">Choose Activity Classification</option>
-                        @foreach($activityClassifications as $activityID => $activity)
-                        <option value="{{ $activityID }}" @selected((old('activity_id') ?? $tender?->activity_id)==$activityID)>{{ $activity }}</option>
-                        @endforeach
+
                     </select>
                     @if($errors->has('activity_id'))
                     <p>{{ $errors->first('activity_id') }}</p>
@@ -236,6 +234,11 @@
         $("#country_id").on("change", function() {
             getCityList($(this).val());
         });
+
+        $("#category_id").on("change", function() {
+            getActivityList($(this).val());
+            $(".activityOption").remove()
+        });
     });
 
     function getCityList($country_id) {
@@ -260,6 +263,34 @@
                     });
 
                     $('#city_id').select2({
+                        dropdownCssClass: "country-select"
+                    });
+                }
+            });
+        }
+    }
+    function getActivityList() {
+        var listCatUrl = '{{ route('category.list.activities', ['category_id' => '#id']) }}';
+
+        var category_id = $("#category_id").val();
+        var activity_id = "{{ old('activity_id') }}" ? "{{ old('activity_id') }}" : "{{ $tender?->activity_id }}";
+
+        $("#city_id").find('option').not(':first').remove();
+
+        if (category_id !== '') {
+            $.ajax({
+                url: listCatUrl.replace('#id', category_id)
+                , dataType: 'json'
+                , success: function(data) {
+                    $.each(data, function(key, val) {
+                        if (key === activity_id) {
+                            $("#activity_id").append(`<option value="${val.id}" class="activityOption" selected>${val.arabic_name}</option>`);
+                        } else {
+                            $("#activity_id").append(`<option class="activityOption" value="${val.id}">${val.arabic_name}</option>`);
+                        }
+                    });
+
+                    $('#activity_id').select2({
                         dropdownCssClass: "country-select"
                     });
                 }
