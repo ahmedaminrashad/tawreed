@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserType;
 use App\Models\ActivityClassification;
 use App\Models\Tender;
 use App\Models\User;
@@ -17,7 +18,8 @@ class TestController extends Controller
             'name' => 'John Doe',
             'email'=>'mail2@gmail.com',
             'password'=>bcrypt('12345678'),
-            'phone'=>'01017213866'
+            'phone'=>'01017213866',
+           'type'=>UserType::COMPANY->value
         ]);
 
         return Tender::query()->latest()->first();
