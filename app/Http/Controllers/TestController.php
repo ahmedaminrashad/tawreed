@@ -16,7 +16,7 @@ class TestController extends Controller
 
        return User::query()->create([
             'name' => 'John Doe',
-            'email'=>'mail2@gmail.com',
+            'email'=>'mail3@gmail.com',
             'password'=>bcrypt('12345678'),
             'phone'=>'01017213866',
            'type'=>UserType::COMPANY->value
