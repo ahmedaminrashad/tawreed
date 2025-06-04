@@ -113,9 +113,6 @@
                     </div>
                     @if($tender->status==TenderStatus::AWARDED)
                         <div class="col-xs-6">
-                            <img src="{{ asset('/assets/front/img/11.svg') }}">
-                            <h5>Activity Classification</h5>
-                            <h3>Awarded</h3>
                             <a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a>
                         </div>
                     @endif
