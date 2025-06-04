@@ -172,7 +172,7 @@
 
                         @if($tender->status==TenderStatus::AWARDED->value)
                             <div class="col-xs-6">
-                                <li><a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a></li>
+                                <a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a>
 
                             </div>
                         @endif
