@@ -170,6 +170,12 @@
                             <h3>{{ $tender->activityClassification->translate('ar')->name }}</h3>
                         </div>
 
+                        @if($tender->status==TenderStatus::AWARDED->value)
+                            <div class="col-xs-6">
+                                <li><a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a></li>
+
+                            </div>
+                        @endif
                         <div class="col-xs-6">
                             <img src="{{ asset('/assets/front/img/12.svg') }}">
                             <h5>Project Name</h5>
