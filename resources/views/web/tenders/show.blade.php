@@ -18,6 +18,11 @@
         <div class="container tender-d-main remove-padding">
             <div class="col-xs-12 proposal-d-main tender-head">
                 <h1>{{ $tender->subject . ' . ' . $tender->tender_uuid }}</h1>
+                @if($tender->status==TenderStatus::AWARDED)
+
+                        <a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a>
+
+                @endif
                 <div class="proposal-img-main col-xs-12 remove-padding">
                     <img src="{{ asset('/assets/front/img/1.png') }}">
                     <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
@@ -111,11 +116,6 @@
                     <div class="review-item-title col-xs-12">
                         <h4>Tender Overview </h4>
                     </div>
-                    @if($tender->status==TenderStatus::AWARDED)
-                        <div class="col-xs-6">
-                            <a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a>
-                        </div>
-                    @endif
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/6.svg') }}">
                         <h5>location</h5>
