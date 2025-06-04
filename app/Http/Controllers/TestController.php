@@ -13,6 +13,13 @@ class TestController extends Controller
     public function test()
     {
 
+       return User::query()->create([
+            'name' => 'John Doe',
+            'email'=>'mail2@gmail.com',
+            'password'=>bcrypt('12345678'),
+            'phone'=>'01017213866'
+        ]);
+
         return Tender::query()->latest()->first();
 
         return ActivityClassification::query()->get();
