@@ -111,8 +111,7 @@
                     <div class="review-item-title col-xs-12">
                         <h4>Tender Overview </h4>
                     </div>
-                    @dd($tender)
-                    @if($tender->status==TenderStatus::AWARDED->value)
+                    @if($tender->status==TenderStatus::AWARDED)
                         <div class="col-xs-6">
                             <img src="{{ asset('/assets/front/img/11.svg') }}">
                             <h5>Activity Classification</h5>
