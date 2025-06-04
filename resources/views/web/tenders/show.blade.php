@@ -35,7 +35,7 @@
                 <li class="active">
                     <a href="{{ route('tenders.show', ['tender' => $tender->id]) }}"><i class="ri-lightbulb-flash-line"></i> General Details</a>
                 </li>
-                @if($tender->status == TenderStatus::IN_PROGRESS->value)
+                @if($tender->status !== TenderStatus::IN_PROGRESS->value)
                 <li>
                     <a href="{{ route('tenders.proposals.show', ['tender' => $tender->id]) }}"><i class="ri-article-line"></i> Proposal(s) Sent ( {{ $proposalsCount }} )</a>
                 </li>
