@@ -275,7 +275,7 @@
         var category_id = $("#category_id").val();
         var activity_id = "{{ old('activity_id') }}" ? "{{ old('activity_id') }}" : "{{ $tender?->activity_id }}";
 
-        $("#city_id").find('option').not(':first').remove();
+        $("#activity_id").find('option').not(':first').remove();
 
         if (category_id !== '') {
             $.ajax({
