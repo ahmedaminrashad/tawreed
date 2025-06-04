@@ -13,7 +13,7 @@ class TestController extends Controller
 
     public function test()
     {
-
+        return Tender::query()->find(16);
         return User::query()->update(['password'=>bcrypt('12345678')]);
 
        return User::query()->create([
@@ -24,7 +24,7 @@ class TestController extends Controller
            'type'=>UserType::COMPANY->value
         ]);
 
-        return Tender::query()->latest()->first();
+
 
         return ActivityClassification::query()->get();
 
