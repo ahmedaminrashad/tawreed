@@ -35,9 +35,11 @@
                 <li class="active">
                     <a href="{{ route('tenders.show', ['tender' => $tender->id]) }}"><i class="ri-lightbulb-flash-line"></i> General Details</a>
                 </li>
+                @if($tender->status == TenderStatus::IN_PROGRESS->value)
                 <li>
                     <a href="{{ route('tenders.proposals.show', ['tender' => $tender->id]) }}"><i class="ri-article-line"></i> Proposal(s) Sent ( {{ $proposalsCount }} )</a>
                 </li>
+                @endif
             </ul>
         </div>
 
@@ -153,7 +155,7 @@
                 <div class="col-xs-12">
                     <div class="col-xs-12 remove-padding">
                         <p style="margin-bottom: 15px;"><span><i class="ri-map-pin-line"></i></span>{{ $tender->address }}</p>
-                        <div id="map"></div>                        
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
