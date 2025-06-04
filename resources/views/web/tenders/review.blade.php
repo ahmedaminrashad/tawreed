@@ -169,6 +169,11 @@
                             <h5>Activity Classification</h5>
                             <h3>{{ $tender->activityClassification->translate('ar')->name }}</h3>
                         </div>
+                        <div class="col-xs-6">
+                            <img src="{{ asset('/assets/front/img/11.svg') }}">
+                            <h5>awarded</h5>
+                            <h3>{{ $tender->activityClassification->translate('ar')->name }}</h3>
+                        </div>
 
                         --
                         @if($tender->status==TenderStatus::AWARDED->value)
