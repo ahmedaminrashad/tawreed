@@ -13,7 +13,7 @@ class TestController extends Controller
     public function test()
     {
 
-        return Tender::query()->latest()->find();
+        return Tender::query()->latest()->first();
 
         return ActivityClassification::query()->get();
 
