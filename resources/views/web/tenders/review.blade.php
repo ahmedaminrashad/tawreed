@@ -170,6 +170,7 @@
                             <h3>{{ $tender->activityClassification->translate('ar')->name }}</h3>
                         </div>
 
+                        --
                         @if($tender->status==TenderStatus::AWARDED->value)
                             <div class="col-xs-6">
                                 <img src="{{ asset('/assets/front/img/11.svg') }}">
