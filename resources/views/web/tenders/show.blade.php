@@ -17,12 +17,14 @@
     <div class="container-fluid body remove-padding">
         <div class="container tender-d-main remove-padding">
             <div class="col-xs-12 proposal-d-main tender-head">
-                <h1>{{ $tender->subject . ' . ' . $tender->tender_uuid }}</h1>
+                <h1>{{ $tender->subject . ' . ' . $tender->tender_uuid }}
                 @if($tender->status==TenderStatus::AWARDED)
 
                         <a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a>
 
                 @endif
+
+                </h1>
                 <div class="proposal-img-main col-xs-12 remove-padding">
                     <img src="{{ asset('/assets/front/img/1.png') }}">
                     <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
