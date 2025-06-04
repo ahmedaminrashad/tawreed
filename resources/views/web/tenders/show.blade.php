@@ -35,11 +35,9 @@
                 <li class="active">
                     <a href="{{ route('tenders.show', ['tender' => $tender->id]) }}"><i class="ri-lightbulb-flash-line"></i> General Details</a>
                 </li>
-                @if($tender->status == \App\Enums\TenderStatus::CREATED->value)
                 <li>
                     <a href="{{ route('tenders.proposals.show', ['tender' => $tender->id]) }}"><i class="ri-article-line"></i> Proposal(s) Sent ( {{ $proposalsCount }} )</a>
                 </li>
-                @endif
             </ul>
         </div>
 
