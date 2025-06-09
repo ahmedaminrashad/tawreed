@@ -26,7 +26,7 @@
                             <label for="contract_start_date">{{ __('admin.contract_start_date') }}</label>
                             <input type="date" class="form-control @error('contract_start_date') is-invalid @enderror"
                                 id="contract_start_date" name="contract_start_date"
-                                value="{{ old('contract_start_date', $tender->contract_start_date->format('Y-m-d')) }}" required>
+                                value="{{ old('contract_start_date', $tender->contract_start_date?->format('Y-m-d')) }}" required>
                             @error('contract_start_date')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -36,7 +36,7 @@
                             <label for="contract_end_date">{{ __('admin.contract_end_date') }}</label>
                             <input type="date" class="form-control @error('contract_end_date') is-invalid @enderror"
                                 id="contract_end_date" name="contract_end_date"
-                                value="{{ old('contract_end_date', $tender->contract_end_date->format('Y-m-d')) }}" required>
+                                value="{{ old('contract_end_date', $tender->contract_end_date?->format('Y-m-d')) }}" required>
                             @error('contract_end_date')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -46,7 +46,7 @@
                             <label for="closing_date">{{ __('admin.closing_date') }}</label>
                             <input type="date" class="form-control @error('closing_date') is-invalid @enderror"
                                 id="closing_date" name="closing_date"
-                                value="{{ old('closing_date', $tender->closing_date->format('Y-m-d')) }}" required>
+                                value="{{ old('closing_date', $tender->closing_date?->format('Y-m-d')) }}" required>
                             @error('closing_date')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

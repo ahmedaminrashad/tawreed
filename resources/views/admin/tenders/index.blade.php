@@ -23,7 +23,7 @@
                     <!-- Filter Form -->
                     <form action="{{ route('admin.tenders.index') }}" method="GET" class="mb-4">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="user_id">{{ __('admin.user') }}</label>
                                     <select name="user_id" id="user_id" class="form-control">
@@ -36,20 +36,31 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>&nbsp;</label>
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        {{ __('admin.filter') }}
-                                    </button>
+                                    <label for="start_date">{{ __('admin.start_date_form') }}</label>
+                                    <input type="date" class="form-control" id="start_date" name="start_date"
+                                        value="{{ request('start_date') }}">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="end_date">{{ __('admin.end_date_till') }}</label>
+                                    <input type="date" class="form-control" id="end_date" name="end_date"
+                                        value="{{ request('end_date') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>&nbsp;</label>
-                                    <a href="{{ route('admin.tenders.index') }}" class="btn btn-secondary btn-block">
-                                        {{ __('admin.reset') }}
-                                    </a>
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary mr-2">
+                                            {{ __('admin.filter') }}
+                                        </button>
+                                        <a href="{{ route('admin.tenders.index') }}" class="btn btn-secondary">
+                                            {{ __('admin.reset') }}
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

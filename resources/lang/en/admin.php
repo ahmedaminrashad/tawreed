@@ -28,6 +28,8 @@ return [
     'filter' => 'Filter',
     'reset' => 'Reset',
     'proposals' => 'Proposals',
+    'start_date_form' => 'Start Date From',
+    'end_date_till' => 'End Date Till',
     
     // Select Placeholders
     'select_country' => 'Select Country',

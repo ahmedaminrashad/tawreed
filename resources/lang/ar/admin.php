@@ -28,6 +28,8 @@ return [
     'filter' => 'تصفية',
     'reset' => 'إعادة تعيين',
     'proposals' => 'العروض',
+    'start_date_form' => 'تاريخ البداية من',
+    'end_date_till' => 'تاريخ النهاية إلى',
     
     // Select Placeholders
     'select_country' => 'اختر الدولة',

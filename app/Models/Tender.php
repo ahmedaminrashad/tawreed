@@ -19,9 +19,9 @@ class Tender extends Model
 
     protected $casts = [
         'status' => TenderStatus::class,
-        'contract_start_date' => 'datetime',
-        'contract_end_date' => 'datetime',
-        'closing_date' => 'datetime',
+        'contract_start_date' => 'date',
+        'contract_end_date' => 'date',
+        'closing_date' => 'date',
     ];
 
     protected $appends = ['created_date', 'remaining_days', 'contract_start_date_text', 'contract_end_date_text', 'closing_date_text'];

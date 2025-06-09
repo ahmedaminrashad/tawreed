@@ -21,12 +21,20 @@ class TenderController extends Controller
         $query = Tender::with(['country', 'city', 'workCategoryClassification', 'activityClassification', 'user'])
             ->withCount('proposals');
 
-        if ($request->has('user_id')) {
+        if ($request->user_id) {
             $query->where('user_id', $request->user_id);
         }
 
+        if ($request->start_date) {
+            $query->where('contract_start_date', '>=', $request->start_date);
+        }
+
+        if ($request->end_date) {
+            $query->whereDate('contract_end_date', '<=', $request->end_date);
+        }
+
         $tenders = $query->paginate(10);
-        $users = \App\Models\User::all();
+        $users = User::all();
 
         return view('admin.tenders.index', compact('tenders', 'users'));
     }
