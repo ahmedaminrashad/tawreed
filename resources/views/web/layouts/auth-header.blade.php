@@ -5,23 +5,23 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Welcome back </h1>
+            <h1>{{ __('web.welcome_back') }}</h1>
             <form id="login_form" action="{{ route('login') }}" method="POST">
                 @csrf
 
                 <div id="login_text_div" class="col-xs-12 remove-padding">
-                    <input type="text" name="login_text" id="login_text" placeholder="Write your Email or Commercial Registration Number (Company Only)">
+                    <input type="text" name="login_text" id="login_text" placeholder="{{ __('web.login_placeholder') }}">
                 </div>
                 <div id="login_password_div" class="col-xs-12 remove-padding">
-                    <input type="password" id="login_password" name="login_password" placeholder="Password">
+                    <input type="password" id="login_password" name="login_password" placeholder="{{ __('web.password') }}">
                     <span toggle="#password-field" class="ri-eye-fill ri-eye-off-fill toggle-password1"></span>
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit">{{ __('web.login') }}</button>
             </form>
-            <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#forgot-passord-div">Forgot password ?</a>
+            <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#forgot-passord-div">{{ __('web.forgot_password') }}</a>
             <div class="clearfix"></div>
-            <p>Don't have an account? <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#signUp">Create account</a></p>
+            <p>{{ __('web.no_account') }} <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#signUp">{{ __('web.create_account') }}</a></p>
         </div>
     </div>
 </div>
@@ -33,7 +33,7 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Join as Individual or Company </h1>
+            <h1>{{ __('web.join_as') }}</h1>
             <form class="chose">
                 <div class="row">
                     <div class="col-md-6">
@@ -41,8 +41,8 @@
                             <input type="radio" checked name="type" value="company">
                             <img src="{{ asset('/assets/front/img/1.svg') }}">
                             <div class="radio-span"></div>
-                            <h3>Campany</h3>
-                            <h5>You can add company main info</h5>
+                            <h3>{{ __('web.company') }}</h3>
+                            <h5>{{ __('web.company_info') }}</h5>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -50,15 +50,15 @@
                             <input type="radio" name="type" value="individual">
                             <img src="{{ asset('/assets/front/img/2.svg') }}">
                             <div class="radio-span"></div>
-                            <h3>Individual</h3>
-                            <h5>You can submit tender as well as send proposals</h5>
+                            <h3>{{ __('web.individual') }}</h3>
+                            <h5>{{ __('web.individual_info') }}</h5>
                         </div>
                     </div>
                 </div>
-                <button class="link-style" id="account_form_btn" data-dismiss="modal" data-toggle="modal" data-target="#signUp-company-form">Create account</button>
+                <button class="link-style" id="account_form_btn" data-dismiss="modal" data-toggle="modal" data-target="#signUp-company-form">{{ __('web.create_account') }}</button>
             </form>
             <div class="clearfix"></div>
-            <p>Already have an account? <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#logIn">Login</a></p>
+            <p>{{ __('web.have_account') }} <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#logIn">{{ __('web.login') }}</a></p>
         </div>
     </div>
 </div>
@@ -70,17 +70,17 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Create account</h1>
+            <h1>{{ __('web.create_account') }}</h1>
             <form id="signUp_individual_form" action="{{ route('register') }}" method="POST">
                 @csrf
 
                 <div id="full_name_div" class="col-xs-12 remove-padding">
-                    <input type="text" name="full_name" placeholder="Full name">
+                    <input type="text" name="full_name" placeholder="{{ __('web.full_name') }}">
                 </div>
 
                 <div id="country_id_individual_div" class="col-xs-12 remove-padding">
                     <select data-minimum-results-for-search="Infinity" class="country-select" name="country_id_individual" id="country_id_individual">
-                        <option value="">Choose Country</option>
+                        <option value="">{{ __('web.choose_country') }}</option>
                         @foreach($countries as $id => $name)
                         <option value="{{ $id }}">{{ $name }}</option>
                         @endforeach
@@ -88,37 +88,37 @@
                 </div>
 
                 <div id="email_individual_div" class="col-xs-12 remove-padding">
-                    <input type="email" name="email_individual" placeholder="Write your email" id="email_individual">
+                    <input type="email" name="email_individual" placeholder="{{ __('web.write_email') }}" id="email_individual">
                 </div>
 
                 <div id="individual_password_div" class="col-xs-12 remove-padding">
-                    <input type="password" id="individual_password" name="individual_password" placeholder="Password">
+                    <input type="password" id="individual_password" name="individual_password" placeholder="{{ __('web.password') }}">
                     <span toggle="#password-field2" class="ri-eye-fill ri-eye-off-fill toggle-password2"></span>
-                    <h6>Must contain 8 character</h6>
+                    <h6>{{ __('web.password_requirement') }}</h6>
                 </div>
 
                 <div id="individual_password_confirmation_div" class="col-xs-12 remove-padding">
-                    <input type="password" id="individual_password_confirmation" name="individual_password_confirmation" placeholder="Confirm Password">
+                    <input type="password" id="individual_password_confirmation" name="individual_password_confirmation" placeholder="{{ __('web.confirm_password') }}">
                     <span toggle="#password-field3" class="ri-eye-fill ri-eye-off-fill toggle-password3"></span>
-                    <h6>Must contain 8 character</h6>
+                    <h6>{{ __('web.password_requirement') }}</h6>
                 </div>
 
                 <div class="clearfix"></div>
 
                 <div id="read_div" class="col-xs-12 remove-padding">
-                    <label class="checkbox-main"> Read & agree <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#terms_conditions">Terms & Conditions</a>, & <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#privacy_policy">Privacy policy</a>
+                    <label class="checkbox-main"> {{ __('web.read_agree') }} <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#terms_conditions">{{ __('web.terms_conditions') }}</a>, & <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#privacy_policy">{{ __('web.privacy_policy') }}</a>
                         <input type="checkbox" name="read_individual" id="read_individual" value="1">
                         <span class="checkmark"></span>
                     </label>
                 </div>
 
                 <input type="hidden" name="account_type" value="individual">
-                <button type="submit">Create account</button>
+                <button type="submit">{{ __('web.create_account') }}</button>
 
             </form>
 
             <div class="clearfix"></div>
-            <p>Already have an account? <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#logIn">Login</a> </p>
+            <p>{{ __('web.have_account') }} <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#logIn">{{ __('web.login') }}</a> </p>
         </div>
     </div>
 </div>
@@ -130,17 +130,17 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Create account</h1>
+            <h1>{{ __('web.create_account') }}</h1>
             <form id="signUp_company_form" action="{{ route('register') }}" method="POST">
                 @csrf
 
                 <div id="company_name_div" class="col-xs-12 remove-padding">
-                    <input type="text" name="company_name" placeholder="Company name">
+                    <input type="text" name="company_name" placeholder="{{ __('web.company_name') }}">
                 </div>
 
                 <div id="country_id_company_div" class="col-xs-12 remove-padding">
                     <select data-minimum-results-for-search="Infinity" class="country-select" name="country_id_company" id="country_id_company">
-                        <option value="">Choose Country</option>
+                        <option value="">{{ __('web.choose_country') }}</option>
                         @foreach($countries as $id => $name)
                         <option value="{{ $id }}">{{ $name }}</option>
                         @endforeach
@@ -148,41 +148,41 @@
                 </div>
 
                 <div id="crn_div" class="col-xs-12 remove-padding">
-                    <input type="text" name="crn" id="crn" placeholder="Commercial Registration Number">
+                    <input type="text" name="crn" id="crn" placeholder="{{ __('web.crn') }}">
                 </div>
 
                 <div id="email_div" class="col-xs-12 remove-padding">
-                    <input type="email" name="email_company" placeholder="Write your Email" id="email_company">
+                    <input type="email" name="email_company" placeholder="{{ __('web.write_email') }}" id="email_company">
                 </div>
 
                 <div id="company_password_div" class="col-xs-12 remove-padding">
-                    <input type="password" id="company_password" name="company_password" placeholder="Password">
+                    <input type="password" id="company_password" name="company_password" placeholder="{{ __('web.password') }}">
                     <span toggle="#password-field2" class="ri-eye-fill ri-eye-off-fill toggle-password4"></span>
-                    <h6>Must contain 8 character</h6>
+                    <h6>{{ __('web.password_requirement') }}</h6>
                 </div>
 
                 <div id="company_password_confirmation_div" class="col-xs-12 remove-padding">
-                    <input type="password" id="company_password_confirmation" name="company_password_confirmation" placeholder="Confirm Password">
+                    <input type="password" id="company_password_confirmation" name="company_password_confirmation" placeholder="{{ __('web.confirm_password') }}">
                     <span toggle="#password-field3" class="ri-eye-fill ri-eye-off-fill toggle-password5"></span>
-                    <h6>Must contain 8 character</h6>
+                    <h6>{{ __('web.password_requirement') }}</h6>
                 </div>
 
                 <div class="clearfix"></div>
 
                 <div id="read_company_div" class="col-xs-12 remove-padding">
-                    <label class="checkbox-main"> Read & agree <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#terms_conditions">Terms & Conditions</a>, & <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#privacy_policy">Privacy policy</a>
+                    <label class="checkbox-main"> {{ __('web.read_agree') }} <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#terms_conditions">{{ __('web.terms_conditions') }}</a>, & <a style="font-weight: bold;" data-dismiss="modal" data-toggle="modal" data-target="#privacy_policy">{{ __('web.privacy_policy') }}</a>
                         <input type="checkbox" name="read_company" id="read_company" value="1">
                         <span class="checkmark"></span>
                     </label>
                 </div>
 
                 <input type="hidden" name="account_type" value="company">
-                <button type="submit">Create account</button>
+                <button type="submit">{{ __('web.create_account') }}</button>
 
             </form>
 
             <div class="clearfix"></div>
-            <p>Already have an account? <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#logIn">Login</a> </p>
+            <p>{{ __('web.have_account') }} <a class="link-style" data-dismiss="modal" data-toggle="modal" data-target="#logIn">{{ __('web.login') }}</a> </p>
         </div>
     </div>
 </div>
@@ -193,8 +193,8 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Enter OTP Sent to your email </h1>
-            <h4>OTP Sent to your email @</h4>
+            <h1>{{ __('web.enter_otp') }}</h1>
+            <h4>{{ __('web.otp_sent_to') }}</h4>
             <h4 id="set_sent_email"></h4>
             <form id="otp_verify_form" action="{{ route('verify.otp') }}" method="POST">
                 @csrf
@@ -215,9 +215,9 @@
                 <div class="col-xs-12 remove-padding"></div>
 
                 <input type="hidden" name="otp_user" id="otp_user">
-                <button type="submit">Verify</button>
+                <button type="submit">{{ __('web.verify') }}</button>
             </form>
-            <p>Didn’t receive the code ? <a href="javascript:void(0);" class="verify-resend-link disabled">Resend</a><br><span id="verify-timer"></span></p>
+            <p>{{ __('web.no_code_received') }} <a href="javascript:void(0);" class="verify-resend-link disabled">{{ __('web.resend') }}</a><br><span id="verify-timer"></span></p>
             
             <form id="verify_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
                 @csrf
@@ -233,7 +233,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
-            <h1>Terms and Conditions</h1>
+            <h1>{{ __('web.terms_conditions') }}</h1>
             <h5>{!! $terms_conditions !!}</h5>
         </div>
     </div>
@@ -244,7 +244,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
-            <h1>Privacy Policy</h1>
+            <h1>{{ __('web.privacy_policy') }}</h1>
             <h5>{!! $privacy_policy !!}</h5>
         </div>
     </div>
@@ -311,7 +311,7 @@
                 <button type="submit">Reset Password</button>
             </form>
 
-            <p>Didn’t receive the code ? <a href="javascript:void(0);" class="reset-resend-link disabled">Resend</a><br><span id="reset-timer"></span></p>
+            <p>Didn't receive the code ? <a href="javascript:void(0);" class="reset-resend-link disabled">Resend</a><br><span id="reset-timer"></span></p>
             
             <form id="reset_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
                 @csrf

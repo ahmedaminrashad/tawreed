@@ -73,7 +73,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        Thank you for choosing Quotech Company. Use the following OTP
+                        شكرًا لاختيارك شركة كيو تيك. استخدم رمز OTP التالي
                         to complete the procedure to verify your email address. OTP is
                         valid for
                         <span style="font-weight: 600; color: #1f1f1f;">3 minutes</span>.
@@ -116,7 +116,7 @@
           border-top: 1px solid #e6ebf1;
         ">
             <p style="margin: 0; margin-top: 16px; color: #434343;">
-                Copyright © 2022 Quotech Company. All rights reserved.
+                حقوق النشر © 2022 شركة كيو تيك. جميع الحقوق محفوظة.
             </p>
         </footer>
     </div>

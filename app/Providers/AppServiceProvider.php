@@ -51,5 +51,14 @@ class AppServiceProvider extends ServiceProvider
 
         // share Linkedin Link with all views
         view()->share('linkedin_link', Setting::where('key', 'linkedin_link')->first()?->value);
+
+        // share Address with all views
+        view()->share('address', Setting::where('key', 'address')->first()?->value);
+
+        // share Email with all views
+        view()->share('email', Setting::where('key', 'email')->first()?->value);
+
+        // share Phone with all views
+        view()->share('phone', Setting::where('key', 'phone')->first()?->value);
     }
 }

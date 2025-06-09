@@ -18,7 +18,9 @@
     <div class="container remove-padding about-main">
         <div class="col-xs-12 contact-section">
 
-            <h1>Privacy Policy</h1>
+            <h1>سياسة الخصوصية</h1>
+
+            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
 
             {!! $privacy_policy !!}
         </div>

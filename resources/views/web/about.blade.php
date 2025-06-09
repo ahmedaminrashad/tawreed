@@ -17,9 +17,9 @@
     <div class="container remove-padding about-main">
         <div class="col-xs-12 contact-section">
 
-            <h1>About us</h1>
+            <h1>من نحن</h1>
             
-            {!! html_entity_decode($about) !!}
+            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
         </div>
     </div>
 </div>

@@ -22,6 +22,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 
+// Language Switcher Route
+Route::get('language/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ar'])) {
+        session()->put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('language.switch');
+
 Route::get('/about', [HomePageController::class, 'about'])->name('about');
 
 Route::get('/contact', [HomePageController::class, 'contact'])->name('contact');

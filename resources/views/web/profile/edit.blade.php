@@ -24,7 +24,7 @@
             @include('web.profile.aside', ['active' => "profile"])
 
             <div class="col-md-8 col-xs-12">
-                <h1>Edit Profile</h1>
+                <h1>تعديل الملف الشخصي</h1>
                 <div class="edit-profile-cont col-xs-12 remove-padding">
                     @if ($errors->any())
                     @foreach ($errors->all() as $error)

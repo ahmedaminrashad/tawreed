@@ -10,7 +10,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ route('admin.home') }}"><b>QuoTech Dashboard</a>
+        <a href="{{ route('admin.home') }}"><b>لوحة تحكم كيو تيك</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

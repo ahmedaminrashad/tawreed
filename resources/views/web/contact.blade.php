@@ -18,11 +18,9 @@
     <div class="container remove-padding about-main">
         <div class="col-xs-12 contact-section">
 
-            <h1>Contact us</h1>
+            <h1>اتصل بنا</h1>
 
-            <p>
-                Enim tempor eget pharetra facilisis sed maecenas adipiscing. Eu leo molestie vel, ornare non id blandit netus.
-            </p>
+            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
 
             <div class="col-xs-12 remove-padding">
                 <a href="tel:{{ $phone }}"><span><i class="ri-whatsapp-line"></i></span> {{ $phone }}</a>

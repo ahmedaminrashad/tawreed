@@ -17,8 +17,10 @@
 
     <div class="container remove-padding categories-main margin-section all-categories">
         <div class="col-xs-12 title">
-            <h1>Category</h1>
+            <h1>التصنيفات</h1>
         </div>
+
+        <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
 
         @foreach($workCategories as $categoryID => $categoryName)
         <div class="col-md-4 col-sm-6 col-xs-12">

@@ -17,8 +17,8 @@
             <h3>Logout</h3>
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/35.svg') }}">
-            <h1>Are you sure you want to log out</h1>
-            <p>We look forward to seeing you again soon!</p>
+            <h1>الملف الشخصي</h1>
+            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
             <ul>
                 <li><a href="javascript:void(0);" data-dismiss="modal">Cancel</a></li>
                 <li>
