@@ -19,43 +19,31 @@ class Tender extends Model
 
     protected $casts = [
         'status' => TenderStatus::class,
+        'contract_start_date' => 'datetime',
+        'contract_end_date' => 'datetime',
+        'closing_date' => 'datetime',
     ];
 
     protected $appends = ['created_date', 'remaining_days', 'contract_start_date_text', 'contract_end_date_text', 'closing_date_text'];
 
-    public function getContractStartDateAttribute()
-    {
-        return Carbon::parse($this->attributes['contract_start_date'])->format('m/d/Y');
-    }
-
-    public function getContractEndDateAttribute()
-    {
-        return Carbon::parse($this->attributes['contract_end_date'])->format('m/d/Y');
-    }
-
-    public function getClosingDateAttribute()
-    {
-        return Carbon::parse($this->attributes['closing_date'])->format('m/d/Y');
-    }
-
-    public function getCreatedDateAttribute()
-    {
-        return Carbon::parse($this->created_at)->format('Y-m-d');
-    }
-
     public function getContractStartDateTextAttribute()
     {
-        return Carbon::parse($this->contract_start_date)->format('d M, Y');
+        return $this->contract_start_date ? $this->contract_start_date->format('d M, Y') : null;
     }
 
     public function getContractEndDateTextAttribute()
     {
-        return Carbon::parse($this->contract_end_date)->format('d M, Y');
+        return $this->contract_end_date ? $this->contract_end_date->format('d M, Y') : null;
     }
 
     public function getClosingDateTextAttribute()
     {
-        return Carbon::parse($this->closing_date)->format('d M, Y');
+        return $this->closing_date ? $this->closing_date->format('d M, Y') : null;
+    }
+
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at ? $this->created_at->format('Y-m-d') : null;
     }
 
     public function isPublished()
@@ -65,10 +53,11 @@ class Tender extends Model
 
     public function getRemainingDaysAttribute()
     {
-        $closeDate = Carbon::parse($this->closing_date);
-        $now = Carbon::today();
-
-        return $closeDate->diffInDays($now);
+        if (!$this->closing_date) {
+            return null;
+        }
+        
+        return $this->closing_date->diffInDays(Carbon::today());
     }
 
     public function items(): HasMany

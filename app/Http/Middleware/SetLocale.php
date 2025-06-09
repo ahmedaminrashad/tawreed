@@ -18,9 +18,17 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
+        // Set English as default for dashboard routes
+        if ($request->is('dashboard*') || $request->is('admin*')) {
+            App::setLocale('en');
+            return $next($request);
+        }
+
+        // For other routes, use session locale or default
         if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
         }
+        
         return $next($request);
     }
 } 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DocumentationController;
 use App\Http\Controllers\Admin\RejectionReasonController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TenderController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\WorkCategoryClassificationController;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +52,7 @@ Route::group(['as' => 'admin.'], function () {
         // Admins Routes
         Route::resource('admins', AdminController::class);
         Route::put('admins/{admin}/reset/password', [AdminController::class, 'resetPassword'])->name('admins.reset.password');
-
+        Route::resource('tenders', TenderController::class);
         // Countries Routes
         Route::resource('countries', CountryController::class);
 

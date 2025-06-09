@@ -273,6 +273,30 @@ class RolePermissionSeeder extends Seeder
             'name' => 'delete-rejections',
             'guard_name' => 'admin'
         ]);
+        Permission::updateOrCreate([
+            'name' => 'list-tenders',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'create-tenders',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'show-tenders',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'edit-tenders',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'delete-tenders',
+            'guard_name' => 'admin'
+        ]);
 
         $permissions = Permission::get()->pluck('id')->toArray();
 

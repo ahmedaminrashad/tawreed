@@ -20,6 +20,18 @@
             </li>
         @endcan
 
+        @can('list-tenders')
+            <li class="nav-item">
+                <a href="{{ route('admin.tenders.index') }}"
+                   class="nav-link {{ request()->routeIs('admin.tenders*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-file-contract"></i>
+                    <p>
+                        Tenders
+                    </p>
+                </a>
+            </li>
+        @endcan
+
         @can('list-roles')
             <li class="nav-item">
                 <a href="{{ route('admin.roles.index') }}"
