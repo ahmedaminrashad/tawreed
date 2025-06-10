@@ -44,6 +44,18 @@
             </li>
         @endcan
 
+        @can('list-users')
+            <li class="nav-item">
+                <a href="{{ route('admin.users.index') }}"
+                   class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                        Users
+                    </p>
+                </a>
+            </li>
+        @endcan
+
         @can('list-admins')
             <li class="nav-item">
                 <a href="{{ route('admin.admins.index') }}"
