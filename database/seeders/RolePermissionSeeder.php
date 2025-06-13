@@ -274,27 +274,51 @@ class RolePermissionSeeder extends Seeder
             'guard_name' => 'admin'
         ]);
         Permission::updateOrCreate([
-            'name' => 'list-tenders',
+            'name' => 'list-users',
             'guard_name' => 'admin'
         ]);
 
         Permission::updateOrCreate([
-            'name' => 'create-tenders',
+            'name' => 'create-users',
             'guard_name' => 'admin'
         ]);
 
         Permission::updateOrCreate([
-            'name' => 'show-tenders',
+            'name' => 'show-users',
             'guard_name' => 'admin'
         ]);
 
         Permission::updateOrCreate([
-            'name' => 'edit-tenders',
+            'name' => 'edit-users',
             'guard_name' => 'admin'
         ]);
 
         Permission::updateOrCreate([
-            'name' => 'delete-tenders',
+            'name' => 'delete-users',
+            'guard_name' => 'admin'
+        ]);
+        Permission::updateOrCreate([
+            'name' => 'list-users',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'create-users',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'show-users',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'edit-users',
+            'guard_name' => 'admin'
+        ]);
+
+        Permission::updateOrCreate([
+            'name' => 'delete-users',
             'guard_name' => 'admin'
         ]);
 

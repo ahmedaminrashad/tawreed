@@ -13,7 +13,8 @@ class TestController extends Controller
 
     public function test()
     {
-        return Tender::query()->find(16);
+        return bcrypt('12345678');
+//        return Tender::query()->find(16);
         return User::query()->update(['password'=>bcrypt('12345678')]);
 
        return User::query()->create([

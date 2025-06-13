@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TenderController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\WorkCategoryClassificationController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['as' => 'admin.'], function () {
@@ -45,6 +46,10 @@ Route::group(['as' => 'admin.'], function () {
     Route::group(['middleware' => ['auth:admin', 'check-permission']], function () {
         // Dashboard Homepage Route
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+
+        // Users Routes
+        Route::resource('users', UserController::class);
+        Route::put('users/{user}/verify', [UserController::class, 'verifyCompany'])->name('users.verify');
 
         // Roles Routes
         Route::resource('roles', RoleController::class)->except('destroy', 'show');
