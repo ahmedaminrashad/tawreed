@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Profile')
+@section('title', __('web.profile'))
 
 @section('head')
 <style>
@@ -32,7 +32,7 @@
                     <p>4.8</p><i class="ri-star-fill"></i><span>(221)</span>
                 </a>
                 <h6>{{ $user->user_type }}</h6>
-                <a class="edit-btn" href="{{ route('profile.edit') }}">Edit Profile</a>
+                <a class="edit-btn" href="{{ route('profile.edit') }}">{{ __('web.edit_profile') }}</a>
                 <div class="clearfix"></div>
                 <ul>
                     <li class="follow-btn" data-toggle="modal" data-target="#follow-list">
@@ -55,27 +55,27 @@
             </div>
 
             <div class="col-xs-12 user-main-info">
-                <h3>Main info</h3>
+                <h3>{{ __('web.main_info') }}</h3>
                 <div class="col-xs-12 remove-padding user-main-info-item">
-                    <h5>Email</h5>
-                    <p>{{ $user->email ?? 'No Email Added' }}</p>
+                    <h5>{{ __('web.email') }}</h5>
+                    <p>{{ $user->email ?? __('web.no_email_added') }}</p>
                 </div>
                 <div class="col-xs-12 remove-padding user-main-info-item">
-                    <h5>Phone Number</h5>
-                    <p>{{ $user->phone ? $user->phone_number : 'No Phone Number Added' }}</p>
+                    <h5>{{ __('web.phone_number') }}</h5>
+                    <p>{{ $user->phone ? $user->phone_number : __('web.no_phone_number_added') }}</p>
                 </div>
                 <div class="col-xs-12 remove-padding user-main-info-item">
-                    <h5>Country</h5>
-                    <p>{{ $user->country?->translate('ar')->name ?? 'No Country Added' }}</p>
+                    <h5>{{ __('web.country') }}</h5>
+                    <p>{{ $user->country?->translate('ar')->name ?? __('web.no_country_added') }}</p>
                 </div>
                 @if($user->isCompany())
                 <div class="col-xs-12 remove-padding user-main-info-item">
-                    <h5>Commerical Registration Number</h5>
-                    <p>{{ $user->commercial_registration_number ?? 'No Commerical Registration Number Added' }}</p>
+                    <h5>{{ __('web.commercial_registration_number') }}</h5>
+                    <p>{{ $user->commercial_registration_number ?? __('web.no_commercial_registration_number_added') }}</p>
                 </div>
                 @endif
                 <div class="col-xs-12 remove-padding user-main-info-item">
-                    <h5>Work Category</h5>
+                    <h5>{{ __('web.work_category') }}</h5>
                     @if($user->userCategories()->count() > 0)
                     <ul>
                         @foreach($user->userCategoriesName() as $category)
@@ -83,7 +83,7 @@
                         @endforeach
                     </ul>
                     @else
-                    <p>No Work Category Added</p>
+                    <p>{{ __('web.no_work_category_added') }}</p>
                     @endif
                 </div>
 

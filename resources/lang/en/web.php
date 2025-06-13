@@ -75,4 +75,7 @@ return [
     'follow_us' => 'Follow Us',
     'footer_description' => 'Your trusted platform for tenders and business opportunities',
     'copyright' => '© 2024 Quotech. All rights reserved.',
+    'enter_email_or_crn' => 'Enter your email or commercial registration number',
+    'enter_email_or_crn_placeholder' => 'Enter your email or commercial registration number',
+    'enter_email_or_crn_placeholder' => 'Enter your email or commercial registration number',
 ]; 

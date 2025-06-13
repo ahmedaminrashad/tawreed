@@ -95,23 +95,23 @@
                                     <div class="col-xs-12 remove-padding">
                                         <div class="col-xs-12 remove-padding notification-item">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                            <h5>Last Wednesday at 9:42 AM</h5>
+                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item unread-notification">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                            <h5>Last Wednesday at 9:42 AM</h5>
+                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                            <h5>Last Wednesday at 9:42 AM</h5>
+                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
                                         </div>
                                         <div class="col-xs-12 remove-padding notification-item">
                                             <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                            <h5>Last Wednesday at 9:42 AM</h5>
+                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -119,46 +119,46 @@
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                 </div>
 
                                 <div class="tab-content">
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                     <div class="col-xs-12 remove-padding notification-item">
                                         <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">Your Verification Request is Rejected you can View Reason of Rejection.</a>
-                                        <h5>Last Wednesday at 9:42 AM</h5>
+                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
+                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
                                     </div>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@
                 </div>
                 <div id="login_password_div" class="col-xs-12 remove-padding">
                     <input type="password" id="login_password" name="login_password" placeholder="{{ __('web.password') }}">
-                    <span toggle="#password-field" class="ri-eye-fill ri-eye-off-fill toggle-password1"></span>
+                    <span toggle="#password-field1" class="ri-eye-fill ri-eye-off-fill toggle-password1"></span>
                 </div>
 
                 <button type="submit">{{ __('web.login') }}</button>
@@ -256,13 +256,13 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Forget password</h1>
-            <h4>Enter you Email or Commercial Register Number to reset password</h4>
+            <h1>{{ __('web.forgot_password') }}</h1>
+            <h4>{{ __('web.enter_email_or_crn') }}</h4>
             <form id="forget_password_form" action="{{ route('forget.password') }}" method="POST">
                 @csrf
 
-                <input type="text" name="forget_password_search" id="forget_password_search" placeholder="Write your Email or Commercial Registration Number (Company Only)">
-                <button type="submit">Request OTP</button>
+                <input type="text" name="forget_password_search" id="forget_password_search" placeholder="{{ __('web.login_placeholder') }}">
+                <button type="submit">{{ __('web.request_otp') }}</button>
             </form>
         </div>
     </div>
@@ -274,8 +274,8 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}">
-            <h1>Forget Password</h1>
-            <h4>Enter you OTP sent to your email address to reset password @</h4>
+            <h1>{{ __('web.reset_password') }}</h1>
+            <h4>{{ __('web.reset_password_otp_sent') }}</h4>
             <h4 id="reset_sent_email"></h4>
             <form id="reset_password_otp_form" action="{{ route('reset.password') }}" method="POST">
                 @csrf
@@ -295,23 +295,23 @@
 
                 <div id="new_password_div">
                     <div class="col-xs-12 remove-padding">
-                        <input type="password" id="new_password" name="new_password" placeholder="New Password">
+                        <input type="password" id="new_password" name="new_password" placeholder="{{ __('web.new_password') }}">
                         <span toggle="#password-field4" class="ri-eye-fill ri-eye-off-fill toggle-password4"></span>
                     </div>
                 </div>
 
                 <div id="new_password_confirmation_div">
                     <div class="col-xs-12 remove-padding">
-                        <input type="password" id="new_password_confirmation" name="new_password_confirmation" placeholder="New Password Confirmation">
+                        <input type="password" id="new_password_confirmation" name="new_password_confirmation" placeholder="{{ __('web.new_password_confirmation') }}">
                         <span toggle="#password-field4" class="ri-eye-fill ri-eye-off-fill toggle-password4"></span>
                     </div>
                 </div>
 
                 <input type="hidden" name="reset_otp_user" id="reset_otp_user">
-                <button type="submit">Reset Password</button>
+                <button type="submit">{{ __('web.reset_password_button') }}</button>
             </form>
 
-            <p>Didn't receive the code ? <a href="javascript:void(0);" class="reset-resend-link disabled">Resend</a><br><span id="reset-timer"></span></p>
+            <p>{{ __('web.didnt_receive_code') }} <a href="javascript:void(0);" class="reset-resend-link disabled">{{ __('web.resend_reset') }}</a><br><span id="reset-timer"></span></p>
             
             <form id="reset_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
                 @csrf

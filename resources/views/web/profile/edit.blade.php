@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-xs-12 input-item">
-                            <p>{{ $user->isCompany() ? 'Company Name' : 'Full Name' }}</p>
+                            <p>{{ $user->isCompany() ? __('web.company_name') : __('web.full_name') }}</p>
                             @if($user->isCompany())
                             <input type="text" name="company_name" id="company_name" value="{{ old('company_name') ?? $user->company_name }}" autocomplete="off">
                             @else
@@ -56,12 +56,12 @@
 
                         @if($user->isCompany())
                         <div class="col-xs-12 input-item">
-                            <p>Commercial Registration Number</p>
+                            <p>{{ __('web.commercial_registration_number') }}</p>
                             <input type="text" name="commercial_registration_number" id="commercial_registration_number" value="{{ old('commercial_registration_number') ?? $user->commercial_registration_number }}" autocomplete="off">
                         </div>
 
                         <div class="col-xs-12 input-item">
-                            <p>Tax Card Number / Zakat Certificate</p>
+                            <p>{{ __('web.tax_card_number') }}</p>
                             <input type="text" name="tax_card_number" id="tax_card_number" value="{{ old('tax_card_number') ?? $user->tax_card_number }}" autocomplete="off">
                         </div>
                         @endif

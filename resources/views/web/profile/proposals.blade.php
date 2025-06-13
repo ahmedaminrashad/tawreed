@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Profile - My Proposals')
+@section('title', __('web.my_proposals'))
 
 @section('head')
 <style>
@@ -21,13 +21,13 @@
         <div class="col-md-8 col-xs-12 proposal-main-cont">
             @if(auth()->user()->proposals->count() > 0)
             <ul class="proposal-tabs-first">
-                <li class="active"><a href="javascript:void(0);"><i class="ri-flashlight-line"></i> Current</a></li>
+                <li class="active"><a href="javascript:void(0);"><i class="ri-flashlight-line"></i> {{ __('web.current') }}</a></li>
                 <li>
-                    <p><i class="ri-skip-right-fill"></i> Previous</p>
+                    <p><i class="ri-skip-right-fill"></i> {{ __('web.previous') }}</p>
                 </li>
             </ul>
             <ul class="proposal-tabs" role="tablist">
-                <li class="active"><a id="tabAll" href="javascript:void(0);">All</a></li>
+                <li class="active"><a id="tabAll" href="javascript:void(0);">{{ __('web.all') }}</a></li>
                 @foreach($statuses as $key => $status)
                 <li>
                     <a href="#{{ $key }}" role="tab" data-toggle="tab">
@@ -48,24 +48,24 @@
                                 <i class="ri-more-line"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0);">Edit</a></li>
-                                <li><a href="javascript:void(0);">Withdraw</a></li>
-                                <li><a href="javascript:void(0);">Sample sent</a></li>
-                                <li><a href="javascript:void(0);">Print</a></li>
+                                <li><a href="javascript:void(0);">{{ __('web.edit') }}</a></li>
+                                <li><a href="javascript:void(0);">{{ __('web.withdraw') }}</a></li>
+                                <li><a href="javascript:void(0);">{{ __('web.sample_sent') }}</a></li>
+                                <li><a href="javascript:void(0);">{{ __('web.print') }}</a></li>
                             </ul>
                         </div>
-                        <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>In Progress</span></p>
-                        <h4>Proposal Validity Period : <b>{{ $proposal->proposal_end_date }}</b></h4>
-                        <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>Contract Duration by Seller : <b> {{ $proposal->contract_duration }} Day(s)</b></h3>
+                        <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>{{ __('web.in_progress') }}</span></p>
+                        <h4>{{ __('web.proposal_validity_period') }} : <b>{{ $proposal->proposal_end_date }}</b></h4>
+                        <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>{{ __('web.contract_duration_by_seller') }} : <b> {{ $proposal->contract_duration }} {{ __('web.days') }}</b></h3>
                         <div class="col-xs-12 remove-padding propoal-img">
                             <img src="{{ asset('/assets/front/img/1.png') }}">
                             <h6>{{ $proposal->tender->user->displayed_name }} . <span>{{ $proposal->tender->user->user_type }}</span></h6>
                         </div>
                         <h5>
-                            <span>Total Price </span><br>
+                            <span>{{ __('web.total_price') }} </span><br>
                             <b>{{ $proposal->total }} SAR</b>
                         </h5>
-                        <a href="{{ route('proposals.show', ['proposal' => $proposal]) }}" class="details">View Details</a>
+                        <a href="{{ route('proposals.show', ['proposal' => $proposal]) }}" class="details">{{ __('web.view_details') }}</a>
                     </div>
 
                 </div>    
@@ -79,7 +79,7 @@
             @else
             <div class="proposal-empty col-xs-12 text-center remove-padding">
                 <img src="{{ asset('/assets/front/img/46.svg') }}">
-                <p>The is No Proposal Created Yet</p>
+                <p>{{ __('web.no_proposals') }}</p>
             </div>
             @endif
         </div>

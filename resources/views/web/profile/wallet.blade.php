@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Profile - Settings')
+@section('title', __('web.wallet'))
 
 @section('content')
 <div class="container-fluid body remove-padding">
@@ -10,7 +10,7 @@
         <div class="col-md-8 wallet-main">
             <div class="col-xs-12 text-center wallet-empty">
                 <img src="{{ asset('/assets/front/img/36.svg') }}">
-                <h3>No balance in Wallet</h3>
+                <h3>{{ __('web.no_balance') }}</h3>
             </div>
         </div>
     </div>

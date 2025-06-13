@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Create Proposal - Add Items')
+@section('title', __('web.create_proposal') . ' - ' . __('web.add_items'))
 
 @section('head')
 <style>
@@ -11,41 +11,41 @@
 <div class="container-fluid body remove-padding">
     <div class="container stie-map">
         <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('home') }}">{{ __('web.tenders') }}</a></li>
             <li><span>/</span></li>
-            <li><a href="{{ route('tenders.index') }}">Tenders</a></li>
+            <li><a href="{{ route('tenders.index') }}">{{ __('web.tenders') }}</a></li>
             <li><span>/</span></li>
-            <li><a href="{{ route('tenders.show', ['tender' => $tender->id]) }}">Show Tender - {{ $tender->subject }}</a></li>
+            <li><a href="{{ route('tenders.show', ['tender' => $tender->id]) }}">{{ __('web.show_tender') }} - {{ $tender->subject }}</a></li>
             <li><span>/</span></li>
             <li>
-                <p>Create Proposal - Add Items</p>
+                <p>{{ __('web.create_proposal') }} - {{ __('web.add_items') }}</p>
             </li>
         </ul>
     </div>
 
     <div class="container remove-padding add-tender-main add-tender-review">
         <div class="col-xs-12">
-            <h1>Send Proposal to <span>( {{ $tender->subject . ' . ' . $tender->tender_uuid }} )</span></h1>
+            <h1>{{ __('web.send_proposal_to') }} <span>( {{ $tender->subject . ' . ' . $tender->tender_uuid }} )</span></h1>
         </div>
         <div class="col-xs-12 tender-steps-head">
             <div class="col-md-4 active">
                 <span>1</span>
-                <h4>Item(s) Price</h4>
-                <p>Unit Price for each Item</p>
+                <h4>{{ __('web.item_price') }}</h4>
+                <p>{{ __('web.unit_price_for_each_item') }}</p>
                 <i class="ri-arrow-right-s-line"></i>
             </div>
 
             <div class="col-md-4">
                 <span>2</span>
-                <h4>General info</h4>
-                <p>Add Details of your Proposal</p>
+                <h4>{{ __('web.general_info') }}</h4>
+                <p>{{ __('web.add_details_of_proposal') }}</p>
                 <i class="ri-arrow-right-s-line"></i>
             </div>
 
             <div class="col-md-4">
                 <span>3</span>
-                <h4>Preview</h4>
-                <p>Review your Proposal info before Publish</p>
+                <h4>{{ __('web.preview') }}</h4>
+                <p>{{ __('web.review_proposal_info_before_publish') }}</p>
                 <i class="ri-arrow-right-s-line"></i>
             </div>
         </div>
@@ -72,7 +72,7 @@
 
                 <div class="review-item col-xs-12 remove-padding">
                     <div class="review-item-title col-xs-12">
-                        <h4>Items list <span>( {{ $tender->items()->count() }} items )</span></h4>
+                        <h4>{{ __('web.items_list') }} <span>( {{ $tender->items()->count() }} {{ __('web.items') }} )</span></h4>
                     </div>
 
                     @foreach($tender->items as $key => $item)
@@ -82,18 +82,18 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Item Name</th>
-                                    <th>Unit</th>
-                                    <th>Quantity</th>
+                                    <th>{{ __('web.item_name') }}</th>
+                                    <th>{{ __('web.unit') }}</th>
+                                    <th>{{ __('web.quantity') }}</th>
                                     <th>-</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td data-label="#">{{ $key + 1 }}</td>
-                                    <td data-label="item name">{{ $item->name }}</td>
-                                    <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
-                                    <td data-label="Quantities">{{ $item->quantity }}</td>
+                                    <td data-label="{{ __('web.item_name') }}">{{ $item->name }}</td>
+                                    <td data-label="{{ __('web.unit') }}">{{ $item->unit->translate('ar')->name }}</td>
+                                    <td data-label="{{ __('web.quantity') }}">{{ $item->quantity }}</td>
                                     <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs_{{ $item->id }}"></td>
                                 </tr>
                             </tbody>
@@ -126,7 +126,7 @@
             </div>
 
             <div class="col-xs-12 remove-padding">
-                <button type="submit">Next / Add General Details</button>
+                <button type="submit">{{ __('web.next_add_general_details') }}</button>
             </div>
         </form>
     </div>

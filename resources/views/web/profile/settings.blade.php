@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Profile - Settings')
+@section('title', __('web.settings'))
 
 @section('content')
 <div class="container-fluid body remove-padding">
@@ -9,11 +9,11 @@
 
         <div class="col-md-4 col-xs-12">
             <ul class="settings-list">
-                <li class="active"><a data-toggle="tab" href="#notifications-tab"><img src="{{ asset('/assets/front/img/25.svg') }}"> Notifications Options</a></li>
-                <li><a data-toggle="tab" href="#change-password-tab"><img src="{{ asset('/assets/front/img/26.svg') }}"> Change Password</a></li>
-                <li><a data-toggle="tab" href="#change-email-tab"><img src="{{ asset('/assets/front/img/27.svg') }}"> Change Email</a></li>
-                <li><a data-toggle="tab" href="#payment-options-tab"><img src="{{ asset('/assets/front/img/28.svg') }}"> Payment Options</a></li>
-                <li><a data-toggle="tab" href="#delete-account-tab"><img src="{{ asset('/assets/front/img/29.svg') }}">Delete Account</a></li>
+                <li class="active"><a data-toggle="tab" href="#notifications-tab"><img src="{{ asset('/assets/front/img/25.svg') }}"> {{ __('web.notifications') }}</a></li>
+                <li><a data-toggle="tab" href="#change-password-tab"><img src="{{ asset('/assets/front/img/26.svg') }}"> {{ __('web.change_password') }}</a></li>
+                <li><a data-toggle="tab" href="#change-email-tab"><img src="{{ asset('/assets/front/img/27.svg') }}"> {{ __('web.change_email') }}</a></li>
+                <li><a data-toggle="tab" href="#payment-options-tab"><img src="{{ asset('/assets/front/img/28.svg') }}"> {{ __('web.payment_options') }}</a></li>
+                <li><a data-toggle="tab" href="#delete-account-tab"><img src="{{ asset('/assets/front/img/29.svg') }}">{{ __('web.delete_account') }}</a></li>
             </ul>
         </div>
 
@@ -41,7 +41,7 @@
                             </label>
                         </div>
 
-                        <button type="submit" style="margin-top: 10px;">Done</button>
+                        <button type="submit" style="margin-top: 10px;">{{ __('web.done') }}</button>
                     </form>
                 </div>
 
@@ -68,24 +68,24 @@
                             <h6>Must contain 8 character</h6>
                         </div>
 
-                        <button type="submit" style="margin-top: 10px;">Done</button>
+                        <button type="submit" style="margin-top: 10px;">{{ __('web.done') }}</button>
                     </form>
                 </div>
 
                 <div id="change-email-tab" class="tab-pane fade">
                     <div id="new_email_div">
-                        <h3>Enter new Email to change your current Email </h3>
+                        <h3>{{ __('web.enter_new_email') }}</h3>
                         <form id="profile_email_update" action="{{ route('profile.settings.email.update') }}" method="POST">
                             @csrf
 
                             <input type="email" name="new_email" id="new_email">
                         </form>
 
-                        <button id="post_new_email">Update</button>
+                        <button id="post_new_email">{{ __('web.update') }}</button>
                     </div>
 
                     <div id="new_email_otp_div" style="display: none;">
-                        <p>OTP Sent to your new Email @ </p>
+                        <p>{{ __('web.otp_sent_to_new_email') }}</p>
                         <p id="set_email"></p>
                         <form id="new_email_otp_form" action="{{ route('profile.settings.verify.email.update') }}" method="POST">
                             @csrf
@@ -101,9 +101,9 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 remove-padding"></div>
-                            <button type="submit" style="margin-top: 10px;">Done</button>
+                            <button type="submit" style="margin-top: 10px;">{{ __('web.done') }}</button>
                         </form>
-                        <p>Didn’t receive the code ? <a href="javascript:void(0);" id="set-resend-link" class="set-resend-link disabled">Resend</a><br><span id="set-timer"></span></p>
+                        <p>Didn't receive the code ? <a href="javascript:void(0);" id="set-resend-link" class="set-resend-link disabled">Resend</a><br><span id="set-timer"></span></p>
 
                         <form id="verify_update_email_form" method="POST" action="{{ route('resend.otp') }}">
                             @csrf
@@ -115,7 +115,7 @@
 
                 <div id="payment-options-tab" class="tab-pane fade">
                     <img src="{{ asset('/assets/front/img/30.svg') }}">
-                    <h2>No Payment Methods are added yet</h2>
+                    <h2>{{ __('web.no_payment_methods') }}</h2>
 
                     {{-- <ul class="Payment-Methods">
                         <li class="col-xs-12 remove-padding">
@@ -160,7 +160,7 @@
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/16.svg') }}">
             <h1>Your password has been changed successfully </h1>
-            <a data-dismiss="modal" href="javascript:void(0);">Done</a>
+            <a data-dismiss="modal" href="javascript:void(0);">{{ __('web.done') }}</a>
         </div>
     </div>
 </div>
@@ -171,7 +171,7 @@
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/16.svg') }}">
             <h1>Your Email has been changed successfully</h1>
-            <a data-dismiss="modal" href="javascript:void(0);">Done</a>
+            <a data-dismiss="modal" href="javascript:void(0);">{{ __('web.done') }}</a>
         </div>
     </div>
 </div>
@@ -186,8 +186,8 @@
                 this Credit Cardfrom ?</h1>
             <p>Remove this credit card from your payment options list</p>
             <ul>
-                <li><a data-dismiss="modal" href="javascript:void(0);">Cancel</a></li>
-                <li><a href="javascript:void(0);">Remove</a></li>
+                <li><a data-dismiss="modal" href="javascript:void(0);">{{ __('web.cancel') }}</a></li>
+                <li><a href="javascript:void(0);">{{ __('web.remove') }}</a></li>
             </ul>
         </div>
     </div>
@@ -201,7 +201,7 @@
             <img src="{{ asset('/assets/front/img/32.svg') }}">
             <h1>To delete your account you Must cancel all open tenders bid or withdraw your proposals for the open tenders bid</h1>
             <ul>
-                <li><a data-dismiss="modal" href="javascript:void(0);">Ok</a></li>
+                <li><a data-dismiss="modal" href="javascript:void(0);">{{ __('web.ok') }}</a></li>
             </ul>
         </div>
     </div>

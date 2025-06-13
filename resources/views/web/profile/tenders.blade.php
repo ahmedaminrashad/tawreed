@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Profile - My Tenders')
+@section('title', __('web.my_tenders'))
 
 @section('head')
 <style>
@@ -21,10 +21,10 @@
         <div class="col-md-8 col-xs-12 proposal-main-cont Tenders-pro-main">
             <ul class="proposal-tabs-first">
                 <li class="active">
-                    <a href="#inprogress_div"><i class="ri-loader-2-line"></i> In Progress</a>
+                    <a href="#inprogress_div"><i class="ri-loader-2-line"></i> {{ __('web.in_progress') }}</a>
                 </li>
-                <li><a href="#awarded_div"><i class="ri-award-fill"></i> Awarded</a></li>
-                <li><a href="#cancelled_div"><i class="ri-close-fill"></i> Cancelled</a></li>
+                <li><a href="#awarded_div"><i class="ri-award-fill"></i> {{ __('web.awarded') }}</a></li>
+                <li><a href="#cancelled_div"><i class="ri-close-fill"></i> {{ __('web.cancelled') }}</a></li>
             </ul>
 
             {{-- <div id="inprogress_div" class="proposal-empty col-xs-12 text-center remove-padding"> --}}
@@ -36,20 +36,20 @@
                             <i class="ri-more-line"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Edit</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#Cancel">Cancel</a></li>
-                            <li><a href="#">Print</a></li>
+                            <li><a href="#">{{ __('web.edit') }}</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#Cancel">{{ __('web.cancel') }}</a></li>
+                            <li><a href="#">{{ __('web.print') }}</a></li>
                         </ul>
                     </div>
                     <span>{{ $tender->workCategoryClassification->translate('ar')->name }}</span>
-                    <h3> Contract Duration :<span>{{ $tender->contract_duration }} day(s)</span></h3>
+                    <h3>{{ __('web.contract_duration') }} :<span>{{ $tender->contract_duration }} {{ __('web.days') }}</span></h3>
                     <div class="clearfix"></div>
                     <ul class="col-xs-12 remove-padding">
                         <li>
-                            <h5>Contract Start Date : <span>{{ $tender->contract_start_date_text }}</span></h5>
+                            <h5>{{ __('web.contract_start_date') }} : <span>{{ $tender->contract_start_date_text }}</span></h5>
                         </li>
                         <li>
-                            <h5>Contract End Date : <span>{{ $tender->contract_end_date_text }}</span></h5>
+                            <h5>{{ __('web.contract_end_date') }} : <span>{{ $tender->contract_end_date_text }}</span></h5>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -62,20 +62,20 @@
                         </li>
                     </ul>
                     <div class="clearfix"></div>
-                    <p>{{ $tender->desc }}</p>
+                    <p>{{ __('web.no_tenders') }}</p>
                     <div class="col-xs-12 remove-padding">
                         <div class="Tender-progress">
                             <div style="width:50%;"></div>
                         </div>
-                        <h6>Time remaining<span>{{ $tender->remaining_days }} day(s) before closing date </span></h6>
+                        <h6>{{ __('web.time_remaining') }}<span>{{ $tender->remaining_days }} {{ __('web.days') }} {{ __('web.before_closing_date') }}</span></h6>
                     </div>
                     <div class="col-xs-12 remove-padding">
                         <h2>
-                            <span>Number of submitted Proposal(s)</span>
+                            <span>{{ __('web.number_of_submitted_proposals') }}</span>
                             <br>
-                            {{ $tender->proposals()->count() }} Proposal(s)
+                            {{ $tender->proposals()->count() }} {{ __('web.proposals') }}
                         </h2>
-                        <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">View details </a>
+                        <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">{{ __('web.view_details') }}</a>
                     </div>
                 </div>    
                 @empty

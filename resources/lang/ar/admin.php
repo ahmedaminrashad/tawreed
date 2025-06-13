@@ -49,4 +49,7 @@ return [
     'tender_created' => 'تم إنشاء المناقصة بنجاح',
     'tender_updated' => 'تم تحديث المناقصة بنجاح',
     'tender_deleted' => 'تم حذف المناقصة بنجاح',
+    "enter_email_or_crn" => "أدخل البريد الإلكتروني أو رقم التعريف الوطني",
+    "enter_email_or_crn_placeholder" => "أدخل البريد الإلكتروني أو رقم التعريف الوطني",
+    "enter_email_or_crn_placeholder" => "أدخل البريد الإلكتروني أو رقم التعريف الوطني", 
 ]; 

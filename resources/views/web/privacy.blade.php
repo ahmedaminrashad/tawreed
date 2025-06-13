@@ -1,16 +1,16 @@
 @extends('web.layouts.master')
 
-@section('title', 'Privacy Policy')
+@section('title', __('web.privacy_policy'))
 
 @section('content')
 <div class="container-fluid body remove-padding">
 
     <div class="container stie-map">
         <ul>
-            <li><a href="{{ route('contact') }}">Home</a></li>
+            <li><a href="{{ route('contact') }}">@lang('web.tenders')</a></li>
             <li><span>/</span></li>
             <li>
-                <p>Privacy Policy</p>
+                <p>@lang('web.privacy_policy')</p>
             </li>
         </ul>
     </div>
@@ -18,9 +18,9 @@
     <div class="container remove-padding about-main">
         <div class="col-xs-12 contact-section">
 
-            <h1>سياسة الخصوصية</h1>
+            <h1>@lang('web.privacy_policy')</h1>
 
-            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
+            <p>@lang('web.privacy_policy_content')</p>
 
             {!! $privacy_policy !!}
         </div>

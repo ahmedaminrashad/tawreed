@@ -1,6 +1,6 @@
 @extends('web.layouts.master')
 
-@section('title', 'Tenders List')
+@section('title', __('web.tenders'))
 
 @section('head')
 <style>
@@ -17,10 +17,10 @@
 
     <div class="container stie-map">
         <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('home') }}">{{ __('web.tenders') }}</a></li>
             <li><span>/</span></li>
             <li>
-                <p>Tenders List</p>
+                <p>{{ __('web.tenders') }}</p>
             </li>
         </ul>
     </div>
@@ -33,19 +33,19 @@
                 <aside class="filter-main">
                     <div class="col-xs-12 remove-padding filter-item">
                         <div class="col-xs-8">
-                            <p>Filters</p>
-                            <h5 id="filter_count_txt">{{ $filterCount }} Filter(s) Selected</h5>
+                            <p>{{ __('web.filters') }}</p>
+                            <h5 id="filter_count_txt">{{ $filterCount }} {{ __('web.filters_selected') }}</h5>
                         </div>
                         <div class="col-xs-4">
-                            <input type="button" value="Apply" id="apply_filter" class="btn btn-filter">
+                            <input type="button" value="{{ __('web.apply') }}" id="apply_filter" class="btn btn-filter">
                         </div>
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#sort-div">Sort by </p>
+                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#sort-div">{{ __('web.sort_by') }}</p>
                         <ul id="sort-div" class="collapse in">
                             <li>
-                                <label class="checkbox-item">Recent Tenders
+                                <label class="checkbox-item">{{ __('web.recent_tenders') }}
                                     <input type="checkbox" name="recent_filter" value="1" checked>
                                     <span class="checkmark"></span>
                                 </label>
@@ -57,7 +57,7 @@
                             </label>
                         </li> --}}
                             <li>
-                                <label class="checkbox-item">Nearest Closing Date
+                                <label class="checkbox-item">{{ __('web.nearest_closing_date') }}
                                     <input type="checkbox" name="closing_filter" value="1">
                                     <span class="checkmark"></span>
                                 </label>
@@ -66,15 +66,15 @@
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#category-div">Category</p>
+                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#category-div">{{ __('web.categories') }}</p>
                         <ul id="category-div" class="collapse in">
                             <div class="filter-search">
                                 <i class="ri-search-line"></i>
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="{{ __('web.search_placeholder') }}">
                             </div>
 
                             <li>
-                                <label class="checkbox-item">All
+                                <label class="checkbox-item">{{ __('web.all') }}
                                     <input type="checkbox" id="category_filter_all" name="category_filter[]" class="category_filter" value="all" checked>
                                     <span class="checkmark"></span>
                                 </label>
@@ -104,29 +104,29 @@
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#range-div">Contract Duration in Days</p>
+                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#range-div">{{ __('web.contract_duration_in_days') }}</p>
                         <div id="range-div" class="collapse in range-days">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <input type="number" name="range_from" min="1" placeholder="From in Days">
+                                    <input type="number" name="range_from" min="1" placeholder="{{ __('web.from_in_days') }}">
                                 </div>
                                 <div class="col-xs-6">
-                                    <input type="number" name="range_to" min="1" placeholder="To in Days">
+                                    <input type="number" name="range_to" min="1" placeholder="{{ __('web.to_in_days') }}">
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#location-div">Location</p>
+                        <p class="collapse-btn-main" data-toggle="collapse" data-target="#location-div">{{ __('web.location') }}</p>
                         <ul id="location-div" class="collapse in">
                             <div class="filter-search">
                                 <i class="ri-search-line"></i>
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="{{ __('web.search') }}">
                             </div>
 
                             <li>
-                                <label class="checkbox-item">All
+                                <label class="checkbox-item">{{ __('web.all') }}
                                     <input type="checkbox" id="country_filter_all" class="country_filter" name="country_filter[]" value="all" checked>
                                     <span class="checkmark"></span>
                                 </label>
@@ -157,10 +157,10 @@
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main collapsed" data-toggle="collapse" data-target="#activity-div">Activity Classification</p>
+                        <p class="collapse-btn-main collapsed" data-toggle="collapse" data-target="#activity-div">{{ __('web.activity_classification') }}</p>
                         <ul id="activity-div" class="collapse">
                             <li>
-                                <label class="checkbox-item">All
+                                <label class="checkbox-item">{{ __('web.all') }}
                                     <input type="checkbox" id="classification_filter_all" class="classification_filter" name="classification_filter[]" value="all" checked>
                                     <span class="checkmark"></span>
                                 </label>
@@ -177,24 +177,24 @@
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main collapsed" data-toggle="collapse" data-target="#user-type-div">User Type</p>
+                        <p class="collapse-btn-main collapsed" data-toggle="collapse" data-target="#user-type-div">{{ __('web.user_type') }}</p>
                         <ul id="user-type-div" class="collapse">
                             <li>
-                                <label class="checkbox-item">All
+                                <label class="checkbox-item">{{ __('web.all') }}
                                     <input type="checkbox" id="user_type_filter_all" class="user_type_filter" name="user_type_filter[]" value="all" checked>
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
 
                             <li>
-                                <label class="checkbox-item">Company
+                                <label class="checkbox-item">{{ __('web.company') }}
                                     <input type="checkbox" name="user_type_filter[]" class="user_type_filter user_type_filter_custom" value="company">
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
 
                             <li>
-                                <label class="checkbox-item">Individual
+                                <label class="checkbox-item">{{ __('web.individual') }}
                                     <input type="checkbox" name="user_type_filter[]" class="user_type_filter user_type_filter_custom" value="individual">
                                     <span class="checkmark"></span>
                                 </label>
@@ -204,10 +204,10 @@
                     </div>
 
                     <div class="col-xs-12 remove-padding filter-item">
-                        <p class="collapse-btn-main collapsed" data-toggle="collapse" data-target="#account-type-div">Account Type</p>
+                        <p class="collapse-btn-main collapsed" data-toggle="collapse" data-target="#account-type-div">{{ __('web.account_type') }}</p>
                         <ul id="account-type-div" class="collapse">
                             <li>
-                                <label class="checkbox-item">Verified accounts
+                                <label class="checkbox-item">{{ __('web.verified_accounts') }}
                                     <input type="checkbox" name="account_type" value="1">
                                     <span class="checkmark"></span>
                                 </label>
@@ -224,14 +224,14 @@
             <div class="col-xs-12 Tender-item">
                 <h4><a href="{{ route('tenders.show', ['tender' => $tender]) }}">{{ $tender->subject }}</a></h4>
                 <span>{{ $tender->workCategoryClassification->translate('ar')->name }}</span>
-                <h3> Contract duration :<span>{{ $tender->contract_duration }} day(s)</span></h3>
+                <h3>{{ __('web.contract_duration') }} :<span>{{ $tender->contract_duration }} {{ __('web.days') }}</span></h3>
                 <div class="clearfix"></div>
                 <ul class="col-xs-12 remove-padding">
                     <li>
-                        <h5>Contract Start date : <span>{{ $tender->contract_start_date_text }}</span></h5>
+                        <h5>{{ __('web.contract_start_date') }} : <span>{{ $tender->contract_start_date_text }}</span></h5>
                     </li>
                     <li>
-                        <h5>Contract End date : <span>{{ $tender->contract_end_date_text }}</span></h5>
+                        <h5>{{ __('web.contract_end_date') }} : <span>{{ $tender->contract_end_date_text }}</span></h5>
                     </li>
                 </ul>
                 <div class="clearfix"></div>
@@ -249,14 +249,14 @@
                     <div class="Tender-progress">
                         <div style="width:50%;"></div>
                     </div>
-                    <h6>Time remaining<span>{{ $tender->remaining_days }} day(s) before closing date </span></h6>
+                    <h6>{{ __('web.time_remaining') }}<span>{{ $tender->remaining_days }} {{ __('web.days') }} {{ __('web.before_closing_date') }}</span></h6>
                 </div>
                 <div class="col-xs-12 remove-padding">
                     <div class="tender-img">
                         <img src="{{ asset('/assets/front/img/1.png') }}">
                         <p>{{ $tender->user->displayed_name }} <span>{{ $tender->user->user_type }}</span></p>
                     </div>
-                    <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">View details </a>
+                    <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">{{ __('web.view_details') }}</a>
                 </div>
             </div>
             @endforeach
@@ -319,7 +319,7 @@
                     // console.log(result);
                     // return false;
                     $("#tenders_div").empty();
-                    $("#filter_count_txt").text(`${result.data.filterCount} Filter(s) selected`);
+                    $("#filter_count_txt").text(`${result.data.filterCount} {{ __('web.filters_selected') }}`);
                     $.each(result.data.tenders, function(index, tender) {
                         $("#tenders_div").append(`
                     <div class="col-xs-12 Tender-item">
