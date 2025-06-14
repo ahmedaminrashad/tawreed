@@ -91,7 +91,7 @@ return [
     'search' => 'بحث',
 
     // Premium
-    'premium' => 'كيو تيك Premium',
+    'premium' => 'كيو تيك بريميم',
 
     // User Dashboard
     'my_tenders_title' => 'مناقصاتي',
