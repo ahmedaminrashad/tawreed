@@ -71,10 +71,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Item Name</th>
-                                <th>Unit</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th>{{__('web.item_name')}}</th>
+                                <th>{{__('web.unit')}}</th>
+                                <th>{{__('web.price')}}</th>
+                                <th>{{__('web.quantity')}}</th>
                                 <th>Total Price</th>
                                 <th>-</th>
                             </tr>
@@ -82,17 +82,17 @@
                         <tbody>
                             <tr>
                                 <td data-label="#">{{ $key + 1 }}</td>
-                                <td data-label="item name">{{ $item->name }}</td>
-                                <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
-                                <td data-label="Quantities">{{ $item->price }}</td>
-                                <td data-label="Quantities">{{ $item->quantity }}</td>
-                                <td data-label="total_price">{{ $item->quantity * $item->price }}</td>
+                                <td data-label="{{__('web.item_name')}}">{{ $item->name }}</td>
+                                <td data-label="{{__('web.unit')}}">{{ $item->unit->translate('ar')->name }}</td>
+                                <td data-label="{{__('web.price')}}">{{ $item->price }}</td>
+                                <td data-label="{{__('web.quantity')}}">{{ $item->quantity }}</td>
+                                <td data-label="{{__('web.total_price')}}">{{ $item->quantity * $item->price }}</td>
                                 <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs-{{ $item->id }}"></td>
                             </tr>
                         </tbody>
                     </table>
                     <p id="specs-{{ $item->id }}" class="collapse">
-                        Technical Specifications<br>
+                        {{__('web.technical_specifications')}}<br>
                         {{ $item->item_specs }}
                     </p>
                 </div>
@@ -103,31 +103,31 @@
         <div class="col-md-4">
             <div class="review-item Proposal-Overview  col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12 ">
-                    <h4>Proposal Overview </h4>
+                    <h4>{{__('web.proposal_overview')}}</h4>
                     <a href="#"><i class="ri-pencil-line"></i></a>
                 </div>
                 <div class="col-xs-6">
                     <img src="{{ asset('/assets/front/img/10.svg') }}">
-                    <h5>Contract Duration</h5>
-                    <h3>{{ $proposal->contract_duration }} Day(s)</h3>
+                    <h5>{{__('web.contract_duration')}}</h5>
+                    <h3>{{ $proposal->contract_duration }} {{__('web.days')}}</h3>
                 </div>
 
 
                 <div class="col-xs-6">
                     <img src="{{ asset('/assets/front/img/42.svg') }}">
-                    <h5>Proposal Total Price</h5>
-                    <h3>{{ $proposal->total }} USD</h3>
+                    <h5>{{__('web.proposal_total_price')}}</h5>
+                    <h3>{{ $proposal->total }} {{__('web.usd')}}</h3>
                 </div>
                 <div class="col-xs-12">
                     <img src="{{ asset('/assets/front/img/44.svg') }}">
-                    <h5>The Proposal Validity Period</h5>
+                    <h5>{{__('web.the_proposal_validity_period')}}</h5>
                     <h3>{{ $proposal->proposal_end_date_text }}</h3>
                 </div>
 
                 @if($proposal->payment_terms != 'NA')
                 <div class="col-xs-12">
                     <img src="{{ asset('/assets/front/img/44.svg') }}">
-                    <h5>Payment terms</h5>
+                    <h5>{{__('web.payment_terms')}}</h5>
                     <h3>{{ $proposal->payment_terms }}</h3>
                 </div>
                 @endif
@@ -136,8 +136,8 @@
 
         <div class="col-xs-12 tender-review-bottom">
             <ul>
-                <li><a href="#" data-toggle="modal" data-target="#back-tender">Back</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#Pulish-tender">Publish</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#back-tender">{{__('web.back')}}</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#Pulish-tender">{{__('web.publish')}}</a></li>
             </ul>
         </div>
     </div>
@@ -148,17 +148,17 @@
         <form action="{{ route('tenders.proposals.publish', ['tender' => $tender, 'proposal' => $proposal]) }}" method="POST">
             @csrf
         <div class="modal-content">
-            <h4>Publish tender</h4>
+            <h4>{{__('web.publish_tender')}}</h4>
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <div class="clearfix"></div>
             <img src="{{ asset('/assets/front/img/14.svg') }}">
-            <h1>Are you sure you want to Submit this Proposal ?</h1>
+            <h1>{{__('web.are_you_sure_you_want_to_submit_this_proposal')}}</h1>
             <h5>
-                If you Submit your Proposal, you still have the option to edit or delete it till the closing date.
+                {{__('web.if_you_submit_your_proposal_you_still_have_the_option_to_edit_or_delete_it_till_the_closing_date')}}
             </h5>
             <ul>
-                <li><a href="#" data-dismiss="modal">cancel</a></li>
-                <li><input type="submit" value="Publish"></li>
+                <li><a href="#" data-dismiss="modal">{{__('web.cancel')}}</a></li>
+                <li><input type="submit" value="{{__('web.publish')}}"></li>
                 {{-- <li><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#done-tender">Submit</a></li> --}}
             </ul>
         </div>
@@ -171,13 +171,13 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/15.svg') }}">
-            <h1>If you go back, you'll lose all the data you've inputted into the porpsal ?</h1>
+            <h1>{{__('web.if_you_go_back_you_ll_lose_all_the_data_you_ve_inputted_into_the_porpsal')}}</h1>
             <h5>
-                If you cancel the tender, all unsaved data will be lost. You have the option to either complete your proposal or lose all the data you've inputted into it
+                {{__('web.if_you_cancel_the_tender_all_unsaved_data_will_be_lost_you_have_the_option_to_either_complete_your_proposal_or_lose_all_the_data_you_ve_inputted_into_it')}}
             </h5>
             <ul>
-                <li><a href="#" data-dismiss="modal">Cancel proposal</a></li>
-                <li><a href="#">Complete your proposal</a></li>
+                <li><a href="#" data-dismiss="modal">{{__('web.cancel_proposal')}}</a></li>
+                <li><a href="#">{{__('web.complete_your_proposal')}}</a></li>
             </ul>
         </div>
 
@@ -189,12 +189,12 @@
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/16.svg') }}">
-            <h1>Your proposal is Submitted successfully</h1>
+            <h1>{{__('web.your_proposal_is_submitted_successfully')}}</h1>
             <h5>
-                you still have the option to edit or delete it from my proposal
+                {{__('web.you_still_have_the_option_to_edit_or_delete_it_from_my_proposal')}}
             </h5>
             <ul>
-                <li><a href="#" data-dismiss="modal">Done</a></li>
+                    <li><a href="#" data-dismiss="modal">{{__('web.done')}}</a></li>
             </ul>
         </div>
 

@@ -201,7 +201,7 @@
 
             <div class="col-xs-12 remove-padding">
                 <input type="hidden" name="step" value="1">
-                <button type="submit">Next / Add Item(s) to Tender</button>
+                <button type="submit">{{ __('web.next_preview_tender_before_publish') }}</button>
             </div>
 
         </form>

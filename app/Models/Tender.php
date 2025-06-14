@@ -51,6 +51,11 @@ class Tender extends Model
         return $this->status->value == TenderStatus::IN_PROGRESS->value;
     }
 
+    public function getStatusText()
+    {
+        return $this->status->getLabel();
+    }
+
     public function getRemainingDaysAttribute()
     {
         if (!$this->closing_date) {

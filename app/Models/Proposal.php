@@ -18,7 +18,7 @@ class Proposal extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        // 'status' => TenderStatus::class,
+        // 'status' => ProposalStatus::class,
     ];
 
     protected $appends = ['proposal_end_date_text'];

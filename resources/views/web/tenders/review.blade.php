@@ -78,18 +78,18 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>ITEM NAME</th>
-                                        <th>UNITS</th>
-                                        <th>QUANTITIES</th>
+                                        <th>{{__('web.item_name')}}</th>
+                                        <th>{{__('web.unit')}}</th>
+                                        <th>{{__('web.quantity')}}</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td data-label="#">{{ ++$key }}</td>
-                                        <td data-label="item name">{{ $item->name }}</td>
-                                        <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
-                                        <td data-label="Quantities">{{ $item->quantity }}</td>
+                                        <td data-label="{{__('web.item_name')}}">{{ $item->name }}</td>
+                                        <td data-label="{{__('web.unit')}}">{{ $item->unit->translate('ar')->name }}</td>
+                                        <td data-label="{{__('web.quantity')}}">{{ $item->quantity }}</td>
                                         <td class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs_{{ $key }}"></td>
                                     </tr>
                                 </tbody>
@@ -152,7 +152,7 @@
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/10.svg') }}">
                         <h5>{{ __('web.contract_duration') }}</h5>
-                        <h3>{{ $tender->contract_duration }} Day(s)</h3>
+                        <h3>{{ $tender->contract_duration }} {{__('web.days')}}</h3>
                     </div>
 
                     <div class="col-xs-6">

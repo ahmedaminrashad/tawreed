@@ -2158,13 +2158,7 @@ text-decoration: none;
     width: 85px;
   }
 
-  .review-item td.toggle-collapse.collapsed::after {
-    content: "See more";
-  }
 
-  .review-item td.toggle-collapse::after {
-    content: "See less";
-  }
 
   .review-item td.toggle-collapse:hover {
     color: var(--green);

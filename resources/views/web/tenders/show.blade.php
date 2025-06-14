@@ -19,7 +19,7 @@
             <div class="col-xs-12 proposal-d-main tender-head">
                 <h1>{{ $tender->subject . ' . ' . $tender->tender_uuid }}
                     @if($tender->status==TenderStatus::AWARDED)
-                        <a href="#awarded_div"><i class="ri-award-fill"></i> Awarded </a>
+                        <a href="#awarded_div"><i class="ri-award-fill"></i> {{ $tender->status->getLabel() }} </a>
                     @endif
 
                 </h1>
@@ -27,7 +27,7 @@
                     <img src="{{ asset('/assets/front/img/1.png') }}">
                     <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
                     @if($tender->user_id != auth()->id() && !in_array(auth()->id(), $tender->proposals()->pluck('user_id')->toArray()))
-                        <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">Submit Proposal</a>
+                        <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">{{__('web.submit_proposal')}}</a>
                     @endif
                     @if($tender->user_id == auth()->id())
                         <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
@@ -42,11 +42,11 @@
                 <ul class="proposal-tabs-first">
                     <li class="active">
                         <a href="{{ route('tenders.show', ['tender' => $tender->id]) }}"><i
-                                class="ri-lightbulb-flash-line"></i> General Details</a>
+                                class="ri-lightbulb-flash-line"></i> {{__('web.general_details')}}</a>
                     </li>
                     <li>
                         <a href="{{ route('tenders.proposals.show', ['tender' => $tender->id]) }}"><i
-                                class="ri-article-line"></i> Proposal(s) Sent ( {{ $proposalsCount }} )</a>
+                                class="ri-article-line"></i> {{__('web.proposal_s_sent')}} ( {{ $proposalsCount }} )</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
             <div class="col-md-8 col-xs-12 proposal-main-cont Tenders-pro-main">
                 <div class="review-item col-xs-12 remove-padding">
                     <div class="review-item-title col-xs-12">
-                        <h4>Description</h4>
+                        <h4>{{__('web.description')}}</h4>
                     </div>
                     <div class="col-xs-12">
                         <p>
@@ -65,7 +65,7 @@
 
                 <div class="review-item col-xs-12 remove-padding">
                     <div class="review-item-title col-xs-12">
-                        <h4>Items list <span>( {{ $tender->items()->count() }} item(s) )</span></h4>
+                        <h4>{{__('web.items_list')}} <span>( {{ $tender->items()->count() }} {{__('web.item_s')}} )</span></h4>
                     </div>
 
                     <div class="col-xs-12 table-item">
@@ -74,25 +74,25 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Item Name</th>
-                                    <th>Units</th>
-                                    <th>Quantities</th>
+                                    <th>{{__('web.item_name')}}</th>
+                                    <th>{{__('web.unit')}}</th>
+                                    <th>{{__('web.quantity')}}</th>
                                     <th>-</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td data-label="#">{{ ++$index }}</td>
-                                    <td data-label="item name">{{ $item->name }}</td>
-                                    <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
-                                    <td data-label="Quantities">{{ $item->quantity }}</td>
+                                    <td data-label="{{__('web.item_name')}}">{{ $item->name }}</td>
+                                    <td data-label="{{__('web.unit')}}">{{ $item->unit->translate('ar')->name }}</td>
+                                    <td data-label="{{__('web.quantity')}}">{{ $item->quantity }}</td>
                                     <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse"
                                         data-target="#item_{{ $item->id }}"></td>
                                 </tr>
                                 </tbody>
                             </table>
                             <p id="item_{{ $item->id }}" class="collapse">
-                                <span>Technical Specifications</span>{{ $item->specs }}</p>
+                                <span>{{__('web.technical_specifications')}}</span>{{ $item->specs }}</p>
                         @endforeach
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             <div class="Tender-progress">
                                 <div style="width:50%;"></div>
                             </div>
-                            <h6>Time remaining<span> {{ $tender->remaining_days }} day(s) before Closing Date </span>
+                            <h6>{{__('web.time_remaining')}}<span> {{ $tender->remaining_days }} {{__('web.days')}} {{__('web.before_closing_date')}} </span>
                             </h6>
                         </div>
                     </div>
@@ -114,45 +114,45 @@
 
                 <div class="review-item col-xs-12 remove-padding">
                     <div class="review-item-title col-xs-12">
-                        <h4>Tender Overview </h4>
+                        <h4>{{__('web.tender_overview')}} </h4>
                     </div>
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/6.svg') }}">
-                        <h5>location</h5>
+                        <h5>{{__('web.location')}}</h5>
                         <h3>{{ $tender->city->arabic_name }}, {{ $tender->country->arabic_name }}</h3>
                     </div>
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/7.svg') }}">
-                        <h5>Category</h5>
+                        <h5>{{__('web.category')}}</h5>
                         <h3>{{ $tender->workCategoryClassification->arabic_name }}</h3>
                     </div>
 
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/8.svg') }}">
-                        <h5>Contract Start Date</h5>
+                        <h5>{{__('web.contract_start_date')}}</h5>
                         <h3>{{ $tender->contract_end_date_text }}</h3>
                     </div>
 
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/9.svg') }}">
-                        <h5>Contract End Date</h5>
+                        <h5>{{__('web.contract_end_date')}}</h5>
                         <h3>{{ $tender->contract_start_date_text }}</h3>
                     </div>
 
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/10.svg') }}">
-                        <h5>Contract Duration</h5>
+                        <h5>{{__('web.contract_duration')}}</h5>
                         <h3>{{ $tender->contract_duration }}</h3>
                     </div>
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/48.svg') }}">
-                        <h5>Status</h5>
-                        <h3>{{ $tender->status }}</h3>
+                        <h5>{{__('web.status')}}</h5>
+                        <h3>{{ $tender->status->getLabel() }}</h3>
                     </div>
 
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/11.svg') }}">
-                        <h5>Classification</h5>
+                        <h5>{{__('web.classification')}}</h5>
                         <h3>{{ $tender->activityClassification->arabic_name }}</h3>
                     </div>
 

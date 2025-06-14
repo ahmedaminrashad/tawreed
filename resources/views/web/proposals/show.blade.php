@@ -33,47 +33,47 @@
 <div class="container-fluid body remove-padding">
     <div class="container stie-map">
         <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('home') }}">{{__('web.home')}}</a></li>
             <li><span>/</span></li>
-            <li><a href="{{ route('tenders.index') }}">Tender list</a></li>
+            <li><a href="{{ route('tenders.index') }}">{{__('web.tender_list')}}</a></li>
             <li><span>/</span></li>
             <li><a href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}">{{ $proposal->tender->subject }}</a></li>
             <li><span>/</span></li>
             <li>
-                <p>Submitted Proposal</p>
+                <p>{{__('web.submitted_proposal')}}</p>
             </li>
         </ul>
     </div>
 
     <div class="container remove-padding proposal-container">
         <div class="col-xs-12 proposal-d-main tender-head my-tender-head-final">
-            <h1>{{ $proposal->tender->subject }} - Proposal Details</h1>
+            <h1>{{ $proposal->tender->subject }} - {{__('web.proposal_details')}}</h1>
             <div class="proposal-img-main col-xs-12 remove-padding">
                 <img src="{{ asset('/assets/front/img/1.png') }}">
                 <h4><b>{{ $proposal->user->displayed_name }}</b>. {{ $proposal->status }} <a class="chat-tender-icon" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}"><i class="ri-wechat-2-line"></i></a> <span data-toggle="modal" data-target="#Reason" class="tag {{ $proposal->getStatusText() }}-tag">{{ $proposal->checkStatus() }}</span></h4>
                 <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
                 @if($proposal->isCreator())
                 @if($proposal->isSampleRequested())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sent" class="Final-Accept-btn">Sample Sent</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sent" class="Final-Accept-btn">{{__('web.sample_sent')}}</a>
                 @endif
                 @if(!$proposal->isWithdrawn())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#withdraw-proposal" class="Final-Accept-btn">Withdraw</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#withdraw-proposal" class="Final-Accept-btn">{{__('web.withdraw')}}</a>
                 @endif
                 @endif
 
                 @if($proposal->isTenderCreator())
                 @if(!$proposal->isWithdrawn() && !$proposal->isRejected())
                 @if(!$proposal->isFinallyAccepted())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#final-accept" class="Final-Accept-btn">Final Acceptance</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#final-accept" class="Final-Accept-btn">{{__('web.final_acceptance')}}</a>
                 @endif
                 @if($proposal->isInitialAccept())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sample" class="Final-Accept-btn">Request a Sample</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sample" class="Final-Accept-btn">{{__('web.request_a_sample')}}</a>
                 @endif
                 @if($proposal->isUnderReview())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#initial-accept" class="Initial-accept-btn">Initial Accept</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#initial-accept" class="Initial-accept-btn">{{__('web.initial_acceptance')}}</a>
                 @endif
                 @if(!$proposal->isFinallyAccepted())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#del-proposal" class="Reject-btn">Reject</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#del-proposal" class="Reject-btn">{{__('web.reject')}}</a>
                 @endif
                 @endif
                 @endif
@@ -83,7 +83,7 @@
         <div class="col-md-8">
             <div class="review-item col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12">
-                    <h4>Description</h4>
+                    <h4>{{__('web.description')}}</h4>
                 </div>
                 <div class="col-xs-12">
                     <p>
@@ -94,7 +94,7 @@
 
             <div class="review-item col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12">
-                    <h4>Items list <span>( {{ $proposal->items->count() }} Item(s) )</span></h4>
+                    <h4>{{__('web.items_list')}} <span>( {{ $proposal->items->count() }} {{__('web.item_s')}} )</span></h4>
                 </div>
 
                 @foreach($proposal->items as $key => $item)
@@ -103,28 +103,28 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Item Name</th>
-                                <th>Unit</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
+                                <th>{{__('web.item_name')}}</th>
+                                <th>{{__('web.unit')}}</th>
+                                <th>{{__('web.price')}}</th>
+                                <th>{{__('web.quantity')}}</th>
+                                <th>{{__('web.total_price')}}</th>
                                 <th>-</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td data-label="#">{{ $key + 1 }}</td>
-                                <td data-label="item name">{{ $item->name }}</td>
-                                <td data-label="Units">{{ $item->unit->translate('ar')->name }}</td>
-                                <td data-label="Quantities">{{ $item->price }}</td>
-                                <td data-label="Quantities">{{ $item->quantity }}</td>
-                                <td data-label="total_price">{{ $item->quantity * $item->price }}</td>
+                                <td data-label="{{__('web.item_name')}}">{{ $item->name }}</td>
+                                <td data-label="{{__('web.unit')}}">{{ $item->unit->translate('ar')->name }}</td>
+                                <td data-label="{{__('web.price')}}">{{ $item->price }}</td>
+                                <td data-label="{{__('web.quantity')}}">{{ $item->quantity }}</td>
+                                <td data-label="{{__('web.total_price')}}">{{ $item->quantity * $item->price }}</td>
                                 <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs-{{ $item->id }}"></td>
                             </tr>
                         </tbody>
                     </table>
                     <p id="specs-{{ $item->id }}" class="collapse">
-                        Technical Specifications<br>
+                        {{__('web.technical_specifications')}}<br>
                         {{ $item->item_specs }}
                     </p>
                 </div>
@@ -136,7 +136,7 @@
         <div class="col-md-4">
             <div class="review-item col-xs-12 proposal-side-item remove-padding">
                 <div class="review-item-title col-xs-12">
-                    <h4>Tender details</h4>
+                    <h4>{{__('web.tender_details')}}</h4>
                     <a class="tender-details" style="border: none;" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}">
                         <h2>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}</h2>
                     </a>
@@ -149,30 +149,30 @@
 
             <div class="review-item Proposal-Overview  col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12 ">
-                    <h4>Proposal Overview</h4>
+                    <h4>{{__('web.proposal_overview')}}</h4>
                 </div>
 
                 <div class="col-xs-6">
                     <img src="{{ asset('/assets/front/img/10.svg') }}">
-                    <h5>Contract Duration</h5>
-                    <h3>{{ $proposal->contract_duration }} Day(s) </h3>
+                    <h5>{{__('web.contract_duration')}}</h5>
+                    <h3>{{ $proposal->contract_duration }} {{__('web.days')}} </h3>
                 </div>
 
                 <div class="col-xs-6">
                     <img src="{{ asset('/assets/front/img/42.svg') }}">
-                    <h5>Proposal Total Price</h5>
-                    <h3>{{ $proposal->total }} USD</h3>
+                    <h5>{{__('web.proposal_total_price')}}</h5>
+                    <h3>{{ $proposal->total }} {{__('web.usd')}}</h3>
                 </div>
 
                 <div class="col-xs-12">
                     <img src="{{ asset('/assets/front/img/44.svg') }}">
-                    <h5>The Proposal Validity Period</h5>
+                    <h5>{{__('web.the_proposal_validity_period')}}</h5>
                     <h3>{{ $proposal->proposal_end_date_text }}</h3>
                 </div>
 
                 <div class="col-xs-12">
                     <img src="{{ asset('/assets/front/img/44.svg') }}">
-                    <h5>Payment Terms</h5>
+                    <h5>{{__('web.payment_terms')}}</h5>
                     <h3>{{ $proposal->payment_terms }}</h3>
                 </div>
             </div>
@@ -186,13 +186,13 @@
             <form method="POST" action="{{ route('proposals.final.accept', ['proposal' => $proposal]) }}">
                 @csrf
 
-                <h3>Final Acceptance</h3>
+                <h3>{{__('web.final_acceptance')}}</h3>
                 <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
                 <img src="{{ asset('/assets/front/img/13.svg') }}">
-                <h2>Are you sure you want to final accept this Proposal ?</h2>
+                <h2>{{__('web.are_you_sure_you_want_to_final_accept_this_proposal')}}</h2>
                 <ul>
-                    <li><button data-dismiss="modal">Cancel</button></li>
-                    <li><input type="submit" value="Final Accept"></li>
+                    <li><button data-dismiss="modal">{{__('web.cancel')}}</button></li>
+                    <li><input type="submit" value="{{__('web.final_acceptance')}}"></li>
                 </ul>
             </form>
         </div>
@@ -205,13 +205,12 @@
             <form method="POST" action="{{ route('proposals.request.sample', ['proposal' => $proposal]) }}">
                 @csrf
 
-                <h3>Sample Request</h3>
+                <h3>{{__('web.sample_request')}}</h3>
                 <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
-                <h2>Request a sample from seller ? </h2>
-                <textarea placeholder="Enter Sample Request" name="sample_request"></textarea>
+                <textarea placeholder="{{__('web.enter_sample_request')}}" name="sample_request"></textarea>
                 <ul>
-                    <li><button data-dismiss="modal">Cancel</button></li>
-                    <li><input type="submit" value="Request Sample"></li>
+                    <li><button data-dismiss="modal">{{__('web.cancel')}}</button></li>
+                    <li><input type="submit" value="{{__('web.request_sample')}}"></li>
                 </ul>
             </form>
         </div>
@@ -224,13 +223,13 @@
             <form method="POST" action="{{ route('proposals.sample.sent', ['proposal' => $proposal]) }}">
                 @csrf
 
-                <h3>Sample Request Sent</h3>
+                <h3>{{__('web.sample_request_sent')}}</h3>
                 <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
                 <img src="{{ asset('/assets/front/img/13.svg') }}">
-                <h2>Are you sure you want to confirm that you sent Proposal Sample Request ?</h2>
+                <h2>{{__('web.are_you_sure_you_want_to_confirm_that_you_sent_proposal_sample_request')}}</h2>
                 <ul>
-                    <li><button data-dismiss="modal">Cancel</button></li>
-                    <li><input type="submit" value="Submit"></li>
+                    <li><button data-dismiss="modal">{{__('web.cancel')}}</button></li>
+                    <li><input type="submit" value="{{__('web.submit')}}"></li>
                 </ul>
 
                 <input type="hidden" name="status" value="initial acceptance (sample sent)">
@@ -245,14 +244,14 @@
             <form method="POST" action="{{ route('proposals.initial.accept', ['proposal' => $proposal]) }}">
                 @csrf
 
-                <h3>Initial Accept</h3>
+                <h3>{{__('web.initial_acceptance')}}</h3>
                 <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
                 <img src="{{ asset('/assets/front/img/13.svg') }}">
-                <h2>Are you sure you want to initial accept this Proposal ?</h2>
-                <p>After you initial accept this proposal you can chat with seller and request a sample from it</p>
+                <h2>{{__('web.are_you_sure_you_want_to_initial_accept_this_proposal')}}</h2>
+                <p>{{__('web.after_you_initial_accept_this_proposal_you_can_chat_with_seller_and_request_a_sample_from_it')}}</p>
                 <ul>
-                    <li><button data-dismiss="modal">Cancel</button></li>
-                    <li><input type="submit" value="Initial Accept"></li>
+                    <li><button data-dismiss="modal">{{__('web.cancel')}}</button></li>
+                    <li><input type="submit" value="{{__('web.initial_acceptance')}}"></li>
                 </ul>
             </form>
         </div>
@@ -262,41 +261,41 @@
 <div id="del-proposal" class="modal fade proposal-model cancel-model-tender" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <h3>Cancel tender bid </h3>
+            <h3>{{__('web.cancel_tender_bid')}}</h3>
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/45.svg') }}">
-            <h2>Before reject Proposal Tender Bid Select cancelation reason</h2>
+            <h2>{{__('web.before_reject_proposal_tender_bid_select_cancelation_reason')}}</h2>
 
             <form method="POST" action="{{ route('proposals.reject', ['proposal' => $proposal]) }}">
                 @csrf
                 
-                <label class="container-radio">Proposals Prices are too high
+                <label class="container-radio">{{__('web.proposals_prices_are_too_high')}}
                     <input type="radio" name="reject_reason" value="1">
                     <span class="checkmark-radio"></span>
                 </label>
 
-                <label class="container-radio">Non-Compliance with Technical Specification
+                <label class="container-radio">{{__('web.non_compliance_with_technical_specification')}}
                     <input type="radio" name="reject_reason" value="2">
                     <span class="checkmark-radio"></span>
                 </label>
 
-                <label class="container-radio">Don’t need it anymore
+                <label class="container-radio">{{__('web.dont_need_it_anymore')}}
                     <input type="radio" name="reject_reason" value="3">
                     <span class="checkmark-radio"></span>
                 </label>
 
-                <label class="container-radio">other option
+                <label class="container-radio">{{__('web.other_option')}}
                     <input type="radio" name="reject_reason" value="4">
                     <span class="checkmark-radio"></span>
                 </label>
 
                 <div class="add-note-main">
-                    <textarea placeholder="add Reason" name="custom_reject_reason"></textarea>
+                    <textarea placeholder="{{__('web.add_reason')}}" name="custom_reject_reason"></textarea>
                 </div>
 
                 <ul>
-                    <li><a data-dismiss="modal" href="javascript:void(0);">back</a></li>
-                    <li><input type="submit" value="Reject"></li>
+                    <li><a data-dismiss="modal" href="javascript:void(0);">{{__('web.back')}}</a></li>
+                    <li><input type="submit" value="{{__('web.reject')}}"></li>
                 </ul>
 
             </form>
@@ -310,13 +309,13 @@
             <form method="POST" action="{{ route('proposals.withdraw', ['proposal' => $proposal]) }}">
                 @csrf
 
-                <h3>Proposal Withdraw</h3>
+                <h3>{{__('web.proposal_withdraw')}}</h3>
                 <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
                 <img src="{{ asset('/assets/front/img/45.svg') }}">
-                <h1>Are you sure you want to withdraw this Proposal ?</h1>
+                <h1>{{__('web.are_you_sure_you_want_to_withdraw_this_proposal')}}</h1>
                 <ul>
-                    <li><a data-dismiss="modal" href="javascript:void(0);">Cancel</a></li>
-                    <li><input type="submit" value="Withdraw"></li>
+                    <li><a data-dismiss="modal" href="javascript:void(0);">{{__('web.cancel')}}</a></li>
+                    <li><input type="submit" value="{{__('web.withdraw')}}"></li>
                 </ul>
             </form>
         </div>

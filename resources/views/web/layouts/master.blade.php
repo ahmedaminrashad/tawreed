@@ -6,6 +6,15 @@
 </head>
 <body>
 
+<style>
+      .review-item td.toggle-collapse.collapsed::after {
+    content: "{{__('web.see_more')}}";
+  }
+
+  .review-item td.toggle-collapse::after {
+    content: "{{__('web.see_less')}}";
+  }
+</style>
     <!-- Header -->
     @include('web.layouts.header')
 

@@ -42,13 +42,13 @@
 
                 <div class="dropdown sort-dropdown">
                     <button class="dropdown-toggle" type="button" data-toggle="dropdown">
-                        <b> Sort by:</b> Date ( Newest to Oldest )<span><i class="ri-arrow-down-s-fill"></i></span>
+                        <b> {{__('web.sort_by')}}:</b> {{__('web.date_newest_to_oldest')}}<span><i class="ri-arrow-down-s-fill"></i></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Date (Newest to Oldest)</a></li>
-                        <li><a href="#">Date (Oldest to Newest)</a></li>
-                        <li><a href="#">Total Price (High to Low)</a></li>
-                        <li><a href="#">Total Price (Low to High)</a></li>
+                        <li><a href="#">{{__('web.date_newest_to_oldest')}}</a></li>
+                        <li><a href="#">{{__('web.date_oldest_to_newest')}}</a></li>
+                        <li><a href="#">{{__('web.total_price_high_to_low')}}</a></li>
+                        <li><a href="#">{{__('web.total_price_low_to_high')}}</a></li>
                     </ul>
                 </div>
             </ul>
@@ -79,24 +79,24 @@
                                         <i class="ri-more-line"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0);">Edit</a></li>
-                                        <li><a href="javascript:void(0);">Withdraw</a></li>
-                                        <li><a href="javascript:void(0);">Sample sent</a></li>
-                                        <li><a href="javascript:void(0);">Print</a></li>
+                                        <li><a href="javascript:void(0);">{{__('web.edit')}}</a></li>
+                                        <li><a href="javascript:void(0);">{{__('web.withdraw')}}</a></li>
+                                        <li><a href="javascript:void(0);">{{__('web.sample_sent')}}</a></li>
+                                        <li><a href="javascript:void(0);">{{__('web.print')}}</a></li>
                                     </ul>
                                 </div>
                                 <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>{{ $proposal->checkStatus() }}</span></p>
-                                <h4>Proposal Validity Period : <b>{{ $proposal->proposal_end_date }}</b></h4>
-                                <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>Contract Duration by Seller : <b> {{ $proposal->contract_duration }} Day(s)</b></h3>
+                                <h4>{{__('web.proposal_validity_period')}} : <b>{{ $proposal->proposal_end_date }}</b></h4>
+                                <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>{{__('web.contract_duration_by_seller')}} : <b> {{ $proposal->contract_duration }} {{__('web.days')}}</b></h3>
                                 <div class="col-xs-12 remove-padding propoal-img">
                                     <img src="{{ asset('/assets/front/img/1.png') }}">
                                     <h6>{{ $proposal->tender->user->displayed_name }}<span>{{ $proposal->tender->user->user_type }}</span></h6>
                                 </div>
                                 <h5>
-                                    <span>Total Price </span><br>
-                                    <b>{{ $proposal->total }} SAR</b>
+                                    <span>{{__('web.total_price')}} </span><br>
+                                    <b>{{ $proposal->total }} {{__('web.sar')}}</b>
                                 </h5>
-                                <a href="{{ route('proposals.show', ['proposal' => $proposal]) }}" class="details">View Details</a>
+                                <a href="{{ route('proposals.show', ['proposal' => $proposal]) }}" class="details">{{__('web.view_details')}}</a>
                             </div>
                         </div>
                     </div>
