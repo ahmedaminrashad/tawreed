@@ -42,18 +42,16 @@
                     </li>
                 </ul>
             </div>
-           
+            <div class="col-md-3 col-xs-12">
+                <h3>{{ __('web.follow_us') }}</h3>
+                <ul>
+                    <li><a href="{{ $facebook_link }}" target="blanked"><i class="ri-facebook-fill"></i></a></li>
+                    <li><a href="{{ $twitter_link }}" target="blanked"><i class="ri-twitter-fill"></i></a></li>
+                    <li><a href="{{ $instagram_link }}" target="blanked"><i class="ri-instagram-fill"></i></a></li>
+                    <li><a href="{{ $linkedin_link }}" target="blanked"><i class="ri-linkedin-fill"></i></a></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="container-fluid remove-padding copy-main">
-        <div class="container">
-            <p>{{ __('web.copyright') }}</p>
-            <ul>
-                <li><a href="{{ $facebook_link }}" target="blanked"><i class="ri-facebook-fill"></i></a></li>
-                <li><a href="{{ $twitter_link }}" target="blanked"><i class="ri-twitter-fill"></i></a></li>
-                <li><a href="{{ $instagram_link }}" target="blanked"><i class="ri-instagram-fill"></i></a></li>
-                <li><a href="{{ $linkedin_link }}" target="blanked"><i class="ri-linkedin-fill"></i></a></li>
-            </ul>
-        </div>
-    </div>
+    
 </footer>
