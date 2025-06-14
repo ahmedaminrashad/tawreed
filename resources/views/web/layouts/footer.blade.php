@@ -19,15 +19,7 @@
                 <h2>{{ __('web.company_name') }}</h2>
                 <p>{{ __('web.footer_description') }}</p>
             </div>
-            <div class="col-md-2 col-xs-12">
-                <h3>{{ __('web.quick_links') }}</h3>
-                <ul>
-                    <li><a href="{{ route('about') }}">{{ __('web.about_us') }}</a></li>
-                    <li><a href="{{ route('contact') }}">{{ __('web.contact_us') }}</a></li>
-                    <li><a href="{{ route('privacy') }}">{{ __('web.privacy_policy') }}</a></li>
-                    <li><a href="{{ route('terms') }}">{{ __('web.terms_conditions') }}</a></li>
-                </ul>
-            </div>
+    
             <div class="col-md-3 col-xs-12">
                 <h3>{{ __('web.contact_us') }}</h3>
                 <ul>

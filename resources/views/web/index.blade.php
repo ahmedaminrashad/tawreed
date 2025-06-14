@@ -249,11 +249,11 @@
 <div class="container">
     <div class="col-xs-12 quoTech-premium">
         <div class="col-xs-12 remove-padding">
-            <h4>حزمة المؤسسات</h4>
-            <h1>كيو تيك Premium</h1>
-            <p>يرجى التأكد من التحقق من ملفك الشخصي للاشتراك في كيو تيك بريميوم. تقديم مجموعة لا مثيل لها من العروض المتزامنة للمناقصات! خطوة إلى عالم حيث الفرص وفيرة، وخيارات العطاءات غير محدودة. لقد قمنا بتوسيع وتحسين اقتراح المناقصة.</p>
-            <h2>$ 99/شهريًا<span>يتم الفوترة سنويًا</span></h2>
-            <a href="#">ترقية</a>
+            <h4>{{__('web.premium_package')}}</h4>
+            <h1>{{__('web.premium')}}</h1>
+            <p>{{__('web.premium_description')}}</p>
+            <h2>{{__('web.premium_price')}}<span>{{__('web.premium_price_description')}}</span></h2>
+            <a href="#">{{__('web.upgrade')}}</a>
         </div>
         <img src="{{ asset('/assets/front/img/2.png') }}">
     </div>
