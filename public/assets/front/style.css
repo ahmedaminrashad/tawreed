@@ -281,7 +281,7 @@ header.member-head .main-menu a {
 
 .member-side > ul li {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 7px;
 
 }
 
@@ -1096,11 +1096,11 @@ margin-right: 7.5px;
 /* categories */
 
 .categories-main {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .title {
-    margin-bottom: 50px; 
+    margin-bottom: 30px; 
 }
 
 .title h1 {
@@ -1202,6 +1202,13 @@ margin-right: 7.5px;
     font-size: 18px;
     color: var(--dark);
     margin-bottom: 7px;
+}
+
+.Tender-item h4 a{
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 10px;
+    text-decoration: none;
 }
 
 .Tender-item > span {
@@ -1382,7 +1389,7 @@ margin-top: 20px;
     }
 
 .Finish-tender {
-    margin-top: 90px;
+    margin-top: 30px;
 }
 
 
@@ -2158,7 +2165,13 @@ text-decoration: none;
     width: 85px;
   }
 
+  .review-item td.toggle-collapse.collapsed::after {
+    content: "See more";
+  }
 
+  .review-item td.toggle-collapse::after {
+    content: "See less";
+  }
 
   .review-item td.toggle-collapse:hover {
     color: var(--green);
@@ -2239,6 +2252,7 @@ table {
 .review-item h3  {
     font-size: 14px;
     font-weight: 500;
+    height: 40px;
 }
 
 .add-tender-review {
@@ -4960,6 +4974,11 @@ a.more:hover  {
     margin-bottom: 15px;
 }
 
+.proposal-d-main h1 a {
+    text-decoration: underline;
+    color: var(--green);
+}
+
 .proposal-d-main .proposal-img-main {
     padding-left: 55px;
     position: relative;
@@ -6053,9 +6072,11 @@ margin-top: 12px;
     margin-bottom: 15px;
 }
 
-#logIn img, #singIn img, #signForm img {
+#logIn img, #singIn img, #signForm img, #signUp img {
     height: 60px;
 }
+
+
 
 
 
@@ -7135,4 +7156,7 @@ aside.filter-main.open {
     0%   {background-position:-150% 0,-150% 0}
     66%  {background-position: 250% 0,-150% 0}
     100% {background-position: 250% 0, 250% 0}
-  }
+  }.col-xs-12.footer-main {
+    padding-left: 0;
+    padding-right: 0;
+}
