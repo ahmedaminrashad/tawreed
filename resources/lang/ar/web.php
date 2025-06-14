@@ -341,4 +341,11 @@ return [
     'premium_price' => '$ 99/شهريًا',
     'premium_price_description' => 'يتم الفوترة سنويًا',
     'upgrade' => 'ترقية',
+    'all_rights_reserved' => 'جميع الحقوق محفوظة',
+    'company_name' => 'كيو تيك',
+    'tenders' => 'المناقصات',
+    'about_us' => 'عن الشركة',
+    'contact_us' => 'تواصل معنا',
+    'privacy_policy' => 'سياسة الخصوصية',
+    'terms_conditions' => 'الشروط والأحكام',
 ];
