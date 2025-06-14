@@ -9,6 +9,26 @@
         width: 100%;
     }
 
+    .input-item label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .input-item.error label {
+        color: #dc3545;
+    }
+
+    .input-item textarea + label {
+        margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .input-item label {
+            font-size: 14px;
+        }
+    }
 </style>
 @endsection
 
@@ -68,6 +88,7 @@
             {{ session('error') }}
         </div>
         @endif
+        
 
         <form id="store_tender_info" action="{{ route('tenders.store', ['tender' => $tender?->id]) }}" method="POST">
             @csrf
@@ -76,12 +97,14 @@
                 <h2>{{ __('web.main_info') }}</h2>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item subject_div @if($errors->has('subject')) error @endif">
+                    <label for="subject">{{ __('web.tender_subject_name') }}</label>
                     <input name="subject" id="subject" placeholder="{{ __('web.tender_subject_name') }}" value="{{ old('subject') ?? $tender?->subject }}">
                     @if($errors->has('subject'))
                     <p>{{ $errors->first('subject') }}</p>
                     @endif
                 </div>
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item project_div @if($errors->has('project')) error @endif">
+                    <label for="project">{{ __('web.tender_project_name_optional') }}</label>
                     <input name="project" id="project" placeholder="{{ __('web.tender_project_name_optional') }}" value="{{ old('project') ?? $tender?->project }}">
                     @if($errors->has('project'))
                     <p>{{ $errors->first('project') }}</p>
@@ -89,6 +112,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item country_id_div @if($errors->has('country_id')) error @endif">
+                    <label for="country_id">{{ __('web.choose_country') }}</label>
                     <select class="list-select2-choose" name="country_id" id="country_id">
                         <option value="">{{ __('web.choose_country') }}</option>
                         @foreach($countries as $countryID => $country)
@@ -101,6 +125,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item city_id_div @if($errors->has('city_id')) error @endif">
+                    <label for="city_id">{{ __('web.choose_city') }}</label>
                     <select class="list-select2-choose" name="city_id" id="city_id">
                         <option value="">{{ __('web.choose_city') }}</option>
                     </select>
@@ -110,6 +135,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item category_id_div @if($errors->has('category_id')) error @endif">
+                    <label for="category_id">{{ __('web.choose_work_category') }}</label>
                     <select class="list-select2-choose" name="category_id" id="category_id">
                         <option value="">{{ __('web.choose_work_category') }}</option>
                         @foreach($workCategories as $categoryID => $category)
@@ -122,6 +148,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item activity_id_div @if($errors->has('activity_id')) error @endif">
+                    <label for="activity_id">{{ __('web.choose_activity_classification') }}</label>
                     <select class="list-select2-choose" name="activity_id" id="activity_id">
                         <option value="">{{ __('web.choose_activity_classification') }}</option>
 
@@ -132,6 +159,7 @@
                 </div>
 
                 <div class="col-xs-12 input-item desc_div @if($errors->has('desc')) error_textarea @endif">
+                    <label for="desc">{{ __('web.tender_description_optional') }}</label>
                     <textarea name="desc" id="desc" placeholder="{{ __('web.tender_description_optional') }}">{{ old('desc') ?? $tender?->desc }}</textarea>
                     @if($errors->has('desc'))
                     <p>{{ $errors->first('desc') }}</p>
@@ -142,6 +170,7 @@
             <div class="col-xs-12 inputs-group">
                 <h2>{{ __('web.dates') }}</h2>
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item contract_duration_div @if($errors->has('contract_duration')) error @endif">
+                    <label for="contract_duration">{{ __('web.tender_contract_duration_in_days') }}</label>
                     <input type="number" min="1" name="contract_duration" id="contract_duration" value="{{ old('contract_duration') ?? $tender?->contract_duration }}" placeholder="{{ __('web.tender_contract_duration_in_days') }}" autocomplete="off">
                     @if($errors->has('contract_duration'))
                     <p>{{ $errors->first('contract_duration') }}</p>
@@ -149,6 +178,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input contract_start_date_div @if($errors->has('contract_start_date')) error @endif">
+                    <label for="contract_start_date">{{ __('web.tender_contract_start_date') }}</label>
                     <input type="text" name="contract_start_date" id="contract_start_date" value="{{ old('contract_start_date') ?? $tender?->contract_start_date }}" class="date-picker" placeholder="{{ __('web.tender_contract_start_date') }}" autocomplete="off">
                     <i class="ri-calendar-line"></i>
                     @if($errors->has('contract_start_date'))
@@ -157,6 +187,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input contract_end_date_div @if($errors->has('contract_end_date')) error @endif">
+                    <label for="contract_end_date">{{ __('web.tender_contract_end_date') }}</label>
                     <input type="text" name="contract_end_date" id="contract_end_date" value="{{ old('contract_end_date') ?? $tender?->contract_end_date }}" placeholder="{{ __('web.tender_contract_end_date') }}" readonly>
                     <i class="ri-calendar-line"></i>
                     @if($errors->has('contract_end_date'))
@@ -165,6 +196,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input closing_date_div @if($errors->has('closing_date')) error @endif">
+                    <label for="closing_date">{{ __('web.tender_closing_date') }}</label>
                     <input type="text" name="closing_date" id="closing_date" class="date-picker" value="{{ old('closing_date') ?? $tender?->closing_date }}" placeholder="{{ __('web.tender_closing_date') }}" autocomplete="off">
                     <i class="ri-calendar-line"></i>
                     @if($errors->has('closing_date'))
@@ -173,6 +205,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item proposal_evaluation_duration_div @if($errors->has('proposal_evaluation_duration')) error @endif">
+                    <label for="proposal_evaluation_duration">{{ __('web.tender_proposals_evaluation_duration_in_days') }}</label>
                     <input type="number" min="1" name="proposal_evaluation_duration" id="proposal_evaluation_duration" value="{{ old('proposal_evaluation_duration') ?? $tender?->proposal_evaluation_duration }}" placeholder="{{ __('web.tender_proposals_evaluation_duration_in_days') }}" autocomplete="off">
                     @if($errors->has('proposal_evaluation_duration'))
                     <p>{{ $errors->first('proposal_evaluation_duration') }}</p>
@@ -183,6 +216,7 @@
             <div class="col-xs-12 inputs-group" style="padding-bottom: 50px;">
                 <h2>{{ __('web.address') }}</h2>
                 <div class="col-xs-12 col-md-6 input-item remove-margin address_div @if($errors->has('address')) error_textarea @endif">
+                    <label for="address">{{ __('web.write_address') }}</label>
                     <textarea name="address" id="address" placeholder="{{ __('web.write_address') }}">{{ old('address') ?? $tender?->address }}</textarea>
                     @if($errors->has('address'))
                     <p>{{ $errors->first('address') }}</p>
