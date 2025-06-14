@@ -6,7 +6,7 @@
 
 @if(app()->getLocale() == 'ar')
 <link href="{{ asset('/assets/front/css/bootstrap.css') }}" rel="stylesheet">
-<link href="{{ asset('/assets/front/css/bootstrap_rtl.css') }}" rel="stylesheet">
+<link href="{{ asset('/assets/front/css/bootstrap-rtl.css') }}" rel="stylesheet">
 <link href="{{ asset('/assets/front/css/style-rtl.css') }}" rel="stylesheet">
 @else
 <link href="{{ asset('/assets/front/css/bootstrap.css') }}" rel="stylesheet">
