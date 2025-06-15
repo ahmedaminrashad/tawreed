@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\FormRequest\ApiFormRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
 
 class LoginRequest extends ApiFormRequest
 {
@@ -17,17 +18,17 @@ class LoginRequest extends ApiFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
-        $validations = [
+        return [
             'login_text' => ['required', 'string'],
             'login_password'  => ['required', 'min:8'],
         ];
-
-        return $validations;
     }
+
+
 
     public function attributes(): array
     {
