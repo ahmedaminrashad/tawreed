@@ -176,7 +176,8 @@
         });
 
         $('.Choose-country').select2({
-            dropdownCssClass: "country-select"
+            dropdownCssClass: "country-select",
+            dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
 
         let ajaxConfig = {
@@ -244,7 +245,8 @@
         $("#items_div").append(item);
 
         $('.Choose-country').select2({
-            dropdownCssClass: "country-select"
+            dropdownCssClass: "country-select",
+            dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
 
         let ajaxConfig = {

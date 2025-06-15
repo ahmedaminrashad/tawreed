@@ -89,7 +89,9 @@
 <!-- Page specific script -->
 <script>
     $(function() {
-        $('.select2').select2();
+        $('.select2').select2({
+            dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
+        });
     });
 
 </script>

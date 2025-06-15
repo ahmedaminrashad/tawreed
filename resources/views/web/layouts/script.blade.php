@@ -46,10 +46,15 @@
             $(this).closest('.col-xs-12').addClass("checked");
         });
 
-        $('.js-example-basic-single').select2();
+        $('.js-example-basic-single').select2(
+            {
+                dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
+            }
+        );
         // $('.country-select').select2();
         $('.country-select').select2({
-            dropdownCssClass: "country-select"
+            dropdownCssClass: "country-select",
+            dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
     });
 
@@ -511,7 +516,6 @@
             }
         });
     });
-
 </script>
 
 @yield('script')

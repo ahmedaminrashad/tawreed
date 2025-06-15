@@ -135,15 +135,18 @@
     $(document).ready(function() {});
 
     $("#country_id").select2({
-        dropdownCssClass: "country-select"
+        dropdownCssClass: "country-select",
+        dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
     });
 
     $('.js-example-phone').select2({
-        dropdownCssClass: "phone-select"
+        dropdownCssClass: "phone-select",
+        dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
     });
 
     $('.js-example-basic-multiple').select2({
-        dropdownCssClass: "multiple-select"
+        dropdownCssClass: "multiple-select",
+        dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
     });
 
     let ajaxConfig = {

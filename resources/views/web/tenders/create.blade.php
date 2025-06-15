@@ -88,7 +88,7 @@
             {{ session('error') }}
         </div>
         @endif
-        
+
 
         <form id="store_tender_info" action="{{ route('tenders.store', ['tender' => $tender?->id]) }}" method="POST">
             @csrf
@@ -248,14 +248,20 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.country-select').select2();
+        $('.country-select').select2(
+            {
+                dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
+            }
+        );
 
         $('.country-select').select2({
-            dropdownCssClass: "country-select"
+            dropdownCssClass: "country-select",
+            dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
 
         $('.list-select2-choose').select2({
-            dropdownCssClass: "country-select"
+            dropdownCssClass: "country-select",
+            dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
 
         $(".date-picker").datepicker({
@@ -297,7 +303,8 @@
                     });
 
                     $('#city_id').select2({
-                        dropdownCssClass: "country-select"
+                        dropdownCssClass: "country-select",
+                        dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
                     });
                 }
             });
@@ -325,7 +332,8 @@
                     });
 
                     $('#activity_id').select2({
-                        dropdownCssClass: "country-select"
+                        dropdownCssClass: "country-select",
+                        dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
                     });
                 }
             });

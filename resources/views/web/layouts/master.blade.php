@@ -28,5 +28,6 @@
 
     <!-- Scripts -->
     @include('web.layouts.script')
+
 </body>
 </html>

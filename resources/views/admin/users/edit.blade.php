@@ -102,7 +102,7 @@
                                         </div>
                                         @if($user->image)
                                             <div class="mt-2">
-                                                <img src="{{ asset('assets/uploads/users/' . $user->id . '/images/' . $user->image) }}" 
+                                                <img src="{{ asset('assets/uploads/users/' . $user->id . '/images/' . $user->image) }}"
                                                      alt="Profile Image" class="img-thumbnail" style="max-height: 100px;">
                                             </div>
                                         @endif
@@ -110,8 +110,8 @@
 
                                     <div class="form-group company-fields" style="display: {{ $user->type->value === 'company' ? 'block' : 'none' }}">
                                         <label for="commercial_registration_number">Commercial Registration Number</label>
-                                        <input type="text" class="form-control" id="commercial_registration_number" 
-                                               name="commercial_registration_number" 
+                                        <input type="text" class="form-control" id="commercial_registration_number"
+                                               name="commercial_registration_number"
                                                value="{{ old('commercial_registration_number', $user->commercial_registration_number) }}">
                                     </div>
 
@@ -171,7 +171,7 @@
                                         </div>
                                         @if($user->commercial_registration_file)
                                             <div class="mt-2">
-                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->commercial_registration_file) }}" 
+                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->commercial_registration_file) }}"
                                                    target="_blank" class="btn btn-info btn-sm">
                                                     View File
                                                 </a>
@@ -189,7 +189,7 @@
                                         </div>
                                         @if($user->company_profile)
                                             <div class="mt-2">
-                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->company_profile) }}" 
+                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->company_profile) }}"
                                                    target="_blank" class="btn btn-info btn-sm">
                                                     View File
                                                 </a>
@@ -207,7 +207,7 @@
                                         </div>
                                         @if($user->tax_card_file)
                                             <div class="mt-2">
-                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->tax_card_file) }}" 
+                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->tax_card_file) }}"
                                                    target="_blank" class="btn btn-info btn-sm">
                                                     View File
                                                 </a>
@@ -225,7 +225,7 @@
                                         </div>
                                         @if($user->iban_file)
                                             <div class="mt-2">
-                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->iban_file) }}" 
+                                                <a href="{{ asset('assets/uploads/users/' . $user->id . '/files/' . $user->iban_file) }}"
                                                    target="_blank" class="btn btn-info btn-sm">
                                                     View File
                                                 </a>
@@ -257,7 +257,11 @@
 <script>
     $(function() {
         // Initialize Select2
-        $('.select2').select2();
+        $('.select2').select2(
+            {
+                dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
+            }
+        );
 
         // Initialize custom file input
         bsCustomFileInput.init();
@@ -275,4 +279,4 @@
         });
     });
 </script>
-@endsection 
+@endsection

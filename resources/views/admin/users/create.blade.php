@@ -103,8 +103,8 @@
 
                                     <div class="form-group company-fields" style="display: none;">
                                         <label for="commercial_registration_number">Commercial Registration Number</label>
-                                        <input type="text" class="form-control" id="commercial_registration_number" 
-                                               name="commercial_registration_number" 
+                                        <input type="text" class="form-control" id="commercial_registration_number"
+                                               name="commercial_registration_number"
                                                value="{{ old('commercial_registration_number') }}">
                                     </div>
 
@@ -218,7 +218,11 @@
 <script>
     $(function() {
         // Initialize Select2
-        $('.select2').select2();
+        $('.select2').select2(
+            {
+                dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
+            }
+        );
 
         // Initialize custom file input
         bsCustomFileInput.init();
@@ -236,4 +240,4 @@
         });
     });
 </script>
-@endsection 
+@endsection
