@@ -188,7 +188,7 @@ header .side-menu > li {
 }
 
 header .side-menu > li a {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--dark);
     text-decoration: none;
 }
@@ -6071,7 +6071,7 @@ margin-top: 12px;
     margin-bottom: 15px;
 }
 
-#logIn img, #singIn img, #signForm img, #signUp img {
+#logIn img, #singIn img, #signForm img, #signUp img, .signUp-individual-form img, .verify-otp-form img, .forgot-passord-div img {
     height: 60px;
 }
 
@@ -7158,4 +7158,9 @@ aside.filter-main.open {
   }.col-xs-12.footer-main {
     padding-right: 0;
     padding-left: 0;
+}
+
+.select2-container {
+    direction: ltr;
+    text-align: right !important;
 }
