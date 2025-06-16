@@ -69,7 +69,7 @@
 
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
-            <img src="{{ asset('/assets/front/img/logo.png') }}">
+            <img src="{{ asset('/assets/front/img/logo.png') }}" style="width: 70%">
             <h1>{{ __('web.create_account') }}</h1>
             <form id="signUp_individual_form" action="{{ route('register') }}" method="POST">
                 @csrf
@@ -129,7 +129,7 @@
 
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
-            <img src="{{ asset('/assets/front/img/logo.png') }}">
+            <img src="{{ asset('/assets/front/img/logo.png') }}" style="width: 70%">
             <h1>{{ __('web.create_account') }}</h1>
             <form id="signUp_company_form" action="{{ route('register') }}" method="POST">
                 @csrf
@@ -218,10 +218,10 @@
                 <button type="submit">{{ __('web.verify') }}</button>
             </form>
             <p>{{ __('web.no_code_received') }} <a href="javascript:void(0);" class="verify-resend-link disabled">{{ __('web.resend') }}</a><br><span id="verify-timer"></span></p>
-            
+
             <form id="verify_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
                 @csrf
-                
+
                 <input type="hidden" name="resend_otp_user">
             </form>
         </div>
@@ -312,7 +312,7 @@
             </form>
 
             <p>{{ __('web.didnt_receive_code') }} <a href="javascript:void(0);" class="reset-resend-link disabled">{{ __('web.resend_reset') }}</a><br><span id="reset-timer"></span></p>
-            
+
             <form id="reset_resend_link_form" method="POST" action="{{ route('resend.otp') }}">
                 @csrf
 
