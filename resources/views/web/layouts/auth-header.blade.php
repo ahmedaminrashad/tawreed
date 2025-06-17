@@ -1,5 +1,5 @@
 <!-- login  -->
-<div data-backdrop="static" data-keyboard="false" id="logIn" class="modal fade" role="dialog">
+<div data-keyboard="false" id="logIn" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -27,7 +27,7 @@
 </div>
 
 <!-- sign up -->
-<div data-backdrop="static" data-keyboard="false" id="signUp" class="modal fade" role="dialog">
+<div  data-keyboard="false" id="signUp" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -64,7 +64,7 @@
 </div>
 
 <!-- Sign Up Individual Form -->
-<div data-backdrop="static" data-keyboard="false" id="signUp-individual-form" class="modal fade" role="dialog">
+<div  data-keyboard="false" id="signUp-individual-form" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -124,7 +124,7 @@
 </div>
 
 <!-- Sign Up Company Form -->
-<div data-backdrop="static" data-keyboard="false" id="signUp-company-form" class="modal fade" role="dialog">
+<div  data-keyboard="false" id="signUp-company-form" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -188,7 +188,7 @@
 </div>
 
 <!-- otp -->
-<div data-backdrop="static" data-keyboard="false" id="verify-otp-form" class="modal fade reset-model" role="dialog">
+<div  data-keyboard="false" id="verify-otp-form" class="modal fade reset-model" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -229,7 +229,7 @@
 </div>
 
 <!-- Terms & Conditons -->
-<div data-backdrop="static" data-keyboard="false" id="terms_conditions" class="modal fade terms" role="dialog">
+<div  data-keyboard="false" id="terms_conditions" class="modal fade terms" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -240,7 +240,7 @@
 </div>
 
 <!-- Privacy Policy  -->
-<div data-backdrop="static" data-keyboard="false" id="privacy_policy" class="modal fade terms" role="dialog">
+<div  data-keyboard="false" id="privacy_policy" class="modal fade terms" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -251,7 +251,7 @@
 </div>
 
 <!-- forgot password  -->
-<div data-backdrop="static" data-keyboard="false" id="forgot-passord-div" class="modal fade reset-model" role="dialog">
+<div  data-keyboard="false" id="forgot-passord-div" class="modal fade reset-model" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
@@ -269,7 +269,7 @@
 </div>
 
 <!-- reset password  -->
-<div data-backdrop="static" data-keyboard="false" id="reset-password-otp" class="modal fade reset-model" role="dialog">
+<div  data-keyboard="false" id="reset-password-otp" class="modal fade reset-model" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>

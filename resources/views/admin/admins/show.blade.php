@@ -46,7 +46,7 @@
                             </a>
                         </div> --}}
                         <div class="input-group input-group-sm">
-                            <button type="button" class="btn btn-default mr-3" data-toggle="modal" data-target="#reset-password-modal" data-backdrop="static" data-keyboard="false">
+                            <button type="button" class="btn btn-default mr-3" data-toggle="modal" data-target="#reset-password-modal"  data-keyboard="false">
                                 Reset Password
                             </button>
 
