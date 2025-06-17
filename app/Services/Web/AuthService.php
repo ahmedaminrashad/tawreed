@@ -29,18 +29,18 @@ readonly class AuthService
 
             if (!$user) {
                 DB::rollBack();
-                return ['error' => 'Invalid Credentials'];
+                return ['error' => __('auth.invalid_credentials')];
             }
 
             if (!$user->email_verified_at) {
                 DB::rollBack();
-                return ['error' => 'Invalid Credentials'];
+                return ['error' => __('auth.email_not_verified')];
             }
 
             $credentials = $this->credentials($data['login_text'], $data['login_password']);
 
             if (!Auth::guard('web')->attempt($credentials)) {
-                return ['error' => 'Invalid Credentials'];
+                return ['error' => __('auth.invalid_credentials')];
             }
 
             $user = Auth::guard('web')->user();
@@ -172,17 +172,17 @@ readonly class AuthService
 
             if (!$user) {
                 DB::rollBack();
-                return ['error' => 'Invalid - User not exists'];
+                return ['error' => __('auth.user_not_found')];
             }
 
             if ($user->otp != $data['otp']) {
                 DB::rollBack();
-                return ['error' => 'Invalid OTP'];
+                return ['error' => __('auth.otp_invalid')];
             }
 
             if ($user->otp_expires_at <= Carbon::now()->toDateTimeString()) {
                 DB::rollBack();
-                return ['error' => 'OTP Expired'];
+                return ['error' => __('auth.otp_expired')];
             }
 
             $user->update([
@@ -210,7 +210,7 @@ readonly class AuthService
 
             if (!$user) {
                 DB::rollBack();
-                return ['error' => 'Invalid - User not exists'];
+                return ['error' => __('auth.user_not_found')];
             }
 
             $otp = $this->oTPService->generateUserOTP();
@@ -241,7 +241,7 @@ readonly class AuthService
 
             if (!$user) {
                 DB::rollBack();
-                return ['error' => 'Invalid - User not exists'];
+                return ['error' => __('auth.user_not_found')];
             }
 
             $otp = $this->oTPService->generateUserOTP();
@@ -272,17 +272,17 @@ readonly class AuthService
 
             if (!$user) {
                 DB::rollBack();
-                return ['error' => 'Invalid - User not exists'];
+                return ['error' => __('auth.user_not_found')];
             }
 
             if ($user->otp != $data['otp']) {
                 DB::rollBack();
-                return ['error' => 'Invalid OTP'];
+                return ['error' => __('auth.otp_invalid')];
             }
 
             if ($user->otp_expires_at <= Carbon::now()->toDateTimeString()) {
                 DB::rollBack();
-                return ['error' => 'OTP Expired'];
+                return ['error' => __('auth.otp_expired')];
             }
 
             $user->update([

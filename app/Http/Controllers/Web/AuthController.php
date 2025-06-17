@@ -31,10 +31,10 @@ class AuthController extends Controller
         $response = $this->authService->login($data, $userIP);
 
         if (is_array($response) && array_key_exists('error', $response)) {
-            return $this->failure(['error' => $response['error']], 'Error in Login User');
+            return $this->failure(['error' => $response['error']], __('auth.login_error'));
         }
 
-        return $this->success($response, 'User Logged in successfully');
+        return $this->success($response, __('auth.login_success'));
     }
 
     public function register(RegisterRequest $request)
@@ -46,10 +46,10 @@ class AuthController extends Controller
         if (is_object($result) || $result instanceof User) {
             $response['user'] = new UserResource($result);
 
-            return $this->success($response, 'User created successfully');
+            return $this->success($response, __('auth.register_success'));
         }
 
-        return $this->failure(['error' => $result['error']], 'Error in create User');
+        return $this->failure(['error' => $result['error']], __('auth.register_error'));
     }
 
     public function verifyOTP(OTPRequest $request)
@@ -59,10 +59,10 @@ class AuthController extends Controller
         $response = $this->authService->verifyOTP($data);
 
         if (is_array($response) && array_key_exists('error', $response)) {
-            return $this->failure(['error' => $response['error']], 'Error in verify User OTP');
+            return $this->failure(['error' => $response['error']], __('auth.otp_verify_error'));
         }
 
-        return $this->success([], 'User verified successfully');
+        return $this->success([], __('auth.otp_verify_success'));
     }
 
     public function resendOTP(ResendOTPRequest $request)
@@ -72,10 +72,10 @@ class AuthController extends Controller
         $response = $this->authService->resendOTP($data);
 
         if (is_array($response) && array_key_exists('error', $response)) {
-            return $this->failure(['error' => $response['error']], 'Error in resend User OTP');
+            return $this->failure(['error' => $response['error']], __('auth.otp_resend_error'));
         }
 
-        return $this->success([], 'User OTP resend successfully');
+        return $this->success([], __('auth.otp_resend_success'));
     }
 
     public function forgetPassword(ForgetPasswordRequest $request)
@@ -85,10 +85,10 @@ class AuthController extends Controller
         $response = $this->authService->forgetPassword($data);
 
         if (is_array($response) && array_key_exists('error', $response)) {
-            return $this->failure(['error' => $response['error']], 'Error in resend User OTP');
+            return $this->failure(['error' => $response['error']], __('auth.password_reset_error'));
         }
 
-        return $this->success(['user' => $response], 'User OTP resend successfully');
+        return $this->success(['user' => $response], __('auth.password_reset_mail_success'));
     }
 
     public function resetPassword(ResetPasswordRequest $request)
@@ -98,23 +98,22 @@ class AuthController extends Controller
         $response = $this->authService->resetPassword($data);
 
         if (is_array($response) && array_key_exists('error', $response)) {
-            return $this->failure(['error' => $response['error']], 'Error in resend User OTP');
+            return $this->failure(['error' => $response['error']], __('auth.password_reset_error'));
         }
 
-        return $this->success([], 'User Password reset successfully');
+        return $this->success([], __('auth.password_reset_success'));
     }
 
     public function logout(Request $request)
     {
         $userIP = $request->ip();
-        // return $this->success($data, 'Logiiiiiiiiiiiiiiiiiin');
 
         $response = $this->authService->logout($userIP);
 
         if (is_array($response) && array_key_exists('error', $response)) {
-            return $this->failure(['error' => $response['error']], 'Error in Logout User');
+            return $this->failure(['error' => $response['error']], __('auth.logout_error'));
         }
 
-        return $this->success([], 'User Logged out successfully');
+        return $this->success([], __('auth.logout_success'));
     }
 }
