@@ -67,9 +67,9 @@ readonly class ProposalService
         $statuses = ProposalStatus::values();
 
         foreach ($statuses as $status) {
-            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
-                continue;
-            }
+//            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
+//                continue;
+//            }
 
             $final = str_replace(' ', '_', $status);
             $final = str_replace('(', '', $final);
