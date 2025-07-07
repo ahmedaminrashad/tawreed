@@ -32,7 +32,7 @@ class StoreTenderInfoRequest extends FormRequest
             "contract_duration" => ["required", "numeric", "min:1", 'regex:/^[0-9]+$/'],
             "contract_start_date" => ["required", "date", 'after:today', "date_format:m/d/Y"],
             "contract_end_date" => ["required", "date", 'after:contract_start_date', "date_format:m/d/Y"],
-            "closing_date" => ["required", "date", "date_format:m/d/Y"],
+            "closing_date" => ["required", "date", 'before:contract_start_date',"after:today", "date_format:m/d/Y"],
             "proposal_evaluation_duration" => ["required", "numeric", "min:1"],
             "address" => ["required", "string", "max:3000"],
             "latitude" =>  ["required", "numeric", "min:-90", "max:90"],
@@ -43,13 +43,51 @@ class StoreTenderInfoRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            "country_id" => "Country",
-            "city_id" => "City",
-            "category_id" => "Category Work Classification",
-            "activity_id" => "Activity Classification",
-            "desc" => "Description",
-            "latitude" => "Location",
-            "longitude" => "Location",
+            "country_id" => __("admin.country"),
+            "city_id" => __("admin.city"),
+            "category_id" => __("admin.category"),
+            "activity_id" => __("admin.activity"),
+            "desc" => __("web.description"),
+            "latitude" => __("web.location"),
+            "longitude" => __("web.location"),
+            "closing_date" => __("admin.closing_date"),
+            "contract_start_date" => __("admin.contract_start_date"),
+            "contract_end_date" => __("admin.contract_end_date"),
+        
         ];
+    }
+    public function messages(): array
+    {
+        return [
+            "closing_date.before" => __("admin.closing_date_before"),
+            "closing_date.after" => __("admin.closing_date_after"),
+            "contract_start_date.after" => __("admin.contract_start_date_after"),
+            "contract_end_date.after" => __("admin.contract_end_date_after"),
+            "contract_start_date.date_format" => __("admin.contract_start_date_date_format"),
+            "contract_end_date.date_format" => __("admin.contract_end_date_date_format"),
+            "closing_date.date_format" => __("admin.closing_date_date_format"),
+            "contract_start_date.date" => __("admin.contract_start_date_date"),
+            "contract_end_date.date" => __("admin.contract_end_date_date"),
+            "closing_date.date" => __("admin.closing_date_date"),
+            "contract_start_date.required" => __("admin.contract_start_date_required"),
+            "contract_end_date.required" => __("admin.contract_end_date_required"),
+            "closing_date.required" => __("admin.closing_date_required"),
+        ];
+    }
+
+    protected function prepareForValidation()
+    {
+        if (isset($this->contract_duration)) {
+            $this->merge([
+                'contract_duration' => $this->convertArabicToEnglishNumbers($this->contract_duration)
+            ]);
+        }
+    }
+
+    private function convertArabicToEnglishNumbers($number)
+    {
+        $arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+        $english = ['0','1','2','3','4','5','6','7','8','9'];
+        return str_replace($arabic, $english, $number);
     }
 }

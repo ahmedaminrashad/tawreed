@@ -49,4 +49,13 @@ return [
     'tender_created' => 'Tender created successfully',
     'tender_updated' => 'Tender updated successfully',
     'tender_deleted' => 'Tender deleted successfully',
+    "enter_email_or_crn" => "Enter Email or CRN",
+    "enter_email_or_crn_placeholder" => "Enter Email or CRN",
+    "closing_date_before" => "Closing date must be before contract start date",
+    "closing_date_after" => "Closing date must be after today",
+    "contract_start_date_after" => "Contract start date must be after today",
+    "contract_end_date_after" => "Contract end date must be after contract start date",
+    "contract_start_date_date_format" => "Contract start date must be in dd/mm/yyyy format",
+    "contract_end_date_date_format" => "Contract end date must be in dd/mm/yyyy format",
+    "closing_date_date_format" => "Closing date must be in dd/mm/yyyy format",
 ]; 
