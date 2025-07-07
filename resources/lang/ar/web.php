@@ -311,5 +311,6 @@ return [
     'tax_card_number_label' => 'رقم بطاقة الضريبة',
     'image' => 'الصورة',
     'proposals_sent' => 'عروض مرسلة',
-            
+    'sar'=>'ريال'
+
 ];
