@@ -14,6 +14,7 @@ class TestController extends Controller
     public function test()
     {
 
+        return 'sss';
         return Tender::query()
             ->with('proposals')
             ->find(17);
