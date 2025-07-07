@@ -436,7 +436,7 @@
     return output;
 }
 
-$("#contract_duration").on("input", function() {
+$("#contract_duration").on("change", function() {
     let val = $(this).val();
     let converted = arabicToEnglishNumbers(val);
     if (val !== converted) {
