@@ -109,6 +109,7 @@ class Proposal extends Model
 
     public function getTotalWithVatAttribute()
     {
-        return $this->total * (1 + config('app.vat'));
+        $total_fromated= $this->total * (1 + config('app.vat'));
+        return number_format($total_fromated, 2);
     }
 }
