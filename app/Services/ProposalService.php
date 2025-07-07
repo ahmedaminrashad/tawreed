@@ -44,9 +44,10 @@ readonly class ProposalService
         $statuses = ProposalStatus::values();
 
         foreach ($statuses as $status) {
-            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
-                continue;
-            }
+
+//            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
+//                continue;
+//            }
 
             $qry = $this->getQuery($data);
 

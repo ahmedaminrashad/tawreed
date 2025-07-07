@@ -101,4 +101,9 @@ class Proposal extends Model
     {
         return $this->status == ProposalStatus::FINAL_ACCEPTANCE->value;
     }
+
+    public function getStatusLabel()
+    {
+        return ProposalStatus::from($this->status)->getLabel();
+    }
 }
