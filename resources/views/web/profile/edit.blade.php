@@ -69,7 +69,7 @@
                         <div class="col-xs-12 input-item">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <p>Phone Number (Optional)</p>
+                                    <p>{{ __('web.phone_number') }}</p>
                                 </div>
                                 <div class="col-md-4 col-xs-4">
                                     <select class="js-example-phone" name="country_code" id="country_code">
@@ -88,7 +88,7 @@
                         <div class="col-xs-12 input-item">
                             <p>Country</p>
                             <select id="country_id" name="country_id">
-                                <option value="">Select Country</option>
+                                <option value="">{{ __('web.select_country') }}</option>
                                 @foreach($countries as $id => $name)
                                 <option value="{{ $id }}" @selected($id==$user->country_id)>{{ $name }}</option>
                                 @endforeach
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="col-xs-12 input-item">
-                            <p>Work Category (Optional)</p>
+                            <p>{{ __('web.work_category') }}</p>
                             <select class="js-example-basic-multiple" id="category_id" name="category_id[]" multiple="multiple">
                                 @foreach($categories as $id => $name)
                                 <option value="{{ $id }}" @selected(in_array($id, $userCategories))>{{ $name }}</option>
@@ -105,19 +105,19 @@
                         </div>
 
                         <div class="col-xs-12 input-item">
-                            <p>Address (Optional)</p>
+                            <p>{{ __('web.address') }}</p>
                             <textarea name="address" id="address">{{ old('address') ?? $user->address }}</textarea>
                         </div>
 
                         <div class="col-xs-12 input-item">
-                            <p>Pin your location on Map (Optional)</p>
+                            <p>{{ __('web.pin_your_location_on_map') }}</p>
                             <input type="hidden" id="latitude" name="latitude" value="{{ $user->latitude }}">
                             <input type="hidden" id="longitude" name="longitude" value="{{ $user->longitude }}">
                             <div id="map"></div>
                         </div>
                         <ul class="col-xs-12">
-                            <li><button>Cancel</button></li>
-                            <li><button>Save</button></li>
+                            <li><button>{{ __('web.cancel') }}</button></li>
+                            <li><button>{{ __('web.save') }}</button></li>
                         </ul>
                     </form>
                 </div>
