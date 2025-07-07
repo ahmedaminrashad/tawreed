@@ -157,11 +157,15 @@
                     <h5>{{__('web.contract_duration')}}</h5>
                     <h3>{{ $proposal->contract_duration }} {{__('web.days')}} </h3>
                 </div>
-
+                 <div class="col-xs-6">
+                    <img src="{{ asset('/assets/front/img/42.svg') }}">
+                    <h5>{{__('web.price_not_include_vat')}}</h6>
+                    <h3>{{ $proposal->total }} {{__('web.sar')}}</h3>
+                </div>
                 <div class="col-xs-6">
                     <img src="{{ asset('/assets/front/img/42.svg') }}">
                     <h5>{{__('web.proposal_total_price')}}</h5>
-                    <h3>{{ $proposal->total }} {{__('web.usd')}}</h3>
+                    <h3>{{ $proposal->total * 1.15 }} {{__('web.sar')}}</h3>
                 </div>
 
                 <div class="col-xs-12">

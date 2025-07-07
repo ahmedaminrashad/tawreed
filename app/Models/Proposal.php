@@ -21,7 +21,7 @@ class Proposal extends Model
         // 'status' => ProposalStatus::class,
     ];
 
-    protected $appends = ['proposal_end_date_text'];
+    protected $appends = ['proposal_end_date_text', 'total_with_vat'];
 
     public function user(): BelongsTo
     {
@@ -105,5 +105,10 @@ class Proposal extends Model
     public function getStatusLabel()
     {
         return ProposalStatus::from($this->status)->getLabel();
+    }
+
+    public function getTotalWithVatAttribute()
+    {
+        return $this->total * (1 + config('app.vat'));
     }
 }

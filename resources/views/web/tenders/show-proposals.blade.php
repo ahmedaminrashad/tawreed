@@ -112,7 +112,7 @@
                                                 </div>
                                                 <h5>
                                                     <span>{{__('web.total_price')}} </span><br>
-                                                    <b>{{ $proposal->total }} {{__('web.sar')}}</b>
+                                                    <b>{{ $proposal->total_with_vat }} {{__('web.sar')}}</b>
                                                 </h5>
                                                 <a href="{{ route('proposals.show', ['proposal' => $proposal]) }}"
                                                    class="details">{{__('web.view_details')}}</a>
