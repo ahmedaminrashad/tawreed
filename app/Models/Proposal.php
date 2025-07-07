@@ -111,9 +111,4 @@ class Proposal extends Model
     {
         return number_format($this->total * (1 + config('app.vat')), 2);
     }
-
-    public function getTotalAttribute($total)
-    {
-        return number_format($total, 2);
-    }
 }
