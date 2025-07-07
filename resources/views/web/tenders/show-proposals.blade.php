@@ -77,9 +77,9 @@
                         @foreach($statuses as $key => $status)
                             @if(count($proposals[$key]) > 0)
                                 @foreach($proposals[$key] as $proposal)
-{{--                                    @if(Auth::user()->id!=$proposal->user_id && Auth::user()->id !=$proposal->tender->user_id && in_array($proposal->status,[\App\Enums\ProposalStatus::CREATED->value,\App\Enums\ProposalStatus::DRAFT->value] ))--}}
-{{--                                        @continue--}}
-{{--                                    @endif--}}
+                                    @if(Auth::user()->id!=$proposal->user_id && Auth::user()->id !=$proposal->tender->user_id && in_array($proposal->status,[\App\Enums\ProposalStatus::CREATED->value,\App\Enums\ProposalStatus::DRAFT->value] ))
+                                        @continue
+                                    @endif
                                     <div class="tab-pane fade active in" id="{{ $key }}">
                                         <div class="col-md-6 col-xs-12">
                                             <div class="col-xs-12 remove-padding propoal-item">
