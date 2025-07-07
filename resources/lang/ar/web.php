@@ -306,4 +306,7 @@ return [
     'work_category' => 'فئة العمل',
     'pin_your_location_on_map' => 'اشرح موقعك على الخريطة',
     'save' => 'حفظ',
+    'tax_card_number' => 'رقم بطاقة الضريبة',
+    'tax_card_number_placeholder' => 'أدخل رقم بطاقة الضريبة',
+    'tax_card_number_label' => 'رقم بطاقة الضريبة',
 ];
