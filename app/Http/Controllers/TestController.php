@@ -15,7 +15,7 @@ class TestController extends Controller
     {
 
         return Tender::query()
-            ->when('proposals')
+            ->with('proposals')
             ->find(17);
         return bcrypt('12345678');
 //        return Tender::query()->find(16);
