@@ -171,7 +171,7 @@
                 <h2>{{ __('web.dates') }}</h2>
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item contract_duration_div @if($errors->has('contract_duration')) error @endif">
                     <label for="contract_duration">{{ __('web.tender_contract_duration_in_days') }}</label>
-                    <input type="number" min="1" name="contract_duration" id="contract_duration" value="{{ old('contract_duration') ?? $tender?->contract_duration }}" placeholder="{{ __('web.tender_contract_duration_in_days') }}" autocomplete="off">
+                    <input type="text" min="1" name="contract_duration" id="contract_duration" value="{{ old('contract_duration') ?? $tender?->contract_duration }}" placeholder="{{ __('web.tender_contract_duration_in_days') }}" autocomplete="off">
                     @if($errors->has('contract_duration'))
                     <p>{{ $errors->first('contract_duration') }}</p>
                     @endif
@@ -400,10 +400,12 @@
         calculateClosingDate();
     });
 
-    $("#contract_duration").on("change", function() {
-        if($("#contract_duration").val() <= 0) {
-            $("#contract_duration").val(1);
-        }
+    $("#contract_duration").on("input", function() {
+        let input = $(this);
+        input.val(input.val().replace(/[\u0660-\u0669]/g, (char) =>
+            String.fromCharCode(char.charCodeAt(0) - 0x0660 + 48)
+        ));
+        input.val(input.val().replace(/[^0-9]/g, ''));
         calculateClosingDate();
     });
 
@@ -436,13 +438,6 @@
     return output;
 }
 
-$("#contract_duration").on("change", function() {
-    let val = $(this).val();
-    let converted = arabicToEnglishNumbers(val);
-    if (val !== converted) {
-        $(this).val(converted);
-    }
-});
 </script>
 
 @endsection
