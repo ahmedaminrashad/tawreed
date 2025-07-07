@@ -309,4 +309,5 @@ return [
     'tax_card_number' => 'رقم بطاقة الضريبة',
     'tax_card_number_placeholder' => 'أدخل رقم بطاقة الضريبة',
     'tax_card_number_label' => 'رقم بطاقة الضريبة',
+    'image' => 'الصورة',
 ];

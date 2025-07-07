@@ -24,7 +24,7 @@
             @include('web.profile.aside', ['active' => "profile"])
 
             <div class="col-md-8 col-xs-12">
-                <h1>تعديل الملف الشخصي</h1>
+                <h1>{{ __('web.edit_profile') }}</h1>
                 <div class="edit-profile-cont col-xs-12 remove-padding">
                     @if ($errors->any())
                     @foreach ($errors->all() as $error)
@@ -41,7 +41,7 @@
                         @csrf
 
                         <div class="col-xs-12 input-item upload-main">
-                            <h3>Image (Optional)</h3>
+                            <h3>{{ __('web.image') }}</h3>
                             <input type="file" id="image" name="image" class="demo1">
                         </div>
 
