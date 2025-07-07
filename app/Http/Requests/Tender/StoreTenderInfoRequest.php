@@ -32,7 +32,7 @@ class StoreTenderInfoRequest extends FormRequest
             "contract_duration" => ["required", "numeric", "min:1", 'regex:/^[0-9]+$/'],
             "contract_start_date" => ["required", "date", 'after:today', "date_format:m/d/Y"],
             "contract_end_date" => ["required", "date", 'after:contract_start_date', "date_format:m/d/Y"],
-            "closing_date" => ["required", "date", 'after:contract_start_date', "date_format:m/d/Y"],
+            "closing_date" => ["required", "date", "date_format:m/d/Y"],
             "proposal_evaluation_duration" => ["required", "numeric", "min:1"],
             "address" => ["required", "string", "max:3000"],
             "latitude" =>  ["required", "numeric", "min:-90", "max:90"],

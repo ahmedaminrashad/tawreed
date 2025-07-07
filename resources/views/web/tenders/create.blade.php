@@ -271,6 +271,8 @@
 
         getCityList($("#country_id").val());
 
+        getActivityList($("#category_id").val());
+
         $("#country_id").on("change", function() {
             getCityList($(this).val());
         });
@@ -314,7 +316,7 @@
         var listCatUrl = '{{ route('category.list.activities', ['category_id' => '#id']) }}';
 
         var category_id = $("#category_id").val();
-        var activity_id = "{{ old('activity_id') }}" ? "{{ old('activity_id') }}" : "{{ $tender?->activity_id }}";
+        var activity_id = "{{ old('activity_id') ? : $tender?->activity_id}}";
 
         $("#activity_id").find('option').not(':first').remove();
 
@@ -324,7 +326,7 @@
                 , dataType: 'json'
                 , success: function(data) {
                     $.each(data, function(key, val) {
-                        if (key === activity_id) {
+                        if (val?.id == activity_id) {
                             $("#activity_id").append(`<option value="${val.id}" class="activityOption" selected>${val.arabic_name}</option>`);
                         } else {
                             $("#activity_id").append(`<option class="activityOption" value="${val.id}">${val.arabic_name}</option>`);
