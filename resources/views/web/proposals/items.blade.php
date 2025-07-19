@@ -103,7 +103,7 @@
                         <div class="row proposal-input-main">
                             <div class="col-xs-12 col-md-6">
                                 <label for="items[{{ $item->id }}][unit_price]">{{ __('web.unit_price_for_each_item_usd') }}</label>
-                                <input class="item_price" step="0.01" data-quantity="{{ $item->quantity }}" data-itemid="{{ $item->id }}" placeholder="{{ __('web.unit_price_for_each_item_usd') }}" type="number" min="1" 
+                                <input class="item_price" step="0.01" data-quantity="{{ $item->quantity }}" data-itemid="{{ $item->id }}"  type="number" min="1" 
                                 id="items[{{ $item->id }}][unit_price]" name="items[{{ $item->id }}][unit_price]" 
                                 value="{{ old('items.'.$item->id.'.unit_price') ?? $proposal?->items()->where('item_id', $item->id)->first()->price }}" 
                                 onchange="return calculateTotal(this, '{{ $item->quantity }}', '{{ $item->id }}');">
@@ -118,7 +118,7 @@
                         <div class="collapse" id="specs_{{ $item->id }}">
                             <div class="row proposal-input-main col-xs-12 input-item">
                                 <label for="items[{{ $item->id }}][seller_item_specs]">{{ __('web.technical_specs_by_seller_optional') }}</label>
-                                <textarea name="items[{{ $item->id }}][seller_item_specs]" id="items[{{ $item->id }}][seller_item_specs]" placeholder="{{ __('web.technical_specs_by_seller_optional') }}"></textarea>
+                                <textarea name="items[{{ $item->id }}][seller_item_specs]" id="items[{{ $item->id }}][seller_item_specs]"></textarea>
                             </div>
                             <label>{{ __('web.technical_specifications') }}</label><br>
                             {{ $item->specs }}
