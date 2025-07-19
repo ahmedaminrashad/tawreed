@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="col-xs-12 input-item">
-                            <p>Country</p>
+                            <p>{{ __('web.country') }}</p>
                             <select id="country_id" name="country_id">
                                 <option value="">{{ __('web.select_country') }}</option>
                                 @foreach($countries as $id => $name)

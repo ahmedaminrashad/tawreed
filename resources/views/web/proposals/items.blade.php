@@ -61,8 +61,9 @@
         @endif
 
         @if ($errors->any())
+        
         <div class="col-xs-12 error" style="margin-top: 15px">
-            <p style="color: red;">Error in Adding Tender Item(s)</p>
+            <p style="color: red;">{{ __('web.error_adding_tender_items') }}</p>
         </div>
         @endif
 
@@ -81,42 +82,45 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>{{ __('web.number_sign') }}</th>
                                     <th>{{ __('web.item_name') }}</th>
                                     <th>{{ __('web.unit') }}</th>
                                     <th>{{ __('web.quantity') }}</th>
-                                    <th>-</th>
+                                    <th>{{ __('web.dash') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td data-label="#">{{ $key + 1 }}</td>
+                                    <td data-label="{{ __('web.number_sign') }}">{{ $key + 1 }}</td>
                                     <td data-label="{{ __('web.item_name') }}">{{ $item->name }}</td>
                                     <td data-label="{{ __('web.unit') }}">{{ $item->unit->translate('ar')->name }}</td>
                                     <td data-label="{{ __('web.quantity') }}">{{ $item->quantity }}</td>
-                                    <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs_{{ $item->id }}"></td>
+                                    <td data-label="{{ __('web.dash') }}" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs_{{ $item->id }}"></td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <div class="row proposal-input-main">
                             <div class="col-xs-12 col-md-6">
-                                <input class="item_price" data-quantity="{{ $item->quantity }}" data-itemid="{{ $item->id }}" placeholder="Unit Price for each Item (USD)" type="number" min="1" 
+                                <label for="items[{{ $item->id }}][unit_price]">{{ __('web.unit_price_for_each_item_usd') }}</label>
+                                <input class="item_price" step="0.01" data-quantity="{{ $item->quantity }}" data-itemid="{{ $item->id }}" placeholder="{{ __('web.unit_price_for_each_item_usd') }}" type="number" min="1" 
                                 id="items[{{ $item->id }}][unit_price]" name="items[{{ $item->id }}][unit_price]" 
                                 value="{{ old('items.'.$item->id.'.unit_price') ?? $proposal?->items()->where('item_id', $item->id)->first()->price }}" 
                                 onchange="return calculateTotal(this, '{{ $item->quantity }}', '{{ $item->id }}');">
                             </div>
 
                             <div class="col-xs-12 col-md-6">
-                                <input placeholder="Total Item Price (USD)" type="text" id="unit_total_price_{{ $item->id }}" readonly>
+                                <label for="unit_total_price_{{ $item->id }}">{{ __('web.total_item_price_usd') }}</label>
+                                <input placeholder="{{ __('web.total_item_price_usd') }}" type="text" id="unit_total_price_{{ $item->id }}" readonly>
                             </div>
                         </div>
 
                         <div class="collapse" id="specs_{{ $item->id }}">
                             <div class="row proposal-input-main col-xs-12 input-item">
-                                <textarea name="items[{{ $item->id }}][seller_item_specs]" id="items[{{ $item->id }}][seller_item_specs]" placeholder="Technical Specifications By Seller (Optional)"></textarea>
+                                <label for="items[{{ $item->id }}][seller_item_specs]">{{ __('web.technical_specs_by_seller_optional') }}</label>
+                                <textarea name="items[{{ $item->id }}][seller_item_specs]" id="items[{{ $item->id }}][seller_item_specs]" placeholder="{{ __('web.technical_specs_by_seller_optional') }}"></textarea>
                             </div>
-                            <label>Technical Specifications</label><br>
+                            <label>{{ __('web.technical_specifications') }}</label><br>
                             {{ $item->specs }}
                         </div>
 
@@ -149,7 +153,7 @@
     });
 
     function calculateTotal(unitPrice, quantity, item) {
-        var price = parseInt(unitPrice.value, 10);
+        var price = parseFloat(unitPrice.value, 10);
         var total = price * quantity;
         $('#unit_total_price_' + item).val(total);
     }

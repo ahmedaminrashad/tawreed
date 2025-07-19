@@ -159,14 +159,14 @@
 
                     <div class="col-xs-6">
                         <img src="{{ asset('/assets/front/img/12.svg') }}">
-                        <h5>Project Name</h5>
+                        <h5>{{ __('web.project_name') }}</h5>
                         <h3>{{ $tender->project }}</h3>
                     </div>
                 </div>
 
                 <div class="review-item map-section col-xs-12 remove-padding">
                     <div class="review-item-title col-xs-12">
-                        <h4>Address</h4>
+                        <h4>{{ __('web.address') }}</h4>
                     </div>
                     <div class="col-xs-12">
                         <div class="col-xs-12 remove-padding">

@@ -87,6 +87,12 @@ class ProposalController extends Controller
 
     public function show(Proposal $proposal)
     {
+        // can access by tender owner or proposal owner  only
+        $userId = auth()->id();
+        if ($proposal->user_id !== $userId && $proposal->tender->user_id !== $userId) {
+            abort(403, __('web.unauthorized_access_to_proposal'));
+        }
+
         return view('web.proposals.show', compact('proposal'));
     }
 

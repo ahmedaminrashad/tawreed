@@ -11,39 +11,39 @@
 <div class="container-fluid body remove-padding">
     <div class="container stie-map">
         <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('home') }}">{{ __('web.home') }}</a></li>
             <li><span>/</span></li>
-            <li><a href="{{ route('tenders.index') }}">Tenders</a></li>
+            <li><a href="{{ route('tenders.index') }}">{{ __('web.tenders') }}</a></li>
             <li><span>/</span></li>
-            <li><a href="{{ route('tenders.show', ['tender' => $tender->id]) }}">Show Tender - {{ $tender->subject }}</a></li>
+            <li><a href="{{ route('tenders.show', ['tender' => $tender->id]) }}">{{ __('web.show_tender') }} - {{ $tender->subject }}</a></li>
             <li><span>/</span></li>
             <li>
-                <p>Create Proposal - Review Proposal</p>
+                <p>{{ __('web.create_proposal') }} - {{ __('web.review_proposal') }}</p>
             </li>
         </ul>
     </div>
 
     <div class="container remove-padding add-tender-main add-tender-review">
         <div class="col-xs-12">
-            <h1>Send Proposal to <span>( {{ $tender->subject . ' . ' . $tender->tender_uuid }} )</span></h1>
+            <h1>{{ __('web.send_proposal_to') }} <span>( {{ $tender->subject . ' . ' . $tender->tender_uuid }} )</span></h1>
         </div>
         <div class="col-xs-12 tender-steps-head">
             <div class="col-md-4 done">
                 <span><i class="ri-check-line"></i></span>
-                <h4>Item(s) Price</h4>
-                <p>Unit Price for each Item</p>
+                <h4>{{ __('web.item_price') }}</h4>
+                <p>{{ __('web.unit_price_for_each_item') }}</p>
                 <i class="ri-arrow-right-s-line"></i>
             </div>
             <div class="col-md-4 done">
                 <span><i class="ri-check-line"></i></span>
-                <h4>General info</h4>
-                <p>Add Details of your Proposal</p>
+                <h4>{{ __('web.general_info') }}</h4>
+                <p>{{ __('web.add_details_of_proposal') }}</p>
                 <i class="ri-arrow-right-s-line"></i>
             </div>
             <div class="col-md-4 active">
                 <span>3</span>
-                <h4>Preview</h4>
-                <p>Review your Proposal info before Publish</p>
+                <h4>{{ __('web.preview') }}</h4>
+                <p>{{ __('web.review_proposal_info_before_publish') }}</p>
                 <i class="ri-arrow-right-s-line"></i>
             </div>
         </div>
@@ -51,8 +51,8 @@
         <div class="col-md-8">
             <div class="review-item col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12">
-                    <h4>Description</h4>
-                    <a href="#">Edit <i class="ri-pencil-line"></i></a>
+                    <h4>{{ __('web.description') }}</h4>
+                    <a href="#">{{ __('web.edit') }} <i class="ri-pencil-line"></i></a>
                 </div>
                 <div class="col-xs-12">
                     <p>{{ $proposal->proposal_desc }}</p>
@@ -61,8 +61,8 @@
 
             <div class="review-item col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12">
-                    <h4>Items list <span>( {{ $proposal->items()->count() }} items )</span></h4>
-                    <a href="#">Edit <i class="ri-pencil-line"></i></a>
+                    <h4>{{ __('web.items_list') }} <span>( {{ $proposal->items()->count() }} {{ __('web.items') }} )</span></h4>
+                    <a href="#">{{ __('web.edit') }} <i class="ri-pencil-line"></i></a>
                 </div>
 
                 @foreach($proposal->items as $key => $item)
@@ -75,7 +75,7 @@
                                 <th>{{__('web.unit')}}</th>
                                 <th>{{__('web.price')}}</th>
                                 <th>{{__('web.quantity')}}</th>
-                                <th>Total Price</th>
+                                <th>{{ __('web.total_price') }}</th>
                                 <th>-</th>
                             </tr>
                         </thead>

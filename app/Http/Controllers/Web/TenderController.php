@@ -50,13 +50,19 @@ class TenderController extends Controller
 
     public function show(Tender $tender)
     {
-        $proposalsCount = $tender->proposals()->count();
+         $proposalsCount = $tender->proposals()->count();
         
         return view('web.tenders.show', compact('tender', 'proposalsCount'));
     }
 
     public function showProposals(Tender $tender)
     {
+        if (auth()->id() === $tender->user_id) {
+            // Tender owner: get all proposals for this tender
+            $data['all'] = true;
+        } else {
+            $data['user_id'] = auth()->id();
+        }
         $data['tenderId'] = $tender->id;
         $proposalsCount = $tender->proposals()->count();
         $proposals = $this->proposalService->statusList($data);

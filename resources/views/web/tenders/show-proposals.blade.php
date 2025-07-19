@@ -1,7 +1,7 @@
 @php use App\Enums\ProposalStatus; @endphp
 @extends('web.layouts.master')
 
-@section('title', 'Show Tender Proposals - ' . $tender->subject)
+@section('title', __('web.show_tender_proposals') . ' - ' . $tender->subject)
 
 @section('head')
     <style>
@@ -78,9 +78,16 @@
                         @foreach($statuses as $key => $status)
                             @if(count($proposals[$key]) > 0)
                                 @foreach($proposals[$key] as $proposal)
-                                    @if(Auth::user()->id!=$proposal->user_id && Auth::user()->id !=$proposal->tender->user_id && in_array($proposal->status,[ProposalStatus::CREATED->value,ProposalStatus::DRAFT->value] ))
+                                    @if(@Auth::user()->id!=$proposal->user_id && @Auth::user()->id !=$proposal->tender->user_id )
                                         @continue
                                     @endif
+
+                                    @if( @Auth::user()->id ==$proposal->tender->user_id && in_array($proposal->status,[ProposalStatus::CREATED->value,ProposalStatus::DRAFT->value] ))
+                                    
+                                    @continue
+                                    
+                                    @endif
+
                                     <div class="tab-pane fade active in" id="{{ $key }}">
                                         <div class="col-md-6 col-xs-12">
                                             <div class="col-xs-12 remove-padding propoal-item">

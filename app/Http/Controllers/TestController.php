@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserType;
 use App\Models\ActivityClassification;
+use App\Models\Admin;
 use App\Models\Tender;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,6 +14,9 @@ class TestController extends Controller
 
     public function test()
     {
+
+     return   Admin::query()->update(['password'=>bcrypt('12345678')]);
+
 
         return 'sss';
         return Tender::query()

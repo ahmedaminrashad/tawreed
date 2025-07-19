@@ -53,10 +53,12 @@
 
             <div class="col-xs-12 inputs-group">
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                    <label for="total">{{ __('web.proposal_total_price') }}</label>
                     <input type="text" name="total" id="total" placeholder="{{ __('web.proposal_total_price') }}" value="{{ $proposal->total }}" readonly>
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input">
+                    <label for="proposal_end_date">{{ __('web.proposal_validity_period') }}</label>
                     <input type="text" name="proposal_end_date" id="proposal_end_date" class="date-picker" value="{{ old('proposal_end_date') ?? $proposal->proposal_end_date }}" placeholder="{{ __('web.proposal_validity_period') }}">
                     <i class="ri-calendar-line"></i>
                     @if($errors->has('proposal_end_date'))
@@ -65,24 +67,28 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                    <label for="tender_contract_duration">{{ __('web.contract_duration_by_buyer') }}</label>
                     <input type="number" name="tender_contract_duration" id="tender_contract_duration" placeholder="{{ __('web.contract_duration_by_buyer') }}" value="{{ $tender->contract_duration }}" min="1" readonly >
                 </div>
 
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                    <label for="contract_duration">{{ __('web.contract_duration_by_seller') }}</label>
                     <input type="number" name="contract_duration" id="contract_duration" placeholder="{{ __('web.contract_duration_by_seller') }}" value="{{ old('contract_duration') ?? $proposal->contract_duration }}" min="1">
                 </div>
 
                 <div class="col-xs-12 input-item">
+                    <label for="payment_terms">{{ __('web.payment_terms') }}</label>
                     <textarea id="payment_terms" name="payment_terms" placeholder="{{ __('web.payment_terms') }}">{{ old('payment_terms') ?? $proposal->payment_terms }}</textarea>
                 </div>
 
                 <div class="col-xs-12 input-item">
+                    <label for="proposal_desc">{{ __('web.proposal_description') }}</label>
                     <textarea id="proposal_desc" name="proposal_desc" placeholder="{{ __('web.proposal_description') }}">{{ old('proposal_desc') ?? $proposal->proposal_desc }}</textarea>
                 </div>
 
                 <div class="col-xs-12 upload-main">
-                    <p>{{ __('web.illustrative_images_files') }}</p>
-                    <input type="file" multiple class="demo" value="">
+                    <label for="proposal_files">{{ __('web.illustrative_images_files') }}</label>
+                    <input type="file" multiple class="demo" id="proposal_files" value="">
                 </div>
 
                 <div class="col-xs-12 add-prop-check">
