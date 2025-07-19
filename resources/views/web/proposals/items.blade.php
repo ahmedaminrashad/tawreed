@@ -111,7 +111,7 @@
 
                             <div class="col-xs-12 col-md-6">
                                 <label for="unit_total_price_{{ $item->id }}">{{ __('web.total_item_price_usd') }}</label>
-                                <input placeholder="{{ __('web.total_item_price_usd') }}" type="text" id="unit_total_price_{{ $item->id }}" readonly>
+                                <input  type="text" id="unit_total_price_{{ $item->id }}" readonly>
                             </div>
                         </div>
 
