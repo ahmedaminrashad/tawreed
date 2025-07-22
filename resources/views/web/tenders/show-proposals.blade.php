@@ -83,9 +83,9 @@
                                     @endif
 
                                     @if( @Auth::user()->id ==$proposal->tender->user_id && in_array($proposal->status,[ProposalStatus::CREATED->value,ProposalStatus::DRAFT->value] ))
-                                    
-                                    @continue
-                                    
+
+                                        @continue
+
                                     @endif
 
                                     <div class="tab-pane fade active in" id="{{ $key }}">
@@ -109,14 +109,26 @@
                                                     <span>{{ $proposal->getStatusLabel() }}</span></p>
                                                 <h4>{{__('web.proposal_validity_period')}} :
                                                     <b>{{ $proposal->proposal_end_date }}</b></h4>
-                                                <h3><span
+                                                <h3>
+
+                                                    <span
                                                         class="tag {{ $status }}-tag">{{ $proposal->getStatusLabel() }}</span>{{__('web.contract_duration_by_seller')}}
                                                     : <b> {{ $proposal->contract_duration }} {{__('web.days')}}</b></h3>
-                                                <div class="col-xs-12 remove-padding propoal-img">
-                                                    <img src="{{ asset('/assets/front/img/1.png') }}">
-                                                    <h6>{{ $proposal->tender->user->displayed_name }}
-                                                        <span>{{ $proposal->tender->user->user_type }}</span></h6>
-                                                </div>
+
+                                                @if(@Auth::user()->id !=$proposal->tender->user_id)
+                                                    <div class="col-xs-12 remove-padding propoal-img">
+                                                        <img src="{{ asset('/assets/front/img/1.png') }}">
+                                                        <h6>{{ $proposal->tender->user->displayed_name }}
+                                                            <span>{{ $proposal->tender->user->user_type }}</span></h6>
+                                                    </div>
+
+                                                @else
+                                                    <div class="col-xs-12 remove-padding propoal-img">
+                                                        <img src="{{ asset('/assets/front/img/1.png') }}">
+                                                        <h6>{{ $proposal->user->displayed_name }}
+                                                            <span>{{ $proposal->user->user_type }}</span></h6>
+                                                    </div>
+                                                @endif
                                                 <h5>
                                                     <span>{{__('web.total_price')}} </span><br>
                                                     <b>{{ $proposal->total_with_vat }} {{__('web.sar')}}</b>

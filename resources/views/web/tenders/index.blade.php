@@ -222,7 +222,12 @@
         <div class="col-md-8 col-xs-12 filter-cont" id="tenders_div">
             @foreach($tenders as $tender)
             <div class="col-xs-12 Tender-item">
-                <h4><a href="{{ route('tenders.show', ['tender' => $tender]) }}">{{ $tender->subject }}</a></h4>
+
+                <h4><a href="{{ route('tenders.show', ['tender' => $tender]) }}">{{ $tender->subject }}</a>
+                    @if($tender->status==\App\Enums\TenderStatus::AWARDED)
+                        <a href="#awarded_div" class="award"><i class="ri-award-fill"></i> {{ $tender->status->getLabel() }} </a>
+                    @endif
+                </h4>
                 <span>{{ $tender->workCategoryClassification->translate('ar')->name }}</span>
                 <h3>{{ __('web.contract_duration') }} :<span>{{ $tender->contract_duration }} {{ __('web.days') }}</span></h3>
                 <div class="clearfix"></div>

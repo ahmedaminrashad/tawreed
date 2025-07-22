@@ -400,7 +400,7 @@ header.member-head .main-menu a {
 .tabbed {
     overflow-x: auto;
     max-height: calc(100vh - 454px);
-   
+
 }
 
 .tabbed > ul li {
@@ -416,8 +416,8 @@ header.member-head .main-menu a {
 .tab > label {
 
 	color: var(--gray5);
-	font-size: 14px; 
-	cursor: pointer;	
+	font-size: 14px;
+	cursor: pointer;
 	transition: all 0.3s;
     font-weight: 300 !important;
     margin-left: 10px;
@@ -679,7 +679,7 @@ footer .copy-main ul li a:hover {
 }
 
 .modal p a {
- 
+
     color: var(--dark);
     text-decoration: none;
 
@@ -734,7 +734,7 @@ height: 24px;
 #signUp .col-md-6 h5 {
    font-size: 14px;
    font-weight: 400;
-   color: var(--gray6); 
+   color: var(--gray6);
 }
 
 #signUp .radio-span {
@@ -797,7 +797,7 @@ height: 24px;
 }
 .modal h6 {
     margin-bottom: 15px;
-} 
+}
 
 
 .checkbox-main {
@@ -916,19 +916,19 @@ height: 24px;
     width: 10px;
   }
   .terms h5::-webkit-scrollbar-track {
-    background: var(--gray7); 
+    background: var(--gray7);
   }
 
   .terms h5::-webkit-scrollbar-thumb {
-    background: var(--green); 
+    background: var(--green);
   }
 
   .reset-model h4 {
     text-align: center;
     margin-bottom: 30px;
   }
-  
- 
+
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -968,7 +968,7 @@ z-index: 1;
     color: var(--white);
     font-size: 72px;
     font-weight: 500;
-   
+
 }
 
 .intor-main p {
@@ -977,7 +977,7 @@ z-index: 1;
     font-weight: 500;
     margin-top: 30px;
     margin-bottom: 30px;
-   
+
 }
 
 
@@ -1099,7 +1099,7 @@ margin-left: 7.5px;
 }
 
 .title {
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
 }
 
 .title h1 {
@@ -1165,8 +1165,8 @@ margin-left: 7.5px;
     text-decoration: none;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
-            line-clamp: 2; 
+    -webkit-line-clamp: 2;
+            line-clamp: 2;
     -webkit-box-orient: vertical;
     line-height: 30px;
     margin-bottom: 10px;
@@ -1521,7 +1521,7 @@ margin-top: 20px;
     font-size: 12px;
     color: var(--gray6);
     font-weight: 500;
-    
+
 }
 .balance-main h6 span {
     font-size: 14px;
@@ -1604,24 +1604,24 @@ margin-top: 20px;
     height: 0;
     width: 0;
   }
-  
+
   .filter-item .checkmark {
     left: 0;
     right: auto;
     border: 2px solid var(--gray6);
   }
-  
+
   /* When the checkbox is checked, add a blue background */
   .checkbox-item input:checked ~ .checkmark {
     background-color: var(--green);
     border: 2px solid var(--green);
   }
-  
+
   /* Show the checkmark when checked */
   .checkbox-item input:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   /* Style the checkmark/indicator */
   .checkbox-item .checkmark:after {
     right: 9px;
@@ -1841,7 +1841,7 @@ border: 1px solid var(--dark);
 .tender-steps-head > div.done span {
     border: 1px solid var(--green);
     font-size: 18px;
-    
+
 }
 
 .tender-steps-head > div.done span i {
@@ -1972,7 +1972,7 @@ width: 100% !important;
 
 
 .add-tender-main .input-item.error .select2-container--default .select2-selection--single{
-    border: 1px solid red; 
+    border: 1px solid red;
 }
 
 
@@ -2153,7 +2153,7 @@ text-decoration: none;
     border-collapse: collapse;
     width: 100%;
   }
-  
+
   .review-item th, .review-item td {
     text-align: right;
     padding: 8px;
@@ -2356,7 +2356,7 @@ table {
 .review-item .col-xs-12.text-center a:hover {
     background-color: var(--green);
     color: var(--white);
-    border: 1px solid var(--green); 
+    border: 1px solid var(--green);
 }
 
 
@@ -2615,13 +2615,13 @@ table {
     float: left;
     margin-bottom: 0;
   }
-  
-  .switch-main .switch input { 
+
+  .switch-main .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
-  
+
   .switch-main .slider {
     position: absolute;
     cursor: pointer;
@@ -2633,7 +2633,7 @@ table {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .switch-main .slider:before {
     position: absolute;
     content: "";
@@ -2645,26 +2645,26 @@ table {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .switch-main input:checked + .slider {
     background-color: var(--green);
   }
-  
+
   .switch-main input:focus + .slider {
     box-shadow: 0 0 1px var(--green);
   }
-  
+
   .switch-main input:checked + .slider:before {
     -webkit-transform: translateX(-26px);
     -ms-transform: translateX(-26px);
     transform: translateX(-26px);
   }
-  
+
   /* Rounded sliders */
   .switch-main .slider.round {
     border-radius: 34px;
   }
-  
+
   .switch-main .slider.round:before {
     border-radius: 50%;
   }
@@ -2776,7 +2776,7 @@ table {
 #change-email-tab .otp-main .col-xs-2{
     padding-right: 2.5px;
     padding-left: 2.5px;
-  
+
 }
 #change-email-tab .otp-main .col-xs-2 input {
     text-align: center;
@@ -2789,7 +2789,7 @@ table {
 }
 
 #change-email-tab a:hover {
-    color: var(--green); 
+    color: var(--green);
 }
 
 
@@ -2952,9 +2952,9 @@ text-decoration: underline;
 }
 
 .profile-header a.rate-link i {
-    margin-left: 10px;  
+    margin-left: 10px;
     margin-right: 10px;
-    color: rgba(255, 193, 82, 1);  
+    color: rgba(255, 193, 82, 1);
     text-decoration: none !important ;
 }
 
@@ -3090,7 +3090,7 @@ font-weight: 300;
 .user-main-info .address-item h4 a {
     text-decoration: underline;
     color: var(--dark);
-    
+
 }
 .user-main-info .address-item h4 a:hover {
     color: var(--green);
@@ -3235,7 +3235,7 @@ float: left;
     padding-bottom: 0;
     position: relative;
     margin-top: 24px;
-    
+
 }
 .review-item-rate img {
     height: 43px;
@@ -3325,7 +3325,7 @@ a.rate-more-btn:hover {
 .profile-main .jquery-uploader-select > .upload-button a:after {
     content: "Upload";
     font-size: 14px;
-} 
+}
 
 .jquery-uploader-preview-action {
     opacity: 1 !important;
@@ -3508,11 +3508,11 @@ color: var(--white);
 }
 
 .attched-files h3 {
-    
+
         font-size: 18px;
         font-weight: 500;
         margin-bottom: 20px;
-  
+
 }
 .attched-files p {
     margin-bottom: 10px;
@@ -3538,7 +3538,7 @@ color: var(--white);
 .attched-files .file-cont h5 {
     font-weight: normal;
     font-size: 16px;
-   
+
 }
 
 .attched-files-item {
@@ -3598,7 +3598,7 @@ color: var(--white);
 
 
 .edit-profile-main .input-item  .jquery-uploader-select-card {
- margin-top: 0;   
+ margin-top: 0;
 }
 
 .edit-profile-main .input-item .jquery-uploader-card {
@@ -3696,12 +3696,12 @@ color: var(--white);
     width: 5px;
 
 }
-  
+
   /* Track */
   .follow-users-list ul::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
   }
-   
+
   /* Handle */
   .follow-users-list ul::-webkit-scrollbar-thumb {
     background: var(--gray6);
@@ -3712,7 +3712,7 @@ color: var(--white);
     -ms-border-radius:8px ;
     -o-border-radius:8px ;
 }
-  
+
 
 
 
@@ -3945,7 +3945,7 @@ margin-bottom: 10px;
 .wallet-main h2 {
     font-size: 20px;
     margin-bottom: 20px;
-} 
+}
 
 .wallet-main .blance-side-bar  h1 {
     font-size: 32px;
@@ -3999,14 +3999,14 @@ margin-bottom: 10px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
 }
-  
+
   /* Hide the browser's default radio button */
   .container-radio input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
-  
+
   /* Create a custom radio button */
   .checkmark-radio {
     position: absolute;
@@ -4017,29 +4017,29 @@ margin-bottom: 10px;
     background-color: #eee;
     border-radius: 50%;
   }
-  
+
   /* On mouse-over, add a grey background color */
   .container-radio:hover input ~ .checkmark-radio {
     background-color: #ccc;
   }
-  
+
   /* When the radio button is checked, add a blue background */
   .container-radio input:checked ~ .checkmark-radio {
     background-color: var(--green);
   }
-  
+
   /* Create the indicator (the dot/circle - hidden when not checked) */
   .checkmark-radio:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   /* Show the indicator (dot/circle) when checked */
   .container-radio input:checked ~ .checkmark-radio:after {
     display: block;
   }
-  
+
   /* Style the indicator (dot/circle) */
   .container-radio .checkmark-radio:after {
        top: 6px;
@@ -4163,7 +4163,7 @@ margin-bottom: 30px;
     top: 8px;
 }
 
-.select2-dropdown.feedback-select.select2-dropdown--below {   
+.select2-dropdown.feedback-select.select2-dropdown--below {
     right: 0;
     top: 0;
 }
@@ -4210,7 +4210,7 @@ margin-bottom: 30px;
     margin-top: 30px;
     text-align: center;
     }
-    
+
     #feedback-done h2 {
         font-size: 28px;
     font-weight: bold;
@@ -4218,11 +4218,11 @@ margin-bottom: 30px;
     text-align: center;
     margin-bottom: 30px;
     }
-    
+
     #feedback-done img {
         height: 100px;
     }
-    
+
     #feedback-done button {
         padding-left: 10px;
         padding-right: 10px;
@@ -4279,9 +4279,9 @@ margin-bottom: 30px;
 }
 .upgrade-payment .container-radio input:checked ~ .checkmark-radio {
     background-color: var(--dark);
-  } 
+  }
 
-    
+
   .container-box {
     display: block;
     position: relative;
@@ -4295,7 +4295,7 @@ margin-bottom: 30px;
     user-select: none;
     font-weight: normal;
   }
-  
+
   /* Hide the browser's default checkbox */
   .container-box input {
     position: absolute;
@@ -4304,7 +4304,7 @@ margin-bottom: 30px;
     height: 0;
     width: 0;
   }
-  
+
   /* Create a custom checkbox */
   .checkmark-box {
     position: absolute;
@@ -4319,29 +4319,29 @@ margin-bottom: 30px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
 }
-  
+
   /* On mouse-over, add a grey background color */
   .container-box:hover input ~ .checkmark-box {
     background-color: #ccc;
   }
-  
+
   /* When the checkbox is checked, add a blue background */
   .container-box input:checked ~ .checkmark-box {
     background-color: var(--green);
   }
-  
+
   /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark-box:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   /* Show the checkmark when checked */
   .container-box input:checked ~ .checkmark-box:after {
     display: block;
   }
-  
+
   /* Style the checkmark/indicator */
   .container-box .checkmark-box:after {
     right: 8px;
@@ -4534,12 +4534,12 @@ top: 20px;
     width: 5px;
 
 }
-  
+
   /* Track */
   .Transactions-main ul::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
   }
-   
+
   /* Handle */
   .Transactions-main ul::-webkit-scrollbar-thumb {
     background: var(--gray6);
@@ -4894,11 +4894,11 @@ a.more:hover  {
     background-color: var(--dark);
     color: var(--white);
 }
- 
+
 .proposal-model .modal-content{
     padding: 30px;
     padding-bottom: 62px;
-  
+
 }
 .proposal-model span.close {
     margin-top: -40px;
@@ -4976,6 +4976,10 @@ a.more:hover  {
 .proposal-d-main h1 a {
     text-decoration: underline;
     color: var(--green);
+}
+
+ .award{
+    color: var(--green) !important;
 }
 
 .proposal-d-main .proposal-img-main {
@@ -5106,7 +5110,7 @@ float: none;
 .proposal-tabs-first {
     margin-top: 30px;
     border-bottom: 1px solid var(--gray8);
-    
+
     margin-bottom: 15px;
 }
 .proposal-tabs-first li {
@@ -5120,7 +5124,7 @@ float: none;
     color: var(--gray5);
     text-decoration: none;
     font-size: 16px;
- 
+
 }
 
 .proposal-tabs-first li a:hover {
@@ -5408,7 +5412,7 @@ margin-bottom: 15px;
     top: -27px;
     left: -10px;
   }
-  
+
   /* Hide the browser's default checkbox */
   .container-tender-check input {
     position: absolute;
@@ -5417,7 +5421,7 @@ margin-bottom: 15px;
     height: 0;
     width: 0;
   }
-  
+
   /* Create a custom checkbox */
   .container-tender-check .checkmark-tender-check{
     position: absolute;
@@ -5432,26 +5436,26 @@ margin-bottom: 15px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
 }
-  
- 
-  
+
+
+
   /* When the checkbox is checked, add a blue background */
   .container-tender-check input:checked ~ .checkmark-tender-check {
     background-color: var(--green);
   }
-  
+
   /* Create the checkmark/indicator (hidden when not checked) */
   .container-tender-check .checkmark-tender-check:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   /* Show the checkmark when checked */
   .container-tender-check input:checked ~ .checkmark-tender-check:after {
     display: block;
   }
-  
+
   /* Style the checkmark/indicator */
   .container-tender-check .checkmark-tender-check:after {
     right: 9px;
@@ -5508,7 +5512,7 @@ height: 22px;
     margin-left: 0;
     padding-left: 0;
     display: block;
-    
+
 }
 
 .sort-dropdown .dropdown-menu li a {
@@ -5566,7 +5570,7 @@ margin-top: 20px;
 .tenders-profile-main .Tender-item .tender-link:hover {
     color: var(--white);
     border: 1px solid var(--green);
-    
+
 }
 
 .tenders-profile-main h2 {
@@ -5742,7 +5746,7 @@ color: #fff !important;
 .Inquiry-item ul li a:hover {
     border: 1px solid var(--green);
     background-color: var(--green);
-    color: var(--white); 
+    color: var(--white);
 }
 
 .Inquiry-cont a.add-qustion-btn {
@@ -5831,12 +5835,12 @@ margin-top: -24px;
 
 }
 .rate > input:checked ~ label {
-    color: #ffc700;  
-      
+    color: #ffc700;
+
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
+    color: #deb217;
 
 }
 .rate > input:checked + label:hover,
@@ -6101,7 +6105,7 @@ margin-top: 12px;
 
   .main-menu {
     padding: 0;
-  } 
+  }
   header .main-menu ul li a {
     font-size: 14px;
   }
@@ -6188,14 +6192,14 @@ header.member-head img {
         transition: -webkit-transform 0.6s cubic-bezier(0.56, 0.1, 0.34, 0.91);
         transition: transform 0.6s cubic-bezier(0.56, 0.1, 0.34, 0.91);
         transition: transform 0.6s cubic-bezier(0.56, 0.1, 0.34, 0.91), -webkit-transform 0.6s cubic-bezier(0.56, 0.1, 0.34, 0.91);
-    
+
 }
 
 .mobile-menu-container.open-menu {
-  
+
         -webkit-transform: translateX(0%);
         transform: translateX(0%);
-    
+
 }
 
 header .main-menu ul li {
@@ -6237,7 +6241,7 @@ footer .copy-main ul li {
     margin-right: 0;
     margin-left: 15px;
 }
- 
+
 footer .footer-menu {
     border-bottom: 1px solid var(--gray5);
     margin-bottom: 20px;
@@ -6297,7 +6301,7 @@ font-size: 16px;
     border: none;
     text-align: center;
     line-height: initial;
- 
+
 }
 
 .title {
@@ -6727,7 +6731,7 @@ aside.filter-main.open {
   }
 
 
-  
+
   table,
   thead,
   tbody,
@@ -6802,7 +6806,7 @@ aside.filter-main.open {
 .settings-list::-webkit-scrollbar {
     height: 10px;
   }
-  
+
   /* Track */
   .settings-list::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px var(--gray7);
@@ -6812,7 +6816,7 @@ aside.filter-main.open {
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
 }
-   
+
   /* Handle */
   .settings-list::-webkit-scrollbar-thumb {
     background: var(--green);
@@ -6822,7 +6826,7 @@ aside.filter-main.open {
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
 }
-  
+
 
 
 
