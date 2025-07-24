@@ -80,7 +80,7 @@
                 </div>    
                 @empty
                 <img src="{{ asset('/assets/front/img/47.svg') }}" />
-                <p>The is No Tenders Created for you Yet</p>    
+                <p>{{__('there_is_no_tender')}}</p>    
                 @endforelse
             {{-- </div> --}}
 

@@ -340,4 +340,9 @@ return [
     'show_tender_proposals' => 'عرض عروض المناقصة',
     'print' => 'طباعة',
     'country' => 'الدولة',
+    'in_progress'=>'قيد التنفيذ',
+    'awarded'=> 'منفذة',
+    'canceled'=> 'ملغية',
+    'there_is_no_tender'=> 'لا توجد مناقصات',
+
 ];
