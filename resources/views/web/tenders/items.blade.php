@@ -85,10 +85,12 @@
                     </h2>
                     @endif
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                        <input type="text" name="item[{{ $count }}][name]" id="item[{{ $count }}][name]" placeholder="{{ __('web.item_name') }}" value="{{ $item->name }}">
+                        <label for="item[{{ $count }}][name]">{{ __('web.item_name') }}</label>
+                        <input type="text" name="item[{{ $count }}][name]" id="item[{{ $count }}][name]" value="{{ $item->name }}">
                     </div>
 
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item unit_div  @if($errors->has('unit_id')) error @endif">
+                        <label for="item[{{ $count }}][unit_id]">{{ __('web.choose_measurement_unit') }}</label>
                         <select class=" Choose-country" name="item[{{ $count }}][unit_id]" id="item[{{ $count }}][unit_id]">
                             <option value="">{{ __('web.choose_measurement_unit') }}</option>
                             @foreach($units as $unitID => $unit)
@@ -101,32 +103,38 @@
                     </div>
 
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                        <input type="number" min="1" name="item[{{ $count }}][quantity]" id="item[{{ $count }}][quantity]" placeholder="{{ __('web.item_quantity') }}" value="{{ $item->quantity }}">
+                        <label for="item[{{ $count }}][quantity]">{{ __('web.item_quantity') }}</label>
+                        <input type="number" min="1" name="item[{{ $count }}][quantity]" id="item[{{ $count }}][quantity]" value="{{ $item->quantity }}">
                     </div>
 
                     <div class="col-xs-12 input-item">
-                        <textarea name="item[{{ $count }}][specs]" id="item[{{ $count }}][specs]" placeholder="{{ __('web.technical_specifications_optional') }}">{{ $item->specs }}</textarea>
+                        <label for="item[{{ $count }}][specs]">{{ __('web.technical_specifications_optional') }}</label>
+                        <textarea name="item[{{ $count }}][specs]" id="item[{{ $count }}][specs]">{{ $item->specs }}</textarea>
                     </div>
 
                     <div class="col-xs-12 upload-main">
-                        <p>{{ __('web.illustrative_images_and_files') }}</p>
+                        <label for="item[{{ $count }}][media]">{{ __('web.illustrative_images_and_files') }}</label>
                         <input type="file" multiple name="item[{{ $count }}][media][]" id="item[{{ $count }}][media]" class="demo1">
                     </div>
 
                 </div>
                 @empty
                 <div id="item_div_1" class="col-xs-12 inputs-group">
-                    <h2>{{ __('web.item') }} 1</h2>
+                    <h2>
+                        {{ __('web.item') }} 1
+                    </h2>
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                        <input type="text" name="item[1][name]" id="item[1][name]" placeholder="{{ __('web.item_name') }}">
+                        <label for="item[1][name]">{{ __('web.item_name') }}</label>
+                        <input type="text" name="item[1][name]" id="item[1][name]">
                     </div>
 
-                    <div class="col-md-6 col-xs-12 col-sm-12 input-item unit_div  @if($errors->has('unit_id')) error @endif"">
-                    <select class=" Choose-country" name="item[1][unit_id]" id="item[1][unit_id]">
-                        <option value="">{{ __('web.choose_measurement_unit') }}</option>
-                        @foreach($units as $unitID => $unit)
-                        <option value="{{ $unitID }}" @selected(old('item.1.unit_id')==$unitID)>{{ $unit }}</option>
-                        @endforeach
+                    <div class="col-md-6 col-xs-12 col-sm-12 input-item unit_div  @if($errors->has('unit_id')) error @endif">
+                        <label for="item[1][unit_id]">{{ __('web.choose_measurement_unit') }}</label>
+                        <select class="Choose-country" name="item[1][unit_id]" id="item[1][unit_id]">
+                            <option value="">{{ __('web.choose_measurement_unit') }}</option>
+                            @foreach($units as $unitID => $unit)
+                            <option value="{{ $unitID }}" @selected(old('item.1.unit_id')==$unitID)>{{ $unit }}</option>
+                            @endforeach
                         </select>
                         @if($errors->has('unit_id'))
                         <p>{{ $errors->first('unit_id') }}</p>
@@ -134,15 +142,17 @@
                     </div>
 
                     <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                        <input type="number" min="1" name="item[1][quantity]" id="item[1][quantity]" placeholder="{{ __('web.item_quantity') }}">
+                        <label for="item[1][quantity]">{{ __('web.item_quantity') }}</label>
+                        <input type="number" min="1" name="item[1][quantity]" id="item[1][quantity]">
                     </div>
 
                     <div class="col-xs-12 input-item">
-                        <textarea name="item[1][specs]" id="item[1][specs]" placeholder="{{ __('web.technical_specifications_optional') }}"></textarea>
+                        <label for="item[1][specs]">{{ __('web.technical_specifications_optional') }}</label>
+                        <textarea name="item[1][specs]" id="item[1][specs]"></textarea>
                     </div>
 
                     <div class="col-xs-12 upload-main">
-                        <p>{{ __('web.illustrative_images_and_files') }}</p>
+                        <label for="item[1][media]">{{ __('web.illustrative_images_and_files') }}</label>
                         <input type="file" multiple name="item[1][media][]" id="item[1][media]" class="demo1">
                     </div>
 
@@ -180,91 +190,116 @@
             dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
 
-        let ajaxConfig = {
-            ajaxRequester: function(config, uploadFile, pCall, sCall, eCall) {
-                let progress = 0
-                let interval = setInterval(() => {
-                    progress += 10;
-                    pCall(progress)
-                    if (progress >= 100) {
-                        clearInterval(interval)
-                        const windowURL = window.URL || window.webkitURL;
-                        sCall({
-                            data: windowURL.createObjectURL(uploadFile.file)
-                        })
-                    }
-                }, 300)
-            }
-        }
 
-        $(".demo1").uploader({
-            multiple: true
-            , ajaxConfig: ajaxConfig
-            , autoUpload: false
-        })
+
+
+            $(`.demo1`).uploader({
+                ajaxConfig: {
+                    url:  "{{route('tenders.items.store.file')}}",
+                    method: "post",
+                    paramsBuilder: function (uploaderFile) {
+                        let form = new FormData();
+                        form.append("file", uploaderFile.file)
+                        form.append("_token", "{{csrf_token()}}")
+                        return form
+                    },
+                    ajaxRequester: function (config, uploaderFile, progressCallback, successCallback, errorCallback) {
+                        $.ajax({
+                            url: config.url,
+                            contentType: false,
+                            processData: false,
+                            method: config.method,
+                            data: config.paramsBuilder(uploaderFile),
+                            success: function (response) {
+                                console.info('call success')
+                                console.info(response)
+                                successCallback(response)
+                            },
+                            error: function (response) {
+                                console.error("Error", response)
+                                errorCallback("Error")
+                            },
+                            xhr: function () {
+                                let xhr = new XMLHttpRequest();
+                                xhr.upload.addEventListener('progress', function (e) {
+                                    let progressRate = (e.loaded / e.total) * 100;
+                                    progressCallback(progressRate)
+                                })
+                                return xhr;
+                            }
+                        })
+                    },
+                    responseConverter: function (uploaderFile, response) {
+                        return {
+                            url: response?.data?.link, //make sure to return the image url
+                            name: null,
+                        }
+                    },
+                },
+                multiple: true,
+            }).on("file-remove",function(_,file) {
+                console.log(file.url)
+                var data = new FormData();
+                data.append( 'url', file.url);
+                data.append( 'tender', {{$tender->id}});
+                $.ajax({
+                    url: "{{route('tenders.items.store.file')}}",
+                    contentType: false,
+                    processData: false,
+                    method: 'post',
+                    data: data,
+                    success: function (response) {
+                        console.info('call success')
+                        console.info(response)
+                    }}
+                );
+            })
+
+
+
     });
 
     $(".add-item-btn").click(function() {
         let itemNumber = count + 1;
-        let item = `
-            <div id="item_div_${itemNumber}" class="col-xs-12 inputs-group">
-                <h2>
+        let item = `<div id="item_div_${itemNumber}" class="col-xs-12 inputs-group">
+           <h2>
                     {{ __('web.item') }} ${itemNumber}
                     <a href="javascript:void(0);" onclick="deleteDiv(${itemNumber});"><i class="ri-delete-bin-line"></i></a>
                 </h2>
-                <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                    <input type="text" name="item[${itemNumber}][name]" id="item[${itemNumber}][name]" placeholder="{{ __('web.item_name') }}">
-                </div>
-
-                <div class="col-md-6 col-xs-12 col-sm-12 input-item unit_div">
-                    <select class="Choose-country" name="item[${itemNumber}][unit_id]" id="item[${itemNumber}][unit_id]">
-                        <option value="">{{ __('web.choose_measurement_unit') }}</option>
-                        @foreach($units as $unitID => $unit)
-                        <option value="{{ $unitID }}">{{ $unit }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-md-6 col-xs-12 col-sm-12 input-item">
-                    <input type="number" min="1" name="item[${itemNumber}][quantity]" id="item[${itemNumber}][quantity]" placeholder="{{ __('web.item_quantity') }}">
-                </div>
-
-                <div class="col-xs-12 input-item">
-                    <textarea name="item[${itemNumber}][specs]" id="item[${itemNumber}][specs]" placeholder="{{ __('web.technical_specifications_optional') }}"></textarea>
-                </div>
-
-                <div class="col-xs-12 upload-main">
-                    <p>{{ __('web.illustrative_images_and_files') }}</p>
-                    <input type="file" multiple name="item[${itemNumber}][media][]" id="item[${itemNumber}][media]" class="demo1">
-                </div>
+            <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                <label for="item[${itemNumber}][name]">{{ __('web.item_name') }}</label>
+                <input type="text" name="item[${itemNumber}][name]" id="item[${itemNumber}][name]">
             </div>
-        `;
-
+            <div class="col-md-6 col-xs-12 col-sm-12 input-item unit_div">
+                <label for="item[${itemNumber}][unit_id]">{{ __('web.choose_measurement_unit') }}</label>
+                <select class="Choose-country" name="item[${itemNumber}][unit_id]" id="item[${itemNumber}][unit_id]">
+                    <option value="">{{ __('web.choose_measurement_unit') }}</option>
+                    @foreach($units as $unitID => $unit)
+                    <option value="{{ $unitID }}">{{ $unit }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6 col-xs-12 col-sm-12 input-item">
+                <label for="item[${itemNumber}][quantity]">{{ __('web.item_quantity') }}</label>
+                <input type="number" min="1" name="item[${itemNumber}][quantity]" id="item[${itemNumber}][quantity]">
+            </div>
+            <div class="col-xs-12 input-item">
+                <label for="item[${itemNumber}][specs]">{{ __('web.technical_specifications_optional') }}</label>
+                <textarea name="item[${itemNumber}][specs]" id="item[${itemNumber}][specs]"></textarea>
+            </div>
+            <div class="col-xs-12 upload-main">
+                <label for="item[${itemNumber}][media]">{{ __('web.illustrative_images_and_files') }}</label>
+                <input type="file" multiple name="item[${itemNumber}][media][]" id="item[${itemNumber}][media]" class="demo1">
+            </div>
+        </div>`;
         count = itemNumber;
-
-        $("#items_div").append(item);
+        $('#items_div').append(item);
 
         $('.Choose-country').select2({
             dropdownCssClass: "country-select",
             dir: "{{app()->getLocale() == 'ar'?'rtl':'ltr'}}"
         });
 
-        let ajaxConfig = {
-            ajaxRequester: function(config, uploadFile, pCall, sCall, eCall) {
-                let progress = 0
-                let interval = setInterval(() => {
-                    progress += 10;
-                    pCall(progress)
-                    if (progress >= 100) {
-                        clearInterval(interval)
-                        const windowURL = window.URL || window.webkitURL;
-                        sCall({
-                            data: windowURL.createObjectURL(uploadFile.file)
-                        })
-                    }
-                }, 300)
-            }
-        }
 
         $(".demo1").uploader({
             multiple: true

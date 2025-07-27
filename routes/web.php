@@ -122,6 +122,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('{tender}/items', [TenderController::class, 'storeItemsForm'])->name('items.form');
         // Store Tender Items Route
         Route::post('{tender}/items', [TenderController::class, 'storeItems'])->name('items.store');
+        Route::post('/item-file', [TenderController::class, 'storeItemFile'])->name('items.store.file');
         // Tender Review Route
         Route::get('{tender}/review', [TenderController::class, 'reviewTender'])->name('review');
         // Publish Tender Route

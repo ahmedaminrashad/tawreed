@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\ProposalMedia;
 
 class Proposal extends Model
 {
@@ -36,6 +37,11 @@ class Proposal extends Model
     public function items(): HasMany
     {
         return $this->hasMany(ProposalItem::class);
+    }
+
+    public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProposalMedia::class);
     }
 
     public function getProposalEndDateTextAttribute()

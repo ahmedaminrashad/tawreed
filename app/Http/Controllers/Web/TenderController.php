@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Tender\StoreTenderInfoRequest;
 use App\Http\Requests\Tender\StoreTenderItemRequest;
 use App\Models\Tender;
+use App\Models\TenderItemMedia;
 use App\Services\ActivityClassificationService;
 use App\Services\CountryService;
 use App\Services\ProposalService;
@@ -15,6 +16,8 @@ use App\Services\UnitService;
 use App\Services\WorkCategoryClassificationService;
 use App\Traits\CustomResponse;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class TenderController extends Controller
@@ -51,8 +54,23 @@ class TenderController extends Controller
     public function show(Tender $tender)
     {
          $proposalsCount = $tender->proposals()->count();
-        
+
         return view('web.tenders.show', compact('tender', 'proposalsCount'));
+    }
+
+
+    public function storeItemFile(Request $request)
+    {
+      $file=  uploadFile($request->file('file'));
+
+      TenderItemMedia::query()->create([
+          'tender_id' => $request->get('tender_id'),
+          'item_id' => $request->get('item_id'),
+          'file' => $file->id,
+      ]);
+
+      return $file;
+
     }
 
     public function showProposals(Tender $tender)
@@ -67,7 +85,7 @@ class TenderController extends Controller
         $proposalsCount = $tender->proposals()->count();
         $proposals = $this->proposalService->statusList($data);
         $statuses = $this->proposalService->listProposalStatus();
-        
+
         return view('web.tenders.show-proposals', compact('tender', 'proposalsCount', 'proposals', 'statuses'));
     }
 
@@ -107,7 +125,7 @@ class TenderController extends Controller
     // public function storeItems(Tender $tender, Request $request)
     public function storeItems(Tender $tender, StoreTenderItemRequest $request)
     {
-        // dd($request->all());
+         dd($request->all());
         $data = $request->validated();
         // dd($tender, $data);
 

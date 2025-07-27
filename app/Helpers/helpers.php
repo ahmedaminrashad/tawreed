@@ -1,10 +1,16 @@
 <?php
+
+use App\Models\File;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 function ordinal_suffix($num)
 {
     if ($num == 0) {
         return 0;
     }
-    
+
     $num = $num % 100; // protect against large numbers
     if ($num < 11 || $num > 13) {
         switch ($num % 10) {
@@ -18,3 +24,17 @@ function ordinal_suffix($num)
     }
     return $num . 'th';
 }
+function uploadFile($file): Model|Builder|null
+{
+    $destinationPath = File::$uploads_path;
+    $upload_success = Storage::disk('public')->put($destinationPath, $file);
+    info($upload_success);
+    if ($upload_success) {
+        return File::query()->create(['url' => basename($upload_success)]);
+    }
+
+    return null;
+
+
+}
+

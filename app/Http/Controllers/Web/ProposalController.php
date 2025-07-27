@@ -32,16 +32,26 @@ class ProposalController extends Controller
     // public function storeInfo(Tender $tender, Proposal $proposal, Request $request)
     public function storeInfo(Tender $tender, Proposal $proposal, StoreTenderProposalInfoRequest $request)
     {
-        // dd($request->all());
+        dd($request->all());
+        return request()->all();
         $data = $request->validated();
-        // dd($data);
-
         $data['proposal_end_date'] = Carbon::parse($data['proposal_end_date'])->format('Y-m-d');
 
         $result = $this->proposalService->update($proposal, $data);
 
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
+        }
+
+        // Handle file uploads
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $path = $file->store('proposals/' . $proposal->id, 'public');
+                \App\Models\ProposalMedia::create([
+                    'proposal_id' => $proposal->id,
+                    'file' => $path,
+                ]);
+            }
         }
 
         return redirect()->route('tenders.proposals.review', ['tender' => $tender, 'proposal' => $result]);

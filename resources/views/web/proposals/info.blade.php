@@ -88,7 +88,7 @@
 
                 <div class="col-xs-12 upload-main">
                     <label for="proposal_files">{{ __('web.illustrative_images_files') }}</label>
-                    <input type="file" multiple class="demo" id="proposal_files" value="">
+                    <input type="file"  multiple class="demo" id="proposal_files">
                 </div>
 
                 <div class="col-xs-12 add-prop-check">
@@ -111,8 +111,12 @@
 
 @section('script')
 
+
+
 <script type="text/javascript">
-    $(document).ready(function() {
+ 
+
+$(document).ready(function() {
         $(".date-picker").datepicker({
             changeMonth: true
             , changeYear: true
@@ -141,7 +145,7 @@
     $(".demo").uploader({
         multiple: true
         , ajaxConfig: ajaxConfig
-        , autoUpload: false
+        , autoUpload: true
     });
 
 </script>
