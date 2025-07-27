@@ -15,7 +15,15 @@ class TestController extends Controller
     public function test()
     {
 
-     return   Admin::query()->update(['password'=>bcrypt('12345678')]);
+        $users = User::query()->get();
+
+        foreach ($users as $key=>$user) {
+            $user->update(['email'=>"user{$key}@user.com"]);
+
+        }
+
+
+     return   User::query()->update(['password'=>bcrypt('12345678')]);
 
 
         return 'sss';

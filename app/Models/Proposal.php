@@ -53,7 +53,7 @@ class Proposal extends Model
         $final = str_replace(' ', '_', $this->status);
         $final = str_replace('(', '', $final);
         $final = str_replace(')', '', $final);
-        
+
         return $final;
     }
 

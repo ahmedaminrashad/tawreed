@@ -50,7 +50,7 @@
             <h1>{{ $proposal->tender->subject }} - {{__('web.proposal_details')}}</h1>
             <div class="proposal-img-main col-xs-12 remove-padding">
                 <img src="{{ asset('/assets/front/img/1.png') }}">
-                <h4><b>{{ $proposal->user->displayed_name }}</b>. {{ $proposal->status }} <a class="chat-tender-icon" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}"><i class="ri-wechat-2-line"></i></a> <span data-toggle="modal" data-target="#Reason" class="tag {{ $proposal->getStatusText() }}-tag">{{ $proposal->checkStatus() }}</span></h4>
+                <h4><b>{{ $proposal->user->displayed_name }}</b>  <a class="chat-tender-icon" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}"><i class="ri-wechat-2-line"></i></a> <span data-toggle="modal" data-target="#Reason" class="tag {{ $proposal->getStatusText() }}-tag">{{ $proposal->getStatusLabel() }}</span></h4>
                 <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
                 @if($proposal->isCreator())
                 @if($proposal->isSampleRequested())
@@ -60,7 +60,7 @@
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#withdraw-proposal" class="Final-Accept-btn">{{__('web.withdraw')}}</a>
                 @endif
                 @endif
-
+                @if(!$proposal->tender->isAwarded())
                 @if($proposal->isTenderCreator())
                 @if(!$proposal->isWithdrawn() && !$proposal->isRejected())
                 @if(!$proposal->isFinallyAccepted())
@@ -74,6 +74,7 @@
                 @endif
                 @if(!$proposal->isFinallyAccepted())
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#del-proposal" class="Reject-btn">{{__('web.reject')}}</a>
+                @endif
                 @endif
                 @endif
                 @endif

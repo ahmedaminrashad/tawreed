@@ -61,7 +61,7 @@ class Tender extends Model
         if (!$this->closing_date) {
             return null;
         }
-        
+
         return $this->closing_date->diffInDays(Carbon::today());
     }
 
@@ -98,5 +98,9 @@ class Tender extends Model
     public function proposals(): HasMany
     {
         return $this->hasMany(Proposal::class);
+    }
+    public function isAwarded(): bool
+    {
+          return $this->status == TenderStatus::AWARDED;
     }
 }
