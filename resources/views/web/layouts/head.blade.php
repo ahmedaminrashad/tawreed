@@ -4,6 +4,61 @@
 <title>@yield('title')</title>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
 
+<style>
+    body {
+
+        min-height: 100vh;
+        background-color: #f4f4f4;
+    }
+
+    .gallery {
+        display: flex;
+        gap: 10px;
+    }
+
+    .gallery-item {
+        width: 150px;
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.1);
+    }
+
+    #lightbox {
+        text-align: center;
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    #lightbox img {
+        max-width: 90%;
+        max-height: 80%;
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+</style>
 @if(app()->getLocale() == 'ar')
 <link href="{{ asset('/assets/front/css/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('/assets/front/css/bootstrap-rtl.css') }}" rel="stylesheet">

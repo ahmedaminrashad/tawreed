@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\TenderStatus;
 use App\Models\Tender;
 use App\Models\TenderItem;
+use App\Models\TenderItemMedia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -35,8 +36,8 @@ readonly class TenderService
         $today = Carbon::today()->format('Y-m-d');
 
         return Tender::
-            // where('status', TenderStatus::IN_PROGRESS->value)
-            whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
+        // where('status', TenderStatus::IN_PROGRESS->value)
+        whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
             ->where('closing_date', '>', $today)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -103,7 +104,9 @@ readonly class TenderService
     }
 
     // list all Tenders function AJAX
-    public function listAjax($ajaxData) {}
+    public function listAjax($ajaxData)
+    {
+    }
 
     // get Tender by ID function
     public function getById($id)
@@ -156,16 +159,29 @@ readonly class TenderService
         try {
             DB::beginTransaction();
 
-            $tender->items()->delete();
 
-            foreach ($data['item'] as $item) {
-                TenderItem::create([
-                    'tender_id' => $tender->id,
-                    'name' => $item['name'],
-                    'quantity' => $item['quantity'],
-                    'unit_id' => $item['unit_id'],
-                    'specs' => $item['specs'],
-                ]);
+            foreach ($data['item'] as $key => $item) {
+                if (isset($item['item_id'])) {
+                    TenderItem::query()->find($item['item_id'])->update([
+                        'tender_id' => $tender->id,
+                        'name' => $item['name'],
+                        'quantity' => $item['quantity'],
+                        'unit_id' => $item['unit_id'],
+                        'specs' => $item['specs'],
+                    ]);
+                } else {
+                    $item = TenderItem::create([
+                        'tender_id' => $tender->id,
+                        'name' => $item['name'],
+                        'quantity' => $item['quantity'],
+                        'unit_id' => $item['unit_id'],
+                        'specs' => $item['specs'],
+                    ]);
+                    TenderItemMedia::query()->where('tender_id', $tender->id)
+                        ->whereNull('tender_item_id')
+                        ->where('index_item', $key)->update(['tender_item_id' => $item->id]);
+                }
+
             }
 
             DB::commit();

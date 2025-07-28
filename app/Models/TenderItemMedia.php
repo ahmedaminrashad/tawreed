@@ -5,14 +5,17 @@ namespace App\Models;
 use File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class TenderItemMedia extends Model
 {
     use HasFactory;
 
     public $table = 'tender_item_media';
+    public static $uploads_path = 'itemfiles';
 
     protected $guarded = ['id'];
+    protected $appends = ['url'];
 
     public function uploadFile($field, $file)
     {
@@ -34,5 +37,12 @@ class TenderItemMedia extends Model
 
         $this->$field = $fileName;
         $this->save();
+    }
+
+    public function getUrlAttribute()
+    {
+        if ($this->file)
+            return Storage::disk('public')->url($this->file);
+        return null;
     }
 }

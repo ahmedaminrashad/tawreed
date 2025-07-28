@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Web;
 use App\Enums\ProposalStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tender\StoreTenderInfoRequest;
-use App\Http\Requests\Tender\StoreTenderItemRequest;
 use App\Models\Tender;
+use App\Models\TenderItem;
 use App\Models\TenderItemMedia;
 use App\Services\ActivityClassificationService;
 use App\Services\CountryService;
@@ -16,22 +16,25 @@ use App\Services\UnitService;
 use App\Services\WorkCategoryClassificationService;
 use App\Traits\CustomResponse;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Tender\StoreTenderItemRequest;
+
 
 class TenderController extends Controller
 {
     use CustomResponse;
 
     public function __construct(
-        protected TenderService $tenderService,
-        protected ProposalService $proposalService,
-        protected CountryService $countryService,
-        protected UnitService $unitService,
+        protected TenderService                     $tenderService,
+        protected ProposalService                   $proposalService,
+        protected CountryService                    $countryService,
+        protected UnitService                       $unitService,
         protected WorkCategoryClassificationService $workCategoryClassificationService,
-        protected ActivityClassificationService $activityClassificationService,
-    ) {}
+        protected ActivityClassificationService     $activityClassificationService,
+    )
+    {
+    }
 
     public function index(Request $request)
     {
@@ -53,7 +56,7 @@ class TenderController extends Controller
 
     public function show(Tender $tender)
     {
-         $proposalsCount = $tender->proposals()->count();
+        $proposalsCount = $tender->proposals()->count();
 
         return view('web.tenders.show', compact('tender', 'proposalsCount'));
     }
@@ -61,16 +64,44 @@ class TenderController extends Controller
 
     public function storeItemFile(Request $request)
     {
-      $file=  uploadFile($request->file('file'));
+        $file = $request->file('file');
+        $tender_id = $request->get('tender_id');
+        $destinationPath = "files";
 
-      TenderItemMedia::query()->create([
-          'tender_id' => $request->get('tender_id'),
-          'item_id' => $request->get('item_id'),
-          'file' => $file->id,
-      ]);
+        $upload_success = Storage::disk('public')->put($destinationPath, $file);
+        $media = TenderItemMedia::query()->create([
+            'tender_id' => $tender_id,
+            'index_item' => $request->get('item_index'),
+            'file' => $upload_success,
+            'tender_item_id' => $request->tender_item_id,
+        ]);
+        return $media;
+    }
 
-      return $file;
+    public function deleteItemMedia(Request $request)
+    {
+        $media = TenderItemMedia::query()
+            ->where('tender_id', $request->tender_id)
+            ->find($request->id);
 
+        if ($media) {
+            return $this->deleteFileItem($media);
+        }
+
+        return 'error';
+
+    }
+
+    public function deleteFileItem(TenderItemMedia $media)
+    {
+        try {
+            if (Storage::disk('public')->exists($media->file)) {
+                Storage::disk('public')->delete($media->file);
+            }
+            return $media->delete() ? 'success' : 'error';
+        } catch (\Exception $e) {
+            return 'error';
+        }
     }
 
     public function showProposals(Tender $tender)
@@ -118,14 +149,20 @@ class TenderController extends Controller
 
     public function storeItemsForm(Tender $tender)
     {
+        $tender->load('items.media');
         $units = $this->unitService->listForSelect();
+        $files = TenderItemMedia::query()->where('tender_id', $tender->id)
+            ->wherenull('tender_item_id')
+            ->get();
+        foreach ($files as $file) {
+            $this->deleteFileItem($file);
+        }
         return view('web.tenders.items', compact('tender', 'units'));
     }
 
     // public function storeItems(Tender $tender, Request $request)
     public function storeItems(Tender $tender, StoreTenderItemRequest $request)
     {
-         dd($request->all());
         $data = $request->validated();
         // dd($tender, $data);
 
@@ -140,6 +177,23 @@ class TenderController extends Controller
     public function reviewTender(Tender $tender)
     {
         return view('web.tenders.review', compact('tender'));
+    }
+
+    public function removeItem(Request $request): string
+    {
+
+        $item = TenderItem::query()
+            ->with('media')
+            ->where('tender_id',$request->tender_id)->find($request->id);
+
+        foreach (@$item->media as $media) {
+            $this->deleteFileItem($media);
+        }
+
+        $item->delete();
+        return 'success';
+
+
     }
 
     public function publishTender(Tender $tender, Request $request)

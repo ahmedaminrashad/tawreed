@@ -344,6 +344,7 @@ return [
     'awarded'=> 'منفذة',
     'canceled'=> 'ملغية',
     'there_is_no_tender'=> 'لا توجد مناقصات',
-    'tender_list'=>'المناقصات'
+    'tender_list'=>'المناقصات',
+    'files'=>'الملفات'
 
 ];

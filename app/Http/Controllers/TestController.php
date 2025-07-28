@@ -15,6 +15,8 @@ class TestController extends Controller
     public function test()
     {
 
+        return Tender::query()->with('items')->find(18);
+
         $users = User::query()->get();
 
         foreach ($users as $key=>$user) {

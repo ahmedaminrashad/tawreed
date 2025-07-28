@@ -27,6 +27,7 @@ class StoreTenderItemRequest extends FormRequest
             "item.*.quantity" => ["required", "numeric", 'min:1', 'regex:/^[0-9]+$/'],
             "item.*.unit_id" => ["required", "numeric", 'exists:units,id'],
             "item.*.specs" => ["nullable", "string", 'max:3000'],
+            "item.*.item_id" => ["nullable", "numeric", 'exists:tender_items,id'],
         ];
     }
 

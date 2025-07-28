@@ -28,6 +28,9 @@
 
     <!-- Scripts -->
     @include('web.layouts.script')
-
+<div id="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="" alt="Lightbox Image">
+</div>
 </body>
 </html>

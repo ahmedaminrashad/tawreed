@@ -88,11 +88,41 @@
                                     <td data-label="{{__('web.quantity')}}">{{ $item->quantity }}</td>
                                     <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse"
                                         data-target="#item_{{ $item->id }}"></td>
+                                    <td class="collapsed toggle-collapse" data-toggle="collapse"
+                                        data-target="#media_{{ $item->id }}">
+                                        <i class="ri-file-list-2-line"></i>
+                                    </td>
+
+
                                 </tr>
                                 </tbody>
                             </table>
                             <p id="item_{{ $item->id }}" class="collapse">
                                 <span>{{__('web.technical_specifications')}}</span>{{ $item->specs }}</p>
+                            @if($item->media->count() > 0)
+                                <div class="item-media collapse" id="media_{{ $item->id }}">
+                                    <span>{{ __('web.files') }}</span>
+                                    <div class="media-files">
+                                        @foreach($item->media as $media)
+
+                                            <div class="media-file gallery">
+                                                <div class="media-preview">
+                                                    @if(isImage($media->url))
+
+                                                        <img src="{{ $media->url }}" alt="Preview"
+                                                             class="gallery-item">
+                                                    @else
+                                                        <a href="{{ $media->url }}" target="_blank">
+                                                            <i class="ri-{{ isImage($media->url) ? 'image-line' : 'file-line' }}"></i>
+                                                            {{ basename($media->file) }}
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

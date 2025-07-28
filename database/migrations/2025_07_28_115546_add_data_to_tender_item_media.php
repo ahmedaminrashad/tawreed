@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->string('url');
-            $table->timestamps();
+        Schema::table('tender_item_media', function (Blueprint $table) {
+            $table->integer('tender_item_id')->nullable()->change();
+            $table->integer('index_item')->nullable();
         });
     }
 
@@ -23,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::table('tender_item_media', function (Blueprint $table) {
+            //
+        });
     }
 };

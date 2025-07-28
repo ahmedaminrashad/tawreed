@@ -38,3 +38,9 @@ function uploadFile($file): Model|Builder|null
 
 }
 
+function isImage($string)
+{
+    $extension = pathinfo($string, PATHINFO_EXTENSION);
+    return in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']);
+}
+

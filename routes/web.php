@@ -123,6 +123,8 @@ Route::group(['middleware' => ['auth:web']], function () {
         // Store Tender Items Route
         Route::post('{tender}/items', [TenderController::class, 'storeItems'])->name('items.store');
         Route::post('/item-file', [TenderController::class, 'storeItemFile'])->name('items.store.file');
+        Route::post('/delete-item-file', [TenderController::class, 'deleteItemMedia'])->name('items.remove.file');
+        Route::post('/delete-item', [TenderController::class, 'removeItem'])->name('items.remove');
         // Tender Review Route
         Route::get('{tender}/review', [TenderController::class, 'reviewTender'])->name('review');
         // Publish Tender Route

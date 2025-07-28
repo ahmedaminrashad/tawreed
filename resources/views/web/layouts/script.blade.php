@@ -516,6 +516,23 @@
             }
         });
     });
+    $(document).ready(function () {
+        $('.gallery-item').click(function () {
+            const imgSrc = $(this).attr('src');
+            $('#lightbox-img').attr('src', imgSrc);
+            $('#lightbox').fadeIn();
+        });
+
+        $('.close').click(function () {
+            $('#lightbox').fadeOut();
+        });
+
+        $('#lightbox').click(function (e) {
+            if (e.target.id === 'lightbox-img') return;
+            $('#lightbox').fadeOut();
+        });
+    });
+
 </script>
 
 @yield('script')
