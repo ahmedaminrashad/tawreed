@@ -35,10 +35,21 @@ readonly class TenderService
     {
         $today = Carbon::today()->format('Y-m-d');
 
-        return Tender::
+        return Tender::query()->
         // where('status', TenderStatus::IN_PROGRESS->value)
         whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
             ->where('closing_date', '>', $today)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+    }
+    public function listEnded()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+
+        return Tender::query()->
+        // where('status', TenderStatus::IN_PROGRESS->value)
+        whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
+            ->where('closing_date', '<', $today)
             ->orderBy('created_at', 'DESC')
             ->get();
     }

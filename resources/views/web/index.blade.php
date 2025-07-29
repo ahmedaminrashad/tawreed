@@ -83,86 +83,55 @@
         <h1>{{ __('web.latest_tenders') }}</h1>
         <a href="#">{{ __('web.view_all') }} <i class="ri-arrow-right-line"></i></a>
     </div>
-    <div class="col-md-6 col-xs-12">
-        <div class="col-xs-12 Tender-item">
-            <h4>{{ __('web.chlorine_removal_agents') }}. 2024010305</h4>
-            <span>{{ __('web.home_appliances') }}</span>
-            <h3>{{ __('web.contract_duration_in_days') }}: <span>4 {{ __('web.from_in_days') }}</span></h3>
-            <div class="clearfix"></div>
-            <ul class="col-xs-12 remove-padding">
-                <li>
-                    <h5>{{ __('web.contract_start_date') }}: <span>01/08/2024</span></h5>
-                </li>
-                <li>
-                    <h5>{{ __('web.contract_end_date') }}: <span>20/08/2024</span></h5>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-            <ul class="col-xs-12 remove-padding">
-                <li><i class="ri-map-pin-line"></i>
-                    <h5>{{ __('web.location') }}: دكا، بنغلاديش</h5>
-                </li>
-                <li><i class="ri-function-line"></i>
-                    <h5>{{ __('web.supply_implementation') }}</h5>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
-            <div class="col-xs-12 remove-padding">
-                <div class="Tender-progress">
-                    <div style="width:50%;"></div>
+
+        @foreach($tenders as $tender)
+        <div class="col-md-6 col-xs-12">
+            <div class="col-xs-12 Tender-item">
+                <h4><a href="{{ route('tenders.show', ['tender' => $tender]) }}">{{ $tender->subject }}</a>
+                    @if($tender->status==\App\Enums\TenderStatus::AWARDED)
+                        <a href="#awarded_div" class="award"><i class="ri-award-fill"></i> {{ $tender->status->getLabel() }} </a>
+                    @endif
+                </h4>
+                <span>{{ $tender->workCategoryClassification->translate('ar')->name }}</span>
+                <h3>{{ __('web.contract_duration') }} :<span>{{ $tender->contract_duration }} {{ __('web.days') }}</span></h3>
+                <div class="clearfix"></div>
+                <ul class="col-xs-12 remove-padding">
+                    <li>
+                        <h5>{{ __('web.contract_start_date') }} : <span>{{ $tender->contract_start_date_text }}</span></h5>
+                    </li>
+                    <li>
+                        <h5>{{ __('web.contract_end_date') }} : <span>{{ $tender->contract_end_date_text }}</span></h5>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <ul class="col-xs-12 remove-padding">
+                    <li><i class="ri-map-pin-line"></i>
+                        <h5>{{ $tender->city->translate('ar')->name }}, {{ $tender->country->translate('ar')->name }}</h5>
+                    </li>
+                    <li><i class="ri-function-line"></i>
+                        <h5>{{ $tender->activityClassification->translate('ar')->name }}</h5>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <p>{{ $tender->desc }}</p>
+                <div class="col-xs-12 remove-padding">
+                    <div class="Tender-progress">
+                        <div style="width:50%;"></div>
+                    </div>
+                    <h6>{{ __('web.time_remaining') }}<span>{{ $tender->remaining_days }} {{ __('web.days') }} {{ __('web.before_closing_date') }}</span></h6>
                 </div>
-                <h6>{{ __('web.time_remaining') }}<span>2 {{ __('web.days_before_closing') }}</span></h6>
-            </div>
-            <div class="col-xs-12 remove-padding">
-                <div class="tender-img">
-                    <img src="{{ asset('/assets/front/img/1.png') }}">
-                    <p>{{ __('web.buyer_name') }} <span>{{ __('web.company_type') }}</span></p>
+                <div class="col-xs-12 remove-padding">
+                    <div class="tender-img">
+                        <img src="{{ asset('/assets/front/img/1.png') }}">
+                        <p>{{ $tender->user->displayed_name }} <span>{{ $tender->user->user_type }}</span></p>
+                    </div>
+                    <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">{{ __('web.view_details') }}</a>
                 </div>
-                <a href="#" class="tender-link">{{ __('web.login_to_view_details') }} <i class="ri-lock-line"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xs-12">
-        <div class="col-xs-12 Tender-item">
-            <h4>{{ __('web.chlorine_removal_agents') }}. 2024010305</h4>
-            <span>{{ __('web.home_appliances') }}</span>
-            <h3>{{ __('web.contract_duration_in_days') }}: <span>4 {{ __('web.from_in_days') }}</span></h3>
-            <div class="clearfix"></div>
-            <ul class="col-xs-12 remove-padding">
-                <li>
-                    <h5>{{ __('web.contract_start_date') }}: <span>01/08/2024</span></h5>
-                </li>
-                <li>
-                    <h5>{{ __('web.contract_end_date') }}: <span>20/08/2024</span></h5>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-            <ul class="col-xs-12 remove-padding">
-                <li><i class="ri-map-pin-line"></i>
-                    <h5>{{ __('web.location') }}: دكا، بنغلاديش</h5>
-                </li>
-                <li><i class="ri-function-line"></i>
-                    <h5>{{ __('web.supply_implementation') }}</h5>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-            <p>موليت في لابوروم تيمبور لوريم إنسيديدونت إيرور. أوتي إيو إكس أد سونت. بارياتور سينت كولبا دو إنسيديدونت إيوسمود إيوسمود كولبا. لابوروم تيمبور لوريم إنسيديدونت.</p>
-            <div class="col-xs-12 remove-padding">
-                <div class="Tender-progress">
-                    <div style="width:50%;"></div>
-                </div>
-                <h6>{{ __('web.time_remaining') }}<span>2 {{ __('web.days_before_closing') }}</span></h6>
-            </div>
-            <div class="col-xs-12 remove-padding">
-                <div class="tender-img">
-                    <img src="{{ asset('/assets/front/img/1.png') }}">
-                    <p>{{ __('web.buyer_name') }} <span>{{ __('web.company_type') }}</span></p>
-                </div>
-                <a href="#" class="tender-link">{{ __('web.login_to_view_details') }} <i class="ri-lock-line"></i></a>
             </div>
         </div>
-    </div>
+        @endforeach
+
+
 </div>
 
 <div class="container remove-padding Finish-tender">
@@ -170,79 +139,55 @@
         <h1>{{ __('web.finished_tenders') }}</h1>
         <a href="#">{{ __('web.view_all') }} <i class="ri-arrow-right-line"></i></a>
     </div>
-    <div class="col-md-6 col-xs-12">
-        <div class="col-xs-12 Tender-item Finish-tender-item">
-            <h4>{{ __('web.chlorine_removal_agents') }}. 2024010305</h4>
-            <span>{{ __('web.home_appliances') }}</span>
-            <h3>{{ __('web.contract_duration_in_days') }}: <span>4 {{ __('web.from_in_days') }}</span></h3>
-            <div class="clearfix"></div>
-            <ul class="col-xs-12 remove-padding">
-                <li><i class="ri-map-pin-line"></i>
-                    <h5>{{ __('web.location') }}: دكا، بنغلاديش</h5>
-                </li>
-                <li><i class="ri-function-line"></i>
-                    <h5>{{ __('web.supply_implementation') }}</h5>
-                </li>
-            </ul>
-            <div class="col-xs-12 remove-padding">
-                <div class="row">
-                    <div class="col-md-6 col-xs-12">
-                        <h2>{{ __('web.seller_name_winner') }}</h2>
-                        <div class="tender-img has-rate">
-                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                            <p>ليزلي ألكسندر</p>
-                            <h4>4.8 <i class="ri-star-fill"></i><span>(653)</span></h4>
-                        </div>
-                    </div>
 
-                    <div class="col-md-6 col-xs-12">
-                        <h2>{{ __('web.buyer_name') }}</h2>
-                        <div class="tender-img">
-                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                            <p>{{ __('web.company_type') }}</p>
-                        </div>
+        @foreach($tenders as $tender)
+        <div class="col-md-6 col-xs-12">
+            <div class="col-xs-12 Tender-item Finish-tender-item">
+
+                <h4><a href="{{ route('tenders.show', ['tender' => $tender]) }}">{{ $tender->subject }}</a>
+                    @if($tender->status==\App\Enums\TenderStatus::AWARDED)
+                        <a href="#awarded_div" class="award"><i class="ri-award-fill"></i> {{ $tender->status->getLabel() }} </a>
+                    @endif
+                </h4>
+                <span>{{ $tender->workCategoryClassification->translate('ar')->name }}</span>
+                <h3>{{ __('web.contract_duration') }} :<span>{{ $tender->contract_duration }} {{ __('web.days') }}</span></h3>
+                <div class="clearfix"></div>
+                <ul class="col-xs-12 remove-padding">
+                    <li>
+                        <h5>{{ __('web.contract_start_date') }} : <span>{{ $tender->contract_start_date_text }}</span></h5>
+                    </li>
+                    <li>
+                        <h5>{{ __('web.contract_end_date') }} : <span>{{ $tender->contract_end_date_text }}</span></h5>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <ul class="col-xs-12 remove-padding">
+                    <li><i class="ri-map-pin-line"></i>
+                        <h5>{{ $tender->city->translate('ar')->name }}, {{ $tender->country->translate('ar')->name }}</h5>
+                    </li>
+                    <li><i class="ri-function-line"></i>
+                        <h5>{{ $tender->activityClassification->translate('ar')->name }}</h5>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <p>{{ $tender->desc }}</p>
+                <div class="col-xs-12 remove-padding">
+                    <div class="Tender-progress">
+                        <div style="width:50%;"></div>
                     </div>
+                    <h6>{{ __('web.time_remaining') }}<span>{{ $tender->remaining_days }} {{ __('web.days') }} {{ __('web.before_closing_date') }}</span></h6>
+                </div>
+                <div class="col-xs-12 remove-padding">
+                    <div class="tender-img">
+                        <img src="{{ asset('/assets/front/img/1.png') }}">
+                        <p>{{ $tender->user->displayed_name }} <span>{{ $tender->user->user_type }}</span></p>
+                    </div>
+                    <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">{{ __('web.view_details') }}</a>
                 </div>
             </div>
         </div>
-    </div>
+        @endforeach
 
-    <div class="col-md-6 col-xs-12">
-        <div class="col-xs-12 Tender-item Finish-tender-item">
-            <h4>{{ __('web.chlorine_removal_agents') }}. 2024010305</h4>
-            <span>{{ __('web.home_appliances') }}</span>
-            <h3>{{ __('web.contract_duration_in_days') }}: <span>4 {{ __('web.from_in_days') }}</span></h3>
-            <div class="clearfix"></div>
-            <ul class="col-xs-12 remove-padding">
-                <li><i class="ri-map-pin-line"></i>
-                    <h5>{{ __('web.location') }}: دكا، بنغلاديش</h5>
-                </li>
-                <li><i class="ri-function-line"></i>
-                    <h5>{{ __('web.supply_implementation') }}</h5>
-                </li>
-            </ul>
-            <div class="col-xs-12 remove-padding">
-                <div class="row">
-                    <div class="col-md-6 col-xs-12">
-                        <h2>{{ __('web.seller_name_winner') }}</h2>
-                        <div class="tender-img has-rate">
-                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                            <p>ليزلي ألكسندر</p>
-                            <h4>4.8 <i class="ri-star-fill"></i><span>(653)</span></h4>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <h2>{{ __('web.buyer_name') }}</h2>
-                        <div class="tender-img">
-                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                            <p>{{ __('web.company_type') }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 @if((auth('api')->check() && auth('api')->user()->isCompany()) || (!auth('api')->check()))
