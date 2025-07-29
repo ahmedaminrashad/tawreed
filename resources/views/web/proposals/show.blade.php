@@ -45,20 +45,7 @@
         </ul>
     </div>
 
-    <div class="container remove-padding">
-        @if($proposal->media && $proposal->media->count())
-            <div class="alert alert-info" style="margin-bottom: 20px;">
-                <strong>{{ __('web.attachments') }}:</strong>
-                <ul style="margin: 0 0 0 20px;">
-                    @foreach($proposal->media as $media)
-                        <li>
-                            <a href="{{ asset('storage/' . $media->file) }}" target="_blank">{{ basename($media->file) }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
+
 
     <div class="container remove-padding proposal-container">
         <div class="col-xs-12 proposal-d-main tender-head my-tender-head-final">
