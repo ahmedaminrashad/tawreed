@@ -85,24 +85,14 @@ class TenderController extends Controller
             ->find($request->id);
 
         if ($media) {
-            return $this->deleteFileItem($media);
+            return  deleteFileItem($media);
         }
 
         return 'error';
 
     }
 
-    public function deleteFileItem(TenderItemMedia $media)
-    {
-        try {
-            if (Storage::disk('public')->exists($media->file)) {
-                Storage::disk('public')->delete($media->file);
-            }
-            return $media->delete() ? 'success' : 'error';
-        } catch (\Exception $e) {
-            return 'error';
-        }
-    }
+
 
     public function showProposals(Tender $tender)
     {
@@ -155,7 +145,7 @@ class TenderController extends Controller
             ->wherenull('tender_item_id')
             ->get();
         foreach ($files as $file) {
-            $this->deleteFileItem($file);
+            deleteFileItem($file);
         }
         return view('web.tenders.items', compact('tender', 'units'));
     }
@@ -187,7 +177,7 @@ class TenderController extends Controller
             ->where('tender_id',$request->tender_id)->find($request->id);
 
         foreach (@$item->media as $media) {
-            $this->deleteFileItem($media);
+            deleteFileItem($media);
         }
 
         $item->delete();

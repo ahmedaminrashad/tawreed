@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\File;
+use App\Models\TenderItemMedia;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -44,3 +45,14 @@ function isImage($string)
     return in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']);
 }
 
+function deleteFileItem($media): string
+{
+        try {
+            if (Storage::disk('public')->exists($media->file)) {
+                Storage::disk('public')->delete($media->file);
+            }
+            return $media->delete() ? 'success' : 'error';
+        } catch (\Exception $e) {
+            return 'error';
+        }
+    }

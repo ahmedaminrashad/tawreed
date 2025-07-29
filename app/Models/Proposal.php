@@ -39,7 +39,7 @@ class Proposal extends Model
         return $this->hasMany(ProposalItem::class);
     }
 
-    public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function media(): HasMany
     {
         return $this->hasMany(ProposalMedia::class);
     }

@@ -11,11 +11,13 @@ use App\Http\Requests\Proposal\RequestSampleProposalRequest;
 use App\Http\Requests\Proposal\StoreTenderProposalInfoRequest;
 use App\Http\Requests\Proposal\StoreTenderProposalItemRequest;
 use App\Http\Requests\Proposal\UpdateTenderProposalStatusRequest;
+use App\Models\ProposalMedia;
 use App\Models\Tender;
 use App\Services\ProposalService;
 use App\Services\TenderService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProposalController extends Controller
 {
@@ -29,11 +31,8 @@ class ProposalController extends Controller
         return view('web.proposals.info', compact('tender', 'proposal'));
     }
 
-    // public function storeInfo(Tender $tender, Proposal $proposal, Request $request)
     public function storeInfo(Tender $tender, Proposal $proposal, StoreTenderProposalInfoRequest $request)
     {
-        dd($request->all());
-        return request()->all();
         $data = $request->validated();
         $data['proposal_end_date'] = Carbon::parse($data['proposal_end_date'])->format('Y-m-d');
 
@@ -57,6 +56,40 @@ class ProposalController extends Controller
         return redirect()->route('tenders.proposals.review', ['tender' => $tender, 'proposal' => $result]);
     }
 
+
+    public function storeFile(Request $request)
+    {
+        $file = $request->file('file');
+        $tender_id = $request->get('tender_id');
+        $proposal_id = $request->get('proposal_id');
+        $destinationPath = "files";
+
+        $upload_success = Storage::disk('public')->put($destinationPath, $file);
+        $media = ProposalMedia::query()->create([
+            'tender_id' => $tender_id,
+            'user_id' => auth()->user()->id,
+            'proposal_id' => $proposal_id,
+            'file' => $upload_success,
+        ]);
+        return $media;
+    }
+    public function removeFile(Request $request)
+    {
+
+        $media = ProposalMedia::query()
+            ->where('tender_id', $request->tender_id)
+            ->where('user_id', auth()->user()->id)
+            ->find($request->id);
+
+        if ($media) {
+            deleteFileItem($media);
+        }
+
+        return 'error';
+
+    }
+
+
     public function items(Tender $tender, Proposal $proposal = null)
     {
         if(auth()->id() == $tender->user_id || in_array(auth()->id(), $tender->proposals()->pluck('user_id')->toArray())) {
@@ -71,7 +104,7 @@ class ProposalController extends Controller
         $data = $request->validated();
 
         $result = $this->proposalService->itemsStore($tender, $proposal, $data);
-        
+
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
@@ -115,7 +148,7 @@ class ProposalController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal status updated successfully');
     }
 
@@ -128,7 +161,7 @@ class ProposalController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal Initial Accept successfully');
     }
 
@@ -141,7 +174,7 @@ class ProposalController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal Request Sample successfully');
     }
 
@@ -154,7 +187,7 @@ class ProposalController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal Sample Sent successfully');
     }
 
@@ -167,7 +200,7 @@ class ProposalController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal Withdrawn successfully');
     }
 
@@ -183,7 +216,7 @@ class ProposalController extends Controller
         if (is_array($result)) {
             return redirect()->back()->with('error', $result['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal Rejected successfully');
     }
 
@@ -204,7 +237,7 @@ class ProposalController extends Controller
         if (is_array($response)) {
             return redirect()->back()->with('error', $response['error']);
         }
-        
+
         return redirect()->route('proposals.show', ['proposal' => $proposal])->with('success', 'Proposal Final Acceptance successfully');
     }
 }

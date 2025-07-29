@@ -148,6 +148,10 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('/{proposal}/withdraw', [ProposalController::class, 'withdraw'])->name('withdraw');
         // Submit Proposal Final Acceptance Route
         Route::post('/{proposal}/final/accept', [ProposalController::class, 'finalAccept'])->name('final.accept');
+
+        Route::post('/files', [ProposalController::class, 'storeFile'])->name('file.store');
+        Route::post('/delete/files', [ProposalController::class, 'removeFile'])->name('file.remove');
+
     });
 
     Route::group(['prefix' => 'tenders', 'as' => 'tenders.'], function () {
@@ -160,6 +164,8 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::get('{tender}/proposals/{proposal}/info', [ProposalController::class, 'info'])->name('info');
             // Store Proposal Info Route
             Route::post('{tender}/proposals/{proposal}/info', [ProposalController::class, 'storeInfo'])->name('info.store');
+
+
             // Proposal Review Route
             Route::get('{tender}/proposals/{proposal}/review', [ProposalController::class, 'reviewProposal'])->name('review');
             // Publish Proposal Route

@@ -86,6 +86,46 @@
                     <textarea id="proposal_desc" name="proposal_desc">{{ old('proposal_desc') ?? $proposal->proposal_desc }}</textarea>
                 </div>
 
+                @if(count($proposal->media)>0)
+                    <div class="media-container">
+                        @foreach ($proposal->media as $media)
+                            <div class="jquery-uploader-card" id="media-{{$media->id}}">
+                                <div class="jquery-uploader-preview-main">
+                                    <div class="jquery-uploader-preview-action">
+                                        <ul>
+                                            <!-- <li class="file-detail"><i class="fa fa-eye"></i></li> !-->
+                                            <li class="file-delete" onclick="deleteMedia({{$media->id}})">
+                                                <i class="fa fa-trash-o"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jquery-uploader-preview-progress" style="display: none;">
+                                        <div class="progress-mask"></div>
+                                        <div class="progress-loading">
+                                            <i class="fa fa-spinner fa-spin"></i>
+                                        </div>
+                                    </div>
+
+
+                                    @php
+                                        $extension = pathinfo($media->url, PATHINFO_EXTENSION);
+                                        $isImage = in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']);
+                                    @endphp
+
+                                    @if(isImage($media->url))
+                                        <img alt="preview" class="files_img" src="{{$media->url}}">
+                                    @else
+                                        <div class="file_other">
+                                            <i class="fa fa-file"></i>
+                                        </div>
+                                        <a href="{{$media->url}}" target="_blank" download="item media {{$proposal->id}}">تحميل</a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="col-xs-12 upload-main">
                     <label for="proposal_files">{{ __('web.illustrative_images_files') }}</label>
                     <input type="file"  multiple class="demo" id="proposal_files">
@@ -114,7 +154,7 @@
 
 
 <script type="text/javascript">
- 
+
 
 $(document).ready(function() {
         $(".date-picker").datepicker({
@@ -124,30 +164,86 @@ $(document).ready(function() {
         , });
     });
 
-    let ajaxConfig = {
-        ajaxRequester: function(config, uploadFile, pCall, sCall, eCall) {
-            let progress = 0
-            let interval = setInterval(() => {
-                progress += 10;
-                pCall(progress)
-                if (progress >= 100) {
-                    clearInterval(interval)
-                    const windowURL = window.URL || window.webkitURL;
-                    sCall({
-                        data: windowURL.createObjectURL(uploadFile.file)
+
+
+$(`.demo`).uploader({
+    ajaxConfig: {
+        url: "{{route('proposals.file.store')}}",
+        method: "post",
+        paramsBuilder: function (uploaderFile) {
+            let form = new FormData();
+            form.append("file", uploaderFile.file)
+            form.append("_token", "{{csrf_token()}}")
+            form.append('item_index', "1");
+            form.append('tender_id', "{{$tender->id}}");
+            form.append('proposal_id', "{{$proposal->id}}");
+            return form
+        },
+        ajaxRequester: function (config, uploaderFile, progressCallback, successCallback, errorCallback) {
+            $.ajax({
+                url: config.url,
+                contentType: false,
+                processData: false,
+                method: config.method,
+                data: config.paramsBuilder(uploaderFile),
+                success: function (response) {
+                    successCallback(response)
+                },
+                error: function (response) {
+                    errorCallback("Error")
+                },
+                xhr: function () {
+                    let xhr = new XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', function (e) {
+                        let progressRate = (e.loaded / e.total) * 100;
+                        progressCallback(progressRate)
                     })
-
+                    return xhr;
                 }
-            }, 300)
+            })
+        },
+        responseConverter: function (uploaderFile, response) {
+            return {
+                url: response?.url, //make sure to return the image url
+                name: response?.id,
+
+            }
+        },
+    },
+    multiple: true,
+}).on("file-remove", function (_, file) {
+    var data = new FormData();
+    data.append('id', file.name);
+    data.append("_token", "{{csrf_token()}}")
+    data.append('tender_id', {{$tender->id}});
+    $.ajax({
+            url: "{{route('proposals.file.remove')}}",
+            contentType: false,
+            processData: false,
+            method: 'post',
+            data: data,
+            success: function (response) {
+                console.info('call success')
+                console.info(response)
+            }
         }
-    }
-
-    $(".demo").uploader({
-        multiple: true
-        , ajaxConfig: ajaxConfig
-        , autoUpload: true
-    });
-
+    );
+})
+function deleteMedia(id) {
+    $.ajax({
+        url: "{{route('proposals.file.remove')}}",
+        data: {
+            id: id,
+            tender_id: {{$tender->id}},
+            proposal_id: {{$proposal->id}},
+            _token: "{{csrf_token()}}"
+        },
+        type: "POST",
+        success: function (response) {
+            $("#media-" + id).remove();
+        }
+    })
+}
 </script>
 
 @endsection

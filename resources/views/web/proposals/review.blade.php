@@ -76,7 +76,7 @@
                                 <th>{{__('web.price')}}</th>
                                 <th>{{__('web.quantity')}}</th>
                                 <th>{{ __('web.total_price') }}</th>
-                                <th>-</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,14 +87,41 @@
                                 <td data-label="{{__('web.price')}}">{{ $item->price }}</td>
                                 <td data-label="{{__('web.quantity')}}">{{ $item->quantity }}</td>
                                 <td data-label="{{__('web.total_price')}}">{{ $item->quantity * $item->price }}</td>
-                                <td data-label="-" class="collapsed toggle-collapse" data-toggle="collapse" data-target="#specs-{{ $item->id }}"></td>
+                                <td class="collapsed toggle-collapse" data-toggle="collapse"
+                                    data-target="#media_{{ $key }}">
+                                    <i class="ri-file-list-2-line"></i>
+                                </td>
+
                             </tr>
                         </tbody>
                     </table>
-                    <p id="specs-{{ $item->id }}" class="collapse">
+
+                    @if($proposal->media->count() > 0)
+                        <p>
                         {{__('web.technical_specifications')}}<br>
                         {{ $item->item_specs }}
                     </p>
+                        <div class="item-media collapse" id="media_{{ $key }}">
+                            <span>{{ __('web.files') }}</span>
+                            <div class="media-files">
+                                @foreach($proposal->media as $media)
+                                    <div class="media-file gallery">
+                                        <div class="media-preview">
+                                            @if(isImage($media->url))
+                                                <img src="{{ $media->url }}" alt="Preview"
+                                                     class="gallery-item">
+                                            @else
+                                                <a href="{{ $media->url }}" target="_blank">
+                                                    <i class="ri-{{ isImage($media->url) ? 'image-line' : 'file-line' }}"></i>
+                                                    {{ basename($media->file) }}
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 @endforeach
             </div>
