@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => '/home/tawredco/public_html/quotech_proj',
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
         ],
