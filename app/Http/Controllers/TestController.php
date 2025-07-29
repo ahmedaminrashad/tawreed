@@ -15,7 +15,6 @@ class TestController extends Controller
     public function test()
     {
 
-        return  base_path('/');
         return Tender::query()->with('items')->find(18);
 
         $users = User::query()->get();

@@ -38,7 +38,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => base_path('public/storage'),
+            'root' => '/home/tawredco/public_html/quotech_proj',
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
