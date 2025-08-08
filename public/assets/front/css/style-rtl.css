@@ -184,7 +184,7 @@ header .side-menu {
 }
 header .side-menu > li {
     display: inline-block;
-    margin-right: 25px;
+    margin-right: 15px;
 }
 
 header .side-menu > li a {
@@ -223,7 +223,7 @@ header .side-menu button {
 }
 
 header .side-menu span {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 header .dropdown-menu {
@@ -604,6 +604,7 @@ footer .copy-main ul li a:hover {
     position: relative;
     font-size: 20px;
     opacity: 1;
+    right: auto !important;
 }
 
 .modal input {
@@ -1132,6 +1133,15 @@ margin-left: 7.5px;
     top: 1px;
 }
 
+.ri-arrow-right-line:before {
+    content: "\ea60" !important;
+}
+
+.ri-arrow-right-s-line:before {
+    content: "\ea64" !important;
+}
+
+
 .title a:hover {
     border: 1px solid var(--green);
     background-color: var(--green);
@@ -1624,16 +1634,18 @@ margin-top: 20px;
 
   /* Style the checkmark/indicator */
   .checkbox-item .checkmark:after {
-    right: 9px;
+    right: 8px;
     top: 5px;
-    width: 5px;
+    width: 6px;
     height: 10px;
     border: solid white;
-    border-width: 0 0 3px 3px;
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-  }
+    border-width: 3px 0px 0px 3px;
+    -webkit-transform: rotate(221deg);
+    -ms-transform: rotate(221deg);
+    transform: rotate(221deg);
+    -moz-transform: rotate(221deg);
+    -o-transform: rotate(221deg);
+}
   .filter-item p.collapse-btn-main {
 border-bottom: 1px solid var(--gray7);
 padding-bottom: 15px;
@@ -2005,7 +2017,7 @@ position: absolute;
 left: 30px;
 font-size: 20px;
 color:var(--gray5);
-top: 10px;
+top: 36px;
 }
 
 
@@ -2367,6 +2379,8 @@ table {
 }
 .tender-model span.close {
     margin-top: 0;
+    top: auto !important;
+    right: auto !important;
 }
 
 
@@ -2381,7 +2395,7 @@ table {
     height: 100;
 }
 .tender-model h1{
-    font-size: 28px;
+    font-size: 22;
     margin-bottom: 30px;
     font-weight: bold;
 }
@@ -6595,7 +6609,7 @@ footer ul li a {
 
 .member-side .dropdown.open .dropdown-menu {
     position: fixed;
-    top: calc(-100vh - -49px);
+    top: calc(-100vh - -120px);
     right: 0;
     height: 100vh;
     width: 100%;
@@ -7168,3 +7182,24 @@ aside.filter-main.open {
     direction: ltr;
     text-align: right !important;
 }
+#logout_btn {
+    color: #333 !important;
+}
+
+div#payment-options-tab {
+    text-align: center;
+}
+
+div#payment-options-tab img {
+margin-bottom: 15px;
+}
+
+div#payment-options-tab h2 {
+   font-size: 18px;
+    }
+
+    .tender-model ul li:last-child input {
+        top: -19px;
+    display: inline-block;
+    position: relative;
+    }
