@@ -344,6 +344,14 @@ return [
     'there_is_no_tender'=> 'لا توجد مناقصات',
     'tender_list'=>'المناقصات',
     'files'=>'الملفات',
-    'you_have_a_proposal_for_this_tender'=>'لا يمكنك ارسال عروض على هذه المناقصة.'
+    'you_have_a_proposal_for_this_tender'=>'لا يمكنك ارسال عروض على هذه المناقصة.',
+    'change_password'=>'تعديل السرى',
+    'change_email'=>'تعديل البريد',
+    'payment_options'=>'طرق الدفع',
+    'delete_account'=>'حذف الحساب',
+    'push_notification'=>'اشعارت الويب',
+    'notification_email'=>'اشعارات البريد',
+
+
 
 ];
