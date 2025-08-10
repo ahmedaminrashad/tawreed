@@ -57,7 +57,7 @@
                     <input type="text" name="total" id="total" value="{{ $proposal->total }}" readonly>
                 </div>
 
-                <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input">
+                <div class="col-md-6 col-xs-12 col-sm-12 input-item datepicker-input @if($errors->has('proposal_end_date')) error @endif">
                     <label for="proposal_end_date">{{ __('web.proposal_validity_period') }}</label>
                     <input type="text" name="proposal_end_date" id="proposal_end_date" class="date-picker" value="{{ old('proposal_end_date') ?? $proposal->proposal_end_date }}">
                     <i class="ri-calendar-line"></i>

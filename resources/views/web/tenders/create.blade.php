@@ -100,7 +100,7 @@
                     <label for="subject">{{ __('web.tender_subject_name') }}</label>
                     <input name="subject" id="subject" placeholder="{{ __('web.tender_subject_name') }}" value="{{ old('subject') ?? $tender?->subject }}">
                     @if($errors->has('subject'))
-                    <p>{{ $errors->first('subject') }}</p>
+                    <p class="danger">{{ $errors->first('subject') }}</p>
                     @endif
                 </div>
                 <div class="col-md-6 col-xs-12 col-sm-12 input-item project_div @if($errors->has('project')) error @endif">

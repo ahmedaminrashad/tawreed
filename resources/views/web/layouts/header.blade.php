@@ -169,7 +169,7 @@
                         </a></li>
                     <li class="dropdown">
                         <button type="button" data-toggle="dropdown">
-                            <i class="ri-user-line"></i>
+                            <i class="ri-user-line"></i> {{auth()->user()->full_name}}
                         </button>
                         <span><i class="ri-arrow-down-s-fill"></i></span>
                         <ul class="dropdown-menu profile-drop">
