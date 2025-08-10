@@ -24,7 +24,7 @@
                         @csrf
 
                         <div class="col-xs-12 remove-padding switch-main">
-                            <p>{{__('push_notification')}}</p>
+                            <p>{{__('web.push_notification')}}</p>
                             <label class="switch">
                                 <input type="hidden" name="push_notify" value="0">
                                 <input type="checkbox" name="push_notify" id="push_notify" value="1" @checked($user->push_notify == 1)>
@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="col-xs-12 remove-padding switch-main">
-                            <p>{{__('notification_email')}}</p>
+                            <p>{{__('web.notification_email')}}</p>
                             <label class="switch">
                                 <input type="hidden" name="email_notify" value="0">
                                 <input type="checkbox" name="email_notify" id="email_notify" value="1" @checked($user->email_notify == 1)>
