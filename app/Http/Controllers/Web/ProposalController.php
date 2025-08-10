@@ -46,7 +46,7 @@ class ProposalController extends Controller
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 $path = $file->store('proposals/' . $proposal->id, 'public');
-                \App\Models\ProposalMedia::create([
+                ProposalMedia::create([
                     'proposal_id' => $proposal->id,
                     'file' => $path,
                 ]);
@@ -92,8 +92,9 @@ class ProposalController extends Controller
 
     public function items(Tender $tender, Proposal $proposal = null)
     {
-        if(auth()->id() == $tender->user_id || in_array(auth()->id(), $tender->proposals()->pluck('user_id')->toArray())) {
-            return redirect()->route('profile.tenders')->with('error', 'You can not submit proposal on your own tender');
+
+        if(userHaveProposal($tender)) {
+            return redirect()->route('profile.tenders')->with('error', __('web.you_have_a_proposal_for_this_tender'));
         }
 
         return view('web.proposals.items', compact('tender', 'proposal'));

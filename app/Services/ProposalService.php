@@ -107,7 +107,7 @@ readonly class ProposalService
             if ($proposal) {
                 $proposal->update($data);
             } else {
-                $proposal = Proposal::updateOrCreate([
+                $proposal = Proposal::create([
                     'tender_id' => $tender->id,
                     'user_id' => auth()->id(),
                 ], [
@@ -137,6 +137,7 @@ readonly class ProposalService
                     return ['error' => $result['error']];
                 }
                 $proposal = $result;
+                $proposal->items()->delete();
             }
 
             // dd($proposal);

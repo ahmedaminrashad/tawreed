@@ -99,16 +99,13 @@ return [
     'remaining_balance' => 'رصيدك المتبقي',
     'pay_now' => 'ادفع الآن',
     'payment_area' => 'منطقة الدفع',
-
-    // Categories
     'explore_by_category' => 'استكشف حسب التصنيف',
     'open_tenders' => 'مناقصات مفتوحة',
-
-    // Tenders
     'latest_tenders' => 'المناقصات الأخيرة',
     'finished_tenders' => 'المناقصات المنتهية',
     'contract_start_date' => 'تاريخ بدء العقد',
     'contract_end_date' => 'تاريخ انتهاء العقد',
+    'proposal_end_date' => 'تاريخ انتهاء العرض',
     'location' => 'الموقع',
     'supply_implementation' => 'التوريد والتنفيذ',
     'time_remaining' => 'الوقت المتبقي',
@@ -251,6 +248,7 @@ return [
     'in_progress_tender' => 'قيد التنفيذ',
     'awarded_tender' => 'منفذة',
     'cancelled_tender' => 'ملغية',
+    'cancelled' => 'ملغية',
     'automatically_cancelled_tender' => 'ملغية تلقائياً',
     'proposal_details' => 'تفاصيل العرض',
     'request_a_sample' => 'طلب عينة',
@@ -345,6 +343,7 @@ return [
     'canceled'=> 'ملغية',
     'there_is_no_tender'=> 'لا توجد مناقصات',
     'tender_list'=>'المناقصات',
-    'files'=>'الملفات'
+    'files'=>'الملفات',
+    'you_have_a_proposal_for_this_tender'=>'لا يمكنك ارسال عروض على هذه المناقصة.'
 
 ];

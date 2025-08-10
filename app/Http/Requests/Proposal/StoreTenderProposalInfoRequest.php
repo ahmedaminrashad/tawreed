@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Proposal;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTenderProposalInfoRequest extends FormRequest
@@ -17,7 +18,7 @@ class StoreTenderProposalInfoRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -33,7 +34,8 @@ class StoreTenderProposalInfoRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            "proposal_desc" => "Proposal Description",
+            "proposal_desc" => __("web.proposal_desc"),
+            "proposal_end_date" => __("web.proposal_end_date"),
         ];
     }
 }

@@ -77,10 +77,10 @@
                         </h2>
                         <a href="{{ route('tenders.show', ['tender' => $tender]) }}" class="tender-link">{{ __('web.view_details') }}</a>
                     </div>
-                </div>    
+                </div>
                 @empty
                 <img src="{{ asset('/assets/front/img/47.svg') }}" />
-                <p>{{__('there_is_no_tender')}}</p>    
+                <p>{{__('web.there_is_no_tender')}}</p>
                 @endforelse
             {{-- </div> --}}
 

@@ -21,7 +21,7 @@
                 <div class="proposal-img-main col-xs-12 remove-padding">
                     <img src="{{ asset('/assets/front/img/1.png') }}">
                     <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
-                    @if($tender->user_id != auth()->id() && !in_array(auth()->id(), $tender->proposals()->pluck('user_id')->toArray()))
+                    @if(!userHaveProposal($tender))
                         <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">{{ __('web.submit_proposal') }}</a>
                     @endif
                     @if($tender->user_id == auth()->id())
@@ -87,6 +87,28 @@
                                         @continue
 
                                     @endif
+                                    <div id="withdraw-proposal{{$proposal->id}}" class="modal fade del-model"
+                                         role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form method="POST"
+                                                      action="{{ route('proposals.withdraw', ['proposal' => $proposal]) }}">
+                                                    @csrf
+
+                                                    <h3>{{__('web.proposal_withdraw')}}</h3>
+                                                    <span class="close" data-dismiss="modal"><i
+                                                            class="ri-close-line"></i></span>
+                                                    <img src="{{ asset('/assets/front/img/45.svg') }}">
+                                                    <h1>{{__('web.are_you_sure_you_want_to_withdraw_this_proposal')}}</h1>
+                                                    <ul>
+                                                        <li><a data-dismiss="modal"
+                                                               href="javascript:void(0);">{{__('web.cancel')}}</a></li>
+                                                        <li><input type="submit" value="{{__('web.withdraw')}}"></li>
+                                                    </ul>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="tab-pane fade active in" id="{{ $key }}">
                                         <div class="col-md-6 col-xs-12">
@@ -98,7 +120,9 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="javascript:void(0);">{{__('web.edit')}}</a></li>
-                                                        <li><a href="javascript:void(0);">{{__('web.withdraw')}}</a>
+                                                        <li><a href="javascript:void(0);" data-toggle="modal"
+                                                               data-target="#withdraw-proposal{{$proposal->id}}"
+                                                               class="Final-Accept-btn">{{__('web.withdraw')}}</a>
                                                         </li>
                                                         <li><a href="javascript:void(0);">{{__('web.sample_sent')}}</a>
                                                         </li>

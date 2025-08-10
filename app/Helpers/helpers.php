@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ProposalStatus;
 use App\Models\File;
 use App\Models\TenderItemMedia;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,6 +26,7 @@ function ordinal_suffix($num)
     }
     return $num . 'th';
 }
+
 function uploadFile($file): Model|Builder|null
 {
     $destinationPath = File::$uploads_path;
@@ -47,12 +49,21 @@ function isImage($string)
 
 function deleteFileItem($media): string
 {
-        try {
-            if (Storage::disk('public')->exists($media->file)) {
-                Storage::disk('public')->delete($media->file);
-            }
-            return $media->delete() ? 'success' : 'error';
-        } catch (\Exception $e) {
-            return 'error';
+    try {
+        if (Storage::disk('public')->exists($media->file)) {
+            Storage::disk('public')->delete($media->file);
         }
+        return $media->delete() ? 'success' : 'error';
+    } catch (\Exception $e) {
+        return 'error';
     }
+}
+
+function userHaveProposal($tender): bool
+{
+
+    if ($tender->user_id == auth()->id())
+        return false;
+    return in_array(auth()->id(), $tender->proposals()->where('status', '!=', ProposalStatus::WITHDRAWN->value)->pluck('user_id')->toArray());
+
+}
