@@ -117,4 +117,9 @@ class Proposal extends Model
     {
         return number_format($this->total * (1 + config('app.vat')), 2);
     }
+
+    public function rejection()
+    {
+        return $this->belongsTo(RejectionReason::class, 'rejection_reason', 'id');
+    }
 }

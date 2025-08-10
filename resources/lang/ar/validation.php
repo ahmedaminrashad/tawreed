@@ -16,6 +16,7 @@ return [
     'accepted_if' => 'يجب قبول :attribute عندما :other يكون :value.',
     'active_url' => ':attribute ليس عنوان URL صالحًا.',
     'after' => 'يجب أن يكون :attribute تاريخًا بعد :date.',
+    'after_today' => 'يجب أن يكون :attribute تاريخًا بعد اليوم.',
     'after_or_equal' => 'يجب أن يكون :attribute تاريخًا بعد أو يساوي :date.',
     'alpha' => 'يجب أن يحتوي :attribute على أحرف فقط.',
     'alpha_dash' => 'يجب أن يحتوي :attribute على أحرف وأرقام وشرطات فقط.',
@@ -192,4 +193,4 @@ return [
         'email_notify' => 'إشعارات البريد الإلكتروني',
         'sample_request' => 'طلب العينة',
     ],
-]; 
+];

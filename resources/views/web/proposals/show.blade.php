@@ -207,6 +207,14 @@
                     <h5>{{__('web.payment_terms')}}</h5>
                     <h3>{{ $proposal->payment_terms }}</h3>
                 </div>
+                @if($proposal->isRejected())
+                    <div class="col-xs-12">
+                        <img src="{{ asset('/assets/front/img/44.svg') }}">
+                        <h5>{{__('web.reject_reason')}}</h5>
+                        <h3>{{ $proposal->custom_reject_reason??$proposal->reject_reason }}</h3>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -302,22 +310,22 @@
                 @csrf
 
                 <label class="container-radio">{{__('web.proposals_prices_are_too_high')}}
-                    <input type="radio" name="reject_reason" value="1">
+                    <input type="radio" name="reject_reason" value="{{__('web.proposals_prices_are_too_high')}}">
                     <span class="checkmark-radio"></span>
                 </label>
 
                 <label class="container-radio">{{__('web.non_compliance_with_technical_specification')}}
-                    <input type="radio" name="reject_reason" value="2">
+                    <input type="radio" name="reject_reason" value="{{__('web.non_compliance_with_technical_specification')}}">
                     <span class="checkmark-radio"></span>
                 </label>
 
                 <label class="container-radio">{{__('web.dont_need_it_anymore')}}
-                    <input type="radio" name="reject_reason" value="3">
+                    <input type="radio" name="reject_reason" value="{{__('web.dont_need_it_anymore')}}">
                     <span class="checkmark-radio"></span>
                 </label>
 
                 <label class="container-radio">{{__('web.other_option')}}
-                    <input type="radio" name="reject_reason" value="4">
+                    <input type="radio" name="reject_reason" data-custom="true" value="{{__('web.other_option')}}">
                     <span class="checkmark-radio"></span>
                 </label>
 
@@ -361,7 +369,7 @@
     $(document).ready(function() {});
 
     $('.cancel-model-tender input[type="radio"]').click(function() {
-        if ($(this).attr("value") == "4") {
+        if ($(this).attr("data-custom") === "true") {
             $(".add-note-main").slideDown();
         } else {
             $('.add-note-main').slideUp();

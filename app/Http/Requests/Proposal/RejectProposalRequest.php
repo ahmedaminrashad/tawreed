@@ -23,7 +23,7 @@ class RejectProposalRequest extends FormRequest
     {
         return [
             "custom_reject_reason" => ["required_if:reject_reason,==,4", "max:2000"],
-            "reject_reason" => ["required", "integer", 'min:1', 'max:4'],
+            "reject_reason" => ["required"],
         ];
     }
 }

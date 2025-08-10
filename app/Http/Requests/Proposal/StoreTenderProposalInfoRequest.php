@@ -38,4 +38,11 @@ class StoreTenderProposalInfoRequest extends FormRequest
             "proposal_end_date" => __("web.proposal_end_date"),
         ];
     }
+    public function messages(): array
+    {
+        return [
+            "proposal_end_date.after" => __("web.proposal_end_date_after"),
+
+        ];
+    }
 }

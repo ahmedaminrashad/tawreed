@@ -351,6 +351,8 @@ return [
     'delete_account'=>'حذف الحساب',
     'push_notification'=>'اشعارت الويب',
     'notification_email'=>'اشعارات البريد',
+    'reject_reason'=>'سبب الرفض',
+    'proposal_end_date_after'=>'يجب أن يكون تاريخ انتهاء العرض تاريخًا بعداليوم '
 
 
 

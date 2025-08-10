@@ -64,6 +64,6 @@ function userHaveProposal($tender): bool
 
     if ($tender->user_id == auth()->id())
         return false;
-    return in_array(auth()->id(), $tender->proposals()->where('status', '!=', ProposalStatus::WITHDRAWN->value)->pluck('user_id')->toArray());
+    return in_array(auth()->id(), $tender->proposals()->whereNotIn('status',[ProposalStatus::WITHDRAWN->value,ProposalStatus::REJECTED->value])->pluck('user_id')->toArray());
 
 }
