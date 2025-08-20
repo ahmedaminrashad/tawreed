@@ -10,7 +10,11 @@
       .review-item td.toggle-collapse.collapsed::after {
     content: "{{__('web.see_more')}}";
   }
-
+      @media print {
+          a[href]:after {
+              content: ""; /* shows title instead of URL */
+          }
+      }
   .review-item td.toggle-collapse::after {
     content: "{{__('web.see_less')}}";
   }

@@ -15,7 +15,7 @@ class TestController extends Controller
     public function test()
     {
 
-        return Tender::query()->with('items')->find(18);
+//        return Tender::query()->with('items')->find(18);
 
         $users = User::query()->get();
 
