@@ -12,6 +12,18 @@
         background-color: transparent !important;
     }
 
+    @media print {
+        .chat-tender-icon,
+        .Final-Accept-btn,
+        .Initial-accept-btn,
+        .Reject-btn,
+        .toggle-collapse,
+        #lightbox,
+        .header,
+        .footer {
+            display: none !important;
+        }
+    }
 </style>
 @endsection
 
@@ -53,8 +65,10 @@
             <div class="proposal-img-main col-xs-12 remove-padding">
                 <img src="{{ asset('/assets/front/img/1.png') }}">
                 <h4><b>{{ $proposal->user->displayed_name }}</b>  <a class="chat-tender-icon" href="{{ route('tenders.show', ['tender' => $proposal->tender]) }}"><i class="ri-wechat-2-line"></i></a> <span data-toggle="modal" data-target="#Reason" class="tag {{ $proposal->getStatusText() }}-tag">{{ $proposal->getStatusLabel() }}</span></h4>
-                <a href="javascript:void(0);"><i class="ri-printer-line"></i></a>
-                @if($proposal->isCreator())
+
+                <a href="javascript:void(0);" onclick="window.print();" style="cursor: pointer;"><i
+                        class="ri-printer-line"></i></a>
+            @if($proposal->isCreator())
                 @if($proposal->isSampleRequested())
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sent" class="Final-Accept-btn">{{__('web.sample_sent')}}</a>
                 @endif
