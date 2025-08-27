@@ -194,6 +194,9 @@ class ProposalController extends Controller
 
     public function withdraw(Proposal $proposal)
     {
+        if ($proposal->user_id != auth()->id())
+            return redirect()->back()->with('error', 'هذا الفعل مخصص فقط لصاحب العرض');
+
         $status = ProposalStatus::WITHDRAWN->value;
 
         $result = $this->proposalService->updateStatus($proposal, $status);
