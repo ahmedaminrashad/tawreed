@@ -113,6 +113,7 @@
                                     <div class="tab-pane fade active in" id="{{ $key }}">
                                         <div class="col-md-6 col-xs-12">
                                             <div class="col-xs-12 remove-padding propoal-item">
+                                                @if(@Auth::user()->id ==$proposal->user_id)
                                                 <div class="dropdown">
                                                     <button class="dropdown-toggle" type="button"
                                                             data-toggle="dropdown">
@@ -129,6 +130,8 @@
                                                         <li><a href="javascript:void(0);">{{__('web.print')}}</a></li>
                                                     </ul>
                                                 </div>
+                                                @endif
+
                                                 <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}
                                                     <span>{{ $proposal->getStatusLabel() }}</span></p>
                                                 <h4>{{__('web.proposal_validity_period')}} :
