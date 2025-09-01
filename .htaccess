@@ -1,0 +1,29 @@
+RedirectMatch 403 ^/(?:storage|vendor|resources|bootstrap|config)(?:/|$)
+
+# Disable directory listing
+Options -Indexes
+
+# Prefer index.php
+DirectoryIndex public/index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Preserve Authorization header
+  RewriteCond %{HTTP:Authorization} .
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # If the request already targets /public, do nothing
+  RewriteCond %{REQUEST_URI} ^/public/ [OR]
+  RewriteCond %{REQUEST_URI} ^/public$
+  RewriteRule ^ - [L]
+
+  # If a matching file exists under /public, serve it
+  RewriteCond %{DOCUMENT_ROOT}/public/%{REQUEST_URI} -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}/public/%{REQUEST_URI} -d
+  RewriteRule ^ public/%{REQUEST_URI} [L]
+
+  # Otherwise route everything to public/index.php
+  RewriteRule ^ public/index.php [L]
+</IfModule>
