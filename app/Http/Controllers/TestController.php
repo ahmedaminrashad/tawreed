@@ -15,7 +15,7 @@ class TestController extends Controller
     public function test()
     {
 
-        return bcrypt('supperAdmin@tawred2026');
+        return bcrypt('superAdmin@tawred2026');
         return 'ss';
 //        return Tender::query()->with('items')->find(18);
 
