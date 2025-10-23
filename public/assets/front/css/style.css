@@ -1985,7 +1985,7 @@ width: 100% !important;
 .input-item.error p {
     position: absolute;
     font-size: 12px;
-    top: 55px;
+    top: 80px;
     color: red;
     left: 20px;
 }
@@ -4691,6 +4691,7 @@ top: 20px;
 .proposal-tabs li {
     display: inline-block;
     margin-right: 5px;
+    margin-bottom: 5px;
 }
 .proposal-tabs li a {
     color: var(--dark);
@@ -7182,3 +7183,19 @@ div#payment-options-tab h2 {
     display: inline-block;
     position: relative;
     }
+
+    #withdraw-proposal .close {
+        top: auto !important;
+    }
+
+    #withdraw-proposal ul li input {
+        position: relative;
+        top: -17px;
+    }
+
+    .input-item label {
+
+        color: #333 !important;
+    }
+    
+  

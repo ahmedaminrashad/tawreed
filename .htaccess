@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+   # Protect from 500 errors if mod_rewrite is not enabled
+   RewriteEngine On
+   # RewriteBase /
+   # Not needed unless using mod_alias to redirect
+   RewriteCond %{REQUEST_URI} !/public
+   RewriteRule ^(.*)$ public/$1 [L]
+   # Direct all requests to /public folder
+</IfModule>
