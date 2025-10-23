@@ -32,10 +32,10 @@ readonly class AuthService
                 return ['error' => __('auth.invalid_credentials')];
             }
 
-            if (!$user->email_verified_at) {
-                DB::rollBack();
-                return ['error' => __('auth.email_not_verified')];
-            }
+//            if (!$user->email_verified_at) {
+//                DB::rollBack();
+//                return ['error' => __('auth.email_not_verified')];
+//            }
 
             $credentials = $this->credentials($data['login_text'], $data['login_password']);
 
