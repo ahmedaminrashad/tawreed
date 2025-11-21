@@ -109,6 +109,14 @@
     $('#signUp_individual_form').on("submit", function(e) {
         e.preventDefault();
 
+        // Show loading state
+        var $btn = $('#individual_register_btn');
+        var $btnText = $btn.find('.btn-text');
+        var $btnLoading = $btn.find('.btn-loading');
+        $btn.prop('disabled', true);
+        $btnText.hide();
+        $btnLoading.show();
+
         $.each($(".error"), function() {
             $(this).removeClass('error');
         });
@@ -117,11 +125,19 @@
             $(this).remove();
         });
 
+        // Hide general error message
+        $('#individual_form_error_message').hide();
+
         $.ajax({
             type: $('#signUp_individual_form').attr('method')
             , url: $('#signUp_individual_form').attr('action')
             , data: $('#signUp_individual_form').serialize()
             , success: function(data) {
+                // Reset button state
+                $btn.prop('disabled', false);
+                $btnText.show();
+                $btnLoading.hide();
+
                 var userIDVal = data.data.user.id;
                 var userEmailVal = data.data.user.email;
 
@@ -138,6 +154,7 @@
                 $("#verify-otp-form #set_sent_email").text(userEmailVal);
                 $('#verify_resend_link_form input[name="resend_otp_user"]').val(userIDVal);
 
+                $('#signUp').modal('hide');
                 $('#signUp-individual-form').modal('hide');
                 $('#verify-otp-form').modal('show');
 
@@ -146,13 +163,31 @@
                 startTimer('verify-timer', 10, timerId, 'verify-resend-link');
             }
             , error: function(error) {
-                var errors = error.responseJSON.messages;
-                $.each(errors, function(index, messageArr) {
-                    $("#" + index + "_div").addClass('error');
-                    $.each(messageArr, function(key, message) {
-                        $("#" + index + "_div").append(`<h6 class='error_text'>${message}</h6>`);
+                // Reset button state
+                $btn.prop('disabled', false);
+                $btnText.show();
+                $btnLoading.hide();
+
+                if (error.responseJSON && error.responseJSON.messages) {
+                    var errors = error.responseJSON.messages;
+                    $.each(errors, function(index, messageArr) {
+                        $("#" + index + "_div").addClass('error');
+                        $.each(messageArr, function(key, message) {
+                            $("#" + index + "_div").append(`<h6 class='error_text'>${message}</h6>`);
+                        });
                     });
-                });
+                } else if (error.responseJSON && error.responseJSON.data && error.responseJSON.data.error) {
+                    // Show general error message in form
+                    $('#individual_form_error_message h6.error_text').text(error.responseJSON.data.error);
+                    $('#individual_form_error_message').show();
+                } else if (error.responseJSON && error.responseJSON.message) {
+                    // Show error message from response
+                    $('#individual_form_error_message h6.error_text').text(error.responseJSON.message);
+                    $('#individual_form_error_message').show();
+                } else {
+                    $('#individual_form_error_message h6.error_text').text('An error occurred. Please try again.');
+                    $('#individual_form_error_message').show();
+                }
                 return false;
             }
         , });
@@ -160,6 +195,14 @@
 
     $('#signUp_company_form').on("submit", function(e) {
         e.preventDefault();
+
+        // Show loading state
+        var $btn = $('#company_register_btn');
+        var $btnText = $btn.find('.btn-text');
+        var $btnLoading = $btn.find('.btn-loading');
+        $btn.prop('disabled', true);
+        $btnText.hide();
+        $btnLoading.show();
 
         $.each($(".error"), function() {
             $(this).removeClass('error');
@@ -169,11 +212,19 @@
             $(this).remove();
         });
 
+        // Hide general error message
+        $('#company_form_error_message').hide();
+
         $.ajax({
             type: $('#signUp_company_form').attr('method')
             , url: $('#signUp_company_form').attr('action')
             , data: $('#signUp_company_form').serialize()
             , success: function(data) {
+                // Reset button state
+                $btn.prop('disabled', false);
+                $btnText.show();
+                $btnLoading.hide();
+
                 var userIDVal = data.data.user.id;
                 var userEmailVal = data.data.user.email;
 
@@ -190,6 +241,7 @@
                 $("#verify-otp-form #set_sent_email").text(userEmailVal);
                 $('#verify_resend_link_form input[name="resend_otp_user"]').val(userIDVal);
 
+                $('#signUp').modal('hide');
                 $('#signUp-company-form').modal('hide');
                 $('#verify-otp-form').modal('show');
 
@@ -198,13 +250,31 @@
                 startTimer('verify-timer', 10, timerId, 'verify-resend-link');
             }
             , error: function(error) {
-                var errors = error.responseJSON.messages;
-                $.each(errors, function(index, messageArr) {
-                    $("#" + index + "_div").addClass('error');
-                    $.each(messageArr, function(key, message) {
-                        $("#" + index + "_div").append(`<h6 class='error_text'>${message}</h6>`);
+                // Reset button state
+                $btn.prop('disabled', false);
+                $btnText.show();
+                $btnLoading.hide();
+
+                if (error.responseJSON && error.responseJSON.messages) {
+                    var errors = error.responseJSON.messages;
+                    $.each(errors, function(index, messageArr) {
+                        $("#" + index + "_div").addClass('error');
+                        $.each(messageArr, function(key, message) {
+                            $("#" + index + "_div").append(`<h6 class='error_text'>${message}</h6>`);
+                        });
                     });
-                });
+                } else if (error.responseJSON && error.responseJSON.data && error.responseJSON.data.error) {
+                    // Show general error message in form
+                    $('#company_form_error_message h6.error_text').text(error.responseJSON.data.error);
+                    $('#company_form_error_message').show();
+                } else if (error.responseJSON && error.responseJSON.message) {
+                    // Show error message from response
+                    $('#company_form_error_message h6.error_text').text(error.responseJSON.message);
+                    $('#company_form_error_message').show();
+                } else {
+                    $('#company_form_error_message h6.error_text').text('An error occurred. Please try again.');
+                    $('#company_form_error_message').show();
+                }
                 return false;
             }
         , });
@@ -531,7 +601,164 @@
             if (e.target.id === 'lightbox-img') return;
             $('#lightbox').fadeOut();
         });
+
+        // Notifications
+        @if(auth('web')->check())
+        loadNotificationCount();
+        loadNotifications('all');
+
+        // Mark all notifications as read when dropdown is opened
+        $('#notification-btn').on('click', function() {
+            // Small delay to ensure dropdown opens first
+            setTimeout(function() {
+                markAllNotificationsAsRead();
+            }, 100);
+        });
+
+        // Prevent dropdown from closing when clicking inside notification menu
+        $('.notification-main').on('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Load notifications when tab is clicked
+        $('.tab label').on('click', function(e) {
+            e.stopPropagation(); // Prevent event from bubbling up and closing dropdown
+            var type = $(this).data('type');
+            loadNotifications(type);
+        });
+
+        // Mark notification as read when clicked
+        $(document).on('click', '.notification-item', function(e) {
+            e.stopPropagation(); // Prevent event from bubbling up and closing dropdown
+            var notificationId = $(this).data('id');
+            // Only mark as read if it's an unread notification
+            if (notificationId && $(this).hasClass('unread-notification')) {
+                markNotificationAsRead(notificationId);
+            }
+        });
+
+        // Refresh notification count every 30 seconds
+        setInterval(function() {
+            loadNotificationCount();
+        }, 30000);
+        @endif
     });
+
+    @if(auth('web')->check())
+    function loadNotificationCount() {
+        $.ajax({
+            url: '{{ route("notifications.unread-count") }}',
+            type: 'GET',
+            success: function(response) {
+                if (response.success) {
+                    var count = response.data.unread_count;
+                    if (count > 0) {
+                        $('#notification-count').text(count).show();
+                    } else {
+                        $('#notification-count').hide();
+                    }
+                }
+            }
+        });
+    }
+
+    function loadNotifications(type) {
+        var containerId = 'notifications-list-' + type;
+        var $container = $('#' + containerId);
+        
+        $container.html('<div class="col-xs-12 remove-padding text-center" style="padding: 20px;"><p>{{ __("web.loading") }}...</p></div>');
+
+        $.ajax({
+            url: '{{ route("notifications.index") }}',
+            type: 'GET',
+            data: { type: type },
+            success: function(response) {
+                if (response.success) {
+                    var notifications = response.data.notifications;
+                    var html = '<div class="col-xs-12 remove-padding">';
+                    
+                    if (notifications.length === 0) {
+                        html += '<div class="col-xs-12 remove-padding text-center" style="padding: 20px;"><p>{{ __("web.no_notifications") }}</p></div>';
+                    } else {
+                        notifications.forEach(function(notification) {
+                            var itemClass = notification.is_read ? 'notification-item' : 'notification-item unread-notification';
+                            html += '<div class="col-xs-12 remove-padding ' + itemClass + '" data-id="' + notification.id + '">';
+                            html += '<img src="{{ asset("/assets/front/img/1.png") }}">';
+                            html += '<a href="javascript:void(0);">' + notification.message + '</a>';
+                            html += '<h5>' + notification.time_ago + '</h5>';
+                            html += '</div>';
+                        });
+                    }
+                    
+                    html += '</div>';
+                    $container.html(html);
+                }
+            },
+            error: function() {
+                $container.html('<div class="col-xs-12 remove-padding text-center" style="padding: 20px;"><p>{{ __("web.error_loading_notifications") }}</p></div>');
+            }
+        });
+    }
+
+    function markNotificationAsRead(notificationId) {
+        $.ajax({
+            url: '{{ route("notifications.read", ":id") }}'.replace(':id', notificationId),
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Update notification count
+                    var count = response.data.unread_count;
+                    if (count > 0) {
+                        $('#notification-count').text(count).show();
+                    } else {
+                        $('#notification-count').hide();
+                    }
+                    
+                    // Reload current tab
+                    var activeTab = $('input[name="css-tabs"]:checked').attr('id');
+                    var type = activeTab === 'tab1' ? 'all' : (activeTab === 'tab2' ? 'unread' : 'read');
+                    loadNotifications(type);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error marking notification as read:', error);
+                console.error('Response:', xhr.responseText);
+            }
+        });
+    }
+
+    function markAllNotificationsAsRead() {
+        $.ajax({
+            url: '{{ route("notifications.read-all") }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Update notification count
+                    var count = response.data.unread_count || 0;
+                    if (count > 0) {
+                        $('#notification-count').text(count).show();
+                    } else {
+                        $('#notification-count').hide();
+                    }
+                    
+                    // Reload current tab to update notification status
+                    var activeTab = $('input[name="css-tabs"]:checked').attr('id');
+                    var type = activeTab === 'tab1' ? 'all' : (activeTab === 'tab2' ? 'unread' : 'read');
+                    loadNotifications(type);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error marking all notifications as read:', error);
+            }
+        });
+    }
+    @endif
 
 </script>
 

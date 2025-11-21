@@ -50,6 +50,7 @@ return [
     'verify' => 'تحقق',
     'no_code_received' => 'لم يصلك الرمز ؟',
     'resend' => 'إعادة الإرسال',
+    'loading' => 'جاري التحميل',
 
     // Profile
     'profile' => 'الملف الشخصي',
@@ -267,6 +268,15 @@ return [
     'withdrawn_proposal' => 'مسحوب',
     'rejected_proposal' => 'مرفوض',
     'final_acceptance_proposal' => 'القبول النهائي',
+    'proposal_cannot_be_updated_final_acceptance' => 'لا يمكن تحديث العرض لأنه في حالة القبول النهائي',
+    
+    // Notifications
+    'new_proposal_received_en' => 'You have received a new proposal for tender: :tender_subject from :proposal_owner',
+    'new_proposal_received_ar' => 'لقد تلقيت عرضاً جديداً للمناقصة: :tender_subject من :proposal_owner',
+    'proposal_withdrawn_en' => 'A proposal for tender: :tender_subject has been withdrawn by :proposal_owner',
+    'proposal_withdrawn_ar' => 'تم سحب عرض للمناقصة: :tender_subject من قبل :proposal_owner',
+    'no_notifications' => 'لا توجد إشعارات',
+    'error_loading_notifications' => 'خطأ في تحميل الإشعارات',
     'premium_package' => 'حزمة المؤسسات',
     'premium_description' => 'يرجى التأكد من التحقق من ملفك الشخصي للاشتراك في كيو تيك بريميوم. تقديم مجموعة لا مثيل لها من العروض المتزامنة للمناقصات! خطوة إلى عالم حيث الفرص وفيرة، وخيارات العطاءات غير محدودة. لقد قمنا بتوسيع وتحسين اقتراح المناقصة.',
     'premium_price' => '$ 99/شهريًا',

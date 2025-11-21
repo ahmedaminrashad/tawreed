@@ -114,22 +114,24 @@
                                         <div class="col-md-6 col-xs-12">
                                             <div class="col-xs-12 remove-padding propoal-item">
                                                 @if(@Auth::user()->id ==$proposal->user_id)
-                                                <div class="dropdown">
-                                                    <button class="dropdown-toggle" type="button"
-                                                            data-toggle="dropdown">
-                                                        <i class="ri-more-line"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="javascript:void(0);">{{__('web.edit')}}</a></li>
-                                                        <li><a href="javascript:void(0);" data-toggle="modal"
-                                                               data-target="#withdraw-proposal{{$proposal->id}}"
-                                                               class="Final-Accept-btn">{{__('web.withdraw')}}</a>
-                                                        </li>
-                                                        <li><a href="javascript:void(0);">{{__('web.sample_sent')}}</a>
-                                                        </li>
-                                                        <li><a href="javascript:void(0);">{{__('web.print')}}</a></li>
-                                                    </ul>
-                                                </div>
+                                                    @if(!$proposal->isFinallyAccepted())
+                                                    <div class="dropdown">
+                                                        <button class="dropdown-toggle" type="button"
+                                                                data-toggle="dropdown">
+                                                            <i class="ri-more-line"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="javascript:void(0);">{{__('web.edit')}}</a></li>
+                                                            <li><a href="javascript:void(0);" data-toggle="modal"
+                                                                   data-target="#withdraw-proposal{{$proposal->id}}"
+                                                                   class="Final-Accept-btn">{{__('web.withdraw')}}</a>
+                                                            </li>
+                                                            <li><a href="javascript:void(0);">{{__('web.sample_sent')}}</a>
+                                                            </li>
+                                                            <li><a href="javascript:void(0);">{{__('web.print')}}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    @endif
                                                 @endif
 
                                                 <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}

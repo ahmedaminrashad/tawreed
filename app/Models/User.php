@@ -99,6 +99,11 @@ class User extends Authenticatable
         return implode(", ", $this->userCategoriesName());
     }
 
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     public function isCompany(): bool
     {
         return $this->type->value == UserType::COMPANY->value;

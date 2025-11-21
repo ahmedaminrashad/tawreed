@@ -69,13 +69,15 @@
                 <a href="javascript:void(0);" onclick="window.print();" style="cursor: pointer;"><i
                         class="ri-printer-line"></i></a>
             @if($proposal->isCreator())
-                @if($proposal->isSampleRequested())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sent" class="Final-Accept-btn">{{__('web.sample_sent')}}</a>
+                @if(!$proposal->isFinallyAccepted())
+                    @if($proposal->isSampleRequested())
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#request-sent" class="Final-Accept-btn">{{__('web.sample_sent')}}</a>
+                    @endif
+                    @if(!$proposal->isWithdrawn())
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#withdraw-proposal" class="Final-Accept-btn">{{__('web.withdraw')}}</a>
+                    @endif
                 @endif
-                @if(!$proposal->isWithdrawn())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#withdraw-proposal" class="Final-Accept-btn">{{__('web.withdraw')}}</a>
-                @endif
-                @endif
+            @endif
                 @if(!$proposal->tender->isAwarded())
                 @if($proposal->isTenderCreator())
                 @if(!$proposal->isWithdrawn() && !$proposal->isRejected())

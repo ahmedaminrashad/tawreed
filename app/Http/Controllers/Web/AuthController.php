@@ -39,17 +39,27 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $data = $request->validated();
+        try {
+            $data = $request->validated();
 
-        $result = $this->authService->register($data);
+            $result = $this->authService->register($data);
 
-        if (is_object($result) || $result instanceof User) {
-            $response['user'] = new UserResource($result);
+            if (is_object($result) || $result instanceof User) {
+                $response['user'] = new UserResource($result);
 
-            return $this->success($response, __('auth.register_success'));
+                return $this->success($response, __('auth.register_success'));
+            }
+
+            // Handle error response
+            $errorMessage = is_array($result) && isset($result['error']) 
+                ? $result['error'] 
+                : __('auth.register_error');
+
+            return $this->failure(['error' => $errorMessage], __('auth.register_error'));
+        } catch (\Exception $e) {
+            \Log::error('Registration controller error: ' . $e->getMessage());
+            return $this->failure(['error' => __('auth.register_error')], __('auth.register_error'));
         }
-
-        return $this->failure(['error' => $result['error']], __('auth.register_error'));
     }
 
     public function verifyOTP(OTPRequest $request)

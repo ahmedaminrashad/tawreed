@@ -71,6 +71,11 @@
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}" style="width: 70%">
             <h1>{{ __('web.create_account') }}</h1>
+            <div id="individual_form_error_message" class="col-xs-12 remove-padding" style="display: none; margin-bottom: 15px;">
+                <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; border: 1px solid #f5c6cb;">
+                    <h6 class="error_text" style="margin: 0;"></h6>
+                </div>
+            </div>
             <form id="signUp_individual_form" action="{{ route('register') }}" method="POST">
                 @csrf
 
@@ -113,7 +118,12 @@
                 </div>
 
                 <input type="hidden" name="account_type" value="individual">
-                <button type="submit">{{ __('web.create_account') }}</button>
+                <button type="submit" id="individual_register_btn">
+                    <span class="btn-text">{{ __('web.create_account') }}</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="ri-loader-4-line" style="animation: spin 1s linear infinite; display: inline-block; margin-right: 5px;"></i> {{ __('web.loading') }}...
+                    </span>
+                </button>
 
             </form>
 
@@ -131,6 +141,11 @@
             <span class="close" data-dismiss="modal"><i class="ri-close-line"></i></span>
             <img src="{{ asset('/assets/front/img/logo.png') }}" style="width: 70%">
             <h1>{{ __('web.create_account') }}</h1>
+            <div id="company_form_error_message" class="col-xs-12 remove-padding" style="display: none; margin-bottom: 15px;">
+                <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; border: 1px solid #f5c6cb;">
+                    <h6 class="error_text" style="margin: 0;"></h6>
+                </div>
+            </div>
             <form id="signUp_company_form" action="{{ route('register') }}" method="POST">
                 @csrf
 
@@ -177,7 +192,12 @@
                 </div>
 
                 <input type="hidden" name="account_type" value="company">
-                <button type="submit">{{ __('web.create_account') }}</button>
+                <button type="submit" id="company_register_btn">
+                    <span class="btn-text">{{ __('web.create_account') }}</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="ri-loader-4-line" style="animation: spin 1s linear infinite; display: inline-block; margin-right: 5px;"></i> {{ __('web.loading') }}...
+                    </span>
+                </button>
 
             </form>
 

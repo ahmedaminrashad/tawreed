@@ -84,6 +84,14 @@ Route::group(['middleware' => ['auth:web']], function () {
     // Logout Route
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
+    // Notifications Routes
+    Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
+        Route::get('/', [\App\Http\Controllers\Web\NotificationController::class, 'index'])->name('index');
+        Route::post('/{id}/read', [\App\Http\Controllers\Web\NotificationController::class, 'markAsRead'])->name('read');
+        Route::post('/read-all', [\App\Http\Controllers\Web\NotificationController::class, 'markAllAsRead'])->name('read-all');
+        Route::get('/unread-count', [\App\Http\Controllers\Web\NotificationController::class, 'getUnreadCount'])->name('unread-count');
+    });
+
     // Profile Routes
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         // Profile Route

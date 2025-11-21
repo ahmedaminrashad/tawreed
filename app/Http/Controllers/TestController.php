@@ -16,13 +16,13 @@ class TestController extends Controller
     {
 
         return bcrypt('superAdmin@tawred2026');
-        return 'ss';
+        // return 'ss';
 //        return Tender::query()->with('items')->find(18);
 
         $users = User::query()->get();
 
         foreach ($users as $key=>$user) {
-            $user->update(['email'=>"user{$key}@user.com"]);
+            $user->update(['email'=>"user{$key}@user.com",'email_verified_at'=>now()]);
 
         }
 

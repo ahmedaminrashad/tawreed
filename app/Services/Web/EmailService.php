@@ -25,6 +25,8 @@ readonly class EmailService
             'administratorEmail' => $this->settingService->getByKey('email')->value,
         ];
 
+        // Use send() instead of queue() for OTP emails since they're time-sensitive
+        // and users need them immediately for verification
         if ($user->isCompany()) {
             Mail::to($user->email)->send(new SendCompanyVerifyOTPMail($otpData, $user->email));
         } else {

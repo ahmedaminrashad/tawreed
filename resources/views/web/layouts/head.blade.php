@@ -58,6 +58,16 @@
         cursor: pointer;
     }
 
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    #individual_register_btn:disabled,
+    #company_register_btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
 </style>
 @if(app()->getLocale() == 'ar')
 <link href="{{ asset('/assets/front/css/bootstrap.css') }}" rel="stylesheet">

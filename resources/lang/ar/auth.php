@@ -35,4 +35,8 @@ return [
     // User messages
     'user_not_found' => 'المستخدم غير موجود',
     'email_not_verified' => 'البريد الإلكتروني غير مفعل',
+    'email_already_registered' => 'هذا البريد الإلكتروني مسجل بالفعل',
+    'crn_already_registered' => 'رقم السجل التجاري هذا مسجل بالفعل',
+    'invalid_account_type' => 'نوع الحساب غير صالح',
+    'database_error' => 'حدث خطأ في قاعدة البيانات. يرجى المحاولة مرة أخرى لاحقاً',
 ]; 

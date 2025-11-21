@@ -3,15 +3,23 @@
 namespace App\Services;
 
 use App\Enums\ProposalStatus;
+use App\Mail\NewProposalNotificationMail;
+use App\Mail\ProposalWithdrawnNotificationMail;
+use App\Models\Notification;
 use App\Models\Proposal;
 use App\Models\ProposalItem;
 use App\Models\Tender;
+use App\Services\Web\EmailService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 readonly class ProposalService
 {
     public function __construct(
         protected TenderService $tenderService,
+        protected EmailService $emailService,
+        protected \App\Services\SettingService $settingService,
     ) {}
 
     // list all Proposals function
@@ -64,18 +72,21 @@ readonly class ProposalService
     // list all Proposals Statuses function
     public function listProposalStatus()
     {
-        $statuses = ProposalStatus::values();
+        $statuses = ProposalStatus::cases();
+        $data = [];
 
-        foreach ($statuses as $status) {
-//            if ($status == ProposalStatus::CREATED->value || $status == ProposalStatus::DRAFT->value) {
+        foreach ($statuses as $statusEnum) {
+//            if ($statusEnum == ProposalStatus::CREATED || $statusEnum == ProposalStatus::DRAFT) {
 //                continue;
 //            }
 
+            $status = $statusEnum->value;
             $final = str_replace(' ', '_', $status);
             $final = str_replace('(', '', $final);
             $final = str_replace(')', '', $final);
 
-            $data[$final] = $status;
+            // Use label instead of raw value
+            $data[$final] = $statusEnum->getLabel();
         }
 
         return $data;
@@ -129,7 +140,12 @@ readonly class ProposalService
     public function itemsStore(Tender $tender, Proposal $proposal = null, $data)
     {
         try {
-            if ($proposal->id) {
+            // Prevent update if proposal has final acceptance status
+            if ($proposal && $proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+                return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
+            }
+
+            if ($proposal && $proposal->id) {
                 $proposal->items()->delete();
             } else {
                 $result = $this->create([], $tender);
@@ -187,11 +203,19 @@ readonly class ProposalService
     public function publish(Proposal $proposal)
     {
         try {
+            // Prevent publish if proposal has final acceptance status
+            if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+                return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
+            }
+
             $result = $this->updateStatus($proposal, ProposalStatus::UNDER_REVIEW->value);
 
             if (is_array($result)) {
                 return ['error' => 'Error in publish Proposal'];
             }
+
+            // Send notification and email to tender owner
+            $this->sendProposalNotification($proposal);
 
             return 1;
         } catch (\Exception $e) {
@@ -200,10 +224,107 @@ readonly class ProposalService
         }
     }
 
+    // Send Proposal Notification
+    private function sendProposalNotification(Proposal $proposal)
+    {
+        try {
+            $tender = $proposal->tender;
+            $tenderOwner = $tender->user;
+            $proposalOwner = $proposal->user;
+
+            // Prepare notification data
+            $messageAr = __('web.new_proposal_received_ar', [
+                'tender_subject' => $tender->subject,
+                'proposal_owner' => $proposalOwner->displayed_name
+            ]);
+            $messageEn = __('web.new_proposal_received_en', [
+                'tender_subject' => $tender->subject,
+                'proposal_owner' => $proposalOwner->displayed_name
+            ]);
+
+            // Create notification record
+            Notification::create([
+                'user_id' => $tenderOwner->id,
+                'message_ar' => $messageAr,
+                'message_en' => $messageEn,
+                'is_read' => false,
+            ]);
+
+            // Prepare email data
+            $emailData = [
+                'date' => Carbon::today()->format('d M, Y'),
+                'tender_owner_name' => $tenderOwner->displayed_name,
+                'tender_subject' => $tender->subject,
+                'proposal_owner_name' => $proposalOwner->displayed_name,
+                'proposal_url' => route('proposals.show', ['proposal' => $proposal->id]),
+                'tender_owner_email' => $tenderOwner->email,
+                'administratorEmail' => $this->settingService->getByKey('email')->value,
+            ];
+
+            // Send email notification
+            Mail::to($tenderOwner->email)->send(new NewProposalNotificationMail($proposal, $emailData));
+
+        } catch (\Exception $e) {
+            // Log error but don't fail the proposal publish
+            \Log::error('Failed to send proposal notification: ' . $e->getMessage());
+        }
+    }
+
+    // Send Proposal Withdrawn Notification
+    private function sendProposalWithdrawnNotification(Proposal $proposal)
+    {
+        try {
+            $tender = $proposal->tender;
+            $tenderOwner = $tender->user;
+            $proposalOwner = $proposal->user;
+
+            // Prepare notification data
+            $messageAr = __('web.proposal_withdrawn_ar', [
+                'tender_subject' => $tender->subject,
+                'proposal_owner' => $proposalOwner->displayed_name
+            ]);
+            $messageEn = __('web.proposal_withdrawn_en', [
+                'tender_subject' => $tender->subject,
+                'proposal_owner' => $proposalOwner->displayed_name
+            ]);
+
+            // Create notification record
+            Notification::create([
+                'user_id' => $tenderOwner->id,
+                'message_ar' => $messageAr,
+                'message_en' => $messageEn,
+                'is_read' => false,
+            ]);
+
+            // Prepare email data
+            $emailData = [
+                'date' => Carbon::today()->format('d M, Y'),
+                'tender_owner_name' => $tenderOwner->displayed_name,
+                'tender_subject' => $tender->subject,
+                'proposal_owner_name' => $proposalOwner->displayed_name,
+                'proposal_url' => route('proposals.show', ['proposal' => $proposal->id]),
+                'tender_owner_email' => $tenderOwner->email,
+                'administratorEmail' => $this->settingService->getByKey('email')->value,
+            ];
+
+            // Send email notification
+            Mail::to($tenderOwner->email)->send(new ProposalWithdrawnNotificationMail($proposal, $emailData));
+
+        } catch (\Exception $e) {
+            // Log error but don't fail the proposal withdrawal
+            \Log::error('Failed to send proposal withdrawn notification: ' . $e->getMessage());
+        }
+    }
+
     // Update Proposal
     public function update(Proposal $proposal, $data)
     {
         try {
+            // Prevent update if proposal has final acceptance status
+            if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+                return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
+            }
+
             DB::beginTransaction();
 
             $proposal->update($data);
@@ -221,6 +342,11 @@ readonly class ProposalService
     public function updateStatus(Proposal $proposal, $status)
     {
         try {
+            // Prevent status update if proposal has final acceptance status
+            if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+                return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
+            }
+
             DB::beginTransaction();
 
             $proposal->update([
@@ -228,6 +354,11 @@ readonly class ProposalService
             ]);
 
             DB::commit();
+
+            // Send notification if proposal is withdrawn
+            if ($status === ProposalStatus::WITHDRAWN->value) {
+                $this->sendProposalWithdrawnNotification($proposal);
+            }
 
             return 1;
         } catch (\Exception $e) {
@@ -240,6 +371,11 @@ readonly class ProposalService
     public function requestSample(Proposal $proposal, $data)
     {
         try {
+            // Prevent sample request if proposal has final acceptance status
+            if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+                return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
+            }
+
             DB::beginTransaction();
 
             $proposal->update([

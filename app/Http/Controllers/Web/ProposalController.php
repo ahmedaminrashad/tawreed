@@ -28,11 +28,21 @@ class ProposalController extends Controller
 
     public function info(Tender $tender, Proposal $proposal)
     {
+        // Prevent access if proposal has final acceptance status
+        if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+            return redirect()->back()->with('error', __('web.proposal_cannot_be_updated_final_acceptance'));
+        }
+
         return view('web.proposals.info', compact('tender', 'proposal'));
     }
 
     public function storeInfo(Tender $tender, Proposal $proposal, StoreTenderProposalInfoRequest $request)
     {
+        // Prevent update if proposal has final acceptance status
+        if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+            return redirect()->back()->with('error', __('web.proposal_cannot_be_updated_final_acceptance'));
+        }
+
         $data = $request->validated();
         $data['proposal_end_date'] = Carbon::parse($data['proposal_end_date'])->format('Y-m-d');
 
@@ -92,9 +102,13 @@ class ProposalController extends Controller
 
     public function items(Tender $tender, Proposal $proposal = null)
     {
-
         if(userHaveProposal($tender)) {
             return redirect()->route('profile.tenders')->with('error', __('web.you_have_a_proposal_for_this_tender'));
+        }
+
+        // Prevent access if proposal has final acceptance status
+        if ($proposal && $proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+            return redirect()->back()->with('error', __('web.proposal_cannot_be_updated_final_acceptance'));
         }
 
         return view('web.proposals.items', compact('tender', 'proposal'));
@@ -102,6 +116,11 @@ class ProposalController extends Controller
 
     public function storeItems(Tender $tender, Proposal $proposal = null, StoreTenderProposalItemRequest $request)
     {
+        // Prevent update if proposal has final acceptance status
+        if ($proposal && $proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+            return redirect()->back()->with('error', __('web.proposal_cannot_be_updated_final_acceptance'));
+        }
+
         $data = $request->validated();
 
         $result = $this->proposalService->itemsStore($tender, $proposal, $data);
@@ -115,11 +134,21 @@ class ProposalController extends Controller
 
     public function reviewProposal(Tender $tender, Proposal $proposal)
     {
+        // Prevent access if proposal has final acceptance status
+        if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+            return redirect()->back()->with('error', __('web.proposal_cannot_be_updated_final_acceptance'));
+        }
+
         return view('web.proposals.review', compact('tender', 'proposal'));
     }
 
     public function publishProposal(Tender $tender, Proposal $proposal, Request $request)
     {
+        // Prevent publish if proposal has final acceptance status
+        if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
+            return redirect()->back()->with('error', __('web.proposal_cannot_be_updated_final_acceptance'));
+        }
+
         $result = $this->proposalService->publish($proposal);
 
         if (is_array($result)) {

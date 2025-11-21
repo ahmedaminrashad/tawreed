@@ -76,6 +76,7 @@ class AuthController extends Controller
             ]);
 
             try {
+                // Use send() instead of queue() for password reset emails since they're time-sensitive
                 Mail::to($admin->email)->send(new SendForgetPasswordMail($token, $admin->email));
 
                 Session::flash('success', 'Reset Password Mail sent successfully');
@@ -114,6 +115,7 @@ class AuthController extends Controller
             ]);
 
             try {
+                // Use send() instead of queue() for password reset emails since they're time-sensitive
                 Mail::to($admin->email)->send(new SendForgetPasswordMail($token, $admin->email));
 
                 Session::flash('success', 'Reset Password Mail sent successfully');
