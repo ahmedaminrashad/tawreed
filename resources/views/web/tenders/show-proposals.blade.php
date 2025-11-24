@@ -21,7 +21,7 @@
                 <div class="proposal-img-main col-xs-12 remove-padding">
                     <img src="{{ asset('/assets/front/img/1.png') }}">
                     <h4><b>{{ $tender->user->displayed_name }} </b>. {{ $tender->user->user_type }}</h4>
-                    @if(!userHaveProposal($tender))
+                    @if(!userHaveProposal($tender) && $tender->user_id != auth()->id())
                         <a href="{{ route('tenders.proposals.items', ['tender' => $tender->id]) }}">{{ __('web.submit_proposal') }}</a>
                     @endif
                     @if($tender->user_id == auth()->id())

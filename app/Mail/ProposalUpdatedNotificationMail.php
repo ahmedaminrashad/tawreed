@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ProposalWithdrawnNotificationMail extends Mailable
+class ProposalUpdatedNotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -34,11 +34,12 @@ class ProposalWithdrawnNotificationMail extends Mailable
         $locale = $data['locale'] ?? app()->getLocale();
         app()->setLocale($locale);
         
-        $subject = __('web.proposal_withdrawn_email_subject');
+        $subject = __('web.proposal_updated_email_subject');
 
         return $this->from(config('mail.from.address'), config('mail.from.name'))
-            ->to($this->data['tender_owner_email'])
+            ->to($this->data['proposal_owner_email'])
             ->subject($subject)
-            ->view('admin.emails.proposal.proposal-withdrawn', compact('subject', 'data'));
+            ->view('admin.emails.proposal.proposal-updated', compact('subject', 'data'));
     }
 }
+

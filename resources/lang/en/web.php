@@ -124,4 +124,32 @@ return [
     'new_proposal_email_or_visit' => 'or visit our',
     'new_proposal_email_help_center' => 'Help Center',
     'new_proposal_email_copyright' => '© 2024 QuoTech. All rights reserved.',
+    
+    // Proposal Updated Email
+    'proposal_updated_email_subject' => 'QuoTech | Proposal Updated Notification',
+    'proposal_updated_email_title' => 'Proposal Updated',
+    'proposal_updated_email_greeting' => 'Hello :name,',
+    'proposal_updated_email_message' => 'Your proposal for the tender:',
+    'proposal_updated_email_updated_by' => 'has been updated by',
+    'proposal_updated_email_view_proposal' => 'View Proposal',
+    'proposal_updated_email_need_help' => 'Need help? Ask at',
+    'proposal_updated_email_or_visit' => 'or visit our',
+    'proposal_updated_email_help_center' => 'Help Center',
+    'proposal_updated_email_copyright' => '© 2024 QuoTech. All rights reserved.',
+    
+    // Proposal Updated Notification
+    'proposal_updated_notification_ar' => 'تم تحديث عرضك للمناقصة: :tender_subject من قبل :tender_owner',
+    'proposal_updated_notification_en' => 'Your proposal for tender: :tender_subject has been updated by :tender_owner',
+    
+    // Proposal Withdrawn Email
+    'proposal_withdrawn_email_subject' => 'QuoTech | Proposal Withdrawn Notification',
+    'proposal_withdrawn_email_title' => 'Proposal Withdrawn',
+    'proposal_withdrawn_email_greeting' => 'Hello :name,',
+    'proposal_withdrawn_email_message' => 'A proposal for your tender:',
+    'proposal_withdrawn_email_withdrawn_by' => 'has been withdrawn by',
+    'proposal_withdrawn_email_view_proposal' => 'View Proposal',
+    'proposal_withdrawn_email_need_help' => 'Need help? Ask at',
+    'proposal_withdrawn_email_or_visit' => 'or visit our',
+    'proposal_withdrawn_email_help_center' => 'Help Center',
+    'proposal_withdrawn_email_copyright' => '© 2024 QuoTech. All rights reserved.',
 ]; 

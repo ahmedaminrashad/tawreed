@@ -312,6 +312,34 @@ return [
     'new_proposal_email_or_visit' => 'أو زر',
     'new_proposal_email_help_center' => 'مركز المساعدة',
     'new_proposal_email_copyright' => '© 2024 شركة كيو تيك. جميع الحقوق محفوظة.',
+    
+    // Proposal Updated Email
+    'proposal_updated_email_subject' => 'كيو تيك | إشعار تحديث العرض',
+    'proposal_updated_email_title' => 'تم تحديث العرض',
+    'proposal_updated_email_greeting' => 'مرحباً :name،',
+    'proposal_updated_email_message' => 'تم تحديث عرضك للمناقصة:',
+    'proposal_updated_email_updated_by' => 'من قبل',
+    'proposal_updated_email_view_proposal' => 'عرض العرض',
+    'proposal_updated_email_need_help' => 'تحتاج مساعدة؟ تواصل معنا على',
+    'proposal_updated_email_or_visit' => 'أو زر',
+    'proposal_updated_email_help_center' => 'مركز المساعدة',
+    'proposal_updated_email_copyright' => '© 2024 شركة كيو تيك. جميع الحقوق محفوظة.',
+    
+    // Proposal Updated Notification
+    'proposal_updated_notification_ar' => 'تم تحديث عرضك للمناقصة: :tender_subject من قبل :tender_owner',
+    'proposal_updated_notification_en' => 'Your proposal for tender: :tender_subject has been updated by :tender_owner',
+    
+    // Proposal Withdrawn Email
+    'proposal_withdrawn_email_subject' => 'كيو تيك | إشعار سحب العرض',
+    'proposal_withdrawn_email_title' => 'تم سحب العرض',
+    'proposal_withdrawn_email_greeting' => 'مرحباً :name،',
+    'proposal_withdrawn_email_message' => 'تم سحب عرض لمناقصتك:',
+    'proposal_withdrawn_email_withdrawn_by' => 'من قبل',
+    'proposal_withdrawn_email_view_proposal' => 'عرض العرض',
+    'proposal_withdrawn_email_need_help' => 'تحتاج مساعدة؟ تواصل معنا على',
+    'proposal_withdrawn_email_or_visit' => 'أو زر',
+    'proposal_withdrawn_email_help_center' => 'مركز المساعدة',
+    'proposal_withdrawn_email_copyright' => '© 2024 شركة كيو تيك. جميع الحقوق محفوظة.',
     'premium_package' => 'حزمة المؤسسات',
     'premium_description' => 'يرجى التأكد من التحقق من ملفك الشخصي للاشتراك في كيو تيك بريميوم. تقديم مجموعة لا مثيل لها من العروض المتزامنة للمناقصات! خطوة إلى عالم حيث الفرص وفيرة، وخيارات العطاءات غير محدودة. لقد قمنا بتوسيع وتحسين اقتراح المناقصة.',
     'premium_price' => '$ 99/شهريًا',

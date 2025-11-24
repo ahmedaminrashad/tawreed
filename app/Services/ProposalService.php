@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\ProposalStatus;
 use App\Mail\NewProposalNotificationMail;
 use App\Mail\ProposalWithdrawnNotificationMail;
+use App\Mail\ProposalUpdatedNotificationMail;
 use App\Models\Notification;
 use App\Models\Proposal;
 use App\Models\ProposalItem;
@@ -271,6 +272,53 @@ readonly class ProposalService
         }
     }
 
+    // Send Proposal Updated Notification
+    private function sendProposalUpdatedNotification(Proposal $proposal)
+    {
+        try {
+            $tender = $proposal->tender;
+            $tenderOwner = $tender->user;
+            $proposalOwner = $proposal->user;
+
+            // Prepare notification data
+            $messageAr = __('web.proposal_updated_notification_ar', [
+                'tender_subject' => $tender->subject,
+                'tender_owner' => $tenderOwner->displayed_name
+            ]);
+            $messageEn = __('web.proposal_updated_notification_en', [
+                'tender_subject' => $tender->subject,
+                'tender_owner' => $tenderOwner->displayed_name
+            ]);
+
+            // Create notification record
+            Notification::create([
+                'user_id' => $proposalOwner->id,
+                'message_ar' => $messageAr,
+                'message_en' => $messageEn,
+                'is_read' => false,
+            ]);
+
+            // Prepare email data
+            $emailData = [
+                'date' => Carbon::today()->format('d M, Y'),
+                'tender_owner_name' => $tenderOwner->displayed_name,
+                'tender_subject' => $tender->subject,
+                'proposal_owner_name' => $proposalOwner->displayed_name,
+                'proposal_url' => route('proposals.show', ['proposal' => $proposal->id]),
+                'proposal_owner_email' => $proposalOwner->email,
+                'administratorEmail' => $this->settingService->getByKey('email')->value,
+                'locale' => app()->getLocale(), // Pass current locale for email
+            ];
+
+            // Send email notification
+            Mail::to($proposalOwner->email)->send(new ProposalUpdatedNotificationMail($proposal, $emailData));
+
+        } catch (\Exception $e) {
+            // Log error but don't fail the proposal update
+            \Log::error('Failed to send proposal updated notification: ' . $e->getMessage());
+        }
+    }
+
     // Send Proposal Withdrawn Notification
     private function sendProposalWithdrawnNotification(Proposal $proposal)
     {
@@ -306,6 +354,7 @@ readonly class ProposalService
                 'proposal_url' => route('proposals.show', ['proposal' => $proposal->id]),
                 'tender_owner_email' => $tenderOwner->email,
                 'administratorEmail' => $this->settingService->getByKey('email')->value,
+                'locale' => app()->getLocale(), // Pass current locale for email
             ];
 
             // Send email notification
@@ -328,9 +377,18 @@ readonly class ProposalService
 
             DB::beginTransaction();
 
+            // Check if tender owner is updating (not proposal owner)
+            $currentUserId = auth()->id();
+            $isTenderOwnerUpdating = $proposal->tender->user_id === $currentUserId && $proposal->user_id !== $currentUserId;
+
             $proposal->update($data);
 
             DB::commit();
+
+            // Send notification to proposal creator if tender owner updated it
+            if ($isTenderOwnerUpdating) {
+                $this->sendProposalUpdatedNotification($proposal);
+            }
 
             return $proposal;
         } catch (\Exception $e) {

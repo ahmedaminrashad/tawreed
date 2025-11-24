@@ -62,7 +62,7 @@
                 font-weight: 500;
                 color: #1f1f1f;
               ">
-                        {{ __('web.proposal_withdrawn_email_title') }}
+                        {{ __('web.proposal_updated_email_title') }}
                     </h1>
                     <p style="
                 margin: 0;
@@ -70,7 +70,7 @@
                 font-size: 16px;
                 font-weight: 500;
               ">
-                        {{ __('web.proposal_withdrawn_email_greeting', ['name' => $data['tender_owner_name']]) }}
+                        {{ __('web.proposal_updated_email_greeting', ['name' => $data['proposal_owner_name']]) }}
                     </p>
                     <p style="
                 margin: 0;
@@ -78,7 +78,15 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        {{ __('web.proposal_withdrawn_email_message') }} <strong>{{ $data['tender_subject'] }}</strong> {{ __('web.proposal_withdrawn_email_withdrawn_by') }} <strong>{{ $data['proposal_owner_name'] }}</strong>
+                        {{ __('web.proposal_updated_email_message') }} <strong>{{ $data['tender_subject'] }}</strong>
+                    </p>
+                    <p style="
+                margin: 0;
+                margin-top: 17px;
+                font-weight: 500;
+                letter-spacing: 0.56px;
+              ">
+                        {{ __('web.proposal_updated_email_updated_by') }} <strong>{{ $data['tender_owner_name'] }}</strong>
                     </p>
                     <div style="
                 margin-top: 40px;
@@ -94,7 +102,7 @@
                     text-decoration: none;
                     border-radius: 5px;
                     font-weight: 500;
-                  ">{{ __('web.proposal_withdrawn_email_view_proposal') }}</a>
+                  ">{{ __('web.proposal_updated_email_view_proposal') }}</a>
                     </div>
                 </div>
             </div>
@@ -107,10 +115,10 @@
             font-weight: 500;
             color: #8c8c8c;
           ">
-                {{ __('web.proposal_withdrawn_email_need_help') }}
+                {{ __('web.proposal_updated_email_need_help') }}
                 <a href="mailto:{{ $data['administratorEmail'] }}" style="color: #499fb6; text-decoration: none;">{{ $data['administratorEmail'] }}</a>
-                {{ __('web.proposal_withdrawn_email_or_visit') }}
-                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">{{ __('web.proposal_withdrawn_email_help_center') }}</a>
+                {{ __('web.proposal_updated_email_or_visit') }}
+                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">{{ __('web.proposal_updated_email_help_center') }}</a>
             </p>
         </main>
 
@@ -122,7 +130,7 @@
           border-top: 1px solid #e6ebf1;
         ">
             <p style="margin: 0; margin-top: 16px; color: #434343;">
-                {{ __('web.proposal_withdrawn_email_copyright') }}
+                {{ __('web.proposal_updated_email_copyright') }}
             </p>
         </footer>
     </div>
