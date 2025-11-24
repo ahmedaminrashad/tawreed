@@ -24,7 +24,7 @@ class TestController extends Controller
     public function test()
     {
 
-      return  $user= User::query()->where('email','ahmedaminrashad@gmail.com')->first();
+         $user= User::query()->where('email','ahmedaminrashad@gmail.com')->first();
         $welcomeData = [
             'date' => Carbon::today()->format('d M, Y'),
             'name' => $user->isCompany() ? $user->company_name : $user->full_name,
