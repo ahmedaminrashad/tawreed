@@ -31,6 +31,7 @@ class TestController extends Controller
             'administratorEmail' => $this->settingService->getByKey('email')->value,
         ];
 
+        return 'success';
         $mail= Mail::to($user->email)->send(new WelcomeMail($welcomeData, $user->email));
 
       dd($mail);
