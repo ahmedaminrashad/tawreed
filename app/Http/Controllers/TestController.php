@@ -24,7 +24,7 @@ class TestController extends Controller
     public function test()
     {
 
-        $user= User::query()->where('email','ahmedaminrashad@gmail.com')->first();
+      return  $user= User::query()->where('email','ahmedaminrashad@gmail.com')->first();
         $welcomeData = [
             'date' => Carbon::today()->format('d M, Y'),
             'name' => $user->isCompany() ? $user->company_name : $user->full_name,
@@ -32,7 +32,7 @@ class TestController extends Controller
         ];
 
         $mail= Mail::to($user->email)->send(new WelcomeMail($welcomeData, $user->email));
-      
+
       dd($mail);
         return bcrypt('12345678');
         return bcrypt('superAdmin@tawred2026');

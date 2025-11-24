@@ -32,7 +32,7 @@ class SendVerifyOTPMail extends Mailable
         $data = $this->data;
         $subject = 'QuoTech | User OTP Verify Email';
 
-        return $this->from(env('MAIL_FROM_ADDRESS'))
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($this->email)
             ->subject($subject)
             ->view('admin.emails.otp.send-otp', compact('subject', 'data'));

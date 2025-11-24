@@ -32,7 +32,7 @@ class SendForgetPasswordMail extends Mailable
         $subject = 'QuoTech | Password Reset Link';
         $url = route('admin.reset.password.form', $this->token);
 
-        return $this->from(env('MAIL_FROM_ADDRESS'))
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($this->email)
             ->subject($subject)
             ->view('admin.emails.password.reset', compact('subject', 'url'));
