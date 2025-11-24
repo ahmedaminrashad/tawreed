@@ -101,4 +101,15 @@ return [
     'welcome_email_or_visit' => 'or visit our',
     'welcome_email_help_center' => 'Help Center',
     'welcome_email_copyright' => '© 2022 QuoTech. All rights reserved.',
+    
+    // OTP Email
+    'otp_email_subject_user' => 'QuoTech | User OTP Verify Email',
+    'otp_email_subject_company' => 'QuoTech | Company OTP Verify Email',
+    'otp_email_title' => 'Verify Email OTP',
+    'otp_email_greeting' => 'Hey :name,',
+    'otp_email_message' => 'Thank you for choosing QuoTech. Use the following OTP code to complete the procedure to verify your email address. OTP is valid for :minutes minutes. Do not share this code with others, including QuoTech employees.',
+    'otp_email_need_help' => 'Need help? Ask at',
+    'otp_email_or_visit' => 'or visit our',
+    'otp_email_help_center' => 'Help Center',
+    'otp_email_copyright' => '© 2022 QuoTech. All rights reserved.',
 ]; 

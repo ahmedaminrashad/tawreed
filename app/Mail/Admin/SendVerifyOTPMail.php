@@ -30,7 +30,12 @@ class SendVerifyOTPMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        $subject = 'QuoTech | User OTP Verify Email';
+        
+        // Set locale for email translation
+        $locale = $data['locale'] ?? app()->getLocale();
+        app()->setLocale($locale);
+        
+        $subject = __('web.otp_email_subject_user');
 
         return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($this->email)

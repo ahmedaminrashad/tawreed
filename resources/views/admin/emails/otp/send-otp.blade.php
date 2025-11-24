@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
                         <td>
                             <img alt="" src="{{ asset('/assets/front/img/logo.png') }}" height="30px">
                         </td>
-                        <td style="text-align: right;">
+                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'left' : 'right' }};">
                             <span style="font-size: 16px; line-height: 30px; color: #ffffff;">{{ $data['date'] }}</span>
                         </td>
                     </tr>
@@ -57,7 +57,7 @@
                 font-weight: 500;
                 color: #1f1f1f;
               ">
-                        Verify Email OTP
+                        {{ __('web.otp_email_title') }}
                     </h1>
                     <p style="
                 margin: 0;
@@ -65,7 +65,7 @@
                 font-size: 16px;
                 font-weight: 500;
               ">
-                        Hey {{ $data['name'] }},
+                        {{ __('web.otp_email_greeting', ['name' => $data['name']]) }}
                     </p>
                     <p style="
                 margin: 0;
@@ -73,12 +73,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        شكرًا لاختيارك شركة كيو تيك. استخدم رمز OTP التالي
-                        to complete the procedure to verify your email address. OTP is
-                        valid for
-                        <span style="font-weight: 600; color: #1f1f1f;">3 minutes</span>.
-                        Do not share this code with others, including Quotech
-                        employees.
+                        {{ __('web.otp_email_message', ['minutes' => 3]) }}
                     </p>
                     <p style="
                 margin: 0;
@@ -101,10 +96,10 @@
             font-weight: 500;
             color: #8c8c8c;
           ">
-                Need help? Ask at
+                {{ __('web.otp_email_need_help') }}
                 <a href="mailto:{{ $data['administratorEmail'] }}" style="color: #499fb6; text-decoration: none;">{{ $data['administratorEmail'] }}</a>
-                or visit our
-                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">Help Center</a>
+                {{ __('web.otp_email_or_visit') }}
+                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">{{ __('web.otp_email_help_center') }}</a>
             </p>
         </main>
 
@@ -116,7 +111,7 @@
           border-top: 1px solid #e6ebf1;
         ">
             <p style="margin: 0; margin-top: 16px; color: #434343;">
-                حقوق النشر © 2022 شركة كيو تيك. جميع الحقوق محفوظة.
+                {{ __('web.otp_email_copyright') }}
             </p>
         </footer>
     </div>

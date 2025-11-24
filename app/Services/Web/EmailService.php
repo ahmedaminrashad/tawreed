@@ -24,6 +24,7 @@ readonly class EmailService
             'name' => $user->isCompany() ? $user->company_name : $user->full_name,
             'otp' => $user->otp,
             'administratorEmail' => $this->settingService->getByKey('email')->value,
+            'locale' => app()->getLocale(), // Pass current locale for email
         ];
 
         // Use send() instead of queue() for OTP emails since they're time-sensitive
