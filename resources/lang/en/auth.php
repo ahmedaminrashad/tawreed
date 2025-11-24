@@ -35,4 +35,8 @@ return [
     // User messages
     'user_not_found' => 'Invalid - User not exists',
     'email_not_verified' => 'Email not verified',
+    'email_already_registered' => 'This email is already registered',
+    'crn_already_registered' => 'This commercial registration number is already registered',
+    'invalid_account_type' => 'Invalid account type',
+    'database_error' => 'A database error occurred. Please try again later',
 ]; 

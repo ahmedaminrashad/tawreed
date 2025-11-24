@@ -9,6 +9,7 @@ use Auth;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 readonly class AuthService
@@ -61,17 +62,25 @@ readonly class AuthService
     // Register New User
     public function register(array $data)
     {
+        $result = null;
+
         if ($data['account_type'] == UserType::INDIVIDUAL->value) {
             $result = $this->registerIndividual($data);
         } else if ($data['account_type'] == UserType::COMPANY->value) {
             $result = $this->registerCompany($data);
+        } else {
+            return ['error' => __('auth.invalid_account_type')];
         }
 
         if (is_object($result) || $result instanceof User) {
             return $result;
         }
 
-        return ['error' => $result['error']];
+        if (is_array($result) && isset($result['error'])) {
+            return ['error' => $result['error']];
+        }
+
+        return ['error' => __('auth.register_error')];
     }
 
     // Register New Individual User
@@ -82,28 +91,47 @@ readonly class AuthService
 
             DB::beginTransaction();
 
-            $user = User::updateOrCreate(
-                [
-                    'email' => $data['email_individual'],
-                ],
-                [
-                    'full_name' => $data['full_name'],
-                    'type' => $data['account_type'],
-                    'country_id' => $data['country_id_individual'],
-                    'password' => Hash::make($data['individual_password']),
-                    'otp' => $otp,
-                    'otp_expires_at' => Carbon::now()->addMinutes(3),
-                ]
-            );
+            // Check if email already exists
+            $existingUser = User::where('email', $data['email_individual'])->first();
+            if ($existingUser) {
+                DB::rollBack();
+                return ['error' => __('auth.email_already_registered')];
+            }
 
-            $this->emailService->sendUserOTPEmail($user);
+            $user = User::create([
+                'email' => $data['email_individual'],
+                'full_name' => $data['full_name'],
+                'type' => $data['account_type'],
+                'country_id' => $data['country_id_individual'],
+                'password' => Hash::make($data['individual_password']),
+                'otp' => $otp,
+                'otp_expires_at' => Carbon::now()->addMinutes(3),
+            ]);
+
+            try {
+                $this->emailService->sendUserOTPEmail($user);
+            } catch (\Exception $emailException) {
+                // Log email error but don't fail registration
+                \Log::error('Failed to send OTP email: ' . $emailException->getMessage());
+            }
 
             DB::commit();
 
             return $user;
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            // Handle database constraint violations
+            if ($e->getCode() == 23000) { // Integrity constraint violation
+                if (str_contains($e->getMessage(), 'email')) {
+                    return ['error' => __('auth.email_already_registered')];
+                }
+                return ['error' => __('auth.database_error')];
+            }
+            return ['error' => __('auth.register_error')];
         } catch (\Exception $e) {
             DB::rollBack();
-            return ['error' => $e->getMessage()];
+            \Log::error('Registration error: ' . $e->getMessage());
+            return ['error' => __('auth.register_error')];
         }
     }
 
@@ -115,29 +143,58 @@ readonly class AuthService
 
             DB::beginTransaction();
 
-            $user = User::updateOrCreate(
-                [
-                    'email' => $data['email_company'],
-                    'commercial_registration_number' => $data['crn'],
-                ],
-                [
-                    'company_name' => $data['company_name'],
-                    'type' => $data['account_type'],
-                    'country_id' => $data['country_id_company'],
-                    'password' => Hash::make($data['company_password']),
-                    'otp' => $otp,
-                    'otp_expires_at' => Carbon::now()->addMinutes(3),
-                ]
-            );
+            // Check if email already exists
+            $existingUserByEmail = User::where('email', $data['email_company'])->first();
+            if ($existingUserByEmail) {
+                DB::rollBack();
+                return ['error' => __('auth.email_already_registered')];
+            }
 
-            $this->emailService->sendUserOTPEmail($user);
+            // Check if CRN already exists
+            $existingUserByCRN = User::where('commercial_registration_number', $data['crn'])->first();
+            if ($existingUserByCRN) {
+                DB::rollBack();
+                return ['error' => __('auth.crn_already_registered')];
+            }
+
+            $user = User::create([
+                'email' => $data['email_company'],
+                'commercial_registration_number' => $data['crn'],
+                'company_name' => $data['company_name'],
+                'type' => $data['account_type'],
+                'country_id' => $data['country_id_company'],
+                'password' => Hash::make($data['company_password']),
+                'otp' => $otp,
+                'otp_expires_at' => Carbon::now()->addMinutes(3),
+            ]);
+
+            try {
+                $this->emailService->sendUserOTPEmail($user);
+            } catch (\Exception $emailException) {
+                // Log email error but don't fail registration
+                \Log::error('Failed to send OTP email: ' . $emailException->getMessage());
+            }
 
             DB::commit();
 
             return $user;
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            // Handle database constraint violations
+            if ($e->getCode() == 23000) { // Integrity constraint violation
+                if (str_contains($e->getMessage(), 'email')) {
+                    return ['error' => __('auth.email_already_registered')];
+                }
+                if (str_contains($e->getMessage(), 'commercial_registration_number')) {
+                    return ['error' => __('auth.crn_already_registered')];
+                }
+                return ['error' => __('auth.database_error')];
+            }
+            return ['error' => __('auth.register_error')];
         } catch (\Exception $e) {
             DB::rollBack();
-            return ['error' => $e->getMessage()];
+            \Log::error('Registration error: ' . $e->getMessage());
+            return ['error' => __('auth.register_error')];
         }
     }
 

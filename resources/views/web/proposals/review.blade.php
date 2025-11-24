@@ -52,7 +52,9 @@
             <div class="review-item col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12">
                     <h4>{{ __('web.description') }}</h4>
+                    @if(!$proposal->isFinallyAccepted())
                     <a href="#">{{ __('web.edit') }} <i class="ri-pencil-line"></i></a>
+                    @endif
                 </div>
                 <div class="col-xs-12">
                     <p>{{ $proposal->proposal_desc }}</p>
@@ -62,7 +64,9 @@
             <div class="review-item col-xs-12 remove-padding">
                 <div class="review-item-title col-xs-12">
                     <h4>{{ __('web.items_list') }} <span>( {{ $proposal->items()->count() }} {{ __('web.items') }} )</span></h4>
+                    @if(!$proposal->isFinallyAccepted())
                     <a href="#">{{ __('web.edit') }} <i class="ri-pencil-line"></i></a>
+                    @endif
                 </div>
 
                 @foreach($proposal->items as $key => $item)
@@ -161,12 +165,14 @@
             </div>
         </div>
 
+        @if(!$proposal->isFinallyAccepted())
         <div class="col-xs-12 tender-review-bottom">
             <ul>
                 <li><a href="#" data-toggle="modal" data-target="#back-tender">{{__('web.back')}}</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#Pulish-tender">{{__('web.publish')}}</a></li>
             </ul>
         </div>
+        @endif
     </div>
 </div>
 

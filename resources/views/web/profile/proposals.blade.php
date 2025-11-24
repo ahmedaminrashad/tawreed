@@ -43,6 +43,7 @@
                 @foreach($proposals[$key] as $proposal)
                 <div class="tab-pane fade active in" id="{{ $key }}">
                     <div class="col-xs-12 remove-padding propoal-item">
+                        @if(!$proposal->isFinallyAccepted())
                         <div class="dropdown">
                             <button class="dropdown-toggle" type="button" data-toggle="dropdown">
                                 <i class="ri-more-line"></i>
@@ -54,9 +55,10 @@
                                 <li><a href="javascript:void(0);">{{ __('web.print') }}</a></li>
                             </ul>
                         </div>
+                        @endif
                         <p>{{ $proposal->tender->subject . ' . ' . $proposal->tender->tender_uuid }}<span>{{ __('web.in_progress') }}</span></p>
                         <h4>{{ __('web.proposal_validity_period') }} : <b>{{ $proposal->proposal_end_date }}</b></h4>
-                        <h3><span class="tag {{ $status }}-tag">{{ $proposal->status }}</span>{{ __('web.contract_duration_by_seller') }} : <b> {{ $proposal->contract_duration }} {{ __('web.days') }}</b></h3>
+                        <h3><span class="tag {{ $key }}-tag">{{ $proposal->getStatusLabel() }}</span>{{ __('web.contract_duration_by_seller') }} : <b> {{ $proposal->contract_duration }} {{ __('web.days') }}</b></h3>
                         <div class="col-xs-12 remove-padding propoal-img">
                             <img src="{{ asset('/assets/front/img/1.png') }}">
                             <h6>{{ $proposal->tender->user->displayed_name }} . <span>{{ $proposal->tender->user->user_type }}</span></h6>

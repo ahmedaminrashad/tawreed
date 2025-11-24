@@ -71,9 +71,9 @@
                     </li>
 
                     <li class="dropdown">
-                        <button type="button" data-toggle="dropdown">
+                        <button type="button" data-toggle="dropdown" id="notification-btn">
                             <i class="ri-notification-line"></i>
-                            <h6>2</h6>
+                            <h6 id="notification-count">0</h6>
                         </button>
                         <span><i class="ri-arrow-down-s-fill"></i></span>
                         <ul class="dropdown-menu notification-main">
@@ -86,87 +86,38 @@
                                 <input type="radio" id="tab3" name="css-tabs">
 
                                 <ul class="tabs">
-                                    <li class="tab"><label for="tab1">{{ __('web.all') }}</label></li>
-                                    <li class="tab"><label for="tab2">{{ __('web.unread') }}</label></li>
-                                    <li class="tab"><label for="tab3">{{ __('web.read') }}</label></li>
+                                    <li class="tab"><label for="tab1" data-type="all">{{ __('web.all') }}</label></li>
+                                    <li class="tab"><label for="tab2" data-type="unread">{{ __('web.unread') }}</label></li>
+                                    <li class="tab"><label for="tab3" data-type="read">{{ __('web.read') }}</label></li>
                                 </ul>
 
-                                <div class="tab-content">
-                                    <div class="col-xs-12 remove-padding">
-                                        <div class="col-xs-12 remove-padding notification-item">
-                                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                        </div>
-                                        <div class="col-xs-12 remove-padding notification-item unread-notification">
-                                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                        </div>
-                                        <div class="col-xs-12 remove-padding notification-item">
-                                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                        </div>
-                                        <div class="col-xs-12 remove-padding notification-item">
-                                            <img src="{{ asset('/assets/front/img/1.png') }}">
-                                            <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                            <h5>{{ __('web.last_wednesday_at') }}</h5>
+                                <div class="tab-content" id="notification-tab-all">
+                                    <div class="col-xs-12 remove-padding" id="notifications-list-all">
+                                        <div class="col-xs-12 remove-padding text-center" style="padding: 20px;">
+                                            <p>{{ __('web.loading') }}...</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="tab-content">
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                    </div>
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                    </div>
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                    </div>
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                    </div>
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
+                                <div class="tab-content" id="notification-tab-unread">
+                                    <div class="col-xs-12 remove-padding" id="notifications-list-unread">
+                                        <div class="col-xs-12 remove-padding text-center" style="padding: 20px;">
+                                            <p>{{ __('web.loading') }}...</p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="tab-content">
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                    </div>
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
-                                    </div>
-                                    <div class="col-xs-12 remove-padding notification-item">
-                                        <img src="{{ asset('/assets/front/img/1.png') }}">
-                                        <a href="javascript:void(0);">{{ __('web.verification_request_rejected') }}</a>
-                                        <h5>{{ __('web.last_wednesday_at') }}</h5>
+                                <div class="tab-content" id="notification-tab-read">
+                                    <div class="col-xs-12 remove-padding" id="notifications-list-read">
+                                        <div class="col-xs-12 remove-padding text-center" style="padding: 20px;">
+                                            <p>{{ __('web.loading') }}...</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0);"><i class="ri-message-3-line"></i>
-                            <h6>2</h6>
-                        </a></li>
+                    
                     <li class="dropdown">
                         <button type="button" data-toggle="dropdown">
                             <i class="ri-user-line"></i>

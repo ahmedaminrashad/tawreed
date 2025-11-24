@@ -50,6 +50,7 @@ return [
     'verify' => 'Verify',
     'no_code_received' => 'Didn\'t receive the code?',
     'resend' => 'Resend',
+    'loading' => 'Loading',
 
     // Profile
     'profile' => 'Profile',
@@ -77,5 +78,15 @@ return [
     'copyright' => '© 2024 Quotech. All rights reserved.',
     'enter_email_or_crn' => 'Enter your email or commercial registration number',
     'enter_email_or_crn_placeholder' => 'Enter your email or commercial registration number',
-    'enter_email_or_crn_placeholder' => 'Enter your email or commercial registration number',
+    
+    // Proposal errors
+    'proposal_cannot_be_updated_final_acceptance' => 'Proposal cannot be updated because it has final acceptance status',
+    
+    // Notifications
+    'new_proposal_received_en' => 'You have received a new proposal for tender: :tender_subject from :proposal_owner',
+    'new_proposal_received_ar' => 'لقد تلقيت عرضاً جديداً للمناقصة: :tender_subject من :proposal_owner',
+    'proposal_withdrawn_en' => 'A proposal for tender: :tender_subject has been withdrawn by :proposal_owner',
+    'proposal_withdrawn_ar' => 'تم سحب عرض للمناقصة: :tender_subject من قبل :proposal_owner',
+    'no_notifications' => 'No notifications',
+    'error_loading_notifications' => 'Error loading notifications',
 ]; 
