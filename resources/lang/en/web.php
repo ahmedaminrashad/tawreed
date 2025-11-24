@@ -89,4 +89,16 @@ return [
     'proposal_withdrawn_ar' => 'تم سحب عرض للمناقصة: :tender_subject من قبل :proposal_owner',
     'no_notifications' => 'No notifications',
     'error_loading_notifications' => 'Error loading notifications',
+    
+    // Welcome Email
+    'welcome_email_subject' => 'QuoTech | Welcome to QuoTech',
+    'welcome_email_title' => 'Welcome to QuoTech!',
+    'welcome_email_greeting' => 'Hello :name,',
+    'welcome_email_message_1' => 'Thank you for joining QuoTech! We\'re excited to have you on board. Your account has been successfully verified and you\'re now ready to explore all the features we have to offer.',
+    'welcome_email_message_2' => 'At QuoTech, you can create tenders, submit proposals, and connect with businesses and individuals in your industry. We\'re here to help you every step of the way.',
+    'welcome_email_get_started' => 'Get Started',
+    'welcome_email_need_help' => 'Need help? Ask at',
+    'welcome_email_or_visit' => 'or visit our',
+    'welcome_email_help_center' => 'Help Center',
+    'welcome_email_copyright' => '© 2022 QuoTech. All rights reserved.',
 ]; 

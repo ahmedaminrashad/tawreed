@@ -30,7 +30,12 @@ class WelcomeMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        $subject = 'QuoTech | Welcome to QuoTech';
+        
+        // Set locale for email translation
+        $locale = $data['locale'] ?? app()->getLocale();
+        app()->setLocale($locale);
+        
+        $subject = __('web.welcome_email_subject');
 
         return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($this->email)

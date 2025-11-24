@@ -42,6 +42,7 @@ readonly class EmailService
             'date' => Carbon::today()->format('d M, Y'),
             'name' => $user->isCompany() ? $user->company_name : $user->full_name,
             'administratorEmail' => $this->settingService->getByKey('email')->value,
+            'locale' => app()->getLocale(), // Pass current locale for email
         ];
 
         Mail::to($user->email)->send(new WelcomeMail($welcomeData, $user->email));

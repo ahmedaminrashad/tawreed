@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
                         <td>
                             <img alt="" src="{{ asset('/assets/front/img/logo.png') }}" height="30px">
                         </td>
-                        <td style="text-align: right;">
+                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'left' : 'right' }};">
                             <span style="font-size: 16px; line-height: 30px; color: #ffffff;">{{ $data['date'] }}</span>
                         </td>
                     </tr>
@@ -57,7 +57,7 @@
                 font-weight: 500;
                 color: #1f1f1f;
               ">
-                        Welcome to QuoTech!
+                        {{ __('web.welcome_email_title') }}
                     </h1>
                     <p style="
                 margin: 0;
@@ -65,7 +65,7 @@
                 font-size: 16px;
                 font-weight: 500;
               ">
-                        Hello {{ $data['name'] }},
+                        {{ __('web.welcome_email_greeting', ['name' => $data['name']]) }}
                     </p>
                     <p style="
                 margin: 0;
@@ -73,7 +73,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        Thank you for joining QuoTech! We're excited to have you on board. Your account has been successfully verified and you're now ready to explore all the features we have to offer.
+                        {{ __('web.welcome_email_message_1') }}
                     </p>
                     <p style="
                 margin: 0;
@@ -81,7 +81,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        At QuoTech, you can create tenders, submit proposals, and connect with businesses and individuals in your industry. We're here to help you every step of the way.
+                        {{ __('web.welcome_email_message_2') }}
                     </p>
                     <div style="
                 margin: 0;
@@ -95,7 +95,7 @@
                     text-decoration: none;
                     border-radius: 5px;
                     font-weight: 500;
-                  ">Get Started</a>
+                  ">{{ __('web.welcome_email_get_started') }}</a>
                     </div>
                 </div>
             </div>
@@ -108,10 +108,10 @@
             font-weight: 500;
             color: #8c8c8c;
           ">
-                Need help? Ask at
+                {{ __('web.welcome_email_need_help') }}
                 <a href="mailto:{{ $data['administratorEmail'] }}" style="color: #499fb6; text-decoration: none;">{{ $data['administratorEmail'] }}</a>
-                or visit our
-                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">Help Center</a>
+                {{ __('web.welcome_email_or_visit') }}
+                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">{{ __('web.welcome_email_help_center') }}</a>
             </p>
         </main>
 
@@ -123,7 +123,7 @@
           border-top: 1px solid #e6ebf1;
         ">
             <p style="margin: 0; margin-top: 16px; color: #434343;">
-                حقوق النشر © 2022 شركة كيو تيك. جميع الحقوق محفوظة.
+                {{ __('web.welcome_email_copyright') }}
             </p>
         </footer>
     </div>

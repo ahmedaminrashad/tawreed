@@ -277,6 +277,18 @@ return [
     'proposal_withdrawn_ar' => 'تم سحب عرض للمناقصة: :tender_subject من قبل :proposal_owner',
     'no_notifications' => 'لا توجد إشعارات',
     'error_loading_notifications' => 'خطأ في تحميل الإشعارات',
+    
+    // Welcome Email
+    'welcome_email_subject' => 'كيو تيك | مرحباً بك في كيو تيك',
+    'welcome_email_title' => 'مرحباً بك في كيو تيك!',
+    'welcome_email_greeting' => 'مرحباً :name،',
+    'welcome_email_message_1' => 'شكراً لانضمامك إلى كيو تيك! نحن متحمسون لوجودك معنا. تم التحقق من حسابك بنجاح وأنت الآن جاهز لاستكشاف جميع الميزات التي نقدمها.',
+    'welcome_email_message_2' => 'في كيو تيك، يمكنك إنشاء المناقصات، وإرسال العروض، والتواصل مع الشركات والأفراد في مجال عملك. نحن هنا لمساعدتك في كل خطوة على الطريق.',
+    'welcome_email_get_started' => 'ابدأ الآن',
+    'welcome_email_need_help' => 'تحتاج مساعدة؟ تواصل معنا على',
+    'welcome_email_or_visit' => 'أو زر',
+    'welcome_email_help_center' => 'مركز المساعدة',
+    'welcome_email_copyright' => '© 2022 شركة كيو تيك. جميع الحقوق محفوظة.',
     'premium_package' => 'حزمة المؤسسات',
     'premium_description' => 'يرجى التأكد من التحقق من ملفك الشخصي للاشتراك في كيو تيك بريميوم. تقديم مجموعة لا مثيل لها من العروض المتزامنة للمناقصات! خطوة إلى عالم حيث الفرص وفيرة، وخيارات العطاءات غير محدودة. لقد قمنا بتوسيع وتحسين اقتراح المناقصة.',
     'premium_price' => '$ 99/شهريًا',
