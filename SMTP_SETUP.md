@@ -87,23 +87,57 @@ After updating your `.env` file:
 
 ### Common Issues:
 
-1. **Authentication Failed**
+1. **Connection Timeout Error**
+   
+   If you see: `Connection could not be established with host "mail.smtp.com:587": Connection timed out`
+   
+   **Solution 1: Try Port 465 with SSL**
+   ```env
+   MAIL_PORT=465
+   MAIL_ENCRYPTION=ssl
+   ```
+   
+   **Solution 2: Try Alternative Port 2525**
+   ```env
+   MAIL_PORT=2525
+   MAIL_ENCRYPTION=tls
+   ```
+   
+   **Solution 3: Verify SMTP.com Server Address**
+   - Log into your SMTP.com dashboard
+   - Check the exact SMTP server hostname (it might not be `mail.smtp.com`)
+   - Common alternatives: `smtp.smtp.com`, `mail-relay.smtp.com`, or a custom server
+   - Update `MAIL_HOST` with the correct value
+   
+   **Solution 4: Check Server Firewall**
+   - Contact your hosting provider (Laravel Forge, etc.)
+   - Request to open outbound ports: 587, 465, or 2525
+   - Some providers block these ports by default to prevent spam
+   
+   **Solution 5: Test Connection**
+   ```bash
+   # Test if port is accessible
+   telnet mail.smtp.com 587
+   # or
+   telnet mail.smtp.com 465
+   # or
+   telnet mail.smtp.com 2525
+   ```
+
+2. **Authentication Failed**
    - Double-check your `MAIL_USERNAME` and `MAIL_PASSWORD`
    - Ensure your SMTP.com account is active
-
-2. **Connection Timeout**
-   - Verify the `MAIL_HOST` is correct
-   - Check if your server's firewall allows outbound connections on ports 587 or 465
-   - Try switching between TLS (587) and SSL (465)
+   - Verify credentials in SMTP.com dashboard
 
 3. **Emails Going to Spam**
    - Ensure SPF and DKIM records are properly configured
    - Verify your `MAIL_FROM_ADDRESS` domain matches your SPF record domain
    - Check SMTP.com's sending reputation
 
-4. **Port Issues**
-   - Some hosting providers block port 587
-   - Try port 465 with SSL encryption instead
+4. **Port Blocked by Hosting Provider**
+   - Many hosting providers (especially shared hosting) block SMTP ports
+   - Contact support to open the required port
+   - If they can't open ports, consider using SMTP.com's API or webhook instead of SMTP
 
 ## Additional Resources
 
