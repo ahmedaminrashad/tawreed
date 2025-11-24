@@ -259,6 +259,7 @@ readonly class ProposalService
                 'proposal_url' => route('proposals.show', ['proposal' => $proposal->id]),
                 'tender_owner_email' => $tenderOwner->email,
                 'administratorEmail' => $this->settingService->getByKey('email')->value,
+                'locale' => app()->getLocale(), // Pass current locale for email
             ];
 
             // Send email notification

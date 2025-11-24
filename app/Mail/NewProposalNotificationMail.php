@@ -29,9 +29,14 @@ class NewProposalNotificationMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        $subject = 'QuoTech | New Proposal Notification';
+        
+        // Set locale for email translation
+        $locale = $data['locale'] ?? app()->getLocale();
+        app()->setLocale($locale);
+        
+        $subject = __('web.new_proposal_email_subject');
 
-        return $this->from(env('MAIL_FROM_ADDRESS'))
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($this->data['tender_owner_email'])
             ->subject($subject)
             ->view('admin.emails.proposal.new-proposal', compact('subject', 'data'));

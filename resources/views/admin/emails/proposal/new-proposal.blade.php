@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $subject }}</title>
-
+    @if(app()->getLocale() == 'ar')
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    @else
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    @endif
 </head>
 <body style="
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: {{ app()->getLocale() == 'ar' ? "'Cairo', sans-serif" : "'Poppins', sans-serif" }};
       background: #ffffff;
       font-size: 14px;
+      direction: {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};
     ">
     <div style="
         max-width: 680px;
@@ -27,13 +31,13 @@
         color: #434343;
       ">
         <header>
-            <table style="width: 100%;">
+            <table style="width: 100%; direction: {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};">
                 <tbody>
                     <tr style="height: 0;">
-                        <td>
+                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'right' : 'left' }}; width: 50%;">
                             <img alt="" src="{{ asset('/assets/front/img/logo.png') }}" height="30px">
                         </td>
-                        <td style="text-align: right;">
+                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'left' : 'right' }}; width: 50%;">
                             <span style="font-size: 16px; line-height: 30px; color: #ffffff;">{{ $data['date'] }}</span>
                         </td>
                     </tr>
@@ -49,6 +53,7 @@
             background: #ffffff;
             border-radius: 30px;
             text-align: center;
+            direction: {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};
           ">
                 <div style="width: 100%; max-width: 489px; margin: 0 auto;">
                     <h1 style="
@@ -57,7 +62,7 @@
                 font-weight: 500;
                 color: #1f1f1f;
               ">
-                        New Proposal Received
+                        {{ __('web.new_proposal_email_title') }}
                     </h1>
                     <p style="
                 margin: 0;
@@ -65,7 +70,7 @@
                 font-size: 16px;
                 font-weight: 500;
               ">
-                        Hello {{ $data['tender_owner_name'] }},
+                        {{ __('web.new_proposal_email_greeting', ['name' => $data['tender_owner_name']]) }}
                     </p>
                     <p style="
                 margin: 0;
@@ -73,7 +78,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        You have received a new proposal for your tender: <strong>{{ $data['tender_subject'] }}</strong>
+                        {{ __('web.new_proposal_email_message') }} <strong>{{ $data['tender_subject'] }}</strong>
                     </p>
                     <p style="
                 margin: 0;
@@ -81,7 +86,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                        Proposal submitted by: <strong>{{ $data['proposal_owner_name'] }}</strong>
+                        {{ __('web.new_proposal_email_submitted_by') }} <strong>{{ $data['proposal_owner_name'] }}</strong>
                     </p>
                     <div style="
                 margin-top: 40px;
@@ -97,7 +102,7 @@
                     text-decoration: none;
                     border-radius: 5px;
                     font-weight: 500;
-                  ">View Proposal</a>
+                  ">{{ __('web.new_proposal_email_view_proposal') }}</a>
                     </div>
                 </div>
             </div>
@@ -110,10 +115,10 @@
             font-weight: 500;
             color: #8c8c8c;
           ">
-                Need help? Ask at
+                {{ __('web.new_proposal_email_need_help') }}
                 <a href="mailto:{{ $data['administratorEmail'] }}" style="color: #499fb6; text-decoration: none;">{{ $data['administratorEmail'] }}</a>
-                or visit our
-                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">Help Center</a>
+                {{ __('web.new_proposal_email_or_visit') }}
+                <a href="{{ route('home') }}" target="_blank" style="color: #499fb6; text-decoration: none;">{{ __('web.new_proposal_email_help_center') }}</a>
             </p>
         </main>
 
@@ -125,7 +130,7 @@
           border-top: 1px solid #e6ebf1;
         ">
             <p style="margin: 0; margin-top: 16px; color: #434343;">
-                Copyright © 2024 QuoTech. All rights reserved.
+                {{ __('web.new_proposal_email_copyright') }}
             </p>
         </footer>
     </div>

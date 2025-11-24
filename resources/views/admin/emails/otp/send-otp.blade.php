@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $subject }}</title>
-
+    @if(app()->getLocale() == 'ar')
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    @else
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    @endif
 </head>
 <body style="
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: {{ app()->getLocale() == 'ar' ? "'Cairo', sans-serif" : "'Poppins', sans-serif" }};
       background: #ffffff;
       font-size: 14px;
+      direction: {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};
     ">
     <div style="
         max-width: 680px;
@@ -27,13 +31,13 @@
         color: #434343;
       ">
         <header>
-            <table style="width: 100%;">
+            <table style="width: 100%; direction: {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};">
                 <tbody>
                     <tr style="height: 0;">
-                        <td>
+                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'right' : 'left' }}; width: 50%;">
                             <img alt="" src="{{ asset('/assets/front/img/logo.png') }}" height="30px">
                         </td>
-                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'left' : 'right' }};">
+                        <td style="text-align: {{ app()->getLocale() == 'ar' ? 'left' : 'right' }}; width: 50%;">
                             <span style="font-size: 16px; line-height: 30px; color: #ffffff;">{{ $data['date'] }}</span>
                         </td>
                     </tr>
@@ -49,6 +53,7 @@
             background: #ffffff;
             border-radius: 30px;
             text-align: center;
+            direction: {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};
           ">
                 <div style="width: 100%; max-width: 489px; margin: 0 auto;">
                     <h1 style="

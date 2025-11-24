@@ -300,6 +300,18 @@ return [
     'otp_email_or_visit' => 'أو زر',
     'otp_email_help_center' => 'مركز المساعدة',
     'otp_email_copyright' => '© 2022 شركة كيو تيك. جميع الحقوق محفوظة.',
+    
+    // New Proposal Email
+    'new_proposal_email_subject' => 'كيو تيك | إشعار عرض جديد',
+    'new_proposal_email_title' => 'تم استلام عرض جديد',
+    'new_proposal_email_greeting' => 'مرحباً :name،',
+    'new_proposal_email_message' => 'لقد تلقيت عرضاً جديداً لمناقصتك:',
+    'new_proposal_email_submitted_by' => 'العرض مقدّم من:',
+    'new_proposal_email_view_proposal' => 'عرض العرض',
+    'new_proposal_email_need_help' => 'تحتاج مساعدة؟ تواصل معنا على',
+    'new_proposal_email_or_visit' => 'أو زر',
+    'new_proposal_email_help_center' => 'مركز المساعدة',
+    'new_proposal_email_copyright' => '© 2024 شركة كيو تيك. جميع الحقوق محفوظة.',
     'premium_package' => 'حزمة المؤسسات',
     'premium_description' => 'يرجى التأكد من التحقق من ملفك الشخصي للاشتراك في كيو تيك بريميوم. تقديم مجموعة لا مثيل لها من العروض المتزامنة للمناقصات! خطوة إلى عالم حيث الفرص وفيرة، وخيارات العطاءات غير محدودة. لقد قمنا بتوسيع وتحسين اقتراح المناقصة.',
     'premium_price' => '$ 99/شهريًا',

@@ -112,4 +112,16 @@ return [
     'otp_email_or_visit' => 'or visit our',
     'otp_email_help_center' => 'Help Center',
     'otp_email_copyright' => '© 2022 QuoTech. All rights reserved.',
+    
+    // New Proposal Email
+    'new_proposal_email_subject' => 'QuoTech | New Proposal Notification',
+    'new_proposal_email_title' => 'New Proposal Received',
+    'new_proposal_email_greeting' => 'Hello :name,',
+    'new_proposal_email_message' => 'You have received a new proposal for your tender:',
+    'new_proposal_email_submitted_by' => 'Proposal submitted by:',
+    'new_proposal_email_view_proposal' => 'View Proposal',
+    'new_proposal_email_need_help' => 'Need help? Ask at',
+    'new_proposal_email_or_visit' => 'or visit our',
+    'new_proposal_email_help_center' => 'Help Center',
+    'new_proposal_email_copyright' => '© 2024 QuoTech. All rights reserved.',
 ]; 
