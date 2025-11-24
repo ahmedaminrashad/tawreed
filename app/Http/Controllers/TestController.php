@@ -20,7 +20,7 @@ class TestController extends Controller
     public function test()
     {
 
-      $user= User::query()->find(1);
+      $user= User::query()->where('email','ahmedaminrashad@gmail.com')->first();
     $mail=  $this->emailService->sendWelcomeEmail($user);
       
       dd($mail);

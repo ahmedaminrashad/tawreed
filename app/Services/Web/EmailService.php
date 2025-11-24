@@ -41,7 +41,6 @@ readonly class EmailService
             'name' => $user->isCompany() ? $user->company_name : $user->full_name,
             'administratorEmail' => $this->settingService->getByKey('email')->value,
         ];
-        dd($user);
 
         Mail::to($user->email)->send(new WelcomeMail($welcomeData, $user->email));
     }
