@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserType;
+use App\Mail\Admin\WelcomeMail;
 use App\Models\ActivityClassification;
 use App\Models\Admin;
 use App\Models\Tender;
 use App\Models\User;
+use App\Services\SettingService;
 use App\Services\Web\EmailService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -15,13 +18,20 @@ class TestController extends Controller
 {
     public function __construct(
         private readonly EmailService $emailService,
+        private readonly SettingService $settingService,
     ) {}
 
     public function test()
     {
 
         $user= User::query()->where('email','ahmedaminrashad@gmail.com')->first();
-    $mail=  $this->emailService->sendWelcomeEmail($user);
+        $welcomeData = [
+            'date' => Carbon::today()->format('d M, Y'),
+            'name' => $user->isCompany() ? $user->company_name : $user->full_name,
+            'administratorEmail' => $this->settingService->getByKey('email')->value,
+        ];
+
+        $mail= Mail::to($user->email)->send(new WelcomeMail($welcomeData, $user->email));
       
       dd($mail);
         return bcrypt('12345678');
