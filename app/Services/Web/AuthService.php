@@ -191,6 +191,9 @@ readonly class AuthService
                 'otp_expires_at' => null,
             ]);
 
+            // Send welcome email after email verification
+            $this->emailService->sendWelcomeEmail($user);
+
             DB::commit();
 
             return 1;

@@ -7,14 +7,24 @@ use App\Models\ActivityClassification;
 use App\Models\Admin;
 use App\Models\Tender;
 use App\Models\User;
+use App\Services\Web\EmailService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TestController extends Controller
 {
+    public function __construct(
+        private readonly EmailService $emailService,
+    ) {}
 
     public function test()
     {
 
+      $user= User::query()->find(1);
+    $mail=  $this->emailService->sendWelcomeEmail($user);
+      
+      dd($mail);
+        return bcrypt('12345678');
         return bcrypt('superAdmin@tawred2026');
         return 'ss';
 //        return Tender::query()->with('items')->find(18);
@@ -25,6 +35,8 @@ class TestController extends Controller
             $user->update(['email'=>"user{$key}@user.com"]);
 
         }
+
+
 
 
      return   User::query()->update(['password'=>bcrypt('12345678')]);
