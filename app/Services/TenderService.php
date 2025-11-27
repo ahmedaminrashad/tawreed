@@ -14,10 +14,7 @@ readonly class TenderService
     // list all Tenders function
     public function list($data = [])
     {
-        $today = Carbon::today()->format('Y-m-d');
-
-        $tenders = Tender::where('closing_date', '>', $today)
-            ->whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value]);
+        $tenders = Tender::whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value]);
 
         if ($data['userId']) {
             $tenders = $tenders->where('user_id', $data['userId']);
@@ -33,12 +30,9 @@ readonly class TenderService
     // list all Published Tenders function
     public function listPublished()
     {
-        $today = Carbon::today()->format('Y-m-d');
-
         return Tender::query()->
         // where('status', TenderStatus::IN_PROGRESS->value)
         whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
-            ->where('closing_date', '>', $today)
             ->orderBy('created_at', 'DESC')
             ->get();
     }
@@ -57,13 +51,10 @@ readonly class TenderService
     // list all Published Tenders With filters function
     public function listFilterPublished($filters)
     {
-        $today = Carbon::today()->format('Y-m-d');
-
         $filterCount = 0;
 
         $query = Tender::with('user', 'country', 'city', 'workCategoryClassification', 'activityClassification')
-            ->whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value])
-            ->where('closing_date', '>', $today);
+            ->whereNotIn('status', [TenderStatus::DRAFT->value, TenderStatus::CREATED->value]);
 
         if (isset($filters['range_from'])) {
             $query = $query->where('contract_duration', '>=', $filters['range_from']);
@@ -168,6 +159,11 @@ readonly class TenderService
     public function itemsStore(Tender $tender, $data)
     {
         try {
+            // Check if tender closing date has passed
+            if ($this->isClosingDatePassed($tender)) {
+                return ['error' => __('web.tender_closing_date_passed_no_updates')];
+            }
+
             DB::beginTransaction();
 
 
@@ -230,6 +226,11 @@ readonly class TenderService
     public function update(Tender $tender, $data)
     {
         try {
+            // Check if tender closing date has passed
+            if ($this->isClosingDatePassed($tender)) {
+                return ['error' => __('web.tender_closing_date_passed_no_updates')];
+            }
+
             DB::beginTransaction();
 
             $tender->update($data);
@@ -285,5 +286,16 @@ readonly class TenderService
     public function delete(Tender $tender)
     {
         return $tender->delete();
+    }
+
+    // Check if tender closing date has passed
+    private function isClosingDatePassed(Tender $tender): bool
+    {
+        if (!$tender->closing_date) {
+            return false;
+        }
+
+        $today = Carbon::today();
+        return $tender->closing_date->lt($today);
     }
 }

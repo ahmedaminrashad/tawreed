@@ -18,11 +18,7 @@
     <div class="container profile-main remove-padding">
         @include('web.profile.aside', ['active' => "profile"])
 
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
+        @include('web.layouts.flash_msg')
 
         <div class="col-md-8 profile-main-cont">
             <div class="col-xs-12 profile-header">

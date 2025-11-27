@@ -340,6 +340,31 @@ return [
     'proposal_withdrawn_email_or_visit' => 'أو زر',
     'proposal_withdrawn_email_help_center' => 'مركز المساعدة',
     'proposal_withdrawn_email_copyright' => '© 2024 شركة كيو تيك. جميع الحقوق محفوظة.',
+    
+    // Proposal Status Updated Email
+    'proposal_status_updated_email_subject' => 'كيو تيك | تحديث حالة العرض',
+    'proposal_status_updated_email_title' => 'تم تحديث حالة العرض',
+    'proposal_status_updated_email_greeting' => 'مرحباً :name،',
+    'proposal_status_updated_email_message' => 'تم تحديث حالة عرضك للمناقصة:',
+    'proposal_status_updated_email_status' => 'الحالة الجديدة',
+    'proposal_status_updated_email_reject_reason' => 'سبب الرفض',
+    'proposal_status_updated_email_view_proposal' => 'عرض العرض',
+    'proposal_status_updated_email_need_help' => 'تحتاج مساعدة؟ تواصل معنا على',
+    'proposal_status_updated_email_or_visit' => 'أو زر',
+    'proposal_status_updated_email_help_center' => 'مركز المساعدة',
+    'proposal_status_updated_email_copyright' => '© 2024 شركة كيو تيك. جميع الحقوق محفوظة.',
+    
+    // Proposal Status Updated Notification
+    'proposal_status_updated_notification_ar' => 'تم تحديث حالة عرضك للمناقصة: :tender_subject إلى :status',
+    'proposal_status_updated_notification_en' => 'Your proposal status for tender: :tender_subject has been updated to :status',
+    
+    // Tender Closing Date Messages
+    'tender_closing_date_passed_no_updates' => 'لا يمكن تحديث المناقصة. لقد انتهى تاريخ الإغلاق.',
+    'tender_closing_date_passed_no_proposal_updates' => 'لا يمكن تحديث العرض. لقد انتهى تاريخ إغلاق المناقصة.',
+    
+    // Flash Messages
+    'error' => 'خطأ',
+    'success' => 'نجاح',
     'premium_package' => 'حزمة المؤسسات',
     'premium_description' => 'يرجى التأكد من التحقق من ملفك الشخصي للاشتراك في كيو تيك بريميوم. تقديم مجموعة لا مثيل لها من العروض المتزامنة للمناقصات! خطوة إلى عالم حيث الفرص وفيرة، وخيارات العطاءات غير محدودة. لقد قمنا بتوسيع وتحسين اقتراح المناقصة.',
     'premium_price' => '$ 99/شهريًا',

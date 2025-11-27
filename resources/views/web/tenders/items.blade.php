@@ -56,21 +56,7 @@
                 </div>
             </div>
 
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="col-xs-12 error" style="margin-top: 15px">
-                    <p style="color: red;">Error in Adding Tender Item(s)</p>
-                </div>
-            @endif
+            @include('web.layouts.flash_msg')
 
             <form id="add-item-form" action="{{ route('tenders.items.store', ['tender' => $tender]) }}" method="POST"
                   enctype="multipart/form-data">

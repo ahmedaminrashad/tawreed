@@ -12,11 +12,7 @@
     <div class="container profile-main remove-padding">
         @include('web.profile.aside', ['active' => "proposals"])
 
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
+        @include('web.layouts.flash_msg')
 
         <div class="col-md-8 col-xs-12 proposal-main-cont">
             @if(auth()->user()->proposals->count() > 0)

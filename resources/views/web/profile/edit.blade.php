@@ -32,11 +32,7 @@
                     @endforeach
                     @endif
 
-                    @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                    @endif
+                    @include('web.layouts.flash_msg')
                     <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 

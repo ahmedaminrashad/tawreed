@@ -152,4 +152,29 @@ return [
     'proposal_withdrawn_email_or_visit' => 'or visit our',
     'proposal_withdrawn_email_help_center' => 'Help Center',
     'proposal_withdrawn_email_copyright' => '© 2024 QuoTech. All rights reserved.',
+    
+    // Proposal Status Updated Email
+    'proposal_status_updated_email_subject' => 'QuoTech | Proposal Status Updated',
+    'proposal_status_updated_email_title' => 'Proposal Status Updated',
+    'proposal_status_updated_email_greeting' => 'Hello :name,',
+    'proposal_status_updated_email_message' => 'The status of your proposal for the tender:',
+    'proposal_status_updated_email_status' => 'New Status',
+    'proposal_status_updated_email_reject_reason' => 'Rejection Reason',
+    'proposal_status_updated_email_view_proposal' => 'View Proposal',
+    'proposal_status_updated_email_need_help' => 'Need help? Ask at',
+    'proposal_status_updated_email_or_visit' => 'or visit our',
+    'proposal_status_updated_email_help_center' => 'Help Center',
+    'proposal_status_updated_email_copyright' => '© 2024 QuoTech. All rights reserved.',
+    
+    // Proposal Status Updated Notification
+    'proposal_status_updated_notification_ar' => 'تم تحديث حالة عرضك للمناقصة: :tender_subject إلى :status',
+    'proposal_status_updated_notification_en' => 'Your proposal status for tender: :tender_subject has been updated to :status',
+    
+    // Tender Closing Date Messages
+    'tender_closing_date_passed_no_updates' => 'Cannot update tender. The closing date has passed.',
+    'tender_closing_date_passed_no_proposal_updates' => 'Cannot update proposal. The tender closing date has passed.',
+    
+    // Flash Messages
+    'error' => 'Error',
+    'success' => 'Success',
 ]; 

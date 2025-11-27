@@ -6,6 +6,7 @@ use App\Enums\ProposalStatus;
 use App\Mail\NewProposalNotificationMail;
 use App\Mail\ProposalWithdrawnNotificationMail;
 use App\Mail\ProposalUpdatedNotificationMail;
+use App\Mail\ProposalStatusUpdatedNotificationMail;
 use App\Models\Notification;
 use App\Models\Proposal;
 use App\Models\ProposalItem;
@@ -146,6 +147,11 @@ readonly class ProposalService
                 return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
             }
 
+            // Check if tender closing date has passed
+            if ($tender->closing_date && $tender->closing_date->lt(Carbon::today())) {
+                return ['error' => __('web.tender_closing_date_passed_no_proposal_updates')];
+            }
+
             if ($proposal && $proposal->id) {
                 $proposal->items()->delete();
             } else {
@@ -207,6 +213,12 @@ readonly class ProposalService
             // Prevent publish if proposal has final acceptance status
             if ($proposal->status === ProposalStatus::FINAL_ACCEPTANCE->value) {
                 return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
+            }
+
+            // Check if tender closing date has passed
+            $tender = $proposal->tender;
+            if ($tender->closing_date && $tender->closing_date->lt(Carbon::today())) {
+                return ['error' => __('web.tender_closing_date_passed_no_proposal_updates')];
             }
 
             $result = $this->updateStatus($proposal, ProposalStatus::UNDER_REVIEW->value);
@@ -319,6 +331,73 @@ readonly class ProposalService
         }
     }
 
+    // Send Proposal Status Updated Notification
+    private function sendProposalStatusUpdatedNotification(Proposal $proposal, $newStatus)
+    {
+        try {
+            $tender = $proposal->tender;
+            $tenderOwner = $tender->user;
+            $proposalOwner = $proposal->user;
+
+            // Get status label
+            $statusEnum = ProposalStatus::from($newStatus);
+            $statusLabel = $statusEnum->getLabel();
+
+            // Prepare notification data
+            $messageAr = __('web.proposal_status_updated_notification_ar', [
+                'tender_subject' => $tender->subject,
+                'status' => $statusLabel
+            ]);
+            $messageEn = __('web.proposal_status_updated_notification_en', [
+                'tender_subject' => $tender->subject,
+                'status' => $statusLabel
+            ]);
+
+            // Create notification record
+            Notification::create([
+                'user_id' => $proposalOwner->id,
+                'message_ar' => $messageAr,
+                'message_en' => $messageEn,
+                'is_read' => false,
+            ]);
+
+            // Prepare email data
+            $emailData = [
+                'date' => Carbon::today()->format('d M, Y'),
+                'tender_owner_name' => $tenderOwner->displayed_name,
+                'tender_subject' => $tender->subject,
+                'proposal_owner_name' => $proposalOwner->displayed_name,
+                'proposal_url' => route('proposals.show', ['proposal' => $proposal->id]),
+                'proposal_owner_email' => $proposalOwner->email,
+                'administratorEmail' => $this->settingService->getByKey('email')->value,
+                'status_label' => $statusLabel,
+                'locale' => app()->getLocale(), // Pass current locale for email
+            ];
+
+            // Add reject reason if status is rejected
+            if ($newStatus === ProposalStatus::REJECTED->value) {
+                // Reload proposal to get updated rejection reason
+                $proposal->refresh();
+                if ($proposal->rejection_reason) {
+                    $rejectionReason = $proposal->rejection;
+                    if ($rejectionReason) {
+                        $emailData['reject_reason'] = $rejectionReason->translate(app()->getLocale())->name ?? $rejectionReason->name;
+                    }
+                }
+                if (isset($proposal->custom_reject_reason) && $proposal->custom_reject_reason) {
+                    $emailData['reject_reason'] = $proposal->custom_reject_reason;
+                }
+            }
+
+            // Send email notification
+            Mail::to($proposalOwner->email)->send(new ProposalStatusUpdatedNotificationMail($proposal, $emailData));
+
+        } catch (\Exception $e) {
+            // Log error but don't fail the status update
+            \Log::error('Failed to send proposal status updated notification: ' . $e->getMessage());
+        }
+    }
+
     // Send Proposal Withdrawn Notification
     private function sendProposalWithdrawnNotification(Proposal $proposal)
     {
@@ -375,11 +454,21 @@ readonly class ProposalService
                 return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
             }
 
+            // Check if tender closing date has passed
+            $tender = $proposal->tender;
+            if ($tender->closing_date && $tender->closing_date->lt(Carbon::today())) {
+                return ['error' => __('web.tender_closing_date_passed_no_proposal_updates')];
+            }
+
             DB::beginTransaction();
 
             // Check if tender owner is updating (not proposal owner)
             $currentUserId = auth()->id();
             $isTenderOwnerUpdating = $proposal->tender->user_id === $currentUserId && $proposal->user_id !== $currentUserId;
+            
+            // Check if status is being updated
+            $oldStatus = $proposal->status;
+            $newStatus = $data['status'] ?? null;
 
             $proposal->update($data);
 
@@ -387,7 +476,13 @@ readonly class ProposalService
 
             // Send notification to proposal creator if tender owner updated it
             if ($isTenderOwnerUpdating) {
-                $this->sendProposalUpdatedNotification($proposal);
+                // If status was changed, send status update notification
+                if ($newStatus && $oldStatus !== $newStatus && !in_array($newStatus, [ProposalStatus::DRAFT->value, ProposalStatus::CREATED->value])) {
+                    $this->sendProposalStatusUpdatedNotification($proposal, $newStatus);
+                } else {
+                    // Otherwise send general update notification
+                    $this->sendProposalUpdatedNotification($proposal);
+                }
             }
 
             return $proposal;
@@ -406,7 +501,18 @@ readonly class ProposalService
                 return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
             }
 
+            // Check if tender closing date has passed
+            $tender = $proposal->tender;
+            if ($tender->closing_date && $tender->closing_date->lt(Carbon::today())) {
+                return ['error' => __('web.tender_closing_date_passed_no_proposal_updates')];
+            }
+
             DB::beginTransaction();
+
+            // Check if tender owner is updating status (not proposal owner)
+            $currentUserId = auth()->id();
+            $isTenderOwnerUpdating = $proposal->tender->user_id === $currentUserId && $proposal->user_id !== $currentUserId;
+            $oldStatus = $proposal->status;
 
             $proposal->update([
                 'status' => $status
@@ -414,9 +520,16 @@ readonly class ProposalService
 
             DB::commit();
 
-            // Send notification if proposal is withdrawn
+            // Send notification if proposal is withdrawn (by proposal owner)
             if ($status === ProposalStatus::WITHDRAWN->value) {
                 $this->sendProposalWithdrawnNotification($proposal);
+            }
+            // Send notification to proposal creator if tender owner updated status
+            elseif ($isTenderOwnerUpdating && $oldStatus !== $status) {
+                // Only send for meaningful status changes (not draft/created)
+                if (!in_array($status, [ProposalStatus::DRAFT->value, ProposalStatus::CREATED->value])) {
+                    $this->sendProposalStatusUpdatedNotification($proposal, $status);
+                }
             }
 
             return 1;
@@ -435,7 +548,18 @@ readonly class ProposalService
                 return ['error' => __('web.proposal_cannot_be_updated_final_acceptance')];
             }
 
+            // Check if tender closing date has passed
+            $tender = $proposal->tender;
+            if ($tender->closing_date && $tender->closing_date->lt(Carbon::today())) {
+                return ['error' => __('web.tender_closing_date_passed_no_proposal_updates')];
+            }
+
             DB::beginTransaction();
+
+            // Check if tender owner is requesting sample (not proposal owner)
+            $currentUserId = auth()->id();
+            $isTenderOwnerUpdating = $proposal->tender->user_id === $currentUserId && $proposal->user_id !== $currentUserId;
+            $oldStatus = $proposal->status;
 
             $proposal->update([
                 'sample_request' => $data['sample_request'],
@@ -443,6 +567,11 @@ readonly class ProposalService
             ]);
 
             DB::commit();
+
+            // Send notification to proposal creator if tender owner requested sample
+            if ($isTenderOwnerUpdating && $oldStatus !== ProposalStatus::INITIAL_ACCEPTANCE_SAMPLE_REQUESTED->value) {
+                $this->sendProposalStatusUpdatedNotification($proposal, ProposalStatus::INITIAL_ACCEPTANCE_SAMPLE_REQUESTED->value);
+            }
 
             return 1;
         } catch (\Exception $e) {
